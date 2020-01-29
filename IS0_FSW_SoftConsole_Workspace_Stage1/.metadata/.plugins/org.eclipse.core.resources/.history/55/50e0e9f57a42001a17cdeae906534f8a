@@ -78,11 +78,11 @@ void Get_VEML6075_Data(){
 //FIXME : Test the "Reliable Working of this Function"
 void Get_AS7265x_Data(){
 
-	//Add code here to read all the 36 bytes of data from the AS7265 sensors
+
 
 }
 
-//TODO: Test the "Reliable" Working of this Function
+//TODO: Test the "Reliable Working of this Function"
 uint8_t read_AS7265_reg(uint8_t virtual_reg_address){
 
 	 uint8_t write_length = TX_LENGTH;
@@ -139,8 +139,8 @@ uint8_t read_AS7265_reg(uint8_t virtual_reg_address){
 
 
 
-	 //TODO: Test the "Reliable" Working of this Function
-	 uint8_t write_AS7265_reg(uint8_t virtual_reg_address, uint8_t data_to_write){
+	 //TODO: Complete the function that writes to a virtual register of the Sensor"
+	 uint8_t write_AS7265_reg(uint8_t virtual_reg_address){
 	 //Poll I²C slave STATUS register;
 	 //If TX_VALID bit is 0, a write can be performed on the interface;
 	 //Send a virtual register address and set the MSB of the register address to 1 to indicate the pending write;
@@ -181,9 +181,8 @@ uint8_t read_AS7265_reg(uint8_t virtual_reg_address){
 			 		break;
 			 }
 		 }
-		 // Write the data to complete the operation.
-		 uint8_t data_write_buffer[TX_LENGTH_2] = {SENSOR_AS72651_WRITE_REG, data_to_write};
-		 instance = do_write_transaction(&g_core_i2c3, SENSOR_MASTER, data_write_buffer, write_length_2);
+		 // Read the data to complete the operation.
+		 instance = do_write_read_transaction(&g_core_i2c3, SENSOR_MASTER, SENSOR_AS72651_READ_REG, write_length, rx_buffer, read_length);
 
 		 return 0;
 	 }
