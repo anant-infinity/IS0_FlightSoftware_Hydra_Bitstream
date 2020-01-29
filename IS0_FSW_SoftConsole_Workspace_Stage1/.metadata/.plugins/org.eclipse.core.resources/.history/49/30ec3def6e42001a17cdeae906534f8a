@@ -76,7 +76,6 @@ void Beacon_Packet_UART_log(){
 	MSS_UART_init(&g_mss_uart0,MSS_UART_9600_BAUD,MSS_UART_DATA_8_BITS | MSS_UART_NO_PARITY | MSS_UART_ONE_STOP_BIT);
 
 	//TODO: Complete This. Send all the bytes of the beacon packet using the MSS UART
-	//Either send the elements of the structure one-by-one or use the memory address of the structure to achive the same
 
 
 

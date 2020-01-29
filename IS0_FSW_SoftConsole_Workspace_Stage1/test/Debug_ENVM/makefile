@@ -67,7 +67,7 @@ all: test.elf secondary-outputs
 test.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM Cross C Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g -T "C:\Users\Anant\Documents\IS0_FSW_Hydra_Bitstream_Files\IS0_FSW_SoftConsole_Workspace_Stage1\test\CMSIS\startup_gcc\debug-in-microsemi-smartfusion2-envm.ld" -Xlinker --gc-sections -Wl,-Map,"test.map" --specs=nano.specs -o "test.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g -T "C:\Users\Anant\Documents\IS0_FSW_Hydra_Bitstream_Files\IS0_FlightSoftware_Hydra_Bitstream\IS0_FSW_SoftConsole_Workspace_Stage1\test\CMSIS\startup_gcc\debug-in-microsemi-smartfusion2-envm.ld" -Xlinker --gc-sections -Wl,-Map,"test.map" --specs=nano.specs -o "test.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
