@@ -1,0 +1,269 @@
+﻿<hydraDef>
+
+    <!-- These types use the default endianness which is Little endianess -->
+    <typeDN name="dn1" size="1"/>
+    <typeDN name="dn2" size="2"/>
+    <typeDN name="dn3" size="3"/>
+    <typeDN name="dn4" size="4"/>
+    <typeDN name="dn5" size="5"/>
+    <typeDN name="dn6" size="6"/>
+    <typeDN name="dn7" size="7"/>
+    <typeDN name="dn8" size="8"/>
+    <typeDN name="dn9" size="9"/>
+    <typeDN name="dn10" size="10"/>
+    <typeDN name="dn11" size="11"/>
+    <typeDN name="dn12" size="12"/>
+    <typeDN name="dn13" size="13"/>
+    <typeDN name="dn14" size="14"/>
+    <typeDN name="dn15" size="15"/>
+    <typeDN name="dn16" size="16"/>
+    <typeDN name="dn17" size="17"/>
+    <typeDN name="dn18" size="18"/>
+    <typeDN name="dn19" size="19"/>
+    <typeDN name="dn20" size="20"/>
+    <typeDN name="dn21" size="21"/>
+    <typeDN name="dn22" size="22"/>
+    <typeDN name="dn23" size="23"/>
+    <typeDN name="dn24" size="24"/>
+    <typeDN name="dn25" size="25"/>
+    <typeDN name="dn26" size="26"/>
+    <typeDN name="dn27" size="27"/>
+    <typeDN name="dn28" size="28"/>
+    <typeDN name="dn29" size="29"/>
+    <typeDN name="dn30" size="30"/>
+    <typeDN name="dn31" size="31"/>
+    <typeDN name="dn32" size="32"/>
+    <typeDN name="dn40" size="40"/>
+    <typeDN name="dn64" size="64"/>
+
+    <typeDN name="sn1" size="1"/>
+    <typeDN name="sn2" size="2"/>
+    <typeDN name="sn3" size="3"/>
+    <typeDN name="sn4" size="4"/>
+    <typeDN name="sn5" size="5"/>
+    <typeDN name="sn6" size="6"/>
+    <typeDN name="sn7" size="7"/>
+    <typeDN name="sn8" size="8"/>
+    <typeDN name="sn9" size="9"/>
+    <typeDN name="sn10" size="10"/>
+    <typeDN name="sn11" size="11"/>
+    <typeDN name="sn12" size="12"/>
+    <typeDN name="sn13" size="13"/>
+    <typeDN name="sn14" size="14"/>
+    <typeDN name="sn15" size="15"/>
+    <typeDN name="sn16" size="16"/>
+    <typeDN name="sn17" size="17"/>
+    <typeDN name="sn18" size="18"/>
+    <typeDN name="sn19" size="19"/>
+    <typeDN name="sn20" size="20"/>
+    <typeDN name="sn21" size="21"/>
+    <typeDN name="sn22" size="22"/>
+    <typeDN name="sn23" size="23"/>
+    <typeDN name="sn24" size="24"/>
+    <typeDN name="sn25" size="25"/>
+    <typeDN name="sn26" size="26"/>
+    <typeDN name="sn27" size="27"/>
+    <typeDN name="sn28" size="28"/>
+    <typeDN name="sn29" size="29"/>
+    <typeDN name="sn30" size="30"/>
+    <typeDN name="sn31" size="31"/>
+    <typeDN name="sn32" size="32"/>
+    <typeDN name="sn40" size="40"/>
+    <typeDN name="sn64" size="64"/>
+
+
+    <typeFloat name="float32"/>
+    <typeDouble name="double64"/>
+    
+    <typeChar name="char8"/>
+    
+    <!-- These types are always big endian, regardless of default-->
+    
+    <typeSN name="dn1b" size="1" endian="BIG"/>
+    <typeSN name="dn2b" size="2" endian="BIG"/>
+    <typeSN name="dn3b" size="3" endian="BIG"/>
+    <typeSN name="dn4b" size="4" endian="BIG"/>
+    <typeSN name="dn5b" size="5" endian="BIG"/>
+    <typeSN name="dn6b" size="6" endian="BIG"/>
+    <typeSN name="dn7b" size="7" endian="BIG"/>
+    <typeSN name="dn8b" size="8" endian="BIG"/>
+    <typeSN name="dn9b" size="9" endian="BIG"/>
+    <typeSN name="dn10b" size="10" endian="BIG"/>
+    <typeSN name="dn11b" size="11" endian="BIG"/>
+    <typeSN name="dn12b" size="12" endian="BIG"/>
+    <typeSN name="dn13b" size="13" endian="BIG"/>
+    <typeSN name="dn14b" size="14" endian="BIG"/>
+    <typeSN name="dn15b" size="15" endian="BIG"/>
+    <typeSN name="dn16b" size="16" endian="BIG"/>
+    <typeSN name="dn17b" size="17" endian="BIG"/>
+    <typeSN name="dn18b" size="18" endian="BIG"/>
+    <typeSN name="dn19b" size="19" endian="BIG"/>
+    <typeSN name="dn20b" size="20" endian="BIG"/>
+    <typeSN name="dn21b" size="21" endian="BIG"/>
+    <typeSN name="dn22b" size="22" endian="BIG"/>
+    <typeSN name="dn23b" size="23" endian="BIG"/>
+    <typeSN name="dn24b" size="24" endian="BIG"/>
+    <typeSN name="dn25b" size="25" endian="BIG"/>
+    <typeSN name="dn26b" size="26" endian="BIG"/>
+    <typeSN name="dn27b" size="27" endian="BIG"/>
+    <typeSN name="dn28b" size="28" endian="BIG"/>
+    <typeSN name="dn29b" size="29" endian="BIG"/>
+    <typeSN name="dn30b" size="30" endian="BIG"/>
+    <typeSN name="dn31b" size="31" endian="BIG"/>
+    <typeSN name="dn32b" size="32" endian="BIG"/>
+    <typeSN name="dn40b" size="40" endian="BIG"/>
+    <typeSN name="dn64b" size="64" endian="BIG"/>
+
+    <typeSN name="sn1b" size="1" endian="BIG"/>
+    <typeSN name="sn2b" size="2" endian="BIG"/>
+    <typeSN name="sn3b" size="3" endian="BIG"/>
+    <typeSN name="sn4b" size="4" endian="BIG"/>
+    <typeSN name="sn5b" size="5" endian="BIG"/>
+    <typeSN name="sn6b" size="6" endian="BIG"/>
+    <typeSN name="sn7b" size="7" endian="BIG"/>
+    <typeSN name="sn8b" size="8" endian="BIG"/>
+    <typeSN name="sn9b" size="9" endian="BIG"/>
+    <typeSN name="sn10b" size="10" endian="BIG"/>
+    <typeSN name="sn11b" size="11" endian="BIG"/>
+    <typeSN name="sn12b" size="12" endian="BIG"/>
+    <typeSN name="sn13b" size="13" endian="BIG"/>
+    <typeSN name="sn14b" size="14" endian="BIG"/>
+    <typeSN name="sn15b" size="15" endian="BIG"/>
+    <typeSN name="sn16b" size="16" endian="BIG"/>
+    <typeSN name="sn17b" size="17" endian="BIG"/>
+    <typeSN name="sn18b" size="18" endian="BIG"/>
+    <typeSN name="sn19b" size="19" endian="BIG"/>
+    <typeSN name="sn20b" size="20" endian="BIG"/>
+    <typeSN name="sn21b" size="21" endian="BIG"/>
+    <typeSN name="sn22b" size="22" endian="BIG"/>
+    <typeSN name="sn23b" size="23" endian="BIG"/>
+    <typeSN name="sn24b" size="24" endian="BIG"/>
+    <typeSN name="sn25b" size="25" endian="BIG"/>
+    <typeSN name="sn26b" size="26" endian="BIG"/>
+    <typeSN name="sn27b" size="27" endian="BIG"/>
+    <typeSN name="sn28b" size="28" endian="BIG"/>
+    <typeSN name="sn29b" size="29" endian="BIG"/>
+    <typeSN name="sn30b" size="30" endian="BIG"/>
+    <typeSN name="sn31b" size="31" endian="BIG"/>
+    <typeSN name="sn32b" size="32" endian="BIG"/>
+    <typeSN name="sn40b" size="40" endian="BIG"/>
+    <typeSN name="sn64b" size="64" endian="BIG"/>
+
+    <typeFloat name="float32b" endian="BIG"/>
+    <typeDouble name="double64b" endian="BIG"/>
+    
+    <!-- These types are always little endian -->
+    <typeDN name="dn1l" size="1" endian="LITTLE"/>
+    <typeDN name="dn2l" size="2" endian="LITTLE"/>
+    <typeDN name="dn3l" size="3" endian="LITTLE"/>
+    <typeDN name="dn4l" size="4" endian="LITTLE"/>
+    <typeDN name="dn5l" size="5" endian="LITTLE"/>
+    <typeDN name="dn6l" size="6" endian="LITTLE"/>
+    <typeDN name="dn7l" size="7" endian="LITTLE"/>
+    <typeDN name="dn8l" size="8" endian="LITTLE"/>
+    <typeDN name="dn9l" size="9" endian="LITTLE"/>
+    <typeDN name="dn10l" size="10" endian="LITTLE"/>
+    <typeDN name="dn11l" size="11" endian="LITTLE"/>
+    <typeDN name="dn12l" size="12" endian="LITTLE"/>
+    <typeDN name="dn13l" size="13" endian="LITTLE"/>
+    <typeDN name="dn14l" size="14" endian="LITTLE"/>
+    <typeDN name="dn15l" size="15" endian="LITTLE"/>
+    <typeDN name="dn16l" size="16" endian="LITTLE"/>
+    <typeDN name="dn17l" size="17" endian="LITTLE"/>
+    <typeDN name="dn18l" size="18" endian="LITTLE"/>
+    <typeDN name="dn19l" size="19" endian="LITTLE"/>
+    <typeDN name="dn20l" size="20" endian="LITTLE"/>
+    <typeDN name="dn21l" size="21" endian="LITTLE"/>
+    <typeDN name="dn22l" size="22" endian="LITTLE"/>
+    <typeDN name="dn23l" size="23" endian="LITTLE"/>
+    <typeDN name="dn24l" size="24" endian="LITTLE"/>
+    <typeDN name="dn25l" size="25" endian="LITTLE"/>
+    <typeDN name="dn26l" size="26" endian="LITTLE"/>
+    <typeDN name="dn27l" size="27" endian="LITTLE"/>
+    <typeDN name="dn28l" size="28" endian="LITTLE"/>
+    <typeDN name="dn29l" size="29" endian="LITTLE"/>
+    <typeDN name="dn30l" size="30" endian="LITTLE"/>
+    <typeDN name="dn31l" size="31" endian="LITTLE"/>
+    <typeDN name="dn32l" size="32" endian="LITTLE"/>
+    <typeDN name="dn40l" size="40" endian="LITTLE"/>
+    <typeDN name="dn48l" size="48" endian="LITTLE"/>
+    <typeDN name="dn64l" size="64" endian="LITTLE"/>
+    
+
+    <!-- These types are always little endian -->
+    <typeSN name="sn1l" size="1" endian="LITTLE"/>
+    <typeSN name="sn2l" size="2" endian="LITTLE"/>
+    <typeSN name="sn3l" size="3" endian="LITTLE"/>
+    <typeSN name="sn4l" size="4" endian="LITTLE"/>
+    <typeSN name="sn5l" size="5" endian="LITTLE"/>
+    <typeSN name="sn6l" size="6" endian="LITTLE"/>
+    <typeSN name="sn7l" size="7" endian="LITTLE"/>
+    <typeSN name="sn8l" size="8" endian="LITTLE"/>
+    <typeSN name="sn9l" size="9" endian="LITTLE"/>
+    <typeSN name="sn10l" size="10" endian="LITTLE"/>
+    <typeSN name="sn11l" size="11" endian="LITTLE"/>
+    <typeSN name="sn12l" size="12" endian="LITTLE"/>
+    <typeSN name="sn13l" size="13" endian="LITTLE"/>
+    <typeSN name="sn14l" size="14" endian="LITTLE"/>
+    <typeSN name="sn15l" size="15" endian="LITTLE"/>
+    <typeSN name="sn16l" size="16" endian="LITTLE"/>
+    <typeSN name="sn17l" size="17" endian="LITTLE"/>
+    <typeSN name="sn18l" size="18" endian="LITTLE"/>
+    <typeSN name="sn19l" size="19" endian="LITTLE"/>
+    <typeSN name="sn20l" size="20" endian="LITTLE"/>
+    <typeSN name="sn21l" size="21" endian="LITTLE"/>
+    <typeSN name="sn22l" size="22" endian="LITTLE"/>
+    <typeSN name="sn23l" size="23" endian="LITTLE"/>
+    <typeSN name="sn24l" size="24" endian="LITTLE"/>
+    <typeSN name="sn25l" size="25" endian="LITTLE"/>
+    <typeSN name="sn26l" size="26" endian="LITTLE"/>
+    <typeSN name="sn27l" size="27" endian="LITTLE"/>
+    <typeSN name="sn28l" size="28" endian="LITTLE"/>
+    <typeSN name="sn29l" size="29" endian="LITTLE"/>
+    <typeSN name="sn30l" size="30" endian="LITTLE"/>
+    <typeSN name="sn31l" size="31" endian="LITTLE"/>
+    <typeSN name="sn32l" size="32" endian="LITTLE"/>
+    <typeSN name="sn40l" size="40" endian="LITTLE"/>
+    <typeSN name="sn64l" size="64" endian="LITTLE"/>
+    
+    <typeFloat name="float32l" endian="LITTLE"/>
+    <typeDouble name="double64l" endian="LITTLE"/>
+
+
+    <typeEU name="adcs_tracker_temp" size="8" eu="adcs_star_tracker_temp_EU"/>
+    <typeEU name="adcs_wheel_temp" size="16" eu="adcs_wheel_temp_EU"/>
+    <typeEU name="adcs_digi_bus_volt" size="16" eu="adcs_digi_bus_EU"/>
+    <typeEU name="adcs_sun_vector" size="16" eu="adcs_sun_vector_EU"/>
+    <typeEU name="adcs_wheel_drag" size="16" eu="adcs_wheel_drag_EU"/>
+    <typeEU name="adcs_wheel_speed" size="16" eu="adcs_wheel_speed_EU"/>
+    <typeEU name="adcs_body_rate" size="32" eu="adcs_body_rate_EU"/>
+    <typeEU name="adcs_mag_vector" size="16" eu="adcs_mag_segment"/>
+    <typeEU name="adcs_body_quat" size="32" eu="adcs_body_quat_EU"/>
+    <typeEU name="sband_board_tmp" size="16" eu="sband_board_tmp_EU" />
+
+    <!-- IS1 types -->
+    <typeState name="ON_OFF_t" size="1" dict="ON_OFF_dict" endian = "LITTLE"/>
+    <typeState name="Enable_Diable_t" size="1" dict="ENABLE_DISABLE_dict" endian = "LITTLE"/>
+    <typeState name="TRUE_FALSE_t" size="1" dict="TRUE_FALSE_dict" endian = "LITTLE"/>
+    <typeState name="YES_NO_t" size="1" dict="Yes_No_dict" endian = "LITTLE"/>
+    <typeState name="Good_Bad_t" size="1" dict="Good_Bad_dict" endian = "LITTLE"/>
+    <typeState name="Spacecraft_Mode_t" size="3" dict="Spacecraft_Mode_dict" endian = "LITTLE"/>
+
+    <!-- DAXSS types -->
+    <typeState name="CDHState" size="4" dict="CDHState"/>
+    <typeState name="ModeStatus" size="3" dict="ModeStatus"/>
+    <typeState name="CmdStatus" size="16" endian="LITTLE" dict="CmdStatus"/>
+    <typeState name="ParamTableStatus" size="8" dict="ParamTableStatus"/>
+    <typeState name="ParamTableValue" size="8" dict="ParamTableValue"/>
+    <typeSN name="CDH_Temp" size="16" endian="LITTLE" eu="CDH_Temp"/>
+    <typeSN name="X123_High_V" size="16" endian="LITTLE" eu="X123_High_V"/>
+    <typeEU name="X123_Det_Temp" size="16" endian="LITTLE" eu="X123_Det_Temp"/>
+    <typeEU name="CDH_Batt_V1" size="16" endian="LITTLE" eu="CDH_Batt_V1"/>
+    <typeEU name="CDH_Batt_V2" size="16" endian="LITTLE" eu="CDH_Batt_V2"/>
+    <typeEU name="CDH_V" size="16" endian="LITTLE" eu="CDH_V"/>
+    <typeEU name="EPS_SA_I5" size="16" endian="LITTLE" eu="EPS_SA_I5"/>
+    <typeEU name="EPS_SA_V" size="16" endian="BIG" eu="EPS_SA_V"/>
+    <typeEU name="EPS_SA_I" size="16" endian="BIG" eu="EPS_SA_I"/>
+    <typeSN name="SPS_Pos" size="16" endian="LITTLE"/>
+    
+</hydraDef>

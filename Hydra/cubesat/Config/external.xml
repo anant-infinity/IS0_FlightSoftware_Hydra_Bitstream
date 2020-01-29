@@ -1,0 +1,35 @@
+<hydraDef>
+
+	<!-- Only define cmdDecoder if configuration chosen is external (not radio or hardline) -->
+	<configType name="External">
+
+	    <!-- <decoderDef name="cmdDecoder">
+	        <description text="Send command to remote connection"/>
+		    <outBuffer size="1024"/>
+		    <outputDevice name="CCSDS_CMD_Client"/>
+	    </decoderDef>
+	 -->
+	</configType>
+
+    <!-- Allows remote commanding of Hydra via strings -->
+   <!--  <hwServer name="Hydra_CMD_Server" port="#HYDRA_CMD_SERVER_PORT" mode="read">
+        <description text="Forwards Hydra command strings received"/>
+        <outputDevice name="SDR_Radio_CMD" enabled="true"/>
+    </hwServer>
+
+    <hwClient name="Hydra_CMD_Client" port="#HYDRA_CMD_SERVER_PORT" addr="#EXT_SERVER_ADDR" mode="write">
+        <description text="Connects to Hydra server for Hydra commanding"/>
+    </hwClient>
+     -->
+    <!-- <hwOutFile name="radioRawFile2" prefix="radioRaw" maxSize="#MAX_OUTPUT_FILE_SIZE" filename="hydra_cmd_server2"/>
+    <decoderDef name="hydraCmdDecoder">
+        <description text="Receives and processes hydra command strings"/>
+        <outputDevice name="radioRawFile2"/>
+    </decoderDef> -->
+
+	<alias name="cmd_ext" command="send_str">
+        <description text="Send a string command to external hydra"/>
+        <argument id="0" value="Hydra_CMD_Client"/>
+    </alias>
+
+</hydraDef>

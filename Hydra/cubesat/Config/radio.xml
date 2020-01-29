@@ -1,0 +1,88 @@
+<hydraDef>
+
+    <!-- Client connections to radio for commands and telemetry -->
+    <hwClient name="SDR_Radio_TLM" mode="read" port="#SDR_RADIO_TLM_PORT" addr="SDR_RADIO_IP_ADDR"/>
+    <hwClient name="SDR_Radio_CMD" mode="write" port="#SDR_RADIO_CMD_PORT" addr="SDR_RADIO_IP_ADDR"/>
+
+    <!-- <hwServer name="SDR_Radio_TLM" mode="read" port="#SDR_RADIO_TLM_PORT"/> -->
+    <!-- <hwServer name="SDR_Radio_CMD" mode="write" port="#SDR_RADIO_CMD_PORT"/> -->
+
+
+    <frameDef name="ax25TlmHdr" id="0x86">
+        <field>
+            <!-- <itemDef name="ax25TlmStart" type="dn8"/> -->
+            <itemDef name="ax25TlmAddr" type="dn8" num="14"/>
+            <itemDef name="ax25TlmControl" type="dn8"/>
+            <itemDef name="ax25TlmPID" type="dn8"/>
+        </field>
+    </frameDef>
+
+    <frameDef name="ax25CmdHeader">
+		<field>
+
+			<itemDef name="ax25CmdAddr" type="dn8" num="14" value="#AX25_CMD_ADDR"/>
+			<itemDef name="ax25CmdControl" type="dn8" value="0x03"/>
+			<itemDef name="ax25CmdPID" type="dn8" value="0xf0"/>
+
+			<placeholder/>
+
+		</field>
+
+	</frameDef>
+
+	<!-- Radio data goes from radio->ax25Decoder->ax25StripDecoder->ccsdsDecoder -->
+
+	<decoderHdr name="ax25StripDecoder" length="16">
+	  <description text="Removes AX25 header and leaves CCSDS packet"/>
+		<outBuffer size="256"/>
+		<outputDevice name="radioRawFile"/>
+		<outputDevice name="ccsdsDecoder"/>
+	</decoderHdr>
+
+	<decoderDef name="ax25Decoder" updateDB="enabled" archive="enabled">
+		<description text="Decomposes AX25 header and sends packet off to be stripped"/>
+        <frame name="ax25TlmHdr"/>
+		<outputDevice name="ax25StripDecoder"/>
+	</decoderDef>
+
+	<!-- <readerHeader name="radioReader" hw="SDR_Radio_TLM" decoder="ax25Decoder" maxSize="2048"
+	    headerSize="22" offset="1" lengthField="20:0:dn16" autoStart="true">
+		<description text="Reads AX25 packets from SDR Radio"/>
+	</readerHeader> -->
+
+
+	<!-- Debug connections, read/write data to/from files -->
+
+	<!-- Radio raw input, read raw radio data from file instead of radio -->
+    <hwInFile name="radioInputFile" interval="1000"/>
+    <readerHeader name="radioFileReader" hw="radioInputFile" decoder="ax25Decoder" maxSize="1024"
+	    headerSize="22" offset="1" lengthField="20:0:dn16"/>
+
+    <!-- Raw radio output data, no telemetry decoding performed -->
+    <hwOutFile name="radioRawFile" prefix="radioRaw" maxSize="#MAX_OUTPUT_FILE_SIZE" filename="SDR_TLM_ccsds_raw_output"/>
+    <!-- <decoderDef name="radioRaw">
+        <outputDevice name="radioRawFile"/>
+    </decoderDef> -->
+    <readerTCP name="SDR_TLM_Reader" maxSize="272" hw="SDR_Radio_TLM" decoder="ax25Decoder"
+	    autoStart="true">
+      <sync size="2" pattern="0x48 0x69"/>
+    </readerTCP>
+
+
+	<!-- Command route: cmdDecoder->radio -->
+
+	<!-- <decoderKE name="cmdKISSEncoder">
+		<outBuffer size="1024"/>
+		<description text="Encode AX25 packets with KISS and send to radio"/>
+		<outputDevice name="SDR_Radio_CMD" enabled="true"/>
+	</decoderKE> -->
+
+	<decoderDef name="cmdDecoder">
+	    <description text="Construct command with AX25 header and send to be encoded"/>
+	    <headerFrame name="ax25CmdHeader"/>
+		<outBuffer size="1024"/>
+		<outputDevice name="SDR_Radio_CMD" enabled="true"/>
+		<!-- <outputDevice name="cmdKISSEncoder"/> -->
+	</decoderDef>
+
+</hydraDef>

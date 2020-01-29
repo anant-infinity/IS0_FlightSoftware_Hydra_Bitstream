@@ -1,0 +1,25 @@
+
+#ifndef _PWR_C
+	#define _PWR_C
+
+#include <EPS/eps.h>
+#include "math.h"
+#include "gpios.h"
+#include "I2C/i2c.h"
+#include "Seq_ops/main_seq.h"
+#include "string.h"
+#include <stdlib.h>
+#include "Utils/utils.h"
+
+
+double const PWR_ADC_RESO = 3.3/1024;
+double const PWR_ADC_CONST_B = 1/3570;
+
+
+void Initialize_EPS_I2C_Channels(){
+}
+
+
+
+
+#endif

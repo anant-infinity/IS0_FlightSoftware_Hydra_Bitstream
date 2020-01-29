@@ -1,0 +1,193 @@
+<hydraDef>
+
+
+
+    <!-- Used to pad commands out to a certain alignment -->
+    <itemDef name="cmdPad8" type="dn8l" value="0x00"/>
+
+    <!-- Example of a command definition -->
+
+    <command name="NOOP" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Nope"/>
+        <description text="Increases the command accept/reject counter."/>
+        <field>
+            <item name="cmdPad8" />
+            <item name="cmdPad8" />
+        </field>
+    </command>
+
+    <command name="Change_Threshold" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Change_Threshold"/>
+        <description text="Change the threshold at which mode switching happens.
+            Option 1 defines which thershold to change. Option 2 is don't care and then 2 bytes of
+            as new value of the threshold"/>
+        <field>
+            <argument id="Opt1" type="dn8l" />
+            <item name="cmdPad8"/>
+            <argument id="SOC_value" type="dn16"/>
+        </field>
+    </command>
+
+    <command name="Power_Cycle_Spacecraft" decoder="cmdDecoder">
+        <protected enabled="true" msg="Are you sure you want to POWER CYCLE the spacecraft??"/>
+        <header frame="ccsdsCmdHeader_Power_Cycle_Spacecraft"/>
+        <description text="Power cycles the whole spacecraft"/>
+        <field>
+            <argument id="Opt1" type="dn8l" />
+            <item name="cmdPad8"/>
+        </field>
+    </command>
+
+    <command name="Force_Mode" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Force_Mode"/>
+        <description text="Force the spacecraft to be in a particular mode for certain amount of
+            time"/>
+        <field>
+            <argument id="Opt1" type="dn8l" />
+            <argument id="Opt2" type="dn8l" />
+            <argument id="Time" type="dn32l"/>
+            <argument id="Save_Rate" type="dn32l"/>
+        </field>
+    </command>
+
+    <command name="Set_Flag" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Set_Flag"/>
+        <description text="Set various flags present in the flight software"/>
+        <field>
+            <argument id="Opt1" type="dn8l" />
+            <item name="cmdPad8"/>
+            <argument id="Value" type="dn8l"/>
+        </field>
+    </command>
+
+    <command name="Restart_Reset_Counter" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Restart_Reset_Counter"/>
+        <description text="Set various flags present in the flight software"/>
+        <field>
+            <argument id="Opt1" type="dn8l" />
+            <item name="cmdPad8"/>
+        </field>
+    </command>
+
+    <command name="Change_Timer_Rate" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Change_Timer_Rate"/>
+        <description text="Change the peroid of the timers."/>
+        <field>
+            <argument id="Opt1" type="dn8l" />
+            <item name="cmdPad8"/>
+            <argument id="Time_peroid" type="dn32l" />
+        </field>
+    </command>
+
+    <command name="Set_Packet_Read_Offset" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Set_Packet_Read_Offset"/>
+        <description text="Set the read offset of a particular packet"/>
+        <field>
+            <argument id="Opt1" type="dn8l" />
+            <item name="cmdPad8"/>
+            <argument id="SD_Address" type="dn32l" />
+        </field>
+    </command>
+
+    <command name="Comms_Priority_Transmit_Data" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Comms_Priority_Transmit_Data"/>
+        <description text="Transmits the packet in a particular order in a given interval after some delay"/>
+        <field>
+            <argument id="Opt1" type="dn8l" />
+            <argument id="Opt2" type="dn8l" />
+            <argument id="Wait_Delay" type="dn32l" />
+            <argument id="Transmit_Time" type="dn32l" />
+        </field>
+    </command>
+
+    <command name="Set_Packet_Write_Offset" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Set_Packet_Write_Offset"/>
+        <description text="Set the write offset of a packet to particular value"/>
+        <field>
+            <argument id="Opt1" type="dn8l" />
+            <item name="cmdPad8"/>
+            <argument id="SD_Address" type="dn32l" />
+        </field>
+    </command>
+
+    <command name="Power_Cycle_Subsystem" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Power_Cycle"/>
+        <description text="Power cycles a particular subsystem"/>
+        <field>
+            <argument id="Opt1" type="dn8l" />
+            <item name="cmdPad8"/>
+        </field>
+    </command>
+
+    <command name="Transmit_Table" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Transmit_ENVM_Table"/>
+        <description text="Transmits either the Flash parameter table or the Global Variables table."/>
+        <field>
+            <argument id="Opt1" type="dn8l" />
+            <item name="cmdPad8"/>
+        </field>
+    </command>
+
+    <command name="Transmit_ADCS_IMG" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Transmit_ADCS_IMG"/>
+        <description text="Transmits the ADCS star tracker image"/>
+        <field>
+            <item name="cmdPad8"/>
+            <item name="cmdPad8"/>
+        </field>
+    </command>
+
+    <command name="Write_Param" decoder="cmdDecoder">
+        <!-- To be updated -->
+        <header frame="ccsdsCmdHeader_Write_Param"/>
+        <description text="Write to the parameter table at a particular offset"/>
+        <field>
+            <argument id="Op1" type="dn8l"/>
+            <item name="cmdPad8"/>
+        </field>
+    </command>
+
+    <command name="Sync_CDH_RTC" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Sync_CDH_RTC"/>
+        <description text="Synchronizes the RTC value with that of gps time"/>
+        <field>
+            <argument id="Op1" type="dn8l"/>
+            <item name="cmdPad8"/>
+            <argument id="Time_in_ms_LSB_32" type="dn32l"/>
+            <argument id="Time_in_ms_MSB_8" type="dn8l"/>
+        </field>
+    </command>
+
+    <command name="Load_Factory_Parameters" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Load_Factory_Parameters"/>
+        <description text="Loads the factory praameter to the SRAM praameter"/>
+        <field>
+            <item name="cmdPad8"/>
+            <item name="cmdPad8"/>
+        </field>
+    </command>
+
+    <command name="Reset_Flash_Parameters" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Reset_Flash_Parameters"/>
+        <description text="Reset the flash parameter table and the SRAM parameter"/>
+        <field>
+            <item name="cmdPad8"/>
+            <item name="cmdPad8"/>
+        </field>
+    </command>
+
+    <command name="Command_Subsystem" decoder="cmdDecoder">
+        <header frame="ccsdsCmdHeader_Command_Subsystem"/>
+        <description text="Command a subsystem"/>
+        <field>
+            <argument id="Opt1" type="dn8l" />
+            <argument id="Opt2" type="dn8l" />
+            <argument id="membuffer" type="dn8l" num="100"/>
+        </field>
+    </command>
+
+    <senderFile name="myHexSender" frame="Command_Subsystem" interval="1000" fileType="hex" buffer="membuffer">
+        <defaults filename="memload_test1.hex" start="0" offset = "0" total="100"/>
+    </senderFile>
+
+</hydraDef>

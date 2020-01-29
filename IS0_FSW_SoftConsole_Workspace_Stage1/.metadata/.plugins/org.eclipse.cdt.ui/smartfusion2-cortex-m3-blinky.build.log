@@ -1,0 +1,11 @@
+18:42:18 **** Incremental Build of configuration Debug for project smartfusion2-cortex-m3-blinky ****
+make all 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "smartfusion2-cortex-m3-blinky.elf"
+   text	   data	    bss	    dec	    hex	filename
+   2240	     16	  63280	  65536	  10000	smartfusion2-cortex-m3-blinky.elf
+Finished building: smartfusion2-cortex-m3-blinky.siz
+ 
+
+18:42:19 Build Finished. 0 errors, 0 warnings. (took 389ms)
+

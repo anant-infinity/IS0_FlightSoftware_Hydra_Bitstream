@@ -1,0 +1,49 @@
+<hydraDef>
+
+    <!-- Generic CCSDS telemetry header definition -->
+    <frameDef name="ccsdsTlmHeader" displayName="CCSDS header">
+        <description text="CCSDS telemetry primary header"/>
+        <field>
+            <itemDef name="ccsds_TlmVersion"    type="dn3b"  displayName="Version"/>
+            <itemDef name="ccsds_TlmPktType"    type="dn1b"  displayName="Type"/>
+            <itemDef name="ccsds_TlmSecHdrFlag" type="dn1b"  displayName="Sec Hdr"/>
+            <itemDef name="ccsds_TlmApID"       type="dn11b" displayName="ApID"/>
+            <itemDef name="ccsds_TlmGroup"      type="dn2b"  displayName="Group"/>
+            <itemDef name="ccsds_TlmSeqCnt"     type="dn14b" displayName="Seq Count"/>
+            <itemDef name="ccsds_TlmLength"     type="dn16b" displayName="Length"/>
+        </field>
+    </frameDef>
+
+    <frameDef name="ccsdsTlmSecHeader" displayName="Secondary header">
+        <description text="CCSDS telemetry secondary header"/>
+        <field>
+            <itemDef name="CDH_TimeStampM"       type="dn8b" displayName="CDH TimeStamp MSB"/>
+            <itemDef name="CDH_TimeStampL"      type="dn32b" displayName="CDH TimeStamp LSB"/>
+        </field>
+    </frameDef>
+
+    <!-- File to hold CCSDS telemetry packets -->
+     <hwOutFile name="beaconTlmOut" suffix="_ccsds" maxSize="#MAX_OUTPUT_FILE_SIZE" filename="beacon_out"/>
+     <hwOutFile name="logTlmOut" suffix="_ccsds" maxSize="#MAX_OUTPUT_FILE_SIZE" filename="log_out"/>
+     <hwOutFile name="subsystemResponseTlmOut" suffix="_ccsds" maxSize="#MAX_OUTPUT_FILE_SIZE" filename="subsystemResponse_out"/>
+     <hwOutFile name="parametertableTlmOut" suffix="_ccsds" maxSize="#MAX_OUTPUT_FILE_SIZE" filename="parameter_table_out"/>
+     <!-- Alias to hide details for rolling over file -->
+     <alias name="ccsds_file_rollover" command="cmd_hw">
+         <description text="Rollover CCSDS output file"/>
+         <argument id="0" value="beaconTlmOut"/>
+         <argument id="1" value="rollover"/>
+     </alias>
+
+     <!-- Decodes CCSDS telemetry packets, adds to database, writes to file,
+         sends to remote connections -->
+     <decoderDef name="ccsdsDecoder" updateDB="enabled">
+          <frameID name="ccsdsTlmHeader.ccsds_TlmApID"/>
+          <outputDevice name="beaconTlmOut" frameID="#BEACON_TLM_PKT_APID"/>
+          <outputDevice name="logTlmOut" frameID="#LOG_TLM_PKT_APID"/>
+         <outputDevice name="subsystemResponseTlmOut" frameID="#SUBSYSTEM_RESPONSE_TLM_PKT_APID"/>
+         <outputDevice name="parametertableTlmOut" frameID="#PARAMETER_TABLE_TLM_PKT_APID1"/>
+         <outputDevice name="parametertableTlmOut" frameID="#PARAMETER_TABLE_TLM_PKT_APID2"/>
+          <!-- <outputDevice name="CCSDS_TLM_Server"/> -->
+      </decoderDef>
+      
+</hydraDef>

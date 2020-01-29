@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 3 resources" deleteContents="false" description="Delete 3 resources" element1="/example_i2c_polled/drivers_config/sys_config/sys_config_mss_clocks.h" element2="/example_i2c_polled/drivers_config/sys_config/sys_config.c" element3="/example_i2c_polled/drivers_config/sys_config/sys_config.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="3" stamp="1574754246843"/>
+</session>

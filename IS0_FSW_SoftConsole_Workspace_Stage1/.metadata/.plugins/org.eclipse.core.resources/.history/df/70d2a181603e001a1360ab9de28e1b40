@@ -1,0 +1,18 @@
+/*
+ * I2C.c
+ *
+ *  Created on: Jun 13, 2018
+ *      Author: Ankit
+ */
+
+#ifndef _I2C_C
+	#define _I2C_C
+
+#include "seq_ops/main_seq.h"
+#include <stdint.h>		// Standard library
+#include "i2c.h"
+#include "Utils/utils.h"
+
+
+
+#endif /* I2C_C_ */

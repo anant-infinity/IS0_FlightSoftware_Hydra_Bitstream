@@ -1,0 +1,394 @@
+2020/023-16:48:32: Configuring for Serial
+2020/023-16:48:32: <CFG> HW beaconTlmOut need to have prefix to use maxSize
+2020/023-16:48:32: <CFG> HW logTlmOut need to have prefix to use maxSize
+2020/023-16:48:32: <CFG> HW subsystemResponseTlmOut need to have prefix to use maxSize
+2020/023-16:48:32: <CFG> HW parametertableTlmOut need to have prefix to use maxSize
+2020/023-16:48:32: <INT> Run Directory: D:\Final_Year_Project_Work\IS-0-P4\is1-fs\Hydra\cubesat\Rundirs\2020_023_16_48_25\
+2020/023-16:48:32: <INT> Writing note to file
+2020/023-16:48:32: <RDR> Auto-starting reader serialReader
+2020/023-16:48:32: <HW> Create file failed for COM6, error number 5
+2020/023-16:48:32: <RDR> Starting reader serialReader
+2020/023-16:48:32: <SCR> Starting script in engine 0
+2020/023-16:48:32: <SCR> Starting script init.prc
+2020/023-16:48:32: <INT> Running startup script
+2020/023-16:48:32: <HW> Starting new file: EventLog_2020_023_16_48_32
+2020/023-16:48:33: <SCR> Done with script init.prc
+2020/023-16:48:47: <HW> Create file failed for COM6, error number 5
+2020/023-16:48:49: <HW> Create file failed for COM6, error number 5
+2020/023-16:49:18: <HW> COM6 is opened
+2020/023-16:50:00: <PAG> Item CDH_CMD_Accept_Count not found
+2020/023-16:50:00: <PAG> Item CDH_CMD_Reject_Count not found
+2020/023-16:50:00: <PAG> Item CDH_Last_CMD_APID not found
+2020/023-16:50:00: <PAG> Item CDH_Last_CMD_Option1 not found
+2020/023-16:50:00: <PAG> Item CDH_Last_CMD_Option2 not found
+2020/023-16:50:00: <PAG> Item beacon_Cmd_reject_stat_not_exec not found
+2020/023-16:50:00: <PAG> Item beacon_Cmd_reject_stat_bad_crc not found
+2020/023-16:50:00: <PAG> Item beacon_Cmd_reject_stat_bad_fcs not found
+2020/023-16:50:00: <PAG> Item beacon_Cmd_reject_stat_bad_data not found
+2020/023-16:50:00: <PAG> Item beacon_Cmd_reject_stat_bad_op2 not found
+2020/023-16:50:00: <PAG> Item beacon_Cmd_reject_stat_bad_op1 not found
+2020/023-16:50:00: <PAG> Item beacon_Cmd_reject_stat_bad_apid not found
+2020/023-16:50:00: <PAG> Item CDH_CIP_ON_Stat not found
+2020/023-16:50:00: <PAG> Item CDH_ADCS_ON_Stat not found
+2020/023-16:50:00: <PAG> Item CDH_SBAND_ON_Stat not found
+2020/023-16:50:00: <PAG> Item CDH_GPS_ON_Stat not found
+2020/023-16:50:00: <PAG> Item CDH_Bat_ON_Stat not found
+2020/023-16:50:00: <PAG> Item CDH_DAXSS_ON_Stat not found
+2020/023-16:50:00: <PAG> Item CDH_Temp not found
+2020/023-16:50:00: <PAG> Item beacon_SC_Mode not found
+2020/023-16:50:00: <PAG> Item beacon_Eclispe_stat not found
+2020/023-16:50:00: <PAG> Item beacon_Bus_Transceiver_stat not found
+2020/023-16:50:00: <PAG> Item beacon_RTC_updated not found
+2020/023-16:50:00: <PAG> Item beacon_SAVE_PARAMETER_MAP_FLAG not found
+2020/023-16:50:00: <PAG> Item beacon_SD_CARD0_WORKING not found
+2020/023-16:50:00: <PAG> Item beacon_SD_CARD1_WORKING not found
+2020/023-16:50:00: <PAG> Item beacon_AUTO_SBAND_BEACON_TRANS not found
+2020/023-16:50:00: <PAG> Item beacon_AUTO_SBAND_DATA_TRANS not found
+2020/023-16:50:00: <PAG> Item beacon_SC_REBOOT not found
+2020/023-16:50:00: <PAG> Item beacon_IS_ECLIPSE not found
+2020/023-16:50:00: <PAG> Item beacon_ADCS_BOOT_WAIT_COMPLETED not found
+2020/023-16:50:00: <PAG> Item beacon_SBAND_TRANSMIT_ENABLE not found
+2020/023-16:50:00: <PAG> Item beacon_UHF_TRANSMIT_ENABLE not found
+2020/023-16:50:00: <PAG> Item beacon_TRANSMIT_DATA_READY not found
+2020/023-16:50:00: <PAG> Item beacon_UPDATE_RTC_GPS not found
+2020/023-16:50:00: <PAG> Item beacon_REQ_BEACON_TRANSMIT not found
+2020/023-16:50:00: <PAG> Item beacon_REQ_PARAM_TRANSMIT not found
+2020/023-16:50:00: <PAG> Item beacon_REQ_SD_DATA_TRANSMIT not found
+2020/023-16:50:00: <PAG> Item beacon_REQ_ADCS_IMG_TRANSMIT not found
+2020/023-16:50:00: <PAG> Item beacon_REQ_SUBSYS_RESPONSE_TRANSMIT not found
+2020/023-16:50:00: <PAG> Item beacon_REQ_GLOBAL_TRANSMIT not found
+2020/023-16:50:00: <PAG> Item CDH_HK_Read_start not found
+2020/023-16:50:00: <PAG> Item CDH_SciC_Read_start not found
+2020/023-16:50:00: <PAG> Item CDH_SciD_Read_start not found
+2020/023-16:50:00: <PAG> Item CDH_ADCS_Read_start not found
+2020/023-16:50:00: <PAG> Item CDH_Beacon_Read_start not found
+2020/023-16:50:00: <PAG> Item CDH_Log_Read_start not found
+2020/023-16:50:00: <PAG> Item CDH_HK_Write_start not found
+2020/023-16:50:00: <PAG> Item CDH_SciC_Write_start not found
+2020/023-16:50:00: <PAG> Item CDH_SciD_Write_start not found
+2020/023-16:50:00: <PAG> Item CDH_ADCS_Write_start not found
+2020/023-16:50:00: <PAG> Item CDH_Beacon_Write_start not found
+2020/023-16:50:00: <PAG> Item CDH_Log_Write_start not found
+2020/023-16:50:00: <PAG> Item CDH_Last_CMD_Timer not found
+2020/023-16:50:00: <PAG> Item beacon_EPS not found
+2020/023-16:50:00: <PAG> Item beacon_UHF not found
+2020/023-16:50:00: <PAG> Item beacon_ADCS not found
+2020/023-16:50:00: <PAG> Item beacon_SBAND not found
+2020/023-16:50:00: <PAG> Item beacon_CIP not found
+2020/023-16:50:00: <PAG> Item beacon_DAXSS not found
+2020/023-16:50:00: <PAG> Item EPS_Bat_Curr not found
+2020/023-16:50:00: <PAG> Item EPS_Bus_Vol not found
+2020/023-16:50:00: <PAG> Item EPS_Bus_Curr not found
+2020/023-16:50:00: <PAG> Item EPS_Bat_SOC not found
+2020/023-16:50:00: <PAG> Item EPS_Bat_Temp1 not found
+2020/023-16:50:00: <PAG> Item EPS_Bat_Temp2 not found
+2020/023-16:50:00: <PAG> Item EPS_SP1_Volt not found
+2020/023-16:50:00: <PAG> Item EPS_SP2_Volt not found
+2020/023-16:50:00: <PAG> Item EPS_SP3_Volt not found
+2020/023-16:50:00: <PAG> Item EPS_SP1_Curr not found
+2020/023-16:50:00: <PAG> Item EPS_SP2_Curr not found
+2020/023-16:50:00: <PAG> Item EPS_SP3_Curr not found
+2020/023-16:50:00: <PAG> Item EPS_Interface_Temp not found
+2020/023-16:50:00: <PAG> Item EPS_EPS_Temp not found
+2020/023-16:50:00: <PAG> Item EPS_CIP_Volt not found
+2020/023-16:50:00: <PAG> Item EPS_CIP_Curr not found
+2020/023-16:50:00: <PAG> Item EPS_ADCS_Volt not found
+2020/023-16:50:00: <PAG> Item EPS_ADCS_Curr not found
+2020/023-16:50:00: <PAG> Item EPS_SBand_Volt not found
+2020/023-16:50:00: <PAG> Item EPS_SBand_Curr not found
+2020/023-16:50:00: <PAG> Item EPS_UHF_Volt not found
+2020/023-16:50:00: <PAG> Item EPS_UHF_Curr not found
+2020/023-16:50:00: <PAG> Item EPS_CDH_Volt not found
+2020/023-16:50:00: <PAG> Item EPS_CDH_Curr not found
+2020/023-16:50:00: <PAG> Item EPS_GPS_33_Volt not found
+2020/023-16:50:00: <PAG> Item EPS_GPS_33_Curr not found
+2020/023-16:50:00: <PAG> Item EPS_GPS_12_Volt not found
+2020/023-16:50:00: <PAG> Item EPS_GPS_12_Curr not found
+2020/023-16:50:00: <PAG> Item EPS_Bat_Heater_Curr not found
+2020/023-16:50:00: <PAG> Item EPS_DAXSS_Volt not found
+2020/023-16:50:00: <PAG> Item EPS_DAXSS_Curr not found
+2020/023-16:50:00: <PAG> Item ADCS_CMD_Stat not found
+2020/023-16:50:00: <PAG> Item ADCS_CMD_Reject_Count not found
+2020/023-16:50:00: <PAG> Item ADCS_CMD_Accept_Count not found
+2020/023-16:50:00: <PAG> Item beacon_ADCS_Time_Valid not found
+2020/023-16:50:00: <PAG> Item beacon_ADCS_Refs_Valid not found
+2020/023-16:50:00: <PAG> Item beacon_ADCS_Att_Valid not found
+2020/023-16:50:00: <PAG> Item beacon_ADCS_Mode not found
+2020/023-16:50:00: <PAG> Item beacon_ADCS_Recomm_Sun_Point not found
+2020/023-16:50:00: <PAG> Item beacon_ADCS_Sun_Point_State not found
+2020/023-16:50:00: <PAG> Item ADCS_Start_Track_Temp not found
+2020/023-16:50:00: <PAG> Item ADCS_Wheel_Temp1 not found
+2020/023-16:50:00: <PAG> Item ADCS_Wheel_Temp2 not found
+2020/023-16:50:00: <PAG> Item ADCS_Wheel_Temp3 not found
+2020/023-16:50:00: <PAG> Item ADCS_Digi_Bus_Volt not found
+2020/023-16:50:00: <PAG> Item ADCS_Sun_Vec1 not found
+2020/023-16:50:00: <PAG> Item ADCS_Sun_Vec2 not found
+2020/023-16:50:00: <PAG> Item ADCS_Sun_Vec3 not found
+2020/023-16:50:00: <PAG> Item ADCS_Wheel_Est_Speed1 not found
+2020/023-16:50:00: <PAG> Item ADCS_Wheel_Est_Speed2 not found
+2020/023-16:50:00: <PAG> Item ADCS_Wheel_Est_Speed3 not found
+2020/023-16:50:00: <PAG> Item ADCS_Body_Frame_Rate1 not found
+2020/023-16:50:00: <PAG> Item ADCS_Body_Frame_Rate2 not found
+2020/023-16:50:00: <PAG> Item ADCS_Body_Frame_Rate3 not found
+2020/023-16:50:00: <PAG> Item ADCS_Body_quat1 not found
+2020/023-16:50:00: <PAG> Item ADCS_Body_quat2 not found
+2020/023-16:50:00: <PAG> Item ADCS_Body_quat3 not found
+2020/023-16:50:00: <PAG> Item ADCS_Body_quat4 not found
+2020/023-16:50:00: <PAG> Item CIP_ComStat not found
+2020/023-16:50:00: <PAG> Item CIP_Temp1 not found
+2020/023-16:50:00: <PAG> Item CIP_Temp2 not found
+2020/023-16:50:00: <PAG> Item CIP_Temp3 not found
+2020/023-16:50:00: <PAG> Item UHF_Temp not found
+2020/023-16:50:00: <PAG> Item UHF_Health not found
+2020/023-16:50:00: <PAG> Item UHF_Channel not found
+2020/023-16:50:00: <PAG> Item UHF_Locked not found
+2020/023-16:50:00: <PAG> Item UHF_Readback_Mode not found
+2020/023-16:50:00: <PAG> Item UHF_SWD_Anncounce not found
+2020/023-16:50:00: <PAG> Item UHF_AFC_stat not found
+2020/023-16:50:00: <PAG> Item UHF_Echo_Mode not found
+2020/023-16:50:00: <PAG> Item SBand_State not found
+2020/023-16:50:00: <PAG> Item SBand_PWR_Good not found
+2020/023-16:50:00: <PAG> Item SBand_Lock not found
+2020/023-16:50:00: <PAG> Item SBand_PA_gain not found
+2020/023-16:50:00: <PAG> Item SBand_Data_Rate not found
+2020/023-16:50:00: <PAG> Item SBand_Scrambler_stat not found
+2020/023-16:50:00: <PAG> Item SBand_PA_Curr not found
+2020/023-16:50:00: <PAG> Item SBand_PA_Volt not found
+2020/023-16:50:00: <PAG> Item SBand_RF_OP_Power not found
+2020/023-16:50:00: <PAG> Item SBand_PA_temp not found
+2020/023-16:50:00: <PAG> Item SBand_Top_Board_Temp not found
+2020/023-16:50:01: <PAG> Item SBand_Bot_Board_Temp not found
+2020/023-16:50:01: <PAG> Item DAXSS_CDH_info not found
+2020/023-16:50:01: <PAG> Item DAXSS_Cmd_Last_OPcode not found
+2020/023-16:50:01: <PAG> Item DAXSS_Last_Status not found
+2020/023-16:50:01: <PAG> Item DAXSS_CMD_accept_count not found
+2020/023-16:50:01: <PAG> Item DAXSS_CMD_rej_count not found
+2020/023-16:50:01: <PAG> Item DAXSS_CDH_Enables not found
+2020/023-16:50:01: <PAG> Item DAXSS_CDH_Temp not found
+2020/023-16:50:01: <PAG> Item DAXSS_SPS_sum_rate not found
+2020/023-16:50:01: <PAG> Item DAXSS_SPS_x not found
+2020/023-16:50:01: <PAG> Item DAXSS_SPS_y not found
+2020/023-16:50:01: <PAG> Item DAXSS_X123_Slow_Count_Rate not found
+2020/023-16:53:54: serialReader length field in header too large: 8104
+2020/023-16:53:54: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8112
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8112
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:55: serialReader length field in header too large: 8104
+2020/023-16:53:55: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8112
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8104
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8104
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8104
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8104
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8112
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8104
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8104
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8104
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8104
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8104
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 3848
+2020/023-16:53:56: serialReader length field in header too large: 3072
+2020/023-16:53:56: serialReader length field in header too large: 8104
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8104
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8104
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:56: serialReader length field in header too large: 8104
+2020/023-16:53:56: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 3855
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:57: serialReader length field in header too large: 8104
+2020/023-16:53:57: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:58: serialReader length field in header too large: 8104
+2020/023-16:53:58: serialReader length field in header too large: 2064
+2020/023-16:53:59: serialReader length field in header too large: 8112
+2020/023-16:53:59: serialReader length field in header too large: 2064
+2020/023-16:53:59: serialReader length field in header too large: 8104
+2020/023-16:53:59: serialReader length field in header too large: 2064
+2020/023-16:53:59: serialReader length field in header too large: 8104
+2020/023-16:53:59: serialReader length field in header too large: 2064
+2020/023-16:53:59: serialReader length field in header too large: 8104
+2020/023-16:53:59: serialReader length field in header too large: 2064
+2020/023-16:53:59: serialReader length field in header too large: 8104
+2020/023-16:53:59: serialReader length field in header too large: 2064
+2020/023-16:53:59: serialReader length field in header too large: 4224
+2020/023-16:53:59: serialReader length field in header too large: 3855
+2020/023-16:53:59: serialReader length field in header too large: 8104
+2020/023-16:53:59: serialReader length field in header too large: 2064
+2020/023-16:53:59: serialReader length field in header too large: 8104
+2020/023-16:53:59: serialReader length field in header too large: 2064
+2020/023-16:53:59: serialReader length field in header too large: 8104
+2020/023-16:53:59: serialReader length field in header too large: 2064
+2020/023-16:53:59: serialReader length field in header too large: 8104
+2020/023-16:53:59: serialReader length field in header too large: 2064
+2020/023-16:53:59: serialReader length field in header too large: 8104
+2020/023-16:53:59: serialReader length field in header too large: 2064
+2020/023-16:53:59: serialReader length field in header too large: 8112
+2020/023-16:53:59: serialReader length field in header too large: 2064
+2020/023-16:53:59: serialReader length field in header too large: 8104
+2020/023-16:53:59: serialReader length field in header too large: 2064
+2020/023-16:53:59: serialReader length field in header too large: 8104
+2020/023-16:53:59: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8104
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8112
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8104
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8104
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8104
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8104
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8104
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8104
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8112
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8104
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8104
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8112
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8104
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8104
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:00: serialReader length field in header too large: 8104
+2020/023-16:54:00: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8104
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8112
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8104
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8104
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8104
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8104
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8104
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8104
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8104
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8104
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8104
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8112
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8104
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 8104
+2020/023-16:54:01: serialReader length field in header too large: 2064
+2020/023-16:54:01: serialReader length field in header too large: 4224
+2020/023-16:54:02: serialReader length field in header too large: 3855
+2020/023-16:54:02: serialReader length field in header too large: 8104
+2020/023-16:54:02: serialReader length field in header too large: 2064
+2020/023-16:54:02: serialReader length field in header too large: 8104
+2020/023-16:54:02: serialReader length field in header too large: 2064
+2020/023-16:54:02: serialReader length field in header too large: 8104
+2020/023-16:54:02: serialReader length field in header too large: 2064
+2020/023-16:54:02: serialReader length field in header too large: 8104
+2020/023-16:54:02: serialReader length field in header too large: 2064
+2020/023-16:54:02: serialReader length field in header too large: 8104
+2020/023-16:54:02: serialReader length field in header too large: 2064

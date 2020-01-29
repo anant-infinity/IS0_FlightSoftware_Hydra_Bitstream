@@ -1,0 +1,54 @@
+<hydraDef>
+
+    <!-- Connection details for power supply communications -->
+	<hwClient name="powerSupply" port="#POWER_SUPPLY_PORT" addr="#POWER_SUPPLY_IP_ADDR" mode="duplex"/>
+    <decoderQuery name="powerSupplyDecoder"/>
+	<readerTCP name="powerSupplyReader" maxSize="1024" hw="powerSupply" decoder="powerSupplyDecoder" autoStart="false"/>
+	
+	<!-- Commands to configure power supply -->
+	
+	<query name="SetCurrent" string="SOUR:CURR 3" destination="powerSupply">
+		<description text="Set power supply current limit"/>
+	</query>
+	
+	<query name="SetVoltage" string="SOUR:VOLT 12" destination="powerSupply">
+		<description text="Set power supply output voltage"/>
+	</query>
+	
+	<query name="TurnOnOutput" string="OUT ON" destination="powerSupply">
+		<description text="Turn on power supply output"/>
+	</query>
+
+	<query name="TurnOffOutput" string="OUT OFF" destination="powerSupply">
+		<description text="Turn off power supply output"/>
+	</query>
+	
+	<!-- Queries to get information from power supply and store in database items -->
+	
+	<itemDef name="PowerVoltage" type="float32"/>
+
+	<query name="GetVoltage" string="SOUR:VOLT?" decoder="powerSupplyDecoder" receiveDest="PowerVoltage" 
+		destination="powerSupply"/>
+
+	<itemDef name="PowerOutputStatus" type="dn32"/>
+	
+	<query name="GetOutputStatus" string="OUT?" decoder="powerSupplyDecoder" receiveDest="PowerOutputStatus" 
+		destination="powerSupply"/>
+		
+	<itemDef name="PowerOutputCurrent" type="float32"/>
+	
+	<query name="GetOutputCurrent" string="MEAS:CURR?" decoder="powerSupplyDecoder" receiveDest="PowerOutputCurrent" 
+		destination="powerSupply"/>
+		
+	<!-- aliases to hide details of power supply commands -->
+	
+	<alias name="pwr_on" command="send_query">
+		<description text="Turn on instrument power"/>
+		<argument id="0" value="TurnOnOutput"/>
+	</alias>
+	
+	<alias name="pwr_off" command="send_query">
+		<description text="Turn off instrument power"/>
+		<argument id="0" value="TurnOffOutput"/>
+	</alias>
+</hydraDef>

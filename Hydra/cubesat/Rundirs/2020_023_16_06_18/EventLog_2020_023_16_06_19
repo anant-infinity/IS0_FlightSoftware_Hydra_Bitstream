@@ -1,0 +1,13 @@
+2020/023-16:06:19: Configuring for Serial
+2020/023-16:06:19: <CFG> HW beaconTlmOut need to have prefix to use maxSize
+2020/023-16:06:19: <CFG> HW logTlmOut need to have prefix to use maxSize
+2020/023-16:06:19: <CFG> HW subsystemResponseTlmOut need to have prefix to use maxSize
+2020/023-16:06:19: <CFG> HW parametertableTlmOut need to have prefix to use maxSize
+2020/023-16:06:19: <INT> Run Directory: D:\Final_Year_Project_Work\IS-0-P4\is1-fs\Hydra\cubesat\Rundirs\2020_023_16_06_18\
+2020/023-16:06:19: <INT> Writing note to file
+2020/023-16:06:19: <SCR> Starting script in engine 0
+2020/023-16:06:19: <SCR> Starting script init.prc
+2020/023-16:06:19: <INT> Running startup script
+2020/023-16:06:19: <HW> Starting new file: EventLog_2020_023_16_06_19
+2020/023-16:06:19: <SCR> Done with script init.prc
+2020/023-16:06:35: <HW> COM6 is opened

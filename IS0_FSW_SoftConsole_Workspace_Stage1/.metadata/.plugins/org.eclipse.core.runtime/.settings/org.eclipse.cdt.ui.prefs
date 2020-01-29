@@ -1,0 +1,14 @@
+content_assist_category_order=org.eclipse.cdt.ui.helpProposalCategory\:0\u0000org.eclipse.cdt.ui.parserProposalCategory\:1\u0000org.eclipse.cdt.ui.templateProposalCategory\:2\u0000org.eclipse.cdt.ui.textProposalCategory\:3\u0000
+content_assist_disabled_computers=
+content_assist_proposals_timeout=8000
+eclipse.preferences.version=1
+hoverModifierMasks=org.eclipse.cdt.ui.BestMatchHover;0;org.eclipse.cdt.debug.internal.ui.editors.DebugTextHover;131072;org.eclipse.cdt.ui.ProblemHover;0;org.eclipse.cdt.ui.CDocHover;0;org.eclipse.cdt.ui.CMacroExpansionHover;0;org.eclipse.cdt.ui.CSourceHover;262144;org.eclipse.cdt.ui.AnnotationHover;0;
+hoverModifiers=org.eclipse.cdt.ui.BestMatchHover;0;org.eclipse.cdt.debug.internal.ui.editors.DebugTextHover;Shift;org.eclipse.cdt.ui.ProblemHover;\!0;org.eclipse.cdt.ui.CDocHover;\!0;org.eclipse.cdt.ui.CMacroExpansionHover;\!0;org.eclipse.cdt.ui.CSourceHover;Ctrl;org.eclipse.cdt.ui.AnnotationHover;\!0;
+org.eclipse.cdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.cdt.ui.text.templates.custom=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates><template autoinsert\="true" context\="org.eclipse.cdt.ui.text.templates.c" deleted\="false" description\="for loop with 32bit counter" enabled\="true" name\="for">for (uint32_t ${var} \= 0; ${var} &lt; ${max}; ++${var}) {\n\t${line_selection}${cursor}\n}</template><template autoinsert\="true" context\="org.eclipse.cdt.ui.text.templates.c" deleted\="false" description\="for loop with 64bit counter" enabled\="true" name\="for">for (uint64_t ${var} \= 0; ${var} &lt; ${max}; ++${var}) {\n\t${line_selection}${cursor}\n}</template><template autoinsert\="true" context\="org.eclipse.cdt.ui.text.templates.c" deleted\="false" description\="MSS_UART_polled_tx_string PSE" enabled\="true" name\="uart_polled_string_pse">MSS_UART_polled_tx_string(&amp;${g_mss_uart0_lo}, "${cursor}\\r\\n");</template><template autoinsert\="true" context\="org.eclipse.cdt.ui.text.templates.c" deleted\="false" description\="Suppresing specific cppcheck error on a single line" enabled\="true" name\="cppcheck-supress">// cppcheck-suppress ${errorCode}</template><template autoinsert\="true" context\="org.eclipse.cdt.ui.text.templates.c" deleted\="false" description\="Suppresing all cppcheck errors on a single line" enabled\="true" name\="cppcheck-supress-all">// cppcheck-suppress *</template></templates>
+spelling_locale=en_US
+spelling_locale_initialized=true
+spelling_user_dictionary=${eclipse_home}/../extras/dictionaries/user-dictionary.txt
+spelling_user_dictionary_encoding=
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

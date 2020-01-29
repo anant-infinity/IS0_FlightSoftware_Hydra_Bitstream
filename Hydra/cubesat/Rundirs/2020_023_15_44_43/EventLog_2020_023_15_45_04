@@ -1,0 +1,15 @@
+2020/023-15:45:04: Configuring for Serial
+2020/023-15:45:04: <CFG> HW beaconTlmOut need to have prefix to use maxSize
+2020/023-15:45:04: <CFG> HW logTlmOut need to have prefix to use maxSize
+2020/023-15:45:04: <CFG> HW subsystemResponseTlmOut need to have prefix to use maxSize
+2020/023-15:45:04: <CFG> HW parametertableTlmOut need to have prefix to use maxSize
+2020/023-15:45:04: <INT> Run Directory: D:\Final_Year_Project_Work\IS-0-P4\is1-fs\Hydra\cubesat\Rundirs\2020_023_15_44_43\
+2020/023-15:45:04: <INT> Writing note to file
+2020/023-15:45:04: <RDR> Auto-starting reader serialReader
+2020/023-15:45:04: <HW> Create file failed for COM3, error number 121
+2020/023-15:45:04: <RDR> Starting reader serialReader
+2020/023-15:45:04: <SCR> Starting script in engine 0
+2020/023-15:45:04: <SCR> Starting script init.prc
+2020/023-15:45:04: <INT> Running startup script
+2020/023-15:45:04: <HW> Starting new file: EventLog_2020_023_15_45_04
+2020/023-15:45:04: <SCR> Done with script init.prc

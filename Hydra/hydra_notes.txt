@@ -1,0 +1,40 @@
+Hydra class:
+	startup.xml to be in the root (of hydra) directory
+	Can talk to serial, tcp ip and another hydra
+	logs are present in the folder "Renders", where creates a new directory everytime it start and put event log there.
+	Can create new log file (render file) while you are running the hydra.
+	Hardware window from the option menu on the top, use the row of even log and get a new (roll over) one by right click.
+	In radio mode a tcp port is open and listening. (IP address doesn't matter)
+	External devices can connect over SCIPY. 
+	Keywords.xml are use to reference things, just like variables in a normal program.
+	All the things like baud rate etc. are configurable in Keywords.xml, use #{keyword_name} everywhere required.
+	We can have our own .xml files for hydra.
+	In TCP hydra is client and radio is server.
+	"Type.xml" make your own type definitions. put the size (in bits). There is default endianess defined in hydra_config.xml with a list of xml file.
+	CCSDS header is big endian by default. (Industry standard is big endian)
+	We have mixed endianess on byte level.
+	Can make scripts to automate things and put their reference in hydra_config.xml
+	State conversion (one to one mapping) to interpret the bits of the data and display the message on the display. Do define typeState tag.
+
+	frameDef is for a packet, can give the ID.
+	Account for the unused space. Do put the suffix or prefix for use.
+	We can define the Items in the packet itself (common) or refer to it. "num" makes the item an array.
+	Display page can be created.
+	Can tell hydra to store history of an item.
+	EU conversion are possible.
+	Use command tag for creating one. In field 
+	CMD decoder is the one which put values.
+	You have to create the cmd_header with different apid.
+	Length field in header to be set later.
+	<placeholder> to put the data.
+	Can put things after it.
+
+	CCSDS length is subtracted 7 bytes.
+	To go out the cmd has to go through "decoder".
+	AX.25 header.
+	Hydra doesnt do bit stuffing.
+	Hydra can't check the CRCs.
+	High speed TCP connection won't work.
+	Need to tell hyrda to start reading.
+	outputDevice have the "frameID" tag to save a particular APID to a particular.
+	Custom commands and menus can be created.

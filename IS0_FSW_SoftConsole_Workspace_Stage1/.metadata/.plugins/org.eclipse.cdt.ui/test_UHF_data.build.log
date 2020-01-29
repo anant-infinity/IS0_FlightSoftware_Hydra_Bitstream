@@ -1,0 +1,11 @@
+20:34:53 **** Incremental Build of configuration Debug_eNVM for project test_UHF_data ****
+make all 
+Invoking: GNU ARM Cross Print Size
+arm-none-eabi-size --format=berkeley "test_UHF_data.elf"
+   text	   data	    bss	    dec	    hex	filename
+   7264	     16	  65520	  72800	  11c60	test_UHF_data.elf
+Finished building: test_UHF_data.siz
+ 
+
+20:34:53 Build Finished. 0 errors, 0 warnings. (took 249ms)
+

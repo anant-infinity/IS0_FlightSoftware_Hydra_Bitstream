@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;rtc.c&apos; to &apos;peripherals&apos;" description="Move &apos;rtc.c&apos; to &apos;peripherals&apos;" destination="peripherals" element1="rtc.c" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1573183518142" updateReferences="true"/>
+</session>

@@ -1,0 +1,965 @@
+
+
+
+
+#ifndef _COMMAND_HANDLE_C
+	#define _COMMAND_HANDLE_C
+
+#include <EPS/eps.h>
+#include "command_handle.h"
+#include "SPI_Flash/spi_flash.h"
+#include "RTC/rtc.h"
+#include "CCSDS/ccsds.h"
+#include "SD_CARD/sd.h"
+#include "gpios.h"
+#include "UART/UART_RX_V3.h"
+#include "string.h"
+#include "Utils/utils.h"
+
+
+//#define CHECK_CCSDS_CHECKSUM
+//uint8_t CMD_Forced_Mode;
+//Timer32_t Globals.Force_Mode_Timer;
+//Timer32_t Globals.Force_Mode_Update_Rate;
+
+//Timer32_t Transmit_Delay;
+//Timer32_t Transmit_Duration;
+//uint16_t Transmit_Data_Flags;
+
+#ifdef ENABLE_UART0_COMMAND
+
+Module_Sync_t CMD_UART_Module_Sync;
+mss_uart_instance_t * CMD_UART;
+
+uint8_t rx_buff[256];
+
+#endif
+
+void CMD_Handle_Init(){
+	#ifdef ENABLE_UART0_COMMAND
+    CMD_UART = &g_mss_uart0;
+    MSS_UART_init(CMD_UART,
+                  MSS_UART_115200_BAUD,
+                  MSS_UART_DATA_8_BITS | MSS_UART_NO_PARITY | MSS_UART_ONE_STOP_BIT);
+    MSS_UART_set_tx_endian(CMD_UART, MSS_UART_LITTLEEND);
+
+    uint8_t stat = UART_RX3_Disable_All(UART0_UART_RX3_ADDR);
+    stat = UART_RX3_Enable_All(UART0_UART_RX3_ADDR);
+    stat = UART_RX3_Set_Config_Reg(UART0_UART_RX3_ADDR, 0x01);
+
+    CMD_UART_Module_Sync.Response_Read = 0;
+    CMD_UART_Module_Sync.CMD_Seq_Count = 0;
+    CMD_UART_Module_Sync.CMD_Period_Timer.Time = 200;
+    #endif
+
+    Globals.Force_Mode_Timer.Start = 0;
+    Globals.Force_Mode_Update_Rate.Start = 0;
+
+    Globals.Transmit_Delay.Time = 0;
+	Globals.Transmit_Duration.Time = 0;
+	Globals.Transmit_Data_Flags = 0;
+}
+
+#ifdef ENABLE_UART0_COMMAND
+
+uint8_t CMD_Pool_For_UART0_CMD(){
+
+	uint8_t stat = 0xff,tmp;
+
+    uint8_t k = UART_RX3_Get_ToRead(UART0_UART_RX3_ADDR);
+    uint16_t read_ptr= UART_RX3_Get_Read_Pointer(UART0_UART_RX3_ADDR);
+    switch(CMD_UART_Module_Sync.CMD_Seq_Count){
+
+    	case 0:
+    		if(k > 0){
+    			k = UART_RX3_Get_ToRead(UART0_UART_RX3_ADDR);
+    			tmp = UART_RX3_peek_data_read_start(UART0_UART_RX3_ADDR, rx_buff, k, read_ptr);
+    			if(tmp >= 6){
+    				CMD_UART_Module_Sync.CMD_Seq_Count = 1;
+    				CMD_UART_Module_Sync.Response_Length = Utils_Buffer_to_16_ValueS_Big(&rx_buff[4]) + 1;
+    			}
+    		}
+    		CMD_UART_Module_Sync.CMD_Period_Timer.Start = RTC_Get_Value16();
+    		break;
+
+    	case 1:
+    		if(k < CMD_UART_Module_Sync.Response_Length + 6){
+    			if(Utils_Handle_Timer16_Started(&CMD_UART_Module_Sync.CMD_Period_Timer)){
+					CMD_UART_Module_Sync.CMD_Seq_Count = 0;
+					CMD_UART_Module_Sync.Response_Read = 0;
+					CMD_UART_Module_Sync.Response_Length = 0;
+				}
+    			break;
+    		}
+    		k = UART_RX3_get_data_read_start(UART0_UART_RX3_ADDR, rx_buff, k, read_ptr);
+
+			stat = UART_RX3_Disable_All(UART0_UART_RX3_ADDR);
+			stat = UART_RX3_Enable_All(UART0_UART_RX3_ADDR);
+			stat = UART_RX3_Set_Config_Reg(UART0_UART_RX3_ADDR, 0x01);
+
+			stat = CCSDS_Fletcher_16_Checkbytes(rx_buff, CMD_UART_Module_Sync.Response_Length + 6 -2, 1);
+
+			CMD_UART_Module_Sync.CMD_Seq_Count = 0;
+			CMD_UART_Module_Sync.Response_Read = 0;
+			CMD_UART_Module_Sync.Response_Length = 0;
+
+			if(stat != 0){
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_CRC;
+				return 0;
+			}
+
+			Globals.Last_Command_Timer.Start = RTC_Get_Value64();
+
+			uint8_t apid = rx_buff[1];
+
+			apid =  CMD_Handle(apid, &rx_buff[6], (uint8_t)CMD_UART_Module_Sync.Response_Length - 2);
+
+			return apid;
+    }
+    return 0;
+}
+
+#endif
+
+uint8_t CMD_Poll_CMD(){
+
+	uint8_t data[CMD_DETECT_MAX_SIZE];
+	uint16_t len = UHF_RX_Get_Received_Length(UHF_RX_ADDR);
+	uint16_t stat2 = UHF_RX_Get_FCS(UHF_RX_ADDR);
+	uint16_t stat = UHF_RX_Get_Status(UHF_RX_ADDR);
+
+	if(len >= CMD_DETECT_MIN_LENGTH_SIZE && (stat & CMD_DETECT_CMD_REC_STATUS) == CMD_DETECT_CMD_REC_STATUS){
+		/* It was observed that whenever we calculate the CRC of received frame including the FCS bytes then the reuslt is always 0xf47*/
+		if(stat2 != CMD_DETECT_CORRECT_FCS){
+			/* AX 25 FCS doesn't match. */
+			Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_FCS;
+			Beacon_pack.CDH_CMD_Reject_Count++;
+			UHF_RX_Reset_Module(UHF_RX_ADDR);
+		}else{
+			/* Since the Verilog code will keep looking for the correct frame even if the fault has occured so here we are checking for the correct frame
+			before going to check it any fault had occurred before. */
+			/* Got a valid frame*/
+			len = UHF_RX_Get_Received_Length(UHF_RX_ADDR);
+
+			stat =  UHF_RX_Received_Data(UHF_RX_ADDR, data, len);
+			UHF_RX_Reset_Module(UHF_RX_ADDR);
+			if(stat != len){
+				return 0;
+			}
+
+			#ifdef CHECK_CCSDS_CHECKSUM
+			/* Checking the CCSDS checksum */
+			stat = CCSDS_Fletcher_16_Checkbytes(&data[16], len - 18, 1);
+			if(stat != 0){
+				Beacon_pack.CDH_CMD_Reject_Count++;
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_CRC;
+				return 0;
+			}
+			#endif
+			
+			uint16_t length_data = Utils_Buffer_to_16_ValueS_Big(&data[20]);	/* 17th byte CCSDS starts. The 21st and 22nd byte is the packet length */
+			stat = CMD_Handle(data[17], &data[22],(uint8_t)length_data - 2);	/* 	23rd byte is the option 1 hence &data[22]. Skipping the fletcher code hence 
+																					length_data - 2. The APID is 18th byte hence data[17]*/
+
+			if(stat){
+				Globals.Last_Command_Timer.Start = RTC_Get_Value64();
+				return 1;
+			}
+			UHF_RX_Reset_Module(UHF_RX_ADDR);
+			Beacon_pack.CDH_CMD_Reject_Count++;
+			return 0;
+		}
+    }
+
+	stat = UHF_RX_Get_Status(UHF_RX_ADDR);
+	stat2 = UHF_RX_Get_FCS(UHF_RX_ADDR);
+	if((stat & CMD_DETECT_FRAME_FAULT_STATUS) > 0x00 ){
+		/* Frame fault reset.*/
+		UHF_RX_Reset_Module(UHF_RX_ADDR);
+	}
+	if((stat & CMD_DETECT_SAVE_FAULT_STATUS) > 0x00){
+		/* Save fault reset.*/
+		UHF_RX_Reset_Module(UHF_RX_ADDR);
+	}
+	return 0;
+}
+
+uint8_t CMD_Handle(uint8_t apid, uint8_t * cmd_pack, uint8_t length){
+	uint8_t stat = 0;
+	switch(apid){
+		case NOOP:
+			stat = 1;
+			break;
+		case CHANGE_THRESHOLD:
+			stat = CMD_Change_Threshold(cmd_pack, length);
+			break;
+		case POWER_CYCLE_SPACECRAFT:
+			stat = CMD_Power_Cycle_Spacecraft(cmd_pack, length);
+			break;
+		case FORCE_MODE:
+			stat = CMD_Force_Mode(cmd_pack, length);
+			break;
+		case SET_FLAG:
+			stat = CMD_Set_Flag(cmd_pack, length);
+			break;
+		case RESTART_COUNTER_RESET:
+			stat = CMD_Restart_Reset_Counter(cmd_pack, length);
+			break;
+		case CHANGE_TIMER_RATE:
+			stat = CMD_Change_Timer_Rate(cmd_pack, length);
+			break;
+		case SET_PACKET_READ_OFFSET:
+			stat = CMD_Set_Packet_Read_Offset(cmd_pack, length);
+			break;
+		case COMMS_PRIORITY_TRANSMIT_DATA:
+			stat = CMD_Comms_Priority_Transmit_Data(cmd_pack, length);
+			break;
+		case SET_PACKET_WRITE_OFFSET:
+			stat = CMD_Set_Packet_Write_Offset(cmd_pack, length);
+			break;
+		case POWER_CYCLE:
+			stat = CMD_Power_Cycle_Subsystem();
+			break;
+		case TRANSMIT_TABLE:
+			stat = CMD_Transmit_Table(cmd_pack, length);
+			break;
+		case TRANSMIT_ADCS_IMG:
+			stat = CMD_Transmit_ADCS_IMG();
+			break;
+		case WRITE_PARAM:
+			stat = CMD_Write_Param(cmd_pack, length);
+			break;
+		case SYNC_CDH_RTC:
+			stat = CMD_Sync_CDH_RTC(cmd_pack, length);
+			break;
+		case COMMAND_SUBSYSTEM:
+			stat = CMD_Command_Subsystem(cmd_pack, length);
+			break;
+		case DEFINE_CUSTOM_MODE:
+			stat = CMD_Define_Custom_Mode();
+			break;
+		case LOAD_FACTORY_PARAMETERS:
+			stat = CMD_Load_Factory_Parameters();
+			break;
+		case RESET_FLASH_PARAMETERS:
+			stat = CMD_Reset_Flash_Parameters();
+			break;
+
+		default:
+			stat = 0;
+			Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_APID;
+			break;
+	}
+	Globals.Last_CMD_Rec.apid = apid;  /* Storing the last received command */
+	Globals.Last_CMD_Rec.option1 = cmd_pack[0];
+	Globals.Last_CMD_Rec.option2 = cmd_pack[1];
+	if(stat != 0){
+		Beacon_pack.CDH_CMD_Accept_Count++;
+		return 1;
+	}
+	Beacon_pack.CDH_CMD_Reject_Status |= CMD_REJECT_STAT_NOT_EXEC;
+	Beacon_pack.CDH_CMD_Reject_Count++;
+	return 0;
+}
+
+uint8_t CMD_Change_Threshold(uint8_t * cmd_pack, uint8_t cmd_length){
+	uint8_t op1 = cmd_pack[0];
+	if(cmd_pack[2] > CHANGE_THRE_VALUE_LIMIT_U){
+		Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+		return 0;
+	}
+	switch(op1){
+		case CHANGE_THRE_PHOENIX_2_SAFE:
+			Globals.Phoe_Safe_Threshold = cmd_pack[2];
+			break;
+
+		case CHANGE_THRE_SAFE_2_PHOENIX:
+			Globals.Safe_Phoe_Threshold = cmd_pack[2];
+			break;
+
+		case CHANGE_THRE_SAFE_2_CHARGING:
+			Globals.Safe_Char_Threshold = cmd_pack[2];
+			break;
+
+		case CHANGE_THRE_CHARGING_2_SAFE:
+			Globals.Char_Safe_Threshold = cmd_pack[2];
+			break;
+
+		case CHANGE_THRE_CHARGE_2_SCIC:
+			Globals.Char_SciC_Threshold = cmd_pack[2];
+			break;
+
+		case CHANGE_THRE_SCIC_2_CHARGE:
+			Globals.SciC_Char_Threshold = cmd_pack[2];
+			break;
+
+		case CHANGE_THRE_CHARGE_2_SCID:
+			Globals.Char_SciD_Threshold = cmd_pack[2];
+			break;
+
+		case CHANGE_THRE_SCID_2_CHARGE:
+			Globals.SciD_Char_Threshold = cmd_pack[2];
+			break;
+
+		default:
+			Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+			return 0;
+
+	}
+	Globals.Indication_Flags |= SAVE_PARAMETER_MAP_FLAG;
+	return 1;
+}
+uint8_t CMD_Power_Cycle_Spacecraft(uint8_t * cmd_pack, uint8_t length ){
+	//TODO: Update function to allow CDH reset via watchdog timer
+	uint8_t op1 = cmd_pack[0];
+	if(op1){
+		SC_Restart();
+		return 1;
+	}
+	/* Log and store it*/
+	Globals.Indication_Flags |= SC_REBOOT;
+	return 1;
+}
+
+uint8_t CMD_Force_Mode(uint8_t * cmd_pack, uint8_t cmd_length){
+	uint8_t op1 = cmd_pack[0];
+	uint8_t op2 = cmd_pack[1] > FORCE_MODE_THRE;
+	Globals.CMD_Persistant_Flags |= FORCE_MODE_FLAG;
+	Globals.Force_Mode_Timer.Time = Utils_Buffer_to_32_ValueU_Little(&cmd_pack[2]);
+	Globals.Force_Mode_Timer.Start = RTC_Get_Value32();
+	Globals.Force_Mode_Update_Rate.Start = Globals.Force_Mode_Timer.Start;
+	if(op2){
+		Globals.Force_Mode_Update_Rate.Time = Utils_Buffer_to_32_ValueU_Little(&cmd_pack[6]);
+	}else{	
+		Globals.Force_Mode_Update_Rate.Time = Globals.Force_Mode_Timer.Time + 1000;
+	}
+	switch(op1){
+		case FORCE_MODE_PHOENIX:
+			Globals.CMD_Forced_Mode = SC_PHOENIX_MODE;
+			break;
+
+		case FORCE_MODE_SAFE:
+			Globals.CMD_Forced_Mode = SC_SAFE_MODE;
+			break;
+
+		case FORCE_MODE_CHARGING:
+			Globals.CMD_Forced_Mode = SC_CHARGING_MODE;
+			break;
+
+		case FORCE_MODE_SCIC:
+			Globals.CMD_Forced_Mode = SC_SCIC_MODE;
+			break;
+
+		case FORCE_MODE_SCID:
+			Globals.CMD_Forced_Mode = SC_SCID_MODE;
+			break;
+
+		case FORCE_MODE_REMOVE:
+			Globals.CMD_Persistant_Flags &= (~FORCE_MODE_FLAG);
+			break;
+
+		case FORCE_MODE_CUSTOM_MODE:
+			//TODO: Figure this out else remove this
+			// Decided to remove this.
+			break;
+
+		default:
+			Globals.CMD_Persistant_Flags &= (~FORCE_MODE_FLAG);
+			Globals.Force_Mode_Timer.Time = 0;
+			Globals.Force_Mode_Timer.Start = 0;
+			Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+			return 0;
+	}
+	return 1;
+}
+uint8_t CMD_Set_Flag(uint8_t * cmd_pack, uint8_t cmd_len){
+	uint8_t op1 = cmd_pack[0];
+
+	uint8_t flag_nature = cmd_pack[2] > SET_FLAG_THRE;
+
+	switch(op1){
+		case SET_FLAG_DEP_ANT:
+			Utils_CMD_Set_Flag( &Globals.Deps_Wait_Tumb_Flag, ANT_DEPLOYMENT_FLAG, flag_nature);
+			break;
+
+		case SET_FLAG_DEP_SP1:
+			Utils_CMD_Set_Flag( &Globals.Deps_Wait_Tumb_Flag, SP1_DEPLOYMENT_FLAG, flag_nature);
+			break;
+
+		case SET_FLAG_DEP_SP3:
+			Utils_CMD_Set_Flag( &Globals.Deps_Wait_Tumb_Flag, SP2_DEPLOYMENT_FLAG, flag_nature);
+			break;
+
+		case SET_FLAG_DE_TUMBLE_FLAG:
+			Utils_CMD_Set_Flag( &Globals.Deps_Wait_Tumb_Flag, DE_TUMBLED_FLAG, flag_nature);
+			break;
+
+		case SET_FLAG_AUTO_SBAND_TRANS:
+			Utils_CMD_Set_Flag( &Globals.CMD_Persistant_Flags, AUTO_SBAND_TRANS, flag_nature);
+			break;
+
+		case SET_FLAG_PSLV_WAIT_TIMER:
+			Utils_CMD_Set_Flag( &Globals.Deps_Wait_Tumb_Flag, PSLV_WAIT_FLAG, flag_nature);
+			break;
+
+		case SET_FLAG_COMMAND_ECHO:
+			Utils_CMD_Set_Flag( &Globals.CMD_Persistant_Flags, CMD_ECHO_ON, flag_nature);
+			break;
+
+		default:
+			Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+			return 0;
+	}
+	Globals.Indication_Flags |= SAVE_PARAMETER_MAP_FLAG;
+	return 1;
+}
+uint8_t CMD_Restart_Reset_Counter(uint8_t * cmd_pack, uint8_t cmd_length){
+	uint8_t op1 = cmd_pack[0];
+
+	switch(op1){
+		case RESTART_RESET_COUNTER_UHF:
+			Globals.UHF_SC_Restart_Counter = 0;
+			Globals.UHF_VC_SC_Restart_Counter = 0;
+			break;
+
+		case RESTART_RESET_COUNTER_ADCS:
+			Globals.ADCS_SC_Restart_Counter = 0;
+			Globals.ADCS_VC_SC_Restart_Counter = 0;
+			break;
+
+		case RESTART_RESET_COUNTER_SBAND:
+			Globals.SBAND_SC_Restart_Counter = 0;
+			Globals.SBAND_VC_SC_Restart_Counter = 0;
+			break;
+
+		case RESTART_RESET_COUNTER_CIP:
+			/*TODO: To be modified*/
+			break;
+
+		case RESTART_RESET_COUNTER_DAXSS:
+			Globals.DAXSS_SC_Restart_Counter = 0;
+			Globals.DAXSS_VC_SC_Restart_Counter = 0;
+			break;
+
+		default:
+			Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+			return 0;
+	}
+	Globals.Indication_Flags |= SAVE_PARAMETER_MAP_FLAG;
+	return 1;
+}
+
+uint8_t CMD_Change_Timer_Rate(uint8_t * cmd_pack, uint8_t cmd_length){
+	uint8_t op1 = cmd_pack[0];
+	uint32_t time = Utils_Buffer_to_32_ValueU_Little(&cmd_pack[2]);
+	switch(op1){
+
+		case CHANGE_RATE_BEACON_STORE_RATE:
+			Globals.Beac_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_HK_STORE_RATE:
+			Globals.HK_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_ADCS_STORE_RATE:
+			Globals.ADCS_Pack_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_BEACON_TRANSMIT_RATE:
+			Globals.Beac_Trans_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_WATCHDOG_SIGNAL_TIMER:
+			Globals.Watchdog_Signal_Timer.Time = (uint16_t)time;
+			break;
+
+		case CHANGE_RATE_DEPLOYMENT_WAIT_TIME:
+			Globals.Deployment_Wait_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_DEPLOYMENT_DURATION_TIME:
+			Globals.Deployment_Duration_Timer.Time = (uint16_t)time;
+			break;
+
+		case CHANGE_RATE_PSLV_WAIT_TIME:
+			Globals.PSLV_Wait_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_LAST_COMMAND_RECEIVE_TIME:
+			Globals.Last_Command_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_UHF_COMMAND_TIMER:
+			Globals.UHF_Module_Sync.CMD_Period_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_UHF_RESPONSE_LIMIT_TIMER:
+			Globals.UHF_Module_Sync.Response_Limit_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_ADCS_COMMAND_TIMER:
+			Globals.ADCS_Module_Sync.CMD_Period_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_ADCS_RESPONSE_LIMIT_TIMER:
+			Globals.UHF_Module_Sync.Response_Limit_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_SBAND_COMMAND_TIMER:
+			Globals.SBand_Module_Sync.CMD_Period_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_SBAND_RESPONSE_LIMIT_TIMER:
+			Globals.SBand_Module_Sync.Response_Limit_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_EPS_COMMAND_TIMER:
+			/*TODO: To be edited */
+			break;
+
+		case CHANGE_RATE_EPS_RESPONSE_LIMIT_TIMER:
+			/*TODO: To be edited */
+			break;
+
+		case CHANGE_RATE_DAXSS_COMMAND_TIMER:
+			Globals.DAXSS_Module_Sync.CMD_Period_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_DAXSS_RESPONSE_LIMIT_TIMER:
+			Globals.DAXSS_Module_Sync.Response_Limit_Timer.Time = time;
+			break;
+
+		case CHANGE_RATE_CIP_COMMAND_TIMER:
+			/*TODO: To be edited */
+			break;
+
+		case CHANGE_RATE_CIP_RESPONSE_LIMIT_TIMER:
+			/*TODO: To be edited */
+			break;
+
+		case CHANGE_RATE_RTC_SYNC_WITH_GPS_DURATION:
+			Globals.RTC_Sync_Timer.Time = time;
+			break;
+
+		default:
+			Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+			return 0;
+
+	}
+	Globals.Indication_Flags |= SAVE_PARAMETER_MAP_FLAG;
+	return 1;
+}
+uint8_t CMD_Set_Packet_Read_Offset(uint8_t * cmd_pack, uint8_t length){
+	uint8_t op1 = cmd_pack[0];
+	uint32_t sector = Utils_Buffer_to_32_ValueU_Little(&cmd_pack[2]);
+	switch(op1){
+
+		case SET_READ_OFFSET_BEACON:
+			if( sector > Globals.Beacon_Sector_End || sector < Globals.Beacon_Sector_Start){
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+				return 0;
+			}
+		    Globals.Beacon_Read_Start = sector;
+		    break;
+
+		case SET_READ_OFFSET_HK:
+			if( sector > Globals.HK_Sector_End || sector < Globals.HK_Sector_Start){
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+				return 0;
+			}
+			Globals.HK_Read_Start = sector;
+		    break;
+
+		case SET_READ_OFFSET_LOG:
+			if( sector > Globals.Log_Sector_End || sector < Globals.Log_Sector_Start){
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+				return 0;
+			}
+			Globals.Log_Read_Start = sector;
+		    break;
+
+		case SET_READ_OFFSET_ADCS:
+			if( sector > Globals.ADCS_Sector_End || sector < Globals.ADCS_Sector_Start){
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+				return 0;
+			}
+		    Globals.ADCS_Read_Start = sector;
+		    break;
+
+		case SET_READ_OFFSET_ADCS_IMAGE:
+			if( sector > Globals.ADCS_Image_Sector_End || sector < Globals.ADCS_Image_Sector_Start){
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+				return 0;
+			}
+		    Globals.ADCS_Image_Read_Start = sector;
+		    break;
+
+		case SET_READ_OFFSET_SCIC:
+			if( sector > Globals.SciC_Sector_End || sector < Globals.SciC_Sector_Start){
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+				return 0;
+			}
+			Globals.SciC_Read_Start = sector;
+		    break;
+
+		case SET_READ_OFFSET_SCID:
+			if( sector > Globals.SciD_Sector_End || sector < Globals.SciD_Sector_Start){
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+				return 0;
+			}
+		    Globals.SciD_Read_Start = sector;
+		    break;
+
+		default:
+			Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+			return 0;
+	}
+	Globals.Indication_Flags |= SAVE_PARAMETER_MAP_FLAG;
+	return 1;
+}
+
+//to be used by Manage_Data_Transmission() in main_seq()
+uint16_t Transmission_Total_Length;
+
+uint8_t CMD_Comms_Priority_Transmit_Data(uint8_t * cmd_pack, uint8_t length){
+	/* Transmit the data asked by the ground station */
+	if(Globals.Current_SD == 0xff){
+		/* Log it */
+		return 0;
+	}
+	Globals.Transmit_Data_Flags = Utils_Buffer_to_16_ValueU_Little(cmd_pack);
+	//Total length will be the sum of what packets are requested by GS
+	Transmission_Total_Length = (((Globals.Transmit_Data_Flags & BEACON_DATA_FLAG) > 0) * (Globals.Beacon_Write_Start - Globals.Beacon_Read_Start) * SD_CARD_SINGLE_BLOCK_SIZE)
+						+ (((Globals.Transmit_Data_Flags & HK_DATA_FLAG) > 0) * (Globals.HK_Write_Start - Globals.HK_Read_Start) * SD_CARD_SINGLE_BLOCK_SIZE)
+						+ (((Globals.Transmit_Data_Flags & LOG_DATA_FLAG) > 0) * (Globals.Log_Write_Start - Globals.Log_Read_Start) * SD_CARD_SINGLE_BLOCK_SIZE)
+						+ (((Globals.Transmit_Data_Flags & ADCS_DATA_FLAG) > 0) * (Globals.ADCS_Write_Start - Globals.ADCS_Read_Start) * SD_CARD_SINGLE_BLOCK_SIZE)
+						+ (((Globals.Transmit_Data_Flags & SCID_DATA_FLAG) > 0) * (Globals.SciD_Write_Start - Globals.SciD_Read_Start) * SD_CARD_SINGLE_BLOCK_SIZE)
+						+ (((Globals.Transmit_Data_Flags & SCIC_DATA_FLAG) > 0) * (Globals.SciC_Write_Start - Globals.SciC_Read_Start) * SD_CARD_SINGLE_BLOCK_SIZE);
+
+	Globals.Transmit_Delay.Time = Utils_Buffer_to_32_ValueU_Little(&cmd_pack[2]);
+	Globals.Transmit_Delay.Start = RTC_Get_Value32();
+	Globals.Transmit_Data_Flags |= DELAY_TIMER_STARTED;
+
+	Globals.Indication_Flags &= ~TRANSMIT_DATA_READY;
+	Globals.Transmit_Duration.Time = Utils_Buffer_to_32_ValueU_Little(&cmd_pack[6]);
+
+	return 1;
+}
+uint8_t CMD_Set_Packet_Write_Offset(uint8_t * cmd_pack, uint8_t length){
+	uint8_t op1 = cmd_pack[0];
+	uint32_t sector = Utils_Buffer_to_32_ValueU_Little(&cmd_pack[2]);
+	switch(op1){
+		case SET_WRITE_OFFSET_BEACON:
+			if (sector >= Globals.Beacon_Sector_Start && sector <= Globals.Beacon_Sector_End)
+				Globals.Beacon_Write_Start = sector;
+			else
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+		    break;
+
+		case SET_WRITE_OFFSET_HK:
+			if (sector >= Globals.HK_Sector_Start && sector <= Globals.HK_Sector_End)
+				Globals.HK_Write_Start = sector;
+			else
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+		    break;
+
+		case SET_WRITE_OFFSET_LOG:
+			if (sector >= Globals.Log_Sector_Start && sector <= Globals.Log_Sector_End)
+				Globals.Log_Write_Start = sector;
+			else
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+		    break;
+
+		case SET_WRITE_OFFSET_ADCS:
+			if (sector >= Globals.ADCS_Sector_Start && sector <= Globals.ADCS_Sector_End)
+				Globals.ADCS_Write_Start = sector;
+			else
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+		    break;
+
+		case SET_WRITE_OFFSET_ADCS_IMAGE:
+			if (sector >= Globals.ADCS_Image_Sector_Start && sector <= Globals.ADCS_Image_Sector_End)
+				Globals.ADCS_Image_Read_Start = sector;
+			else
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+		    break;
+
+		case SET_WRITE_OFFSET_SCIC:
+			if (sector >= Globals.SciC_Sector_Start && sector <= Globals.SciC_Sector_End)
+				Globals.SciC_Write_Start = sector;
+			else
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+		    break;
+
+		case SET_WRITE_OFFSET_SCID:
+			if (sector >= Globals.SciD_Sector_Start && sector <= Globals.SciD_Sector_End)
+				Globals.SciD_Write_Start = sector;
+			else
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_DATA;
+		    break;
+
+	   	default:
+			Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+			return 0;
+	}
+	Globals.Indication_Flags |= SAVE_PARAMETER_MAP_FLAG;
+	return 1;
+}
+
+uint8_t CMD_Power_Cycle_Subsystem(){
+	//TODO: Complete this function
+	return 1;
+}
+
+uint8_t CMD_Transmit_Table(uint8_t * cmd_pack, uint8_t length){
+	uint8_t opt1 = cmd_pack[0];
+	Globals.Transmit_Helper.Response_Length = opt1;
+	switch(opt1){
+		case TRANSMIT_TABLE_ESRAM_PARAM:
+		case TRANSMIT_TABLE_FLASH_PARAM:
+			Globals.Indication_Flags |= REQ_PARAM_TRANSMIT;
+			Globals.Transmit_Helper.CMD_Seq_Count = TRANS_HELPER_PARAM_READ;
+			break;
+		case TRANSMIT_TABLE_GLOBALS:
+			Globals.Indication_Flags |= REQ_GLOBAL_TRANSMIT;
+			Globals.Transmit_Helper.CMD_Seq_Count = TRANS_HELPER_GLOBAL_TRANS1;
+			break;
+		default:
+			Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+			return 0;
+	}
+	Globals.Indication_Flags |= SAVE_PARAMETER_MAP_FLAG;
+	return 1;
+}
+uint8_t CMD_Transmit_ADCS_IMG(){
+
+	return 1;
+}
+
+uint8_t CMD_Write_Param(uint8_t * cmd_pack, uint8_t len){
+	uint8_t op1 = cmd_pack[0];
+
+    Param_Table_t FLASH_Parameter;
+	Get_Filled_Array(&FLASH_Parameter);
+	uint8_t offset = Utils_Buffer_to_32_ValueU_Little(&cmd_pack[2]);
+	uint8_t length = Utils_Buffer_to_32_ValueU_Little(&cmd_pack[6]);
+	uint8_t * pointer = (uint8_t *)&FLASH_Parameter;
+	memcpy(&pointer[offset], &cmd_pack[10], length);
+	Update_Variables(FLASH_Parameter);
+	if(op1){
+		Globals.Indication_Flags |= SAVE_PARAMETER_MAP_FLAG;
+	}
+	return 1;
+}
+uint8_t CMD_Sync_CDH_RTC(uint8_t * cmd_pack, uint8_t length){
+	uint8_t op1 = cmd_pack[0];
+	switch(op1){
+		case 0:
+			if(Globals.Sat_Curr_Mode == SC_PHOENIX_MODE){
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+				return 0;
+			}
+			Globals.Indication_Flags |= UPDATE_RTC_GPS;
+			break;
+
+		case 1:
+			if(!RTC_Set_Value(&cmd_pack[2], 5)){
+				return 0;
+			}
+			return RTC_Enable();
+
+		default:
+			Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+			return 0;
+	}
+	return 1;
+}
+uint8_t CMD_Command_Subsystem(uint8_t * cmd_pack, uint8_t length){
+	uint8_t op1 = cmd_pack[0];
+	uint8_t op2 = cmd_pack[1];
+	uint8_t response_length = cmd_pack[2];
+	uint8_t cmd_length = cmd_pack[3];
+	if(response_length > 230){
+		Beacon_pack.CDH_CMD_Reject_Status =  CMD_REJECT_STAT_BAD_DATA;
+		return 0;
+	}
+	switch(op1){
+
+		/* CIP command re-route */
+		case PIPELINE_CMD_CIP:
+			//TODO: The CIP command re-route has to be worked out
+			break;
+
+		/* EPS command re-route */
+		case PIPELINE_CMD_EPS:
+			//TODO: The EPS command re-route has to be worked out
+			break;
+
+		/* ADCS command re-route */
+		case PIPELINE_CMD_ADCS:
+
+			if(Globals.Sat_Curr_Mode == SC_PHOENIX_MODE){
+				/* ADCS is OFF */
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+				return 0;
+			}
+			memcpy(GS_Pipeline_CMD, &cmd_pack[4], cmd_length);
+			Globals.ADCS_Module_Sync.GS_CMD_Length = cmd_length;
+			Globals.ADCS_Module_Sync.GS_CMD_Response_Length = response_length;
+			break;
+
+		case PIPELINE_CMD_UHF:	/* UHF command re-route */
+			memcpy(GS_Pipeline_CMD, &cmd_pack[4], cmd_length);
+			Globals.UHF_Module_Sync.GS_CMD_Length = cmd_length;
+			Globals.UHF_Module_Sync.GS_CMD_Response_Length = response_length;
+			break;
+
+		case PIPELINE_CMD_SBAND:	/* SBand command re-route */
+			if(Globals.Sat_Curr_Mode <= SC_SAFE_MODE){
+				/* SBand is OFF */
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+				return 0;
+			}
+			memcpy(GS_Pipeline_CMD, &cmd_pack[4], cmd_length);
+			Globals.SBand_Module_Sync.GS_CMD_Length = cmd_length;
+			Globals.SBand_Module_Sync.GS_CMD_Response_Length = response_length;
+			break;
+
+		case PIPELINE_CMD_DAXSS:	/* DAXSS command re-route */
+			if(Globals.Sat_Curr_Mode != SC_SCID_MODE){
+				/* DAXSS is OFF */
+				Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+				return 0;
+			}
+			memcpy(GS_Pipeline_CMD, &cmd_pack[4], cmd_length);
+			Globals.DAXSS_Module_Sync.GS_CMD_Length = cmd_length;
+			Globals.DAXSS_Module_Sync.GS_CMD_Response_Length = response_length;
+			break;
+
+		default:
+			Beacon_pack.CDH_CMD_Reject_Status = CMD_REJECT_STAT_BAD_OP1;
+			return 0;
+	}
+
+	return 1;
+}
+uint8_t CMD_Define_Custom_Mode(){
+	return 1;
+}
+
+uint8_t CMD_Load_Factory_Parameters(){
+	Load_Factory_Value();
+	return 1;
+}
+
+uint8_t CMD_Reset_Flash_Parameters(){
+    Load_Factory_Value();
+    Globals.Indication_Flags |= SAVE_PARAMETER_MAP_FLAG;
+    return 1;
+}
+
+
+void CMD_Continued_Execution(){
+	if((Globals.CMD_Persistant_Flags & FORCE_MODE_FLAG) > 0){
+		if(Utils_Handle_Timer32_Started(&Globals.Force_Mode_Timer)){
+			Globals.CMD_Persistant_Flags &= (~FORCE_MODE_FLAG);
+			Globals.Force_Mode_Timer.Time = 0;
+			Globals.Force_Mode_Timer.Start = 0;
+			Globals.Force_Mode_Update_Rate.Time = 0;
+			Globals.Force_Mode_Update_Rate.Start = 0;
+		}
+		else if(Utils_Handle_Timer32_Started(&Globals.Force_Mode_Update_Rate)){
+			Globals.Force_Mode_Update_Rate.Start = RTC_Get_Value32();
+			Globals.Force_Mode_Timer.Start = RTC_Get_Value32();
+			Globals.Force_Mode_Timer.Time -= Globals.Force_Mode_Update_Rate.Time;
+			Globals.Indication_Flags |= SAVE_PARAMETER_MAP_FLAG;
+		}
+	}
+
+	if((Globals.Transmit_Data_Flags & DELAY_TIMER_STARTED) == 0)
+		return;
+
+	if(!Utils_Handle_Timer32_Started(&Globals.Transmit_Delay)){
+		return;
+	}
+
+	if((Globals.Transmit_Data_Flags & TRANSMISSION_SBAND) > 0)
+		Globals.Indication_Flags |= TRANSMIT_BAND;
+
+	if((Globals.Transmit_Data_Flags & DURATION_TIMER_STARTED) == 0){
+		Globals.Transmit_Duration.Start = RTC_Get_Value32();
+		Globals.Transmit_Data_Flags |= DURATION_TIMER_STARTED;
+	}
+
+	if(Utils_Handle_Timer32_Started(&Globals.Transmit_Duration)){
+		Globals.Indication_Flags &= ~TRANSMIT_DATA_READY;
+		Globals.Transmit_Data_Flags &= ~TRANSMISSION_SBAND;
+		Globals.Transmit_Data_Flags &= ~DELAY_TIMER_STARTED;
+		Globals.Indication_Flags &= ~TRANSMIT_BAND; /* Restting the transmission band to UHF.*/
+		return;	/* if required it will be updated later*/
+	}
+	if((Globals.Indication_Flags & REQ_SD_DATA_TRANSMIT) > 0)
+		return;
+
+	uint32_t * read_addr, * write_addr; uint32_t mask = 0xffffffff;
+	if((Globals.Transmit_Data_Flags & SCID_DATA_FLAG) >= SCID_DATA_FLAG){
+		read_addr = &Globals.SciD_Read_Start;
+		write_addr = &Globals.SciD_Write_Start;
+		mask = ~SCID_DATA_FLAG;
+	}
+	else if((Globals.Transmit_Data_Flags & SCIC_DATA_FLAG) >= SCIC_DATA_FLAG){
+		read_addr = &Globals.SciC_Read_Start;
+		write_addr = &Globals.SciC_Write_Start;
+		mask = ~SCIC_DATA_FLAG;
+	}
+	else if((Globals.Transmit_Data_Flags & ADCS_DATA_FLAG) >= ADCS_DATA_FLAG){
+		read_addr = &Globals.ADCS_Read_Start;
+		write_addr = &Globals.ADCS_Write_Start;
+		mask = ~ADCS_DATA_FLAG;
+	}
+	else if((Globals.Transmit_Data_Flags & LOG_DATA_FLAG) >= LOG_DATA_FLAG){
+		read_addr = &Globals.Log_Read_Start;
+		write_addr = &Globals.Log_Write_Start;
+		mask = ~LOG_DATA_FLAG;
+	}
+	else if((Globals.Transmit_Data_Flags & HK_DATA_FLAG) >= HK_DATA_FLAG){
+		read_addr = &Globals.HK_Read_Start;
+		write_addr = &Globals.HK_Write_Start;
+		mask = ~HK_DATA_FLAG;
+	}
+	else if((Globals.Transmit_Data_Flags & BEACON_DATA_FLAG) >= BEACON_DATA_FLAG){
+		read_addr = &Globals.Beacon_Read_Start;
+		write_addr = &Globals.Beacon_Write_Start;
+		mask = ~BEACON_DATA_FLAG;
+	}
+
+	statusG = SD_Read_Sector(SD_Card_Transmit_Buffer, *read_addr, Globals.Current_SD, SD_CARD_SINGLE_BLOCK_SIZE);
+	if(!statusG){
+		/* Failed to read data stop the transmission */
+		Globals.Indication_Flags &= ~TRANSMIT_DATA_READY;
+		Globals.Transmit_Data_Flags &= ~TRANSMISSION_SBAND;
+		Globals.Indication_Flags &= ~REQ_SD_DATA_TRANSMIT;
+		Globals.Transmit_Data_Flags &= ~DELAY_TIMER_STARTED;
+		Globals.Indication_Flags &= ~TRANSMIT_BAND;
+	}else{
+		if(*read_addr>= *write_addr){
+			Globals.Transmit_Data_Flags &= mask;
+			if(((Globals.Transmit_Data_Flags & 0xFFF) & (~(BEACON_DATA_FLAG | HK_DATA_FLAG | LOG_DATA_FLAG | ADCS_DATA_FLAG | SCIC_DATA_FLAG |SCID_DATA_FLAG))) == 0){
+				Globals.Indication_Flags &= ~TRANSMIT_DATA_READY;
+				Globals.Transmit_Data_Flags &= ~TRANSMISSION_SBAND;
+				Globals.Transmit_Data_Flags &= ~DELAY_TIMER_STARTED;
+				Globals.Indication_Flags &= ~TRANSMIT_BAND;
+			}
+
+			return;
+		}
+		Globals.Indication_Flags |= REQ_SD_DATA_TRANSMIT;
+		//TODO: when to update read_addr in FLASH?
+		(*read_addr)+=1;
+		Globals.Indication_Flags |= TRANSMIT_DATA_READY;
+
+	}
+
+}
+#endif

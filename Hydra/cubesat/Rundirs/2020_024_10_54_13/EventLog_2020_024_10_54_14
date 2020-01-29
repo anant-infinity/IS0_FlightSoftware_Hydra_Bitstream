@@ -1,0 +1,94 @@
+2020/024-10:54:14: Configuring for Serial
+2020/024-10:54:14: <CFG> HW beaconTlmOut need to have prefix to use maxSize
+2020/024-10:54:14: <CFG> HW logTlmOut need to have prefix to use maxSize
+2020/024-10:54:14: <CFG> HW subsystemResponseTlmOut need to have prefix to use maxSize
+2020/024-10:54:14: <CFG> HW parametertableTlmOut need to have prefix to use maxSize
+2020/024-10:54:14: <INT> Run Directory: D:\Final_Year_Project_Work\IS-0-P4\IS0_FSW_Stage_1\Hydra\cubesat\Rundirs\2020_024_10_54_13\
+2020/024-10:54:14: <INT> Writing note to file
+2020/024-10:54:14: <RDR> Auto-starting reader serialReader
+2020/024-10:54:14: <HW> Create file failed for COM6, error number 2
+2020/024-10:54:14: <RDR> Starting reader serialReader
+2020/024-10:54:14: <SCR> Starting script in engine 0
+2020/024-10:54:14: <SCR> Starting script init.prc
+2020/024-10:54:14: <INT> Running startup script
+2020/024-10:54:14: <HW> Starting new file: EventLog_2020_024_10_54_14
+2020/024-10:54:14: <SCR> Done with script init.prc
+2020/024-10:54:16:  <PAG> background color LightBlue not found
+2020/024-10:54:16: <PAG> Item CDH_CMD_Accept_Count not found
+2020/024-10:54:16: <PAG> Item CDH_CMD_Reject_Count not found
+2020/024-10:54:16: <PAG> Item CDH_Last_CMD_APID not found
+2020/024-10:54:16: <PAG> Item CDH_Last_CMD_Option1 not found
+2020/024-10:54:16: <PAG> Item CDH_Last_CMD_Option2 not found
+2020/024-10:54:16: <PAG> Item beacon_Cmd_reject_stat_not_exec not found
+2020/024-10:54:16: <PAG> Item beacon_Cmd_reject_stat_bad_crc not found
+2020/024-10:54:16: <PAG> Item beacon_Cmd_reject_stat_bad_fcs not found
+2020/024-10:54:16: <PAG> Item beacon_Cmd_reject_stat_bad_data not found
+2020/024-10:54:16: <PAG> Item beacon_Cmd_reject_stat_bad_op2 not found
+2020/024-10:54:16: <PAG> Item beacon_Cmd_reject_stat_bad_op1 not found
+2020/024-10:54:16: <PAG> Item beacon_Cmd_reject_stat_bad_apid not found
+2020/024-10:54:16: <PAG> Item CDH_CIP_ON_Stat not found
+2020/024-10:54:16: <PAG> Item CDH_ADCS_ON_Stat not found
+2020/024-10:54:16: <PAG> Item CDH_SBAND_ON_Stat not found
+2020/024-10:54:16: <PAG> Item CDH_GPS_ON_Stat not found
+2020/024-10:54:16: <PAG> Item CDH_Bat_ON_Stat not found
+2020/024-10:54:16: <PAG> Item CDH_DAXSS_ON_Stat not found
+2020/024-10:54:16: <PAG> Item CDH_Temp not found
+2020/024-10:54:16: <PAG> Item beacon_SC_Mode not found
+2020/024-10:54:16: <PAG> Item beacon_Eclispe_stat not found
+2020/024-10:54:16: <PAG> Item beacon_Bus_Transceiver_stat not found
+2020/024-10:54:16: <PAG> Item beacon_RTC_updated not found
+2020/024-10:54:16: <PAG> Item beacon_SAVE_PARAMETER_MAP_FLAG not found
+2020/024-10:54:16: <PAG> Item beacon_SD_CARD0_WORKING not found
+2020/024-10:54:16: <PAG> Item beacon_SD_CARD1_WORKING not found
+2020/024-10:54:16: <PAG> Item beacon_AUTO_SBAND_BEACON_TRANS not found
+2020/024-10:54:16: <PAG> Item beacon_AUTO_SBAND_DATA_TRANS not found
+2020/024-10:54:16: <PAG> Item beacon_SC_REBOOT not found
+2020/024-10:54:16: <PAG> Item beacon_IS_ECLIPSE not found
+2020/024-10:54:16: <PAG> Item beacon_ADCS_BOOT_WAIT_COMPLETED not found
+2020/024-10:54:16: <PAG> Item beacon_SBAND_TRANSMIT_ENABLE not found
+2020/024-10:54:16: <PAG> Item beacon_UHF_TRANSMIT_ENABLE not found
+2020/024-10:54:16: <PAG> Item beacon_TRANSMIT_DATA_READY not found
+2020/024-10:54:16: <PAG> Item beacon_UPDATE_RTC_GPS not found
+2020/024-10:54:16: <PAG> Item beacon_REQ_BEACON_TRANSMIT not found
+2020/024-10:54:16: <PAG> Item beacon_REQ_PARAM_TRANSMIT not found
+2020/024-10:54:16: <PAG> Item beacon_REQ_SD_DATA_TRANSMIT not found
+2020/024-10:54:16: <PAG> Item beacon_REQ_ADCS_IMG_TRANSMIT not found
+2020/024-10:54:16: <PAG> Item beacon_REQ_SUBSYS_RESPONSE_TRANSMIT not found
+2020/024-10:54:16: <PAG> Item beacon_REQ_GLOBAL_TRANSMIT not found
+2020/024-10:54:17: <PAG> Item CDH_HK_Read_start not found
+2020/024-10:54:17: <PAG> Item CDH_SciC_Read_start not found
+2020/024-10:54:17: <PAG> Item CDH_SciD_Read_start not found
+2020/024-10:54:17: <PAG> Item CDH_ADCS_Read_start not found
+2020/024-10:54:17: <PAG> Item CDH_Beacon_Read_start not found
+2020/024-10:54:17: <PAG> Item CDH_Log_Read_start not found
+2020/024-10:54:17: <PAG> Item CDH_HK_Write_start not found
+2020/024-10:54:17: <PAG> Item CDH_SciC_Write_start not found
+2020/024-10:54:17: <PAG> Item CDH_SciD_Write_start not found
+2020/024-10:54:17: <PAG> Item CDH_ADCS_Write_start not found
+2020/024-10:54:17: <PAG> Item CDH_Beacon_Write_start not found
+2020/024-10:54:17: <PAG> Item CDH_Log_Write_start not found
+2020/024-10:54:17: <PAG> Item CDH_Last_CMD_Timer not found
+2020/024-10:54:17: <PAG> Item beacon_EPS not found
+2020/024-10:54:17: <PAG> Item beacon_UHF not found
+2020/024-10:54:17: <PAG> Item beacon_ADCS not found
+2020/024-10:54:17: <PAG> Item beacon_SBAND not found
+2020/024-10:54:17: <PAG> Item beacon_CIP not found
+2020/024-10:54:17: <PAG> Item beacon_DAXSS not found
+2020/024-10:54:17: <PAG> Item EPS_Bat_SOC not found
+2020/024-10:54:17: <PAG> Item EPS_Bat_Temp1 not found
+2020/024-10:54:17: <PAG> Item EPS_Bat_Temp2 not found
+2020/024-10:54:17: <PAG> Item EPS_SP1_Volt not found
+2020/024-10:54:17: <PAG> Item EPS_SP2_Volt not found
+2020/024-10:54:17: <PAG> Item EPS_SP3_Volt not found
+2020/024-10:54:17: <PAG> Item EPS_SP1_Curr not found
+2020/024-10:54:17: <PAG> Item EPS_SP2_Curr not found
+2020/024-10:54:17: <PAG> Item EPS_SP3_Curr not found
+2020/024-10:54:17: <PAG> Item EPS_Interface_Temp not found
+2020/024-10:54:17: <PAG> Item EPS_EPS_Temp not found
+2020/024-10:54:17: <PAG> Item EPS_GPS_33_Volt not found
+2020/024-10:54:17: <PAG> Item EPS_GPS_33_Curr not found
+2020/024-10:54:17: <PAG> Item EPS_GPS_12_Volt not found
+2020/024-10:54:17: <PAG> Item EPS_GPS_12_Curr not found
+2020/024-10:54:17: <PAG> Item EPS_Bat_Heater_Curr not found
+2020/024-10:54:17: <PAG> Item EPS_DAXSS_Volt not found
+2020/024-10:54:17: <PAG> Item EPS_DAXSS_Curr not found

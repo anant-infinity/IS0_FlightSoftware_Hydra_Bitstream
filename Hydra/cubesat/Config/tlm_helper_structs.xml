@@ -1,0 +1,151 @@
+<hydraDef>
+
+    <itemDef name="Padding1"                type="dn1l"          displayName="Padding"/>
+    <itemDef name="Padding2"                type="dn2l"          displayName="Padding"/>
+    <itemDef name="Padding3"                type="dn3l"          displayName="Padding"/>
+    <itemDef name="Padding4"                type="dn4l"          displayName="Padding"/>
+
+    <itemDef name="ADCS_Time"                       type="dn32l"       displayName="ADCS Time"/>
+    <itemDef name="Bat_SOC"                         type="dn16"       displayName="Bat SOC"/>
+    <itemDef name="Fletcher_code"                   type="dn16l"       displayName="Fletcher code"/>
+
+    <!-- ADCS info structure -->
+    <frameDef name="ADCS_info"  displayName="ADCS Info">
+        <field>
+            <itemDef name="ADCS_Sun_Point_State"                type="dn3l"                 displayName="ADCS Sun Mode"/>
+            <itemDef name="ADCS_Recomm_Sun_Point"               type="dn1l"                 displayName="Recommend Sun Point"/>
+            <itemDef name="ADCS_Mode"                           type="dn1l"                 displayName="ADCS Mode "/>
+            <itemDef name="ADCS_Att_Valid"                      type="dn1l"                 displayName="ADCS Attitude Valid"/>
+            <itemDef name="ADCS_Refs_Valid"                     type="dn1l"                 displayName="ADCS Refs Valid"/>
+            <itemDef name="ADCS_Time_Valid"                     type="dn1l"                 displayName="ADCS Time Valid"/>
+        </field>
+    </frameDef>
+    <!-- CDH Primary info structure -->
+    <frameDef name="cdh_primary_info" displayName="CDH Primary Info">
+        <field>
+            <item name="Padding2" />
+            <itemDef name="RTC_updated"             type="YES_NO_t" displayName="RTC updated"/>
+            <itemDef name="Bus_Transceiver_stat"    type="Enable_Diable_t" displayName="Bus Transceiver status"/>
+            <itemDef name="Eclispe_stat"            type="YES_NO_t" displayName="Eclipse: "/>
+            <itemDef name="SC_Mode"                 type="Spacecraft_Mode_t" displayName="Current spacecraft mode"/>
+        </field>
+    </frameDef>
+    <!-- CDH Data valid structure -->
+    <frameDef name="cdh_ss_data_valid" displayName="Subsystem Data Valid Flags">
+        <field>
+
+            <item name="Padding2" />
+            <itemDef name="DAXSS"                  type="TRUE_FALSE_t"      displayName="DAXSS Data Valid"/>
+            <itemDef name="EPS"                    type="TRUE_FALSE_t"      displayName="EPS Data Valid"/>
+            <itemDef name="CIP"                    type="TRUE_FALSE_t"      displayName="CIP Data Valid"/>
+            <itemDef name="SBAND"                  type="TRUE_FALSE_t"      displayName="SBAND Data Valid"/>
+            <itemDef name="ADCS"                    type="TRUE_FALSE_t"      displayName="ADC Data Valid"/>
+            <itemDef name="UHF"                    type="TRUE_FALSE_t"      displayName="UHF Data Valid"/>
+
+        </field>
+    </frameDef>
+    <!-- CDH Indication flag structure -->
+    <frameDef name="indication_flags" displayName="Indication Flags">
+        <field>
+            <itemDef name = "ADCS_BOOT_WAIT_COMPLETED"                     type= "dn1l"                displayName="ADCS BOOT WAIT COMPLETED"/>
+            <itemDef name = "SC_REBOOT"                     type= "dn1l"                               displayName="SC REBOOT"/>
+            <itemDef name = "IS_ECLIPSE"                     type= "dn1l"                              displayName="IS ECLIPSE"/>
+            <itemDef name = "AUTO_SBAND_DATA_TRANS"                     type= "dn1l"                   displayName="AUTO SBAND DATA TRANS"/>
+            <itemDef name = "AUTO_SBAND_BEACON_TRANS"                     type= "dn1l"                 displayName="AUTO SBAND BEACON TRANS"/>
+            <itemDef name = "SD_CARD1_WORKING"                     type= "dn1l"                        displayName="SD CARD1 WORKING"/>
+            <itemDef name = "SD_CARD0_WORKING"                     type= "dn1l"                        displayName="SD CARD0 WORKING"/>
+            <itemDef name = "SAVE_PARAMETER_MAP_FLAG"                     type= "dn1l"                 displayName="SAVE PARAMETER MAP FLAG"/>
+
+            <itemDef name = "REQ_ADCS_IMG_TRANSMIT"                     type= "dn1l"                   displayName="REQ ADCS IMG TRANSMIT"/>
+            <itemDef name = "REQ_SD_DATA_TRANSMIT"                     type= "dn1l"                    displayName="REQ SD DATA TRANSMIT"/>
+            <itemDef name = "REQ_PARAM_TRANSMIT"                     type= "dn1l"                      displayName="REQ PARAM TRANSMIT"/>
+            <itemDef name = "REQ_BEACON_TRANSMIT"                     type= "dn1l"                     displayName="REQ BEACON TRANSMIT"/>
+            <itemDef name = "UPDATE_RTC_GPS"                     type= "dn1l"                          displayName="UPDATE RTC GPS"/>
+            <itemDef name = "TRANSMIT_DATA_READY"                     type= "dn1l"                     displayName="TRANSMIT DATA READY"/>
+            <itemDef name = "UHF_TRANSMIT_ENABLE"                     type= "dn1l"                        displayName="UHF TRANSMIT ENABLE"/>
+            <itemDef name = "SBAND_TRANSMIT_ENABLE"                     type= "dn1l"                    displayName="SBAND TRANSMIT ENABLE"/>
+
+            <item name="Padding4"/>
+            <item name="Padding2"/>
+            <itemDef name = "REQ_GLOBAL_TRANSMIT"     type= "dn1l"    displayName = "REQ GLOBAL TRANSMIT" />
+            <itemDef name = "REQ_SUBSYS_RESPONSE_TRANSMIT"                     type= "dn1l"                   displayName="REQ SUBSYS RESPONSE TRANSMIT"/>
+            <item name="Padding4"/>
+            <item name="Padding4"/>
+        </field>
+    </frameDef>
+
+    <frameDef name="Timer8" displayname="Timer 8 - bit">
+        <field>
+            <itemDef name = "Start8"                          type = "dn8l"         displayname = "Start"    />
+            <itemDef name = "Time8"                          type = "dn8l"         displayname = "Time"    />
+        </field>
+    </frameDef>
+
+    <frameDef name="Timer16" displayname="Timer 16 - bit">
+        <field>
+            <itemDef name = "Start16"                          type = "dn16l"         displayname = "Start"    />
+            <itemDef name = "Time16"                          type = "dn16l"         displayname = "Time"    />
+        </field>
+    </frameDef>
+
+    <frameDef name="Timer32" displayname="Timer 32 - bit">
+        <field>
+            <itemDef name = "Start32"                          type = "dn32l"         displayname = "Start"    />
+            <itemDef name = "Time32"                          type = "dn32l"         displayname = "Time"    />
+        </field>
+    </frameDef>
+
+    <frameDef name="Timer64" displayname="Timer 64 - bit">
+        <field>
+            <itemDef name = "Start64"                          type = "dn64l"         displayname = "Start"    />
+            <itemDef name = "Time64"                          type = "dn64l"         displayname = "Time"    />
+        </field>
+    </frameDef>
+
+    <frameDef name="Module_Sync_t" displayname="Module Sync">
+        <field>
+            <itemDef name = "CMD_Seq_Count"                          type = "dn16l"         displayname = "CMD Seq Count"    />
+            <itemDef name = "Prev_CMD_Seq_Count"                          type = "dn16l"         displayname = "Prev CMD Seq Count"    />
+            <itemDef name = "Response_Length"                          type = "dn16l"         displayname = "Response Length"    />
+            <itemDef name = "Response_Read"                          type = "dn16l"         displayname = "Response Read"    />
+            <frameCopy name="Timer16" prefix= "CMD_Period_Timer_"/>
+            <frameCopy name="Timer16" prefix= "Response_Limit_Timer_"/>
+            <itemDef name = "Non_response_count"                          type = "dn8l"         displayname = "Non response count"    />
+            <itemDef name = "GS_CMD_Length"                          type = "dn8l"         displayname = "GS CMD Length"    />
+            <itemDef name = "GS_CMD_Response_Length"                          type = "dn8l"         displayname = "GS CMD Response Length"    />
+        </field>
+    </frameDef>
+
+    <frameDef name="Module_Sync_Small_t" displayname="Module Sync">
+        <field>
+            <itemDef name = "CMD_Seq_Count_s"                          type = "dn16l"         displayname = "CMD Seq Count"    />
+            <itemDef name = "Prev_CMD_Seq_Count_s"                          type = "dn16l"         displayname = "Prev CMD Seq Count"    />
+            <itemDef name = "Response_Length_s"                          type = "dn16l"         displayname = "Response Length"    />
+            <itemDef name = "Response_Read_s"                          type = "dn16l"         displayname = "Response Read"    />
+        </field>
+    </frameDef>
+
+    <frameDef name="Transmit_Buff_Manage_t" displayname="Module Sync">
+        <field>
+            <itemDef name =  "Transmit_Length"      type = "dn16l"      displayname = "Transmit Length" />
+            <itemDef name =  "Total_Transmit_Length"        type = "dn16l"      displayname = "Total Transmit Length"   />
+            <itemDef name =  "Transmit_Offset"      type = "dn16l"      displayname = "Transmit Offset" />
+            <itemDef name =  "Transmit_Buffer_Index"        type = "dn8l"       displayname = "Transmit Buffer Index"   />
+        </field>
+    </frameDef>
+
+    <frameDef name="CMD_Reject_Status" displayname="Cmd Reject Status">
+        <field>
+            <item name="Padding1"/>
+            <itemDef name="Cmd_reject_stat_not_exec"        type="YES_NO_t" displayname="CMD Reject Stat Not EXEC"/>
+            <itemDef name="Cmd_reject_stat_bad_crc"         type="YES_NO_t" displayname="CMD Reject Stat Bad CRC"/>
+            <itemDef name="Cmd_reject_stat_bad_fcs"         type="YES_NO_t" displayname="CMD Reject Stat Bad DATA"/>
+            <itemDef name="Cmd_reject_stat_bad_data"        type="YES_NO_t" displayname="CMD Reject Stat Bad FCS"/>
+            <itemDef name="Cmd_reject_stat_bad_op2"         type="YES_NO_t" displayname="CMD Reject Stat Bad OP1"/>
+            <itemDef name="Cmd_reject_stat_bad_op1"         type="YES_NO_t" displayname="CMD Reject Stat Bad OP2"/>
+            <itemDef name="Cmd_reject_stat_bad_apid"        type="YES_NO_t" displayname="CMD Reject Stat Bad APID"/>
+        </field>
+
+    </frameDef>
+
+</hydraDef>

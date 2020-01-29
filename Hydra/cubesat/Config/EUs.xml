@@ -1,0 +1,116 @@
+﻿<hydraDef>
+
+    <euPoly name="adcs_star_tracker_temp_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.8"/>
+    </euPoly>
+    
+
+    <euPoly name="adcs_wheel_temp_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.005"/>
+    </euPoly>
+    
+
+    <euPoly name="adcs_digi_bus_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.00125"/>
+    </euPoly>
+    
+
+    <euPoly name="adcs_sun_vector_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="4e-5"/>
+    </euPoly>
+    
+
+    <euPoly name="adcs_wheel_drag_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.01"/>
+    </euPoly>
+    
+
+    <euPoly name="adcs_wheel_speed_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.4"/>
+    </euPoly>
+    
+
+    <euPoly name="adcs_body_rate_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="5E-9"/>
+    </euPoly>
+    
+
+    <euPoly name="adcs_mag_vector_EU_pos">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="5E-5"/>
+    </euPoly>
+    <euPoly name="adcs_mag_vector_EU_neg">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="-5E-5"/>
+    </euPoly>
+    <euSegmented name="adcs_mag_segment">
+        <segment low="0" high="32768" eu="adcs_mag_vector_EU_pos"/>
+        <segment low="-32767" high="0" eu="adcs_mag_vector_EU_neg"/>
+    </euSegmented>
+    
+
+    <euPoly name="adcs_body_quat_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="5E-10"/>
+    </euPoly>
+    
+
+    <euPoly name="sband_board_tmp_EU" signed="True">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.0625"/>
+    </euPoly>
+
+    <!-- DAXSS EUs -->
+    <euPoly name="CDH_Temp">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.00390625"/><!--1/256-->
+    </euPoly>
+    
+    <euPoly name="X123_High_V">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.5"/><!---->
+    </euPoly>
+
+    <euPoly name="X123_Det_Temp">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.1"/><!---->
+    </euPoly>
+
+    <euPoly name="CDH_Batt_V1">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.0163818"/><!--67.1/4096-->
+    </euPoly>
+
+    <euPoly name="CDH_Batt_V2">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.0081909"/><!--33.55/4096-->
+    </euPoly>
+    
+    <euPoly name="CDH_V">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.00163818"/><!--6.71/4096-->
+    </euPoly>
+
+    <euPoly name="EPS_SA_I5">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.1"/><!--163.8/327.68-->
+    </euPoly>
+
+    <euPoly name="EPS_SA_V">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.001"/><!--32.76/32768-->
+    </euPoly>
+
+    <euPoly name="EPS_SA_I">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.4998779"/><!--163.8/327.68-->
+    </euPoly>
+    
+</hydraDef>

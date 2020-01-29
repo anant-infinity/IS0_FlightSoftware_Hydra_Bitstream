@@ -1,0 +1,177 @@
+<pageDef>
+
+	<size width="1300" height="850"/>
+	<background color="Page_Background"/>
+	<text color="BLACK"/>
+	<font name="Arial" size="12"/>
+
+	<!-- Commented CDH Telemetry For now. NEED TO ADD, once FSW is developed enough. -->
+    <page title="IS0 Telemetry Page">
+        <!-- <column>
+        	<section name="CDH">
+        		<row item = "CDH_CMD_Accept_Count" label = "Command Accept Count"/>
+						<row item = "CDH_CMD_Reject_Count" label = "Command Reject Count"/>
+						<row item = "CDH_Last_CMD_APID" label = "Last Command APID" format="HEX"/>
+						<row item = "CDH_Last_CMD_Option1" format="HEX" label = "Last Command Option1"/>
+						<row item = "CDH_Last_CMD_Option2" format="HEX" label = "Last Command Option2"/>
+						<row item = "beacon_Cmd_reject_stat_not_exec"		label="CMD Reject Stat Not EXEC"/>
+						<row item = "beacon_Cmd_reject_stat_bad_crc"			label="CMD Reject Stat Bad CRC"/>
+						<row item = "beacon_Cmd_reject_stat_bad_fcs"			label="CMD Reject Stat Bad DATA"/>
+						<row item = "beacon_Cmd_reject_stat_bad_data"		label="CMD Reject Stat Bad FCS"/>
+						<row item = "beacon_Cmd_reject_stat_bad_op2"			label="CMD Reject Stat Bad OP1"/>
+						<row item = "beacon_Cmd_reject_stat_bad_op1"			label="CMD Reject Stat Bad OP2"/>
+						<row item = "beacon_Cmd_reject_stat_bad_apid"		label="CMD Reject Stat Bad APID"/>
+						<row item = "CDH_CIP_ON_Stat" label = "CIP ON Stat"/>
+						<row item = "CDH_ADCS_ON_Stat" label = "ADCS ON Stat"/>
+						<row item = "CDH_SBAND_ON_Stat" label = "SBAND ON Stat"/>
+						<row item = "CDH_GPS_ON_Stat" label = "GPS ON Stat"/>
+						<row item = "CDH_Bat_ON_Stat" label = "Battery Heater ON Stat"/>
+						<row item = "CDH_DAXSS_ON_Stat" label = "DAXSS ON Stat"/>
+						<row item = "CDH_Temp" label = "Temparature"/>
+						<row item = "beacon_SC_Mode" label = "Spacecraft mode"/>
+						<row item = "beacon_Eclispe_stat" label = "Eclipse"/>
+						<row item = "beacon_Bus_Transceiver_stat" label = "Bus Transceiver status"/>
+						<row item = "beacon_RTC_updated" label = "RTC updated"/>
+						<row item = "beacon_SAVE_PARAMETER_MAP_FLAG"                label = "SAVE PARAMETER MAP FLAG" />
+						<row item = "beacon_SD_CARD0_WORKING"                label = "SD CARD0 WORKING" />
+						<row item = "beacon_SD_CARD1_WORKING"                label = "SD CARD1 WORKING" />
+						<row item = "beacon_AUTO_SBAND_BEACON_TRANS"                label = "AUTO SBAND BEACON TRANS" />
+						<row item = "beacon_AUTO_SBAND_DATA_TRANS"                label = "AUTO SBAND DATA TRANS" />
+						<row item = "beacon_SC_REBOOT"                label = "SC REBOOT" />
+						<row item = "beacon_IS_ECLIPSE"                label = "IS ECLIPSE" />
+						<row item = "beacon_ADCS_BOOT_WAIT_COMPLETED"                label = "ADCS BOOT WAIT COMPLETED" />
+			</section>
+		</column> -->
+		
+		<!-- <column>
+			<section name="CDH">
+						
+						<row item = "beacon_SBAND_TRANSMIT_ENABLE"                label = "SBAND TRANSMIT ENABLE" />
+						<row item = "beacon_UHF_TRANSMIT_ENABLE"                label = "UHF TRANSMIT ENABLE" />
+						<row item = "beacon_TRANSMIT_DATA_READY"                label = "TRANSMIT DATA READY" />
+						<row item = "beacon_UPDATE_RTC_GPS"                label = "UPDATE RTC GPS" />
+						<row item = "beacon_REQ_BEACON_TRANSMIT"                label = "REQ BEACON TRANSMIT" />
+						<row item = "beacon_REQ_PARAM_TRANSMIT"                label = "REQ PARAM TRANSMIT" />
+						<row item = "beacon_REQ_SD_DATA_TRANSMIT"                label = "REQ SD DATA TRANSMIT" />
+						<row item = "beacon_REQ_ADCS_IMG_TRANSMIT"                label = "REQ ADCS IMG TRANSMIT" />
+						<row item = "beacon_REQ_SUBSYS_RESPONSE_TRANSMIT"                label = "REQ SUBSYS RESPONSE TRANSMIT" />
+						<row item = "beacon_REQ_GLOBAL_TRANSMIT"                label = "REQ GLOBALS TRANSMIT" />
+						<row item = "CDH_HK_Read_start" label = "HK Read start"/>
+						<row item = "CDH_SciC_Read_start" label = "Science CIP Read start"/>
+						<row item = "CDH_SciD_Read_start" label = "Science DAXSS Read start"/>
+						<row item = "CDH_ADCS_Read_start" label = "ADCS Read start"/>
+						<row item = "CDH_Beacon_Read_start" label = "Beacon Read start"/>
+						<row item = "CDH_Log_Read_start" label = "Log Read start"/>
+
+						<row item = "CDH_HK_Write_start" label = "HK Write start"/>
+						<row item = "CDH_SciC_Write_start" label = "Science CIP Write start"/>
+						<row item = "CDH_SciD_Write_start" label = "Science DAXSS Write start"/>
+						<row item = "CDH_ADCS_Write_start" label = "ADCS Write start"/>
+						<row item = "CDH_Beacon_Write_start" label = "Beacon Write start"/>
+						<row item = "CDH_Log_Write_start" label = "Log Write start"/>
+
+						<row item = "CDH_Last_CMD_Timer" label = "Last Command Timer"/>
+						<row item = "beacon_EPS" label = "EPS Data Valid"/>
+						<row item = "beacon_UHF" label = "UHF Data Valid"/>
+						<row item = "beacon_ADCS" label = "ADC Data Valid"/>
+						<row item = "beacon_SBAND" label = "SBAND Data Valid"/>
+						<row item = "beacon_CIP" label = "CIP Data Valid"/>
+						<row item = "beacon_DAXSS" label = "DAXSS Data Valid"/>
+        	</section>
+        </column> -->
+
+        <column>
+        	<section name="EPS">
+        		<row item = "EPS_Bat_Volt" label = "Battery Voltage"/>
+				<row item = "EPS_Bat_Curr" label = "Battery Current"/>
+				<row item = "EPS_Bus_Vol" label = "Bus Voltage"/>
+				<row item = "EPS_Bus_Curr" label = "Bus Current"/>
+				<row item = "EPS_Bat_SOC" label = "Battery SOC"/>
+				<row item = "EPS_Bat_Temp1" label = "Battery Temparature1"/>
+				<row item = "EPS_Bat_Temp2" label = "Battery Temparature2"/>
+				<row item = "EPS_SP1_Volt" label = "SP1 Voltage"/>
+				<row item = "EPS_SP2_Volt" label = "SP2 Voltage"/>
+				<row item = "EPS_SP3_Volt" label = "SP3 Voltage"/>
+				<row item = "EPS_SP1_Curr" label = "SP1 Current"/>
+				<row item = "EPS_SP2_Curr" label = "SP2 Current"/>
+				<row item = "EPS_SP3_Curr" label = "SP3 Current"/>
+				<row item = "EPS_Interface_Temp" label = "Interface Temparature"/>
+				<row item = "EPS_EPS_Temp" label = "EPS Temparature"/>
+				<row item = "EPS_CIP_Volt" label = "CIP Voltage"/>
+				<row item = "EPS_CIP_Curr" label = "CIP Current"/>
+				<row item = "EPS_ADCS_Volt" label = "ADCS Voltage"/>
+				<row item = "EPS_ADCS_Curr" label = "ADCS Current"/>
+				<row item = "EPS_SBand_Volt" label = "SBand Voltage"/>
+				<row item = "EPS_SBand_Curr" label = "SBand Current"/>
+				<row item = "EPS_UHF_Volt" label = "UHF Voltage"/>
+				<row item = "EPS_UHF_Curr" label = "UHF Current"/>
+				<row item = "EPS_CDH_Volt" label = "CDH Voltage"/>
+				<row item = "EPS_CDH_Curr" label = "CDH Current"/>
+				<row item = "EPS_GPS_33_Volt" label = "GPS 3.3 Voltage"/>
+				<row item = "EPS_GPS_33_Curr" label = "GPS 3.3 Current"/>
+				<row item = "EPS_GPS_12_Volt" label = "GPS 12 Voltage"/>
+				<row item = "EPS_GPS_12_Curr" label = "GPS 12 Current"/>
+				<row item = "EPS_Bat_Heater_Curr" label = "Battery Heater Current"/>
+				<row item = "EPS_DAXSS_Volt" label = "DAXSS Voltage"/>
+				<row item = "EPS_DAXSS_Curr" label = "DAXSS Current"/>
+        	</section>
+        </column>
+
+        <column>
+        	<section name="Sensor Board VMEL6075 DATA">
+        		<row item = "Sensor_Board_VMEL6075_UVA_DATA_L" label = "VMEL UVA_DATA_L"/>
+				<row item = "Sensor_Board_VMEL6075_UVA_DATA_H" label = "VMEL UVA_DATA_H"/>
+				<row item = "Sensor_Board_VMEL6075_UVB_DATA_L" label = "VMEL UVB_DATA_L"/>
+				<row item = "Sensor_Board_VMEL6075_UVB_DATA_H" label = "VMEL UVB_DATA_H"/>
+				<row item = "Sensor_Board_VMEL6075_UVCOMP1_DATA_L" label = "VMEL UVCOMP1_DATA_L"/>
+				<row item = "Sensor_Board_VMEL6075_UVCOMP1_DATA_H" label = "VMEL UVCOMP1_DATA_H"/>
+				<row item = "Sensor_Board_VMEL6075_UVCOMP2_DATA_L" label = "VMEL UVCOMP2_DATA_L"/>
+				<row item = "Sensor_Board_VMEL6075_UVCOMP2_DATA_H" label = "VMEL UVCOMP2_DATA_H"/>
+	    	</section>
+	     </column>
+
+	     <!-- Commented Out the Sensor Board AS7265x DATA as it is not working reliably -->
+	     <!-- <column>
+        	<section name="Sensor Board AS7265x DATA">
+        		<row item = "Sensor_Board_AS7265x_DataByte_1" label = "DataByte 1"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_2" label = "DataByte 2"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_3" label = "DataByte 3"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_4" label = "DataByte 4"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_5" label = "DataByte 5"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_6" label = "DataByte 6"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_7" label = "DataByte 7"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_8" label = "DataByte 8"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_9" label = "DataByte 9"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_10" label = "DataByte 10"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_11" label = "DataByte 11"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_12" label = "DataByte 11"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_13" label = "DataByte 12"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_14" label = "DataByte 13"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_15" label = "DataByte 14"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_16" label = "DataByte 15"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_17" label = "DataByte 16"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_18" label = "DataByte 17"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_19" label = "DataByte 18"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_20" label = "DataByte 19"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_21" label = "DataByte 20"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_22" label = "DataByte 21"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_23" label = "DataByte 22"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_24" label = "DataByte 23"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_25" label = "DataByte 24"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_26" label = "DataByte 25"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_27" label = "DataByte 26"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_28" label = "DataByte 28"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_29" label = "DataByte 29"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_30" label = "DataByte 30"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_31" label = "DataByte 31"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_32" label = "DataByte 32"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_33" label = "DataByte 33"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_34" label = "DataByte 34"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_35" label = "DataByte 35"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_36" label = "DataByte 36"/>
+        	</section>
+        </column> -->
+    </page>
+</pageDef>
+
+

@@ -1,0 +1,11 @@
+18:42:15 **** Incremental Build of configuration Debug for project m1fpga-cortex-m1-blinky ****
+make all 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "m1fpga-cortex-m1-blinky.elf"
+   text	   data	    bss	    dec	    hex	filename
+   1988	      4	  26680	  28672	   7000	m1fpga-cortex-m1-blinky.elf
+Finished building: m1fpga-cortex-m1-blinky.siz
+ 
+
+18:42:15 Build Finished. 0 errors, 0 warnings. (took 381ms)
+

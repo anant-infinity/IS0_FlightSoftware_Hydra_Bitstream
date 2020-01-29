@@ -1,0 +1,423 @@
+
+#ifndef _PWR_C
+	#define _PWR_C
+
+#include <EPS/eps.h>
+#include "math.h"
+#include "gpios.h"
+#include "I2C/i2c.h"
+#include "Seq_ops/main_seq.h"
+#include "string.h"
+#include <stdlib.h>
+#include "Utils/utils.h"
+
+
+double const PWR_ADC_RESO = 3.3/1024;
+double const PWR_ADC_CONST_B = 1/3570;
+
+// needs to be defined.
+// If determined to be constant,
+// should be put in the .h as a macro
+
+void PWR_Init_Comm(){
+
+	Globals.EPS_Module_Sync.CMD_Seq_Count = PWR_STATE_IDLE;
+	I2C_Set_Reset(I2C_C0_APB_ADDR, 0);
+	I2C_Set_Reset(I2C_C0_APB_ADDR, 1);
+	I2C_Set_Reset(I2C_C1_APB_ADDR, 0);
+	I2C_Set_Reset(I2C_C1_APB_ADDR, 1);
+	I2C_Set_Reset(I2C_NC_APB_ADDR, 0);
+	I2C_Set_Reset(I2C_NC_APB_ADDR, 1);
+	uint8_t stat = 6;
+	stat = I2C_Set_Divider(I2C_C0_APB_ADDR, stat);
+	stat = I2C_Set_Divider(I2C_C1_APB_ADDR, stat);
+	stat = I2C_Set_Divider(I2C_NC_APB_ADDR, stat);
+
+	PWR_Update_SW_Data();
+}
+
+uint32_t PWR_Config_Critical_Slave(	addr_t * I2C_Line,
+								uint8_t slave_Addr,
+								uint8_t reg_To_Write,
+								uint8_t * data_To_Write,
+								uint8_t txsize){
+
+//	uint8_t tx_buff[txsize+1];
+//	tx_buff[0] = reg_To_Write;
+//
+//	memcpy(&tx_buff[1], data_To_Write, txsize);
+//
+//	MSS_I2C_write(I2C_Line, slave_Addr, tx_buff, txsize+1, MSS_I2C_RELEASE_BUS);
+//	i2c_status_t status; uint32_t tries=0;
+//	do{
+//        status = MSS_I2C_get_status(I2C_Line);
+//        tries++;
+//    }while(status == I2C_IN_PROGRESS && tries < PWR_I2C_Wait_Limit);
+//	return tries;
+	return 0;
+}
+
+uint32_t PWR_Config_Non_Critical_Slave(
+								uint8_t slave_Addr,
+								uint8_t reg_To_Write,
+								uint8_t * data_To_Write,
+								uint8_t txsize){
+
+//	uint8_t tx_buff[txsize+1];
+//	tx_buff[0] = reg_To_Write;
+//
+//	memcpy(&tx_buff[1], data_To_Write, txsize);
+//
+//	I2C_write(&PWR_I2C_NC, slave_Addr, tx_buff, txsize+1, I2C_RELEASE_BUS);
+//
+//	i2c_status_t status; uint32_t tries=0;
+//    do{
+//        status = I2C_get_status(&PWR_I2C_NC);
+//        tries++;
+//    }while(status == I2C_IN_PROGRESS && tries < PWR_I2C_Wait_Limit);
+//	return tries;
+	return 0;
+}
+
+uint16_t PWR_I2C_Read_Slave(addr_t I2C_Line,
+										uint8_t slave_Addr, uint8_t reg_To_Read,
+										uint8_t rxsize){
+
+	uint8_t tx_buffer[] = {slave_Addr, reg_To_Read};
+	uint8_t stat = I2C_Transaction(I2C_Line, tx_buffer, sizeof(tx_buffer), 0);
+	if(!Globals.I2C_Error_Flag){
+		return I2C_Transaction(I2C_Line, tx_buffer, 1, rxsize);
+	}
+	return 0;
+}
+
+int32_t PWR_Process_VC_Data(uint8_t * rx, int32_t PWR_VC_STEP_SIZE){	//16 bits will go waste in case of data of Bus Voltage
+
+	uint16_t bus_voltage = 0x0000;
+	bus_voltage = Utils_Buffer_to_16_ValueU_Big(rx);
+	if(bus_voltage & 0x8000){
+		bus_voltage = ~bus_voltage + 0x0001;
+		bus_voltage = (bus_voltage >> 3) & 0x1fff;
+		return -PWR_VC_STEP_SIZE*bus_voltage;
+	}else{
+		bus_voltage = (bus_voltage >> 3) & 0x1fff;
+		return PWR_VC_STEP_SIZE*bus_voltage;
+	}
+}
+
+double PWR_Process_ADC_Data(uint8_t * rx){
+	uint16_t voltage_number = Utils_Buffer_to_16_ValueU_Big(rx);
+	voltage_number = voltage_number & 0x03ff;
+	double tmp = voltage_number * PWR_ADC_RESO;
+	tmp = tmp/(3.3 - tmp) * 23;
+	tmp = 1/PWR_ADC_NORM_TEMP + PWR_ADC_CONST_B*(log(tmp/10));
+	return 1/tmp;
+}
+
+void PWR_Switch(uint32_t config, uint8_t on_off){
+	uint32_t gpio_pattern = MSS_GPIO_get_outputs();
+	if(on_off){
+		gpio_pattern |= config;
+	}else{
+		gpio_pattern &= (~config);
+	}
+	MSS_GPIO_set_outputs(gpio_pattern);
+}
+
+uint8_t PWR_Update_SW_Data(){
+	uint8_t res = 0;
+	uint32_t gpio_pattern = MSS_GPIO_get_outputs();
+	if(gpio_pattern & GPIO_DSW0_DAXSS_Mask)
+		res |= 0x40;
+	if(gpio_pattern & GPIO_DSW1_CIP_Mask)
+		res |= 0x02;
+	if(gpio_pattern & GPIO_DSW3_Sband_Mask)
+		res |= 0x08;
+	if(gpio_pattern & GPIO_DSW4_Bat_heat_Mask)
+		res |= 0x2;
+	if(gpio_pattern & GPIO_DSW2_ADCS_Mask){
+		res |= 0x04;
+		res |= 0x10;
+	}
+	return res;
+}
+
+void Configure_EPS_Slaves(){
+    /* Configure all the slaves. */
+
+		//ADC doesn't actually need to be configured at all,
+		//because Mode 2 - Command Mode is decided based on the values in the upper 4 bits of the address pointer register,
+		//which is filled upon a write operation
+		//This should be handled in PWR_ADC_Read_Channel
+
+		//TODO: Globals.PWR_Fuel_Guage_Data Config
+}
+//uint8_t sig1 = 0;
+void Read_EPS_Data(){
+    /* Read and put the data in Beacon and the LOG packet */
+
+   switch( Globals.EPS_Module_Sync.CMD_Seq_Count) {
+		 	case PWR_STATE_IDLE:
+
+						if (Globals.PWR_I2C_Error_Count[0]) {
+								//reset I2C Bus
+								Beacon_pack.CDH_Sub_System_Data_Valid_Flags &= ~(EPS_C0_DATA_VALID_FLAG);
+						}
+						if (Globals.PWR_I2C_Error_Count[1]) {
+							//reset I2C Bus
+							Beacon_pack.CDH_Sub_System_Data_Valid_Flags &= ~(EPS_C1_DATA_VALID_FLAG);
+						}
+						if (Globals.PWR_I2C_Error_Count[2]) {
+							//reset I2C Bus
+							Beacon_pack.CDH_Sub_System_Data_Valid_Flags &= ~(EPS_NC_DATA_VALID_FLAG);
+						}
+
+						Globals.EPS_Module_Sync.CMD_Seq_Count = PWR_STATE_BEACON_C0;
+						break;
+			case PWR_STATE_BEACON_C0:
+						Globals.PWR_I2C_Error_Count[0] = 0; // ordered c0,c1,nc
+						Globals.PWR_I2C_Error_Count[1] = 0; // ordered c0,c1,nc
+						Globals.PWR_I2C_Error_Count[2] = 0; // ordered c0,c1,nc
+
+						//C0- Connected Slaves
+						/* C&DH voltage and current */
+						Beacon_pack.EPS_CDH_Volt = PWR_I2C_Read_Slave(I2C_C0_APB_ADDR, PWR_VC1_SLAVE_C0, PWR_VC_CH1_BUS_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C0_ERROR_INDEX);
+						Beacon_pack.EPS_CDH_Curr = PWR_I2C_Read_Slave(I2C_C0_APB_ADDR, PWR_VC1_SLAVE_C0, PWR_VC_CH1_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C0_ERROR_INDEX);
+						//DAXSS V+C
+						Beacon_pack.EPS_DAXSS_Volt = PWR_I2C_Read_Slave(I2C_C0_APB_ADDR, PWR_VC1_SLAVE_C0, PWR_VC_CH3_BUS_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C0_ERROR_INDEX);
+						Beacon_pack.EPS_DAXSS_Curr = PWR_I2C_Read_Slave(I2C_C0_APB_ADDR, PWR_VC1_SLAVE_C0, PWR_VC_CH3_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C0_ERROR_INDEX);
+
+						Globals.PWR_Fuel_Guage_Data[0] = PWR_I2C_Read_Slave(I2C_C0_APB_ADDR, PWR_FG1_SLAVE_C0, PWR_FG_SOC, EPS_FG_DATA_SIZE);
+
+						Globals.EPS_Module_Sync.CMD_Seq_Count = PWR_STATE_BEACON_C1_1;
+						if (Globals.PWR_I2C_Error_Count[C0_ERROR_INDEX] == 0) {
+								Beacon_pack.CDH_Sub_System_Data_Valid_Flags |= EPS_C0_DATA_VALID_FLAG;			// CDH_Sub_System_Data_Valid_Flags had two extra bits open, which is why this is stored here.
+								break;
+						}
+						Beacon_pack.CDH_Sub_System_Data_Valid_Flags &= ~EPS_C0_DATA_VALID_FLAG;
+						break;
+			case PWR_STATE_BEACON_C1_1:
+						//C1-Connected SLaves
+						/* Solar panel voltage */
+						Beacon_pack.EPS_SP1_Volt = PWR_I2C_Read_Slave(I2C_C1_APB_ADDR, PWR_VC0_SLAVE_C1, PWR_VC_CH1_BUS_VOLTAGE, EPS_VC_DATA_SIZE);    /* PV0 - +Y */
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C1_ERROR_INDEX);
+						Beacon_pack.EPS_SP2_Volt = PWR_I2C_Read_Slave(I2C_C1_APB_ADDR, PWR_VC0_SLAVE_C1, PWR_VC_CH2_BUS_VOLTAGE, EPS_VC_DATA_SIZE);    /* PV1 - -Z*/
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C1_ERROR_INDEX);
+						/* Solar panel voltage (cont.) */
+						Beacon_pack.EPS_SP3_Volt = PWR_I2C_Read_Slave(I2C_C1_APB_ADDR, PWR_VC0_SLAVE_C1, PWR_VC_CH3_BUS_VOLTAGE, EPS_VC_DATA_SIZE);    /* PV2 - -Y*/
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C1_ERROR_INDEX);
+						/* Solar panel current */
+						Beacon_pack.EPS_SP1_Curr = PWR_I2C_Read_Slave(I2C_C1_APB_ADDR, PWR_VC0_SLAVE_C1, PWR_VC_CH1_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);  /* PV0 - +Y */
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C1_ERROR_INDEX);
+						Beacon_pack.EPS_SP2_Curr = PWR_I2C_Read_Slave(I2C_C1_APB_ADDR, PWR_VC0_SLAVE_C1, PWR_VC_CH2_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);  /* PV1 - -Z*/
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C1_ERROR_INDEX);
+						Beacon_pack.EPS_SP3_Curr = PWR_I2C_Read_Slave(I2C_C1_APB_ADDR, PWR_VC0_SLAVE_C1, PWR_VC_CH3_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);  /* PV2 - -Y*/
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C1_ERROR_INDEX);
+
+						Globals.EPS_Module_Sync.CMD_Seq_Count = PWR_STATE_BEACON_C1_2;
+						if (Globals.PWR_I2C_Error_Count[C1_ERROR_INDEX] > 0) {
+								Beacon_pack.CDH_Sub_System_Data_Valid_Flags &= ~EPS_C1_DATA_VALID_FLAG;
+						}
+
+						break;
+			case PWR_STATE_BEACON_C1_2:
+						/* Battery Voltage and Current */
+						Beacon_pack.EPS_Bat_Volt = PWR_I2C_Read_Slave(I2C_C1_APB_ADDR, PWR_VC2_SLAVE_C1, PWR_VC_CH3_BUS_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C1_ERROR_INDEX);
+						Beacon_pack.EPS_Bat_Curr = PWR_I2C_Read_Slave(I2C_C1_APB_ADDR, PWR_VC2_SLAVE_C1, PWR_VC_CH3_BUS_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C1_ERROR_INDEX);
+						/* Bus Voltage and Current */
+						Beacon_pack.EPS_Bus_Volt = PWR_I2C_Read_Slave(I2C_C1_APB_ADDR, PWR_VC2_SLAVE_C1, PWR_VC_CH2_BUS_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C1_ERROR_INDEX);
+						Beacon_pack.EPS_Bus_Curr = PWR_I2C_Read_Slave(I2C_C1_APB_ADDR, PWR_VC2_SLAVE_C1, PWR_VC_CH2_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, C1_ERROR_INDEX);
+						Globals.PWR_Fuel_Guage_Data[1] = PWR_I2C_Read_Slave(I2C_C1_APB_ADDR, PWR_FG2_SLAVE_C1, PWR_FG_SOC, EPS_FG_DATA_SIZE);
+
+						Globals.EPS_Module_Sync.CMD_Seq_Count = PWR_STATE_BEACON_C1_3;
+						//Error check
+						if (Globals.PWR_I2C_Error_Count[C1_ERROR_INDEX] > 0) {
+							Beacon_pack.CDH_Sub_System_Data_Valid_Flags &= ~EPS_C1_DATA_VALID_FLAG;
+						}
+
+						break;
+			case PWR_STATE_BEACON_C1_3:
+
+						Beacon_pack.EPS_Bat_Temp1 = PWR_ADC_Read_Channel(I2C_C1_APB_ADDR, 2, EPS_ADC_DATA_SIZE);
+						Beacon_pack.EPS_Bat_Temp2 = PWR_ADC_Read_Channel(I2C_C1_APB_ADDR, 4, EPS_ADC_DATA_SIZE);
+						Beacon_pack.CDH_Temp = PWR_ADC_Read_Channel(I2C_C1_APB_ADDR, 6, EPS_ADC_DATA_SIZE);
+						Beacon_pack.EPS_Interface_Temp = PWR_ADC_Read_Channel(I2C_C1_APB_ADDR, 8, EPS_ADC_DATA_SIZE);
+						Beacon_pack.EPS_EPS_Temp = PWR_ADC_Read_Channel(I2C_C1_APB_ADDR, 7, EPS_ADC_DATA_SIZE);
+
+						Globals.EPS_Module_Sync.CMD_Seq_Count = PWR_STATE_BEACON_NC1;
+						if (Globals.PWR_I2C_Error_Count[C1_ERROR_INDEX] == 0) {
+								Beacon_pack.CDH_Sub_System_Data_Valid_Flags |= EPS_C1_DATA_VALID_FLAG;			// CDH_Sub_System_Data_Valid_Flags had two extra bits open, which is why this is stored here.
+								break;
+						}
+
+						Beacon_pack.CDH_Sub_System_Data_Valid_Flags &= ~EPS_C1_DATA_VALID_FLAG;
+						break;
+			case PWR_STATE_BEACON_NC1:
+						//NC-Connected Slaves
+						/* S-Band voltage and current */
+						Beacon_pack.EPS_SBAND_Volt = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC4_SLAVE_NC, PWR_VC_CH2_BUS_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+						Beacon_pack.EPS_SBAND_Curr = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC4_SLAVE_NC, PWR_VC_CH2_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+						/* UHF voltage and current */
+						Beacon_pack.EPS_UHF_Volt = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC4_SLAVE_NC, PWR_VC_CH3_BUS_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+						Beacon_pack.EPS_UHF_Curr = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC4_SLAVE_NC, PWR_VC_CH3_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+						/* Battery heater Current*/
+						Beacon_pack.EPS_Bat_Heater_Curr = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC4_SLAVE_NC, PWR_VC_CH1_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+
+						Globals.EPS_Module_Sync.CMD_Seq_Count = PWR_STATE_BEACON_NC2;
+						if (Globals.PWR_I2C_Error_Count[NC_ERROR_INDEX] == 0) {
+							Beacon_pack.CDH_Sub_System_Data_Valid_Flags &= ~EPS_NC_DATA_VALID_FLAG;
+						}
+
+						break;
+			case PWR_STATE_BEACON_NC2:
+						/* CIP voltage and current */
+						Beacon_pack.EPS_CIP_Volt = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC5_SLAVE_NC, PWR_VC_CH2_BUS_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+						Beacon_pack.EPS_CIP_Curr = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC5_SLAVE_NC, PWR_VC_CH2_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+						/* ADCS voltage and current */
+						Beacon_pack.EPS_ADCS_Volt = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC5_SLAVE_NC, PWR_VC_CH1_BUS_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+						Beacon_pack.EPS_ADCS_Curr = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC5_SLAVE_NC, PWR_VC_CH1_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+
+						Globals.PWR_Fuel_Guage_Data[2] = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_FG3_SLAVE_NC, PWR_FG_SOC, EPS_FG_DATA_SIZE);
+						Beacon_pack.EPS_Bat_SOC = Handle_Batt_SOC(Globals.PWR_Fuel_Guage_Data);
+						Globals.EPS_Module_Sync.CMD_Seq_Count = PWR_STATE_BEACON_NC3;
+						if (Globals.PWR_I2C_Error_Count[NC_ERROR_INDEX] > 0) {
+							Beacon_pack.CDH_Sub_System_Data_Valid_Flags &= ~EPS_NC_DATA_VALID_FLAG;
+						}
+
+						break;
+			case PWR_STATE_BEACON_NC3:
+
+						/* GPS 3.3 voltage and current */
+						Beacon_pack.EPS_GPS_33_Volt = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC5_SLAVE_NC, PWR_VC_CH3_BUS_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+						Beacon_pack.EPS_GPS_33_Curr = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC5_SLAVE_NC, PWR_VC_CH3_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+
+						/* GPS 12V Voltage/Current  */
+						uint16_t gps12_v1 = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC6_SLAVE_NC, PWR_VC_CH1_BUS_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+						uint16_t gps12_c1 = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC6_SLAVE_NC, PWR_VC_CH1_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+						uint16_t gps12_v2 = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC6_SLAVE_NC, PWR_VC_CH2_BUS_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+						uint16_t gps12_c2 = PWR_I2C_Read_Slave(I2C_NC_APB_ADDR, PWR_VC6_SLAVE_NC, PWR_VC_CH2_SHUNT_VOLTAGE, EPS_VC_DATA_SIZE);
+						Handle_I2C_Slave_Error(Globals.PWR_I2C_Error_Count, NC_ERROR_INDEX);
+
+						Beacon_pack.EPS_GPS_12_Volt = Handle_GPS_Volt_12(gps12_v1, gps12_v2);
+						Beacon_pack.EPS_GPS_12_Curr = Handle_GPS_Curr_12(gps12_c1, gps12_c2);
+
+						Globals.EPS_Module_Sync.CMD_Seq_Count = PWR_STATE_IDLE;
+						if (Globals.PWR_I2C_Error_Count[NC_ERROR_INDEX] == 0) {
+								Beacon_pack.CDH_Sub_System_Data_Valid_Flags |= EPS_NC_DATA_VALID_FLAG;			// CDH_Sub_System_Data_Valid_Flags had two extra bits open, which is why this is stored here.
+								break;
+						}
+						Beacon_pack.CDH_Sub_System_Data_Valid_Flags &= ~EPS_NC_DATA_VALID_FLAG;
+						break;
+			default:
+						Globals.EPS_Module_Sync.CMD_Seq_Count = PWR_STATE_IDLE;
+						break;
+	 }
+
+
+
+
+
+
+
+/*	Data Bank for how to extract EPS Data
+
+uint16_t EPS_Bat_Volt;		//PWR_VC2_SLAVE_C1
+uint16_t EPS_Bat_Curr;		//PWR_VC2_SLAVE_C1
+uint16_t EPS_Bus_Volt;		//PWR_VC2_SLAVE_C1
+uint16_t EPS_Bus_Curr;		//PWR_VC2_SLAVE_C1
+uint16_t EPS_Bat_SOC;			//Majority vote from 3 Fuel Gauges one on each I2C line
+uint16_t EPS_Bat_Temp1;		//Read from ADC Channel 2 - I2C C1
+uint16_t EPS_Bat_Temp2;		//Read from ADC Channel 4 - I2C C1
+uint16_t EPS_SP1_Volt;		//PWR_VC0_SLAVE_C1
+uint16_t EPS_SP2_Volt;		//PWR_VC0_SLAVE_C1
+uint16_t EPS_SP3_Volt;		//PWR_VC0_SLAVE_C1
+uint16_t EPS_SP1_Curr;		//PWR_VC0_SLAVE_C1
+uint16_t EPS_SP2_Curr;		//PWR_VC0_SLAVE_C1
+uint16_t EPS_SP3_Curr;		//PWR_VC0_SLAVE_C1
+uint16_t EPS_Interface_Temp;	//Read from ADC CH8 - I2C C1
+uint16_t EPS_EPS_Temp;				//Read from ADC CH7 - I2C C1
+uint16_t EPS_CIP_Volt;		//PWR_VC5_SLAVE_NC
+uint16_t EPS_CIP_Curr;		//PWR_VC5_SLAVE_NC
+uint16_t EPS_ADCS_Volt;		//PWR_VC5_SLAVE_NC
+uint16_t EPS_ADCS_Curr;		//PWR_VC5_SLAVE_NC
+uint16_t EPS_SBAND_Volt;	//PWR_VC4_SLAVE_NC
+uint16_t EPS_SBAND_Curr;	//PWR_VC4_SLAVE_NC
+uint16_t EPS_UHF_Volt; 		//PWR_VC4_SLAVE_NC
+uint16_t EPS_UHF_Curr;		//PWR_VC4_SLAVE_NC
+uint16_t EPS_CDH_Volt;		//PWR_VC1_SLAVE_C0
+uint16_t EPS_CDH_Curr;		//PWR_VC1_SLAVE_C0
+uint16_t EPS_GPS_33_Volt;	//PWR_VC5_SLAVE_NC
+uint16_t EPS_GPS_33_Curr;	//PWR_VC5_SLAVE_NC
+uint16_t EPS_GPS_12_Volt;	//PWR_VC6_SLAVE_NC
+uint16_t EPS_GPS_12_Curr;	//PWR_VC6_SLAVE_NC
+uint16_t EPS_Bat_Heater_Curr; //PWR_VC4_SLAVE_NC
+uint16_t EPS_DAXSS_Volt;	//PWR_VC1_SLAVE_C0
+uint16_t EPS_DAXSS_Curr;	//PWR_VC1_SLAVE_C0
+
+*/
+
+}
+
+void Handle_I2C_Slave_Error(uint8_t * count, uint8_t index){
+    if(Globals.I2C_Error_Flag){
+        /* Can't write/read data to/from slave. Handle the event*/
+				count[index]++;
+    }
+}
+
+void Handle_Battery_heater(){
+	uint8_t i = 0;
+}
+
+uint16_t Handle_Batt_SOC(uint16_t * fg_data){
+	//Majority Vote:
+		uint8_t i = abs(fg_data[0] - fg_data[1]);
+		uint8_t j = abs(fg_data[0] - fg_data[2]);
+		uint8_t k = abs(fg_data[1] - fg_data[2]);
+
+		if (i < j && i < k) {
+			return fg_data[0];
+		}
+		else if (j < i && j < k) {
+			return fg_data[1];
+		}
+		else
+			return fg_data[2];
+}
+uint16_t Handle_GPS_Volt_12(uint16_t volt1, uint16_t volt2) {
+	return (uint16_t) fmax(volt1,volt2);
+}
+uint16_t Handle_GPS_Curr_12(uint16_t curr1, uint16_t curr2) {
+		return curr1 + curr2;
+}
+
+uint16_t PWR_ADC_Read_Channel(addr_t I2C_Line, uint8_t ch, uint8_t rxsize) {
+	//Assumes the ADC is in Command Mode
+	//ch should be 1-8
+	return PWR_I2C_Read_Slave(I2C_Line, PWR_ADC_SLAVE_C1, (((ch - 1) << 4) | 0x80) & 0xF0	, rxsize);
+
+}
+
+#endif

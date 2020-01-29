@@ -1,0 +1,4 @@
+open SDR_Radio_TLM
+open SDR_Radio_CMD
+
+start_reader radioReader

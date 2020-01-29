@@ -1,0 +1,11 @@
+18:42:17 **** Incremental Build of configuration Debug-hardfloat for project miv-rv32imaf-raytracer-uart-cpp ****
+make all 
+Invoking: GNU RISC-V Cross Print Size
+riscv64-unknown-elf-size --format=berkeley "miv-rv32imaf-raytracer-uart-cpp.elf"
+   text	   data	    bss	    dec	    hex	filename
+  38240	    240	   4144	  42624	   a680	miv-rv32imaf-raytracer-uart-cpp.elf
+Finished building: miv-rv32imaf-raytracer-uart-cpp.siz
+ 
+
+18:42:17 Build Finished. 0 errors, 0 warnings. (took 383ms)
+

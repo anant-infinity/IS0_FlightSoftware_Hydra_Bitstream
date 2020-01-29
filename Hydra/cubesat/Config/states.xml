@@ -1,0 +1,116 @@
+<hydraDef>
+    
+    <!-- Example of a state conversion -->
+    <dictionary name="ON_OFF_dict">
+        <pair key="0" str="OFF"/>
+        <pair key="1" str="ON"/>
+    </dictionary>
+	
+	<dictionary name="ENABLE_DISABLE_dict">
+        <pair key="0" str="Disabled"/>
+        <pair key="1" str="Enabled"/>
+    </dictionary>
+	    
+    <dictionary name="TRUE_FALSE_dict">
+        <pair key="0" str="False"/>
+        <pair key="1" str="True"/>
+    </dictionary>
+    
+    <dictionary name="Yes_No_dict">
+        <pair key="0" str="No"/>
+        <pair key="1" str="Yes"/>
+    </dictionary>
+    
+    <dictionary name="Good_Bad_dict">
+        <pair key="0" str="Bad"/>
+        <pair key="1" str="Good"/>
+    </dictionary>
+    
+    <dictionary name="Spacecraft_Mode_dict">
+        <pair key="0" str="Phoenix"/>
+        <pair key="1" str="Safe"/>
+        <pair key="2" str="Charging"/>
+        <pair key="3" str="Science-CIP"/>
+        <pair key="4" str="Science-DAXSS"/>
+    </dictionary>
+    
+    <dictionary name="CDHState">
+    <pair key="0" str="NOMINAL"/>
+    <pair key="1" str="PLAYBACK"/>
+    <pair key="2" str="LED1"/>
+    <pair key="3" str="LED2"/>
+    <pair key="4" str="ANT_DEPLOY"/>
+    <pair key="5" str="SA_DEPLOY"/>
+    <pair key="6" str="undefined"/>
+    <pair key="7" str="undefined"/>
+    <pair key="8" str="LOCKOUT"/>
+    <pair key="9" str="RETRY"/>
+    <pair key="10" str="DUAL_ARMED"/>
+    <pair key="11" str="STORE_READY"/>
+    <pair key="12" str="undefined"/>
+    <pair key="13" str="undefined"/>
+    <pair key="14" str="undefined"/>
+    <pair key="15" str="undefined"/>
+  </dictionary>
+
+  <dictionary name="ModeStatus">
+    <pair key="0" str="UNKNOWN"/>
+    <pair key="1" str="PHOENIX"/>
+    <pair key="2" str="SAFE"/>
+    <pair key="4" str="SCIENCE"/>
+  </dictionary>
+
+  <dictionary name="CmdStatus">
+    <pair key="0" str="CMD_SUCCESS"/>
+    <pair key="1" str="CMD_FAIL_LENGTH"/>
+    <pair key="2" str="CMD_FAIL_APID"/>
+    <pair key="3" str="CMD_FAIL_OPCODE"/>
+    <pair key="4" str="CMD_FAIL_CHECKSUM"/>
+    <pair key="5" str="CMD_FAIL_SAFE_MODE"/>
+    <pair key="6" str="CMD_FAIL_DUAL_CMD"/>
+    <pair key="7" str="CMD_FAIL_PARAMETER"/>
+    <pair key="8" str="CMD_FAIL_STATE"/>
+    <pair key="9" str="CMD_FAIL"/>
+    <pair key="10" str="CMD_FAIL_DUPLICATE"/>
+  </dictionary>
+
+  <dictionary name="ParamTableStatus">
+    <pair key="1" str="RESTORED"/>
+    <pair key="2" str="SAVED"/>
+    <pair key="4" str="MODIFIED"/>
+    <pair key="8" str="DEFAULT_VAL"/>
+    <pair key="16" str="EEPVAL1_CHKSUM_ERR"/>
+    <pair key="17" str="EEPVAL1_CHKSUM_ERR | RESTORED"/>
+    <pair key="18" str="EEPVAL1_CHKSUM_ERR | SAVED"/>
+    <pair key="20" str="EEPVAL1_CHKSUM_ERR | MODIFIED"/>
+    <pair key="24" str="EEPVAL1_CHKSUM_ERR | DEFAULT_VAL"/>
+    <pair key="32" str="EEPVAL2_CHKSUM_ERR"/>
+    <pair key="33" str="EEPVAL2_CHKSUM_ERR | RESTORED"/>
+    <pair key="34" str="EEPVAL2_CHKSUM_ERR | SAVED"/>
+    <pair key="36" str="EEPVAL2_CHKSUM_ERR | MODIFIED"/>
+    <pair key="40" str="EEPVAL2_CHKSUM_ERR | DEFAULT_VAL"/>
+    <pair key="64" str="EEPMIN_CHKSUM_ERR"/>
+    <pair key="65" str="EEPMIN_CHKSUM_ERR | RESTORED"/>
+    <pair key="66" str="EEPMIN_CHKSUM_ERR | SAVED"/>
+    <pair key="68" str="EEPMIN_CHKSUM_ERR | MODIFIED"/>
+    <pair key="72" str="EEPMIN_CHKSUM_ERR | DEFAULT_VAL"/>
+    <pair key="128" str="EEPMAX_CHKSUM_ERR"/>
+    <pair key="129" str="EEPMAX_CHKSUM_ERR | RESTORED"/>
+    <pair key="130" str="EEPMAX_CHKSUM_ERR | SAVED"/>
+    <pair key="132" str="EEPMAX_CHKSUM_ERR | MODIFIED"/>
+    <pair key="136" str="EEPMAX_CHKSUM_ERR | DEFAULT_VAL"/>
+    <pair key="255" str="BOOT"/>
+  </dictionary>
+
+  <dictionary name="ParamTableValue">
+    <pair key="0" str="RAMVAL"/>
+    <pair key="1" str="RAMDEF"/>
+    <pair key="2" str="RAMMIN"/>
+    <pair key="4" str="RAMMAX"/>
+    <pair key="8" str="EEPVAL1"/>
+    <pair key="16" str="EEPVAL2"/>
+    <pair key="32" str="EEPMIN"/>
+    <pair key="64" str="EEPMAX"/>
+  </dictionary>
+
+</hydraDef>

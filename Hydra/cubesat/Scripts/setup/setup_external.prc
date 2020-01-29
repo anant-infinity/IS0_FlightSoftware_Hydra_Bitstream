@@ -1,0 +1,5 @@
+open CCSDS_CMD_Client
+open CCSDS_TLM_Client
+open Hydra_CMD_Client
+
+start_reader clientTlmReader

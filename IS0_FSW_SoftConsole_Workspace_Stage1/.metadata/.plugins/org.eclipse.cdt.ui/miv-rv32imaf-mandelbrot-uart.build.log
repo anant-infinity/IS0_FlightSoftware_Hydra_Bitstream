@@ -1,0 +1,11 @@
+18:42:16 **** Incremental Build of configuration Debug-hardfloat for project miv-rv32imaf-mandelbrot-uart ****
+make all 
+Invoking: GNU RISC-V Cross Print Size
+riscv64-unknown-elf-size --format=berkeley "miv-rv32imaf-mandelbrot-uart.elf"
+   text	   data	    bss	    dec	    hex	filename
+  44496	    736	   4144	  49376	   c0e0	miv-rv32imaf-mandelbrot-uart.elf
+Finished building: miv-rv32imaf-mandelbrot-uart.siz
+ 
+
+18:42:17 Build Finished. 0 errors, 0 warnings. (took 388ms)
+

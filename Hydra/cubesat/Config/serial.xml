@@ -1,0 +1,31 @@
+<hydraDef>
+	
+    <hwSerial name="Comm_Serial" 
+    port="#INSTR_SERIAL_PORT" 
+    baud="#INSTR_SERIAL_BAUD" 
+    parity="#INSTR_SERIAL_PARITY" 
+    stopbits="#INSTR_SERIAL_STOP"/>
+    
+    <readerHeader name="serialReader" headerSize="6" maxSize="2048" lengthField="ccsdsTlmHeader.ccsds_TlmLength" 
+	  offset="1" hw="Comm_Serial" decoder="ccsdsDecoder" autoStart="true">
+		<description text="Reads telemetry packets from serial hardline"/>
+		
+		<!-- Optional sync pattern -->
+		<!-- <sync length="1" minSize="1" pattern="#SERIAL_SYNC_PATTERN"/> -->
+	</readerHeader>
+	
+
+	<!-- <hwOutFile name="radioRawFile" prefix="radioRaw" maxSize="#MAX_OUTPUT_FILE_SIZE"/> -->
+	<decoderDef name="cmdDecoder">
+	    <description text="Send command to hardline serial"/>
+		<outBuffer size="1024"/>
+		<outputDevice name="Comm_Serial"/>
+		<!-- <outputDevice name="radioRawFile"/> -->
+
+		<!-- <headerFrame name="ax25CmdHeader"/> -->
+		
+		<!-- Optional sync pattern -->
+		<!--<frameHeader num="4" type="dn8" value="#SERIAL_SYNC_PATTERN"/>-->
+	</decoderDef>
+	
+</hydraDef>
