@@ -824,13 +824,14 @@ Discarded input sections
                 0x0000000000000000        0x4 ./Header_C_files/Test/test.o
  .bss.rx_size   0x0000000000000000        0x1 ./Header_C_files/Test/test.o
  .text.test_IS0_Read_Sensor_Board_Data
-                0x0000000000000000        0xc ./Header_C_files/Test/test.o
+                0x0000000000000000      0x100 ./Header_C_files/Test/test.o
+ .rodata        0x0000000000000000       0x15 ./Header_C_files/Test/test.o
  .text.test_ISO_test_beacon_debug_UART
-                0x0000000000000000        0xc ./Header_C_files/Test/test.o
+                0x0000000000000000      0x104 ./Header_C_files/Test/test.o
  .text.test_ISO_PeakPower
-                0x0000000000000000        0xc ./Header_C_files/Test/test.o
+                0x0000000000000000       0x78 ./Header_C_files/Test/test.o
  .text.test_ISO_GPIO_Subsystem_Enable_GPIOs
-                0x0000000000000000        0xc ./Header_C_files/Test/test.o
+                0x0000000000000000       0xa8 ./Header_C_files/Test/test.o
  .text.test_main_seq
                 0x0000000000000000        0xc ./Header_C_files/Test/test.o
  .text.test_SD_Card
@@ -839,7 +840,6 @@ Discarded input sections
                 0x0000000000000000       0xd8 ./Header_C_files/Test/test.o
  .text.test_save_parameter_character
                 0x0000000000000000       0x40 ./Header_C_files/Test/test.o
- .rodata        0x0000000000000000        0x5 ./Header_C_files/Test/test.o
  .text.test_RTC
                 0x0000000000000000       0x74 ./Header_C_files/Test/test.o
  .text.spi_flash_test2
@@ -1762,7 +1762,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000    0x1019c
+.debug_info     0x0000000000000000    0x102ff
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000       0x26 ./hal/CortexM3/GNU/hal.o
  .debug_info    0x0000000000000026       0x26 ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1774,13 +1774,13 @@ END GROUP
  .debug_info    0x0000000000007659     0x113c ./drivers/mss_hpdma/mss_hpdma.o
  .debug_info    0x0000000000008795     0x14a4 ./drivers/CoreI2C/core_i2c.o
  .debug_info    0x0000000000009c39      0x75c ./drivers/CoreI2C/i2c_interrupt.o
- .debug_info    0x000000000000a395     0x20e4 ./Header_C_files/Test/test.o
- .debug_info    0x000000000000c479     0x200b ./Header_C_files/Seq_ops/main.o
- .debug_info    0x000000000000e484     0x1244 ./Header_C_files/I2C/i2c.o
- .debug_info    0x000000000000f6c8       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
- .debug_info    0x000000000000f6ee      0xaae ./CMSIS/system_m2sxxx.o
+ .debug_info    0x000000000000a395     0x2248 ./Header_C_files/Test/test.o
+ .debug_info    0x000000000000c5dd     0x200a ./Header_C_files/Seq_ops/main.o
+ .debug_info    0x000000000000e5e7     0x1244 ./Header_C_files/I2C/i2c.o
+ .debug_info    0x000000000000f82b       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_info    0x000000000000f851      0xaae ./CMSIS/system_m2sxxx.o
 
-.debug_abbrev   0x0000000000000000     0x1e3a
+.debug_abbrev   0x0000000000000000     0x1e52
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000       0x14 ./hal/CortexM3/GNU/hal.o
  .debug_abbrev  0x0000000000000014       0x14 ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1792,13 +1792,13 @@ END GROUP
  .debug_abbrev  0x0000000000000df1      0x26a ./drivers/mss_hpdma/mss_hpdma.o
  .debug_abbrev  0x000000000000105b      0x2ab ./drivers/CoreI2C/core_i2c.o
  .debug_abbrev  0x0000000000001306      0x1a7 ./drivers/CoreI2C/i2c_interrupt.o
- .debug_abbrev  0x00000000000014ad      0x2de ./Header_C_files/Test/test.o
- .debug_abbrev  0x000000000000178b      0x365 ./Header_C_files/Seq_ops/main.o
- .debug_abbrev  0x0000000000001af0      0x1a9 ./Header_C_files/I2C/i2c.o
- .debug_abbrev  0x0000000000001c99       0x14 ./CMSIS/startup_gcc/startup_m2sxxx.o
- .debug_abbrev  0x0000000000001cad      0x18d ./CMSIS/system_m2sxxx.o
+ .debug_abbrev  0x00000000000014ad      0x2f6 ./Header_C_files/Test/test.o
+ .debug_abbrev  0x00000000000017a3      0x365 ./Header_C_files/Seq_ops/main.o
+ .debug_abbrev  0x0000000000001b08      0x1a9 ./Header_C_files/I2C/i2c.o
+ .debug_abbrev  0x0000000000001cb1       0x14 ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_abbrev  0x0000000000001cc5      0x18d ./CMSIS/system_m2sxxx.o
 
-.debug_line     0x0000000000000000     0x4b23
+.debug_line     0x0000000000000000     0x4b7c
  *(.debug_line)
  .debug_line    0x0000000000000000       0x4d ./hal/CortexM3/GNU/hal.o
  .debug_line    0x000000000000004d       0x8b ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1810,11 +1810,11 @@ END GROUP
  .debug_line    0x0000000000002393      0x331 ./drivers/mss_hpdma/mss_hpdma.o
  .debug_line    0x00000000000026c4      0x668 ./drivers/CoreI2C/core_i2c.o
  .debug_line    0x0000000000002d2c      0x32d ./drivers/CoreI2C/i2c_interrupt.o
- .debug_line    0x0000000000003059      0xa16 ./Header_C_files/Test/test.o
- .debug_line    0x0000000000003a6f      0x7da ./Header_C_files/Seq_ops/main.o
- .debug_line    0x0000000000004249      0x54c ./Header_C_files/I2C/i2c.o
- .debug_line    0x0000000000004795      0x18e ./CMSIS/startup_gcc/startup_m2sxxx.o
- .debug_line    0x0000000000004923      0x200 ./CMSIS/system_m2sxxx.o
+ .debug_line    0x0000000000003059      0xa6f ./Header_C_files/Test/test.o
+ .debug_line    0x0000000000003ac8      0x7da ./Header_C_files/Seq_ops/main.o
+ .debug_line    0x00000000000042a2      0x54c ./Header_C_files/I2C/i2c.o
+ .debug_line    0x00000000000047ee      0x18e ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_line    0x000000000000497c      0x200 ./CMSIS/system_m2sxxx.o
 
 .debug_frame    0x0000000000000000     0x22c0
  *(.debug_frame)
@@ -1832,7 +1832,7 @@ END GROUP
  .debug_frame   0x0000000000002188      0x10c ./CMSIS/system_m2sxxx.o
  .debug_frame   0x0000000000002294       0x2c c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-init.o)
 
-.debug_str      0x0000000000000000     0x501c
+.debug_str      0x0000000000000000     0x5085
  *(.debug_str)
  .debug_str     0x0000000000000000       0xb7 ./hal/CortexM3/GNU/hal.o
  .debug_str     0x00000000000000b7       0x24 ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1853,15 +1853,15 @@ END GROUP
                                         0xe25 (size before relaxing)
  .debug_str     0x0000000000003b02       0x72 ./drivers/CoreI2C/i2c_interrupt.o
                                         0xabb (size before relaxing)
- .debug_str     0x0000000000003b74      0xe95 ./Header_C_files/Test/test.o
-                                       0x21bd (size before relaxing)
- .debug_str     0x0000000000004a09      0x359 ./Header_C_files/Seq_ops/main.o
+ .debug_str     0x0000000000003b74      0xf17 ./Header_C_files/Test/test.o
+                                       0x22e0 (size before relaxing)
+ .debug_str     0x0000000000004a8b      0x359 ./Header_C_files/Seq_ops/main.o
                                        0x20ed (size before relaxing)
- .debug_str     0x0000000000004d62       0xff ./Header_C_files/I2C/i2c.o
+ .debug_str     0x0000000000004de4       0xe6 ./Header_C_files/I2C/i2c.o
                                        0x1946 (size before relaxing)
- .debug_str     0x0000000000004e61       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_str     0x0000000000004eca       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
                                          0xc3 (size before relaxing)
- .debug_str     0x0000000000004e87      0x195 ./CMSIS/system_m2sxxx.o
+ .debug_str     0x0000000000004ef0      0x195 ./CMSIS/system_m2sxxx.o
                                         0xb29 (size before relaxing)
 
 .debug_loc

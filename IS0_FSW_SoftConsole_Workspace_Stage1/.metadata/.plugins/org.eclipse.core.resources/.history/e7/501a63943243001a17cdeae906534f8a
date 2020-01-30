@@ -67,36 +67,44 @@ i2c_instance_t g_core_i2c3; 			// Core I2C for SENSOR_0;
 
 void test_IS0_Read_Sensor_Board_Data() {
 
+	/*-----------------------------------------------------------------------------
+	 * I2C Transmit and Receive buffers
+	 */
 
+
+	// This test is created to read channel 2 Voltage (DAXSS Voltage) of VC sensor 1 on the EPS Critical Channel 0
+	// The enable of the switch is toggled and the voltage is read
+	// The Voltage is then sent to the MSS UART to view on serial monitor
+	//Global_Init_GPIOs();
+
+/*
 	uint8_t tx_buffer[TX_LENGTH] = {SENSOR_DEVICE_ID};
 	uint8_t tx_buffer_2[TX_LENGTH] = {SENSOR_AS72651_STATUS_REG};
 
 	uint8_t write_length = TX_LENGTH;
 	uint8_t write_length_2 = TX_LENGTH_2;
 
-	uint16_t rx_buffer[RX_LENGTH] = {0x00};
+	uint16_t rx_buffer[RX_LENGTH];
 	uint8_t read_length = RX_LENGTH;
 
-	uint8_t rx_buffer_2[RX_LENGTH_2] = {0x00 , 0x00};
+	uint8_t rx_buffer_2[RX_LENGTH_2];
 	uint8_t read_length_2 = RX_LENGTH_2;
 
 
-	     //Logging UART Initialization
+	     Logging UART Initialization
 		MSS_UART_init(&g_mss_uart0,MSS_UART_115200_BAUD,MSS_UART_DATA_8_BITS | MSS_UART_NO_PARITY | MSS_UART_ONE_STOP_BIT);
 
-/*	    -------------------------------------------------------------------------
-	     * Initialize the Core I2C Drivers*/
+	    -------------------------------------------------------------------------
+	     * Initialize the Core I2C Drivers
 
 	    I2C_init(&g_core_i2c0, COREI2C_0, MASTER_SER_ADDR, I2C_PCLK_DIV_960);
 	    I2C_init(&g_core_i2c1, COREI2C_1, MASTER_SER_ADDR, I2C_PCLK_DIV_960);
 	    I2C_init(&g_core_i2c2, COREI2C_2, MASTER_SER_ADDR, I2C_PCLK_DIV_960);
 	    I2C_init(&g_core_i2c3, COREI2C_3, MASTER_SER_ADDR, I2C_PCLK_DIV_960);
 
-/*
 	    -------------------------------------------------------------------------
 	     * Initialize the system tick for 10mS operation or 1 tick every 100th of
 	     * a second and also make sure it is lower priority than the I2C IRQs.
-*/
 
 	    //NVIC_SetPriority(SysTick_IRQn, 0xFFu); /* Lowest possible priority
 	    //SysTick_Config(MSS_SYS_M3_CLK_FREQ / 100);
@@ -135,9 +143,9 @@ void test_IS0_Read_Sensor_Board_Data() {
 			// Send the Data over the MSS UART for Logging
 			//MSS_UART_polled_tx( &g_mss_uart0, rx_buffer, sizeof(rx_buffer) );
 
-			instance = do_write_read_transaction(&g_core_i2c3, SENSOR_VML, SENSOR_DEVICE_ID, write_length, rx_buffer_2, read_length_2); // This works!
+			instance = do_write_read_transaction(&g_core_i2c3, SENSOR_VML, SENSOR_DEVICE_ID, TX_LENGTH, rx_buffer, read_length); // This works!
 			// Send the Data over the MSS UART for Logging
-			MSS_UART_polled_tx( &g_mss_uart0, rx_buffer_2, sizeof(rx_buffer_2) );
+			MSS_UART_polled_tx( &g_mss_uart0, rx_buffer, sizeof(rx_buffer) );
 
 			//AS72651 Interfacing Code
 			//Read Data from the AS72651
@@ -148,9 +156,19 @@ void test_IS0_Read_Sensor_Board_Data() {
 
 
 	    }
-
+*/
 
 }
+
+
+
+
+
+
+
+	// ******************************** I2C Driver Functions END ***************************************************************
+
+	// ******************************** SensorBoard AS72651 Functions **********************************************************
 
 
 
@@ -193,9 +211,10 @@ void test_IS0_Read_Sensor_Board_Data() {
 
 		//Collecting EPS Data - BUS Voltage and Current
 		instance = do_write_read_transaction(&g_core_i2c1, EPS_VC5_SLAVE_C1, EPS_VC_CH3_BUS_VOLTAGE, write_length, rx_buffer_2, read_length_2);
-		MSS_UART_polled_tx( &g_mss_uart0, rx_buffer_2, sizeof(rx_buffer_2) );
+		MSS_UART_polled_tx( &g_mss_uart0, rx_buffer, sizeof(rx_buffer_2) );
 		instance = do_write_read_transaction(&g_core_i2c1, EPS_VC5_SLAVE_C1,EPS_VC_CH3_SHUNT_VOLTAGE , write_length, rx_buffer_2, read_length_2);
-		MSS_UART_polled_tx( &g_mss_uart0, rx_buffer_2, sizeof(rx_buffer_2) );
+		MSS_UART_polled_tx( &g_mss_uart0, rx_buffer, sizeof(rx_buffer_2) );
+
 		uint8_t write_CCSDS_Dummy_Fletcher[] = {0x0F, 0x0F};
 		MSS_UART_polled_tx( &g_mss_uart0, write_CCSDS_Dummy_Fletcher, sizeof(write_CCSDS_Dummy_Fletcher) );
 
@@ -219,9 +238,13 @@ void test_IS0_Read_Sensor_Board_Data() {
 	    // Send the Data over the MSS UART for Logging
 	    //MSS_UART_polled_tx( &g_mss_uart0, rx_buffer, sizeof(rx_buffer) );
 
+
+
+
 	}
 
 	void test_ISO_PeakPower() {
+/*
 
 		//Reset Sensor Sensor Board - H2 50 - ALWAYS PULL HIGH
 		MSS_GPIO_set_output( MSS_GPIO_25, 1);
@@ -256,10 +279,13 @@ void test_IS0_Read_Sensor_Board_Data() {
 		MSS_GPIO_set_output( MSS_GPIO_3, 0);
 		MSS_GPIO_set_output( MSS_GPIO_2, 0);
 
+*/
+
 	}
 
 	void test_ISO_GPIO_Subsystem_Enable_GPIOs() {
-
+/*
+		//while(1){
 
 		//DSW - 0 - H1 13 - DAXSS SWITCH - Enables 8.4V at H1 pins 3 and 5
 		MSS_GPIO_set_output( MSS_GPIO_1, 1);
@@ -301,8 +327,8 @@ void test_IS0_Read_Sensor_Board_Data() {
 		MSS_GPIO_set_output( MSS_GPIO_26, 1);
 		MSS_GPIO_set_output( MSS_GPIO_26, 0);
 		MSS_GPIO_set_output( MSS_GPIO_26, 1);
-
-
+		//}
+*/
 
 		}
 
