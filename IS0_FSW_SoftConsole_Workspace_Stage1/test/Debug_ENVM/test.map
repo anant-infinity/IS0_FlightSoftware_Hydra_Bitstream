@@ -1075,13 +1075,13 @@ Discarded input sections
  .text.PWR_Switch
                 0x0000000000000000       0x3a ./Header_C_files/EPS/eps.o
  .text.Get_EPS_Data
-                0x0000000000000000      0x538 ./Header_C_files/EPS/eps.o
+                0x0000000000000000      0x5b4 ./Header_C_files/EPS/eps.o
  .debug_info    0x0000000000000000     0x1c06 ./Header_C_files/EPS/eps.o
  .debug_abbrev  0x0000000000000000      0x2ab ./Header_C_files/EPS/eps.o
  .debug_aranges
                 0x0000000000000000       0x40 ./Header_C_files/EPS/eps.o
  .debug_ranges  0x0000000000000000       0x30 ./Header_C_files/EPS/eps.o
- .debug_line    0x0000000000000000      0x68d ./Header_C_files/EPS/eps.o
+ .debug_line    0x0000000000000000      0x692 ./Header_C_files/EPS/eps.o
  .debug_str     0x0000000000000000     0x1f6e ./Header_C_files/EPS/eps.o
  .comment       0x0000000000000000       0x72 ./Header_C_files/EPS/eps.o
  .debug_frame   0x0000000000000000       0xc0 ./Header_C_files/EPS/eps.o

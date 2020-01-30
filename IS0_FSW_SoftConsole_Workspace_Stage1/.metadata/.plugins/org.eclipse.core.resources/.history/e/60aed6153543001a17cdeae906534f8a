@@ -89,12 +89,12 @@
 
 	// Masks for Mode 2 of ADC should be masked to pointer register.
 	#define EPS_ADC_MASK_MODE2_CH1		((uint8_t)0x80)	// 1000-0000 Select CH1 in command mode
-	#define EPS_ADC_MASK_MODE2_CH2		((uint8_t)0x90)	// 1001-0000 Select CH2 in command mode - Contains Battery 0
+	#define EPS_ADC_MASK_MODE2_CH2		((uint8_t)0x90)	// 1001-0000 Select CH2 in command mode
 	#define EPS_ADC_MASK_MODE2_CH3		((uint8_t)0xA0)	// 1010-0000 Select CH3 in command mode
-	#define EPS_ADC_MASK_MODE2_CH4		((uint8_t)0xB0)	// 1011-0000 Select CH4 in command mode - Contains Battery 1
+	#define EPS_ADC_MASK_MODE2_CH4		((uint8_t)0xB0)	// 1011-0000 Select CH4 in command mode
 	#define EPS_ADC_MASK_MODE2_CH5		((uint8_t)0xC0)	// 1100-0000 Select CH5 in command mode
 	#define EPS_ADC_MASK_MODE2_CH6		((uint8_t)0xD0)	// 1101-0000 Select CH6 in command mode - Contains Thermistor on the OBC
-	#define EPS_ADC_MASK_MODE2_CH7		((uint8_t)0xE0)	// 1110-0000 Select CH7 in command mode - Contains Thermistor on the EPS
+	#define EPS_ADC_MASK_MODE2_CH7		((uint8_t)0xE0)	// 1110-0000 Select CH7 in command mode
 	#define EPS_ADC_MASK_MODE2_CH8		((uint8_t)0xF0)	// 1111-0000 Select CH8 in command mode - Contains Thermistor on the Adapter Board
 	#define EPS_ADC_MASK_MODE2_SEQCH	((uint8_t)0x70)	// Sequence of channels selected in configuration register
 	/***************************************************************************/

@@ -73,7 +73,7 @@ void Get_EPS_Data(){
 
 			//TODO: This needs to be updated
 			//Reading the EPS Battery SoC
-			instance = do_write_read_transaction(&g_core_i2c0, EPS_FG1_SLAVE_C0, EPS_FG_SOC, write_length, rx_buffer, read_length);
+			instance = do_write_read_transaction(&g_core_i2c1, EPS_ADC_SLAVE_C1, EPS_ADC_MASK_MODE2_CH2, write_length, rx_buffer, read_length);
 			Beacon_pack_IS0.EPS_Bat_SOC = Utils_Buffer_to_16_ValueU_Big(rx_buffer);;
 
 			//Reading the EPS EPS_Bat_Temp1
