@@ -503,6 +503,12 @@ void RTC_Sync_Timer_Hanlder();
 */
 void Decide_Mode();
 
+void SwitchTo_Mode_Science_C();
+void SwitchTo_Mode_Science_D();
+void SwitchTo_Mode_Safe();
+void SwitchTo_Mode_Pheonix();
+
+
 /*---------------------------------------------------------------------------*/
 /* The Handle_Power_Supply() manages the power supply to different subsystem
  * depending on the mode of the spacecraft. This is called after the Decide_mode()

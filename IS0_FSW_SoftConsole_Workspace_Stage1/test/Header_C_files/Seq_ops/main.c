@@ -28,17 +28,39 @@ uint32_t ret_val;
 uint8_t sig = 0;
 int main(){
 
-
 //	test_ISO_GPIO_Subsystem_Enable_GPIOs();
 //	test_ISO_PeakPower();
 //	test_ISO_test_beacon_debug_UART();
 //	test_IS0_Read_Sensor_Board_Data();
+
+//	Running the Sequence of Operations
+//	main_seq();
+
+
 }
 
 
 void main_seq(){
 
-	//Need to Add sequence of operations here
+	//Call the Init() function to initialize all the peripherals
+	Init();
+
+	//Calling the Get Beacon Packet function to collect the data from the EPS and Sensor Boards
+	//and storing in Beacon packet structure
+	Get_Beacon_Packet();
+
+	//For ground debugging log the beacon packet over UART
+	//Beacon_Packet_UART_log();
+
+	//Storing the beacon packet in the SD Card
+	//TODO: This function is taken as is from IS1 - need to check the working of the same
+	//Store_Beacon_Data();
+
+	//TODO: Add code for any interaction with the PSLV UART verilog peripheral if needed.
+
+	//Call the Decide mode function to Apply the forced simulated modes for IS0
+	//Decide_Mode();
+
 }
 
 void Init(){
@@ -48,39 +70,31 @@ void Init(){
 	Initialize_EPS_I2C_Channels();
 	//Initialize Sensor Board I2C Channel
 	Initialize_Sensor_Board_I2C_Channel();
+
+	//Initialize the SD Cards
+	//TODO: This fucntion is taken directly from IS1 - Test the working of this function
+	//SD_Cards_Init();
+
+	//Initialize the RTC if required
+
+	//Initialize the PSLV UART IP if required
 }
 
-void RTC_Sync_Timer_Hanlder(){
-  if(Utils_Handle_Timer32_Started(&Globals.RTC_Sync_Timer)){
-    Globals.Indication_Flags |= UPDATE_RTC_GPS;
-  }
-}
+
 
 void Get_Beacon_Packet(){
 
 	//Get EPS Data
 	Get_EPS_Data();
+
 	//Get VMEL Sensor Board Data
 	Get_VEML6075_Data();
+
 	//TODO: Get triad sensor data
+	//Get_AS7265x_Data();
+
     }
 
-
-//TODO: Send Beacon Packet of IS0 over MSS UART
-void Beacon_Packet_UART_log(){
-
-	//Updating the Beacon Packet Structure
-	Get_Beacon_Packet();
-
-	//Initializing the MSS UART for Logging
-	MSS_UART_init(&g_mss_uart0,MSS_UART_9600_BAUD,MSS_UART_DATA_8_BITS | MSS_UART_NO_PARITY | MSS_UART_ONE_STOP_BIT);
-
-	//TODO: Complete This. Send all the bytes of the beacon packet using the MSS UART
-	//Either send the elements of the structure one-by-one or use the memory address of the structure to achive the same
-
-
-
-}
 
 void Store_Beacon_Data(){
   if (Globals.Current_SD == 0xff) {
@@ -115,6 +129,74 @@ void Store_Beacon_Data(){
 
 }
 
+void Decide_Mode(){
+
+	//Sequence of Forcing the modes for IS0.
+	//The functions to switch mode are written in a way that switching from any mode to any other mode is possible
+
+	//Start in Science D
+	//Switch to Science C in 45 minutes and repeat
+
+	//Every 5 days, force into safe mode for 5 orbits
+
+	//Every 10 days, force into phoenix mode for 5 orbits
+
+
+}
+
+
+void SwitchTo_Mode_Science_D(){
+	//In science D - DAXSS, SBAND, ADCS, Battery Heater are ON, CIP is OFF
+	//This is the mode we star in so turn ON everything except CIP first
+	PWR_Switch((GPIO_DSW0_DAXSS_Mask|GPIO_DSW2_ADCS_Mask|GPIO_DSW3_Sband_Mask|GPIO_DSW4_Bat_heat_Mask),1);
+	//Turn OFF CIP
+	PWR_Switch(GPIO_DSW1_CIP_Mask,0);
+}
+
+void SwitchTo_Mode_Science_C(){
+	//In science D - CIP, SBAND, ADCS, Battery Heater are ON, DAXSS is OFF
+	//turn ON everything except DAXSS first
+	PWR_Switch((GPIO_DSW1_CIP_Mask|GPIO_DSW2_ADCS_Mask|GPIO_DSW3_Sband_Mask|GPIO_DSW4_Bat_heat_Mask),1);
+	//Turn OFF DAXSS
+	PWR_Switch(GPIO_DSW0_DAXSS_Mask,0);
+
+}
+
+void SwitchTo_Mode_Safe(){
+	//In Safe mode all the GPIOs Distribution Switches (Subsytem Enables) are OFF, EXCEPT ADCS
+	//Turning OFF everything except ADCS
+	PWR_Switch((GPIO_DSW0_DAXSS_Mask|GPIO_DSW1_CIP_Mask|GPIO_DSW3_Sband_Mask|GPIO_DSW4_Bat_heat_Mask),0);
+	//Turning ON ADCS
+	PWR_Switch(GPIO_DSW2_ADCS_Mask,1);
+}
+
+void SwitchTo_Mode_Pheonix(){
+	//In Pheonix mode all the GPIOs Distribution Switches (Subsytem Enables are OFF)
+	//Turning OFF everything
+	PWR_Switch((GPIO_DSW0_DAXSS_Mask|GPIO_DSW1_CIP_Mask|GPIO_DSW2_ADCS_Mask|GPIO_DSW3_Sband_Mask|GPIO_DSW4_Bat_heat_Mask),0);
+}
+
+//TODO: Send Beacon Packet of IS0 over MSS UART
+void Beacon_Packet_UART_log(){
+
+	//Updating the Beacon Packet Structure
+	Get_Beacon_Packet();
+
+	//Initializing the MSS UART for Logging
+	MSS_UART_init(&g_mss_uart0,MSS_UART_9600_BAUD,MSS_UART_DATA_8_BITS | MSS_UART_NO_PARITY | MSS_UART_ONE_STOP_BIT);
+
+	//TODO: Complete This. Send all the bytes of the beacon packet using the MSS UART
+	//Either send the elements of the structure one-by-one or use the memory address of the structure to achieve the same
+
+
+}
+
+
+void RTC_Sync_Timer_Hanlder(){
+  if(Utils_Handle_Timer32_Started(&Globals.RTC_Sync_Timer)){
+    Globals.Indication_Flags |= UPDATE_RTC_GPS;
+  }
+}
 
 
 void Watchdog_Timer_Handler(){
@@ -131,9 +213,6 @@ void Watchdog_Pet() {
 }
 
 
-void Decide_Mode(){
-
-}
 
 void SC_Restart(){
    uint8_t i = 0, j = 0;

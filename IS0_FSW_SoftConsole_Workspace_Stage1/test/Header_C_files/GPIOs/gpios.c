@@ -42,7 +42,7 @@ void Global_Init_GPIOs(){
 	MSS_GPIO_set_output( GPIO_DSW4_Bat_heat, 0);
 	MSS_GPIO_set_output( GPIO_CONVEST, 0);
 
-	MSS_GPIO_set_output( GPIO_EN_SENSOR_BOARD, 0);
+	MSS_GPIO_set_output( GPIO_EN_SENSOR_BOARD, 1);
 	MSS_GPIO_set_output( GPIO_RESET_SENSER_BOARD, 1);
 	MSS_GPIO_set_output( GPIO_SENSER_BOARD_WRITE_PROTECT, 1);
 

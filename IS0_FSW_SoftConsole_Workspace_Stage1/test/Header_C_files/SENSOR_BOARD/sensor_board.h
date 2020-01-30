@@ -82,7 +82,7 @@
 void Initialize_Sensor_Board_I2C_Channel();
 void Get_VEML6075_Data();
 void Get_AS7265x_Data();
-uint8_t read_AS7265_reg(uint8_t virtual_reg_address);
-uint8_t write_AS7265_reg(uint8_t virtual_reg_address, uint8_t data_to_write);
+uint8_t read_AS7265_reg(uint8_t);
+void write_AS7265_reg(uint8_t , uint8_t);
 
 #endif /* HEADER_C_FILES_SENSOR_BOARD_SENSOR_BOARD_H_ */

@@ -32,10 +32,16 @@ void Initialize_EPS_I2C_Channels(){
 }
 
 void PWR_Switch(uint32_t config, uint8_t on_off){
+	//Gets the Current state of all the GPIOs and stores it in GPIO pattern
 	uint32_t gpio_pattern = MSS_GPIO_get_outputs();
+
 	if(on_off){
+		//IF on_off bit is set to 1, then turns ON the GPIOs passed in config,
+		//while keeping the OLD GPIOs in the same state
 		gpio_pattern |= config;
 	}else{
+		//IF on_off bit is set to 0, then turns OFF the GPIOs passed in config,
+		//while keeping the old GPIOs same state
 		gpio_pattern &= (~config);
 	}
 	MSS_GPIO_set_outputs(gpio_pattern);

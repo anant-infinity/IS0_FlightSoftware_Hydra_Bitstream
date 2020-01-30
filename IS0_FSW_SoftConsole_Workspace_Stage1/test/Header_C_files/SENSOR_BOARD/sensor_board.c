@@ -42,6 +42,7 @@ uint8_t read_reg_buffer[TX_LENGTH] = {SENSOR_AS72651_READ_REG};
 
 i2c_status_t instance;
 
+
 void Initialize_Sensor_Board_I2C_Channel(){
     /*-------------------------------------------------------------------------
      * Initialize the Core I2C Drivers
@@ -75,12 +76,6 @@ void Get_VEML6075_Data(){
 
 }
 
-//FIXME : Test the "Reliable Working of this Function"
-void Get_AS7265x_Data(){
-
-	//Add code here to read all the 36 bytes of data from the AS7265 sensors
-
-}
 
 //TODO: Test the "Reliable" Working of this Function
 uint8_t read_AS7265_reg(uint8_t virtual_reg_address){
@@ -137,10 +132,15 @@ uint8_t read_AS7265_reg(uint8_t virtual_reg_address){
 	 //MSS_UART_polled_tx( &g_mss_uart0, rx_buffer_2, sizeof(rx_buffer_2) );
 	 return rx_buffer[0];
 
-
+}
 
 	 //TODO: Test the "Reliable" Working of this Function
-	 uint8_t write_AS7265_reg(uint8_t virtual_reg_address, uint8_t data_to_write){
+	 void write_AS7265_reg(uint8_t virtual_reg_address, uint8_t data_to_write){
+
+		uint8_t write_length = TX_LENGTH;
+		uint8_t write_length_2 = TX_LENGTH_2;
+		uint8_t rx_buffer[RX_LENGTH];
+		uint8_t read_length = RX_LENGTH;
 	 //Poll I²C slave STATUS register;
 	 //If TX_VALID bit is 0, a write can be performed on the interface;
 	 //Send a virtual register address and set the MSB of the register address to 1 to indicate the pending write;
@@ -181,11 +181,84 @@ uint8_t read_AS7265_reg(uint8_t virtual_reg_address){
 			 		break;
 			 }
 		 }
+
 		 // Write the data to complete the operation.
 		 uint8_t data_write_buffer[TX_LENGTH_2] = {SENSOR_AS72651_WRITE_REG, data_to_write};
 		 instance = do_write_transaction(&g_core_i2c3, SENSOR_MASTER, data_write_buffer, write_length_2);
 
-		 return 0;
 	 }
-}
+
+
+	 //FIXME : Test the "Reliable Working of this Function"
+	 void Get_AS7265x_Data(){
+	 /*
+	 	The AS7265x consists of three sensors , which can be selected by writing the either 0x01, 0x02 or 0x03 to the DEV_SEL register
+	 	There are 6 registers which contain this data these are-
+	 	1. Channel R, G, A
+	 	2. Channel S, H, B
+	 	3. Channel T, I, C
+	 	4. Channel U, J, D
+	 	5. Channel V, K, E
+	 	6. Channel W, L, F
+
+	 	Thus the procedure to read that will be followed is
+	 	1. Select Sensor 1 (by writing 0x01 into the DEV_SEL register
+	 	2. Read the data from the 6 register corresponding to channel 1
+	 	3. Repeat the procedure for channel 2 and 3
+	 */
+
+		 //Set the DEV_SEL register to sensor 1
+		 // Add the write line here
+		 //FIXME - Error when calling the write function some issue with the function defination/declaration
+		 //write_AS7265_reg(SENSOR_AS72651_DEVSEL_ADDR, SENSOR_AS72651_DEVSEL_MASTER);
+		 //Read all the data from sensor 1
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_1 = read_AS7265_reg(SENSOR_AS72651_RAW_RGA_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_2 = read_AS7265_reg(SENSOR_AS72651_RAW_RGA_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_3 = read_AS7265_reg(SENSOR_AS72651_RAW_SHB_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_4 = read_AS7265_reg(SENSOR_AS72651_RAW_SHB_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_5 = read_AS7265_reg(SENSOR_AS72651_RAW_TIC_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_6 = read_AS7265_reg(SENSOR_AS72651_RAW_TIC_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_7 = read_AS7265_reg(SENSOR_AS72651_RAW_UJD_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_8 = read_AS7265_reg(SENSOR_AS72651_RAW_UJD_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_9 = read_AS7265_reg(SENSOR_AS72651_RAW_VKE_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_10 = read_AS7265_reg(SENSOR_AS72651_RAW_VKE_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_11 = read_AS7265_reg(SENSOR_AS72651_RAW_WLF_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_12 = read_AS7265_reg(SENSOR_AS72651_RAW_WLF_L);
+
+		 //Set the DEV_SEL register to sensor 2
+		 // Add the write line here
+		 //FIXME - Error when calling the write function some issue with the function defination/declaration
+		 //Read all the data from sensor 2
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_13 = read_AS7265_reg(SENSOR_AS72651_RAW_RGA_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_14 = read_AS7265_reg(SENSOR_AS72651_RAW_RGA_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_15 = read_AS7265_reg(SENSOR_AS72651_RAW_SHB_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_16 = read_AS7265_reg(SENSOR_AS72651_RAW_SHB_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_17 = read_AS7265_reg(SENSOR_AS72651_RAW_TIC_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_18 = read_AS7265_reg(SENSOR_AS72651_RAW_TIC_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_19 = read_AS7265_reg(SENSOR_AS72651_RAW_UJD_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_20 = read_AS7265_reg(SENSOR_AS72651_RAW_UJD_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_21 = read_AS7265_reg(SENSOR_AS72651_RAW_VKE_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_22 = read_AS7265_reg(SENSOR_AS72651_RAW_VKE_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_23 = read_AS7265_reg(SENSOR_AS72651_RAW_WLF_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_24 = read_AS7265_reg(SENSOR_AS72651_RAW_WLF_L);
+
+		 //Set the DEV_SEL register to sensor 3
+		 // Add the write line here
+		 //FIXME - Error when calling the write function some issue with the function defination/declaration
+		 //Read all the data from sensor 3
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_25 = read_AS7265_reg(SENSOR_AS72651_RAW_RGA_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_26 = read_AS7265_reg(SENSOR_AS72651_RAW_RGA_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_27 = read_AS7265_reg(SENSOR_AS72651_RAW_SHB_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_28 = read_AS7265_reg(SENSOR_AS72651_RAW_SHB_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_29 = read_AS7265_reg(SENSOR_AS72651_RAW_TIC_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_30 = read_AS7265_reg(SENSOR_AS72651_RAW_TIC_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_31 = read_AS7265_reg(SENSOR_AS72651_RAW_UJD_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_32 = read_AS7265_reg(SENSOR_AS72651_RAW_UJD_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_33 = read_AS7265_reg(SENSOR_AS72651_RAW_VKE_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_34 = read_AS7265_reg(SENSOR_AS72651_RAW_VKE_L);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_35 = read_AS7265_reg(SENSOR_AS72651_RAW_WLF_H);
+		 Beacon_pack_IS0.Sensor_Board_AS7265x_DataByte_36 = read_AS7265_reg(SENSOR_AS72651_RAW_WLF_L);
+
+	 }
+
 
