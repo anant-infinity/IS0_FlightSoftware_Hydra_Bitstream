@@ -139,10 +139,8 @@ uint8_t read_AS7265_reg(uint8_t virtual_reg_address){
 
 	 //Can Uncomment for step by step logging
 	 //MSS_UART_polled_tx( &g_mss_uart0, rx_buffer_2, sizeof(rx_buffer_2) );
+	 return rx_buffer[0];
 
-	 //FIXME: Uncomment this after the reliable working of the read data functions
-	 ///return rx_buffer[0];
-	 return 0x0A;
 }
 
 	 //TODO: Test the "Reliable" Working of this Function

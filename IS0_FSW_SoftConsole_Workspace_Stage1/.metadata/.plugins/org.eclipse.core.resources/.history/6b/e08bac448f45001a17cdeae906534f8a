@@ -139,10 +139,8 @@ uint8_t read_AS7265_reg(uint8_t virtual_reg_address){
 
 	 //Can Uncomment for step by step logging
 	 //MSS_UART_polled_tx( &g_mss_uart0, rx_buffer_2, sizeof(rx_buffer_2) );
+	 return rx_buffer[0];
 
-	 //FIXME: Uncomment this after the reliable working of the read data functions
-	 ///return rx_buffer[0];
-	 return 0x0A;
 }
 
 	 //TODO: Test the "Reliable" Working of this Function
@@ -254,7 +252,6 @@ uint8_t read_AS7265_reg(uint8_t virtual_reg_address){
 
 		//Set the DEV_SEL register to sensor 1
 		// Add the write line here
-
 		//FIXME - Error when calling the write function some issue with the function defination/declaration
 		//write_AS7265_reg(SENSOR_AS72651_DEVSEL_ADDR, SENSOR_AS72651_DEVSEL_MASTER);
 		//Read all the data from sensor 1

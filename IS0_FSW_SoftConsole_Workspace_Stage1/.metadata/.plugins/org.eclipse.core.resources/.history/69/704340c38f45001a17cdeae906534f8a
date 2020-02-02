@@ -84,15 +84,13 @@ void Init(){
 
 void Get_Beacon_Packet(){
 
-	//TODO Get the important CDH Data
-
 	//Get EPS Data
 	Get_EPS_Data();
 
 	//Get VMEL Sensor Board Data
 	Get_VEML6075_Data();
 
-	//Get triad sensor data
+	//TODO: Get triad sensor data
 	Get_AS7265x_Data();
 
     }
