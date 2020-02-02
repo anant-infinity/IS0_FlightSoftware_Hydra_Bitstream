@@ -606,78 +606,103 @@ struct CCSDS_Header{	// The CCSDS header struct
         uint32_t TS1;   /* 4 byte of MSB */
 };
 
-typedef enum BeaconEpsPacketEnum {
-    EPS_Bat_Volt = 0,
-    EPS_Bat_Curr,
-    EPS_Bus_Volt,
-    EPS_Bus_Curr,
-    EPS_Bat_SOC,
-    EPS_Bat_Temp1,
-    EPS_Bat_Temp2,
-    EPS_SP1_Volt,
-    EPS_SP2_Volt,
-    EPS_SP3_Volt,
+struct Beacon_packet_IS0{	// The beacon packet struct. It contains the CCSDS header and the data along with the fletcher code at the end.
 
-    EPS_SP1_Curr,
-    EPS_SP2_Curr,
-    EPS_SP3_Curr,
-    EPS_Interface_Temp,
-    EPS_EPS_Temp,
-    EPS_CIP_Volt,
-    EPS_CIP_Curr,
-    EPS_ADCS_Volt,
-    EPS_ADCS_Curr,
-    EPS_SBAND_Volt,
+	    	//To Add CCSDS Header
+	        struct CCSDS_Header beac_head;	// The CCSDS header
 
-    EPS_SBAND_Curr,
-    EPS_UHF_Volt,
-    EPS_UHF_Curr,
-    EPS_CDH_Volt,
-    EPS_CDH_Curr,
-    EPS_GPS_33_Volt,
-    EPS_GPS_33_Curr,
-    EPS_GPS_12_Volt,
-    EPS_GPS_12_Curr,
-    EPS_Bat_Heater_Curr,
+	        //To Add CDH HK Data
+	        //uint8_t CDH_Subsystem_ON_Stat;
+	        //uint16_t CDH_Temp;
+	        //uint8_t CDH_Primary_Info;
+	        //uint8_t CDH_Sub_System_Data_Valid_Flags;
 
-    EPS_DAXSS_Volt,
-    EPS_DAXSS_Curr,
-} BeaconEpsPacket;
+	        //EPS HK Data
+	        uint16_t EPS_Bat_Volt;
+	        uint16_t EPS_Bat_Curr;
+	        uint16_t EPS_Bus_Volt;
+	        uint16_t EPS_Bus_Curr;
+	        uint16_t EPS_Bat_SOC;
+	        uint16_t EPS_Bat_Temp1;
+	        uint16_t EPS_Bat_Temp2;
+	        uint16_t EPS_SP1_Volt;
+	        uint16_t EPS_SP2_Volt;
+	        uint16_t EPS_SP3_Volt;
+	        uint16_t EPS_SP1_Curr;
+	        uint16_t EPS_SP2_Curr;
+	        uint16_t EPS_SP3_Curr;
+	        uint16_t EPS_Interface_Temp;
+	        uint16_t EPS_EPS_Temp;
+	        uint16_t EPS_CIP_Volt;
+	        uint16_t EPS_CIP_Curr;
+	        uint16_t EPS_ADCS_Volt;
+	        uint16_t EPS_ADCS_Curr;
+	        uint16_t EPS_SBAND_Volt;
+	        uint16_t EPS_SBAND_Curr;
+	        uint16_t EPS_UHF_Volt;
+	        uint16_t EPS_UHF_Curr;
+	        uint16_t EPS_CDH_Volt;
+	        uint16_t EPS_CDH_Curr;
+	        uint16_t EPS_GPS_33_Volt;
+	        uint16_t EPS_GPS_33_Curr;
+	        uint16_t EPS_GPS_12_Volt;
+	        uint16_t EPS_GPS_12_Curr;
+	        uint16_t EPS_Bat_Heater_Curr;
+	        uint16_t EPS_DAXSS_Volt;
+	        uint16_t EPS_DAXSS_Curr;
 
-typedef enum BeaconVMEL6075PacketEnum {
-	VMEL6075_UVA_DATA = 0,
-	VMEL6075_UVB_DATA,
-	VMEL6075_UVCOMP1_DATA,
-	VMEL6075_UVCOMP2_DATA,
+	        //Sensor Board VMEL Data
+	        //TODO: Update the hydra code to combine DATA_L and DATA_H
+	        uint16_t Sensor_Board_VMEL6075_UVA_DATA;
+	        uint16_t Sensor_Board_VMEL6075_UVB_DATA;
+	        uint16_t Sensor_Board_VMEL6075_UVCOMP1_DATA;
+	        uint16_t Sensor_Board_VMEL6075_UVCOMP2_DATA;
 
-}BeaconVMEL6075Packet;
+	        //Sensor Board AS7265X Data
+	        uint8_t Sensor_Board_AS7265x_DataByte_1;
+	        uint8_t Sensor_Board_AS7265x_DataByte_2;
+	        uint8_t Sensor_Board_AS7265x_DataByte_3;
+	        uint8_t Sensor_Board_AS7265x_DataByte_4;
+	        uint8_t Sensor_Board_AS7265x_DataByte_5;
+	        uint8_t Sensor_Board_AS7265x_DataByte_6;
+	        uint8_t Sensor_Board_AS7265x_DataByte_7;
+	        uint8_t Sensor_Board_AS7265x_DataByte_8;
+	        uint8_t Sensor_Board_AS7265x_DataByte_9;
+	        uint8_t Sensor_Board_AS7265x_DataByte_10;
+	        uint8_t Sensor_Board_AS7265x_DataByte_11;
+	        uint8_t Sensor_Board_AS7265x_DataByte_12;
+	        uint8_t Sensor_Board_AS7265x_DataByte_13;
+	        uint8_t Sensor_Board_AS7265x_DataByte_14;
+	        uint8_t Sensor_Board_AS7265x_DataByte_15;
+	        uint8_t Sensor_Board_AS7265x_DataByte_16;
+	        uint8_t Sensor_Board_AS7265x_DataByte_17;
+	        uint8_t Sensor_Board_AS7265x_DataByte_18;
+	        uint8_t Sensor_Board_AS7265x_DataByte_19;
+	        uint8_t Sensor_Board_AS7265x_DataByte_20;
+	        uint8_t Sensor_Board_AS7265x_DataByte_21;
+	        uint8_t Sensor_Board_AS7265x_DataByte_22;
+	        uint8_t Sensor_Board_AS7265x_DataByte_23;
+	        uint8_t Sensor_Board_AS7265x_DataByte_24;
+	        uint8_t Sensor_Board_AS7265x_DataByte_25;
+	        uint8_t Sensor_Board_AS7265x_DataByte_26;
+	        uint8_t Sensor_Board_AS7265x_DataByte_27;
+	        uint8_t Sensor_Board_AS7265x_DataByte_28;
+	        uint8_t Sensor_Board_AS7265x_DataByte_29;
+	        uint8_t Sensor_Board_AS7265x_DataByte_30;
+	        uint8_t Sensor_Board_AS7265x_DataByte_31;
+	        uint8_t Sensor_Board_AS7265x_DataByte_32;
+	        uint8_t Sensor_Board_AS7265x_DataByte_33;
+	        uint8_t Sensor_Board_AS7265x_DataByte_34;
+	        uint8_t Sensor_Board_AS7265x_DataByte_35;
+	        uint8_t Sensor_Board_AS7265x_DataByte_36;
+
+	        //To Add the Fletcher Code
+	        uint16_t Fletcher_code;
+
+	    }Beacon_pack_IS0;
 
 
-struct Beacon_packet_IS0{
-	//To Add CCSDS Header
-    struct CCSDS_Header beac_head;	// The CCSDS header
 
-    //To Add CDH HK Data
-    //uint8_t CDH_Subsystem_ON_Stat;
-    //uint16_t CDH_Temp;
-    //uint8_t CDH_Primary_Info;
-    //uint8_t CDH_Sub_System_Data_Valid_Flags;
-
-    //EPS HK Data
-    uint16_t EPS[32];
-
-    //Sensor Board VMEL Data
-    uint16_t Sensor_Board_VMEL6075[4];
-    //TODO: Update the hydra code to combine DATA_L and DATA_H
-
-    //Sensor Board AS7265X Data
-    uint8_t Sensor_Board_AS7265X[36];
-
-    //To Add the Fletcher Code
-    uint16_t Fletcher_code;
-
-
-} Beacon_pack_IS0;
 
 
 

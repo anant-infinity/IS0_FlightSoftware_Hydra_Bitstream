@@ -364,7 +364,7 @@ void test_SD_Write_Packets() {
 			if (err > 5) {
 				return;
 			}
-
+			Beacon_pack_IS0.EPS_Bat_Heater_Curr++;
 		}
 	}
 }

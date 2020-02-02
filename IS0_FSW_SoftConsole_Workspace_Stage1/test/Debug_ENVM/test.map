@@ -26,6 +26,7 @@ c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3
 Allocating common symbols
 Common symbol       size              file
 
+points              0xc0              ./Header_C_files/EPS/eps.o
 Transmit_MSG        0x400             ./Header_C_files/Seq_ops/main.o
 FLASH_SPI           0x4               ./Header_C_files/SPI_Flash/spi_flash.o
 g_core_i2c2         0x6c              ./Header_C_files/Test/test.o
@@ -803,13 +804,13 @@ Discarded input sections
                 0x0000000000000000       0x52 ./Header_C_files/Utils/utils.o
  .text.Utils_Delay16
                 0x0000000000000000       0x30 ./Header_C_files/Utils/utils.o
- .debug_info    0x0000000000000000     0x1bf9 ./Header_C_files/Utils/utils.o
+ .debug_info    0x0000000000000000     0x18a8 ./Header_C_files/Utils/utils.o
  .debug_abbrev  0x0000000000000000      0x297 ./Header_C_files/Utils/utils.o
  .debug_aranges
                 0x0000000000000000       0xd8 ./Header_C_files/Utils/utils.o
  .debug_ranges  0x0000000000000000       0xc8 ./Header_C_files/Utils/utils.o
  .debug_line    0x0000000000000000      0x632 ./Header_C_files/Utils/utils.o
- .debug_str     0x0000000000000000     0x1d24 ./Header_C_files/Utils/utils.o
+ .debug_str     0x0000000000000000     0x166c ./Header_C_files/Utils/utils.o
  .comment       0x0000000000000000       0x72 ./Header_C_files/Utils/utils.o
  .debug_frame   0x0000000000000000      0x3a8 ./Header_C_files/Utils/utils.o
  COMMON         0x0000000000000000       0x79 ./Header_C_files/Utils/utils.o
@@ -837,7 +838,7 @@ Discarded input sections
  .text.test_SD_Card
                 0x0000000000000000      0x1b0 ./Header_C_files/Test/test.o
  .text.test_SD_Write_Packets
-                0x0000000000000000       0xd8 ./Header_C_files/Test/test.o
+                0x0000000000000000       0xc4 ./Header_C_files/Test/test.o
  .text.test_save_parameter_character
                 0x0000000000000000       0x40 ./Header_C_files/Test/test.o
  .text.test_RTC
@@ -855,7 +856,7 @@ Discarded input sections
                 0x0000000000000000        0x6 ./Header_C_files/Seq_ops/main.o
  .bss.sig       0x0000000000000000        0x1 ./Header_C_files/Seq_ops/main.o
  .text.main_seq
-                0x0000000000000000       0x10 ./Header_C_files/Seq_ops/main.o
+                0x0000000000000000       0x14 ./Header_C_files/Seq_ops/main.o
  .text.Init     0x0000000000000000       0x14 ./Header_C_files/Seq_ops/main.o
  .text.Get_Beacon_Packet
                 0x0000000000000000       0x10 ./Header_C_files/Seq_ops/main.o
@@ -872,7 +873,7 @@ Discarded input sections
  .text.SwitchTo_Mode_Pheonix
                 0x0000000000000000       0x10 ./Header_C_files/Seq_ops/main.o
  .text.Beacon_Packet_UART_log
-                0x0000000000000000       0x1c ./Header_C_files/Seq_ops/main.o
+                0x0000000000000000      0x1ac ./Header_C_files/Seq_ops/main.o
  .text.RTC_Sync_Timer_Hanlder
                 0x0000000000000000       0x28 ./Header_C_files/Seq_ops/main.o
  .text.Watchdog_Timer_Handler
@@ -929,13 +930,13 @@ Discarded input sections
                 0x0000000000000000       0x4a ./Header_C_files/SPI_Flash/spi_flash.o
  .text.Read_Parameter_Table
                 0x0000000000000000       0x14 ./Header_C_files/SPI_Flash/spi_flash.o
- .debug_info    0x0000000000000000     0x1d8a ./Header_C_files/SPI_Flash/spi_flash.o
+ .debug_info    0x0000000000000000     0x1a39 ./Header_C_files/SPI_Flash/spi_flash.o
  .debug_abbrev  0x0000000000000000      0x3b9 ./Header_C_files/SPI_Flash/spi_flash.o
  .debug_aranges
                 0x0000000000000000       0xa8 ./Header_C_files/SPI_Flash/spi_flash.o
  .debug_ranges  0x0000000000000000       0x98 ./Header_C_files/SPI_Flash/spi_flash.o
  .debug_line    0x0000000000000000      0x633 ./Header_C_files/SPI_Flash/spi_flash.o
- .debug_str     0x0000000000000000     0x1fc7 ./Header_C_files/SPI_Flash/spi_flash.o
+ .debug_str     0x0000000000000000     0x190f ./Header_C_files/SPI_Flash/spi_flash.o
  .comment       0x0000000000000000       0x72 ./Header_C_files/SPI_Flash/spi_flash.o
  .debug_frame   0x0000000000000000      0x2cc ./Header_C_files/SPI_Flash/spi_flash.o
  COMMON         0x0000000000000000        0x4 ./Header_C_files/SPI_Flash/spi_flash.o
@@ -950,24 +951,29 @@ Discarded input sections
                 0x0000000000000000        0x1 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .text.Initialize_Sensor_Board_I2C_Channel
                 0x0000000000000000       0x1c ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .text.assignGetVEML6075
+                0x0000000000000000       0x1a ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .text.VEML6075AssignInit
+                0x0000000000000000       0x58 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .text.Get_VEML6075_Data
-                0x0000000000000000       0xd0 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+                0x0000000000000000       0x70 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .text.read_AS7265_reg
                 0x0000000000000000       0xec ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .rodata        0x0000000000000000        0x2 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .text.write_AS7265_reg
                 0x0000000000000000       0xe0 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .text.Get_AS7265x_Data
-                0x0000000000000000      0x24c ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_info    0x0000000000000000     0x1e12 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_abbrev  0x0000000000000000      0x28f ./Header_C_files/SENSOR_BOARD/sensor_board.o
+                0x0000000000000000        0xc ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_info    0x0000000000000000     0x1b6b ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_abbrev  0x0000000000000000      0x2d9 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .debug_aranges
-                0x0000000000000000       0x40 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_ranges  0x0000000000000000       0x30 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_line    0x0000000000000000      0x746 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_str     0x0000000000000000     0x1fa7 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+                0x0000000000000000       0x50 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_ranges  0x0000000000000000       0x40 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_line    0x0000000000000000      0x75b ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_str     0x0000000000000000     0x1944 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .comment       0x0000000000000000       0x72 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_frame   0x0000000000000000       0xbc ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_frame   0x0000000000000000      0x10c ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ COMMON         0x0000000000000000        0x0 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .text          0x0000000000000000        0x0 ./Header_C_files/SD_CARD/sd.o
  .data          0x0000000000000000        0x0 ./Header_C_files/SD_CARD/sd.o
  .bss           0x0000000000000000        0x0 ./Header_C_files/SD_CARD/sd.o
@@ -1002,13 +1008,13 @@ Discarded input sections
  .text.SD_Card_Wipe
                 0x0000000000000000       0xdc ./Header_C_files/SD_CARD/sd.o
  .text.SD_FDRI  0x0000000000000000       0x88 ./Header_C_files/SD_CARD/sd.o
- .debug_info    0x0000000000000000     0x1df3 ./Header_C_files/SD_CARD/sd.o
+ .debug_info    0x0000000000000000     0x1aa2 ./Header_C_files/SD_CARD/sd.o
  .debug_abbrev  0x0000000000000000      0x303 ./Header_C_files/SD_CARD/sd.o
  .debug_aranges
                 0x0000000000000000       0x98 ./Header_C_files/SD_CARD/sd.o
  .debug_ranges  0x0000000000000000       0x88 ./Header_C_files/SD_CARD/sd.o
  .debug_line    0x0000000000000000      0x8c5 ./Header_C_files/SD_CARD/sd.o
- .debug_str     0x0000000000000000     0x1dd6 ./Header_C_files/SD_CARD/sd.o
+ .debug_str     0x0000000000000000     0x171e ./Header_C_files/SD_CARD/sd.o
  .comment       0x0000000000000000       0x72 ./Header_C_files/SD_CARD/sd.o
  .debug_frame   0x0000000000000000      0x264 ./Header_C_files/SD_CARD/sd.o
  COMMON         0x0000000000000000      0x20c ./Header_C_files/SD_CARD/sd.o
@@ -1031,13 +1037,13 @@ Discarded input sections
                 0x0000000000000000       0x14 ./Header_C_files/RTC/rtc.o
  .text.RTC_Set_Config_value
                 0x0000000000000000       0x28 ./Header_C_files/RTC/rtc.o
- .debug_info    0x0000000000000000      0xf4d ./Header_C_files/RTC/rtc.o
+ .debug_info    0x0000000000000000      0xbfc ./Header_C_files/RTC/rtc.o
  .debug_abbrev  0x0000000000000000      0x1ba ./Header_C_files/RTC/rtc.o
  .debug_aranges
                 0x0000000000000000       0x58 ./Header_C_files/RTC/rtc.o
  .debug_ranges  0x0000000000000000       0x48 ./Header_C_files/RTC/rtc.o
  .debug_line    0x0000000000000000      0x3bf ./Header_C_files/RTC/rtc.o
- .debug_str     0x0000000000000000     0x164f ./Header_C_files/RTC/rtc.o
+ .debug_str     0x0000000000000000      0xf97 ./Header_C_files/RTC/rtc.o
  .comment       0x0000000000000000       0x72 ./Header_C_files/RTC/rtc.o
  .debug_frame   0x0000000000000000      0x128 ./Header_C_files/RTC/rtc.o
  .text          0x0000000000000000        0x0 ./Header_C_files/I2C/i2c.o
@@ -1074,17 +1080,22 @@ Discarded input sections
                 0x0000000000000000       0x44 ./Header_C_files/EPS/eps.o
  .text.PWR_Switch
                 0x0000000000000000       0x3a ./Header_C_files/EPS/eps.o
+ .text.assignGetEps
+                0x0000000000000000       0x3c ./Header_C_files/EPS/eps.o
+ .text.epsAssignInit
+                0x0000000000000000      0x56c ./Header_C_files/EPS/eps.o
  .text.Get_EPS_Data
-                0x0000000000000000      0x5b4 ./Header_C_files/EPS/eps.o
- .debug_info    0x0000000000000000     0x1c06 ./Header_C_files/EPS/eps.o
- .debug_abbrev  0x0000000000000000      0x2ab ./Header_C_files/EPS/eps.o
+                0x0000000000000000       0x9c ./Header_C_files/EPS/eps.o
+ .debug_info    0x0000000000000000     0x1993 ./Header_C_files/EPS/eps.o
+ .debug_abbrev  0x0000000000000000      0x2ee ./Header_C_files/EPS/eps.o
  .debug_aranges
-                0x0000000000000000       0x40 ./Header_C_files/EPS/eps.o
- .debug_ranges  0x0000000000000000       0x30 ./Header_C_files/EPS/eps.o
- .debug_line    0x0000000000000000      0x692 ./Header_C_files/EPS/eps.o
- .debug_str     0x0000000000000000     0x1f6e ./Header_C_files/EPS/eps.o
+                0x0000000000000000       0x50 ./Header_C_files/EPS/eps.o
+ .debug_ranges  0x0000000000000000       0x40 ./Header_C_files/EPS/eps.o
+ .debug_line    0x0000000000000000      0x6d7 ./Header_C_files/EPS/eps.o
+ .debug_str     0x0000000000000000     0x1906 ./Header_C_files/EPS/eps.o
  .comment       0x0000000000000000       0x72 ./Header_C_files/EPS/eps.o
- .debug_frame   0x0000000000000000       0xc0 ./Header_C_files/EPS/eps.o
+ .debug_frame   0x0000000000000000      0x110 ./Header_C_files/EPS/eps.o
+ COMMON         0x0000000000000000       0xc0 ./Header_C_files/EPS/eps.o
  .text          0x0000000000000000        0x0 ./Header_C_files/CCSDS/ccsds.o
  .data          0x0000000000000000        0x0 ./Header_C_files/CCSDS/ccsds.o
  .bss           0x0000000000000000        0x0 ./Header_C_files/CCSDS/ccsds.o
@@ -1094,13 +1105,13 @@ Discarded input sections
                 0x0000000000000000       0xf4 ./Header_C_files/CCSDS/ccsds.o
  .text.CCSDS_Fletcher_16_Checkbytes
                 0x0000000000000000       0xc0 ./Header_C_files/CCSDS/ccsds.o
- .debug_info    0x0000000000000000      0xf85 ./Header_C_files/CCSDS/ccsds.o
+ .debug_info    0x0000000000000000      0xc34 ./Header_C_files/CCSDS/ccsds.o
  .debug_abbrev  0x0000000000000000      0x1ba ./Header_C_files/CCSDS/ccsds.o
  .debug_aranges
                 0x0000000000000000       0x30 ./Header_C_files/CCSDS/ccsds.o
  .debug_ranges  0x0000000000000000       0x20 ./Header_C_files/CCSDS/ccsds.o
  .debug_line    0x0000000000000000      0x320 ./Header_C_files/CCSDS/ccsds.o
- .debug_str     0x0000000000000000     0x1658 ./Header_C_files/CCSDS/ccsds.o
+ .debug_str     0x0000000000000000      0xfa0 ./Header_C_files/CCSDS/ccsds.o
  .comment       0x0000000000000000       0x72 ./Header_C_files/CCSDS/ccsds.o
  .debug_frame   0x0000000000000000       0x80 ./Header_C_files/CCSDS/ccsds.o
  .text          0x0000000000000000        0x0 ./CMSIS/startup_gcc/newlib_stubs.o
@@ -1762,7 +1773,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000    0x102ff
+.debug_info     0x0000000000000000     0xfa67
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000       0x26 ./hal/CortexM3/GNU/hal.o
  .debug_info    0x0000000000000026       0x26 ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1774,13 +1785,13 @@ END GROUP
  .debug_info    0x0000000000007659     0x113c ./drivers/mss_hpdma/mss_hpdma.o
  .debug_info    0x0000000000008795     0x14a4 ./drivers/CoreI2C/core_i2c.o
  .debug_info    0x0000000000009c39      0x75c ./drivers/CoreI2C/i2c_interrupt.o
- .debug_info    0x000000000000a395     0x2248 ./Header_C_files/Test/test.o
- .debug_info    0x000000000000c5dd     0x200a ./Header_C_files/Seq_ops/main.o
- .debug_info    0x000000000000e5e7     0x1244 ./Header_C_files/I2C/i2c.o
- .debug_info    0x000000000000f82b       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
- .debug_info    0x000000000000f851      0xaae ./CMSIS/system_m2sxxx.o
+ .debug_info    0x000000000000a395     0x1ef7 ./Header_C_files/Test/test.o
+ .debug_info    0x000000000000c28c     0x1e14 ./Header_C_files/Seq_ops/main.o
+ .debug_info    0x000000000000e0a0      0xef3 ./Header_C_files/I2C/i2c.o
+ .debug_info    0x000000000000ef93       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_info    0x000000000000efb9      0xaae ./CMSIS/system_m2sxxx.o
 
-.debug_abbrev   0x0000000000000000     0x1e52
+.debug_abbrev   0x0000000000000000     0x1e53
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000       0x14 ./hal/CortexM3/GNU/hal.o
  .debug_abbrev  0x0000000000000014       0x14 ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1793,12 +1804,12 @@ END GROUP
  .debug_abbrev  0x000000000000105b      0x2ab ./drivers/CoreI2C/core_i2c.o
  .debug_abbrev  0x0000000000001306      0x1a7 ./drivers/CoreI2C/i2c_interrupt.o
  .debug_abbrev  0x00000000000014ad      0x2f6 ./Header_C_files/Test/test.o
- .debug_abbrev  0x00000000000017a3      0x365 ./Header_C_files/Seq_ops/main.o
- .debug_abbrev  0x0000000000001b08      0x1a9 ./Header_C_files/I2C/i2c.o
- .debug_abbrev  0x0000000000001cb1       0x14 ./CMSIS/startup_gcc/startup_m2sxxx.o
- .debug_abbrev  0x0000000000001cc5      0x18d ./CMSIS/system_m2sxxx.o
+ .debug_abbrev  0x00000000000017a3      0x366 ./Header_C_files/Seq_ops/main.o
+ .debug_abbrev  0x0000000000001b09      0x1a9 ./Header_C_files/I2C/i2c.o
+ .debug_abbrev  0x0000000000001cb2       0x14 ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_abbrev  0x0000000000001cc6      0x18d ./CMSIS/system_m2sxxx.o
 
-.debug_line     0x0000000000000000     0x4b7c
+.debug_line     0x0000000000000000     0x4bd3
  *(.debug_line)
  .debug_line    0x0000000000000000       0x4d ./hal/CortexM3/GNU/hal.o
  .debug_line    0x000000000000004d       0x8b ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1810,13 +1821,13 @@ END GROUP
  .debug_line    0x0000000000002393      0x331 ./drivers/mss_hpdma/mss_hpdma.o
  .debug_line    0x00000000000026c4      0x668 ./drivers/CoreI2C/core_i2c.o
  .debug_line    0x0000000000002d2c      0x32d ./drivers/CoreI2C/i2c_interrupt.o
- .debug_line    0x0000000000003059      0xa6f ./Header_C_files/Test/test.o
- .debug_line    0x0000000000003ac8      0x7da ./Header_C_files/Seq_ops/main.o
- .debug_line    0x00000000000042a2      0x54c ./Header_C_files/I2C/i2c.o
- .debug_line    0x00000000000047ee      0x18e ./CMSIS/startup_gcc/startup_m2sxxx.o
- .debug_line    0x000000000000497c      0x200 ./CMSIS/system_m2sxxx.o
+ .debug_line    0x0000000000003059      0xa6e ./Header_C_files/Test/test.o
+ .debug_line    0x0000000000003ac7      0x832 ./Header_C_files/Seq_ops/main.o
+ .debug_line    0x00000000000042f9      0x54c ./Header_C_files/I2C/i2c.o
+ .debug_line    0x0000000000004845      0x18e ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_line    0x00000000000049d3      0x200 ./CMSIS/system_m2sxxx.o
 
-.debug_frame    0x0000000000000000     0x22c0
+.debug_frame    0x0000000000000000     0x22c8
  *(.debug_frame)
  .debug_frame   0x0000000000000000      0x3c0 ./drivers_config/mss_spi/mss_spi.o
  .debug_frame   0x00000000000003c0      0x820 ./drivers/mss_uart/mss_uart.o
@@ -1827,12 +1838,12 @@ END GROUP
  .debug_frame   0x0000000000001754      0x484 ./drivers/CoreI2C/core_i2c.o
  .debug_frame   0x0000000000001bd8       0xa8 ./drivers/CoreI2C/i2c_interrupt.o
  .debug_frame   0x0000000000001c80      0x17c ./Header_C_files/Test/test.o
- .debug_frame   0x0000000000001dfc      0x280 ./Header_C_files/Seq_ops/main.o
- .debug_frame   0x000000000000207c      0x10c ./Header_C_files/I2C/i2c.o
- .debug_frame   0x0000000000002188      0x10c ./CMSIS/system_m2sxxx.o
- .debug_frame   0x0000000000002294       0x2c c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-init.o)
+ .debug_frame   0x0000000000001dfc      0x288 ./Header_C_files/Seq_ops/main.o
+ .debug_frame   0x0000000000002084      0x10c ./Header_C_files/I2C/i2c.o
+ .debug_frame   0x0000000000002190      0x10c ./CMSIS/system_m2sxxx.o
+ .debug_frame   0x000000000000229c       0x2c c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-init.o)
 
-.debug_str      0x0000000000000000     0x5085
+.debug_str      0x0000000000000000     0x4a66
  *(.debug_str)
  .debug_str     0x0000000000000000       0xb7 ./hal/CortexM3/GNU/hal.o
  .debug_str     0x00000000000000b7       0x24 ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1853,15 +1864,15 @@ END GROUP
                                         0xe25 (size before relaxing)
  .debug_str     0x0000000000003b02       0x72 ./drivers/CoreI2C/i2c_interrupt.o
                                         0xabb (size before relaxing)
- .debug_str     0x0000000000003b74      0xf17 ./Header_C_files/Test/test.o
-                                       0x22e0 (size before relaxing)
- .debug_str     0x0000000000004a8b      0x359 ./Header_C_files/Seq_ops/main.o
-                                       0x20ed (size before relaxing)
- .debug_str     0x0000000000004de4       0xe6 ./Header_C_files/I2C/i2c.o
-                                       0x1946 (size before relaxing)
- .debug_str     0x0000000000004eca       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_str     0x0000000000003b74      0x85f ./Header_C_files/Test/test.o
+                                       0x1c28 (size before relaxing)
+ .debug_str     0x00000000000043d3      0x3f2 ./Header_C_files/Seq_ops/main.o
+                                       0x1ace (size before relaxing)
+ .debug_str     0x00000000000047c5       0xe6 ./Header_C_files/I2C/i2c.o
+                                       0x128e (size before relaxing)
+ .debug_str     0x00000000000048ab       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
                                          0xc3 (size before relaxing)
- .debug_str     0x0000000000004ef0      0x195 ./CMSIS/system_m2sxxx.o
+ .debug_str     0x00000000000048d1      0x195 ./CMSIS/system_m2sxxx.o
                                         0xb29 (size before relaxing)
 
 .debug_loc
