@@ -175,19 +175,13 @@ void SwitchTo_Mode_Pheonix(){
 	PWR_Switch((GPIO_DSW0_DAXSS_Mask|GPIO_DSW1_CIP_Mask|GPIO_DSW2_ADCS_Mask|GPIO_DSW3_Sband_Mask|GPIO_DSW4_Bat_heat_Mask),0);
 }
 
-
+//TODO: Send Beacon Packet of IS0 over MSS UART
 void Beacon_Packet_UART_log(){
 
 	uint16_t EPS_array_1[8];
 	uint16_t EPS_array_2[8];
 	uint16_t EPS_array_3[8];
 	uint16_t EPS_array_4[8];
-
-	uint8_t AS7265X_array_1[16];
-	uint8_t AS7265X_array_2[16];
-	uint8_t AS7265X_array_3[4];
-
-
 	//Updating the Beacon Packet Structure
 	Get_Beacon_Packet();
 
@@ -214,17 +208,6 @@ void Beacon_Packet_UART_log(){
 		EPS_array_4[i] = Beacon_pack_IS0.EPS[i+24];
 	}
 
-
-	for(int i = 0; i < 16; ++i){
-		AS7265X_array_1[i] = Beacon_pack_IS0.Sensor_Board_AS7265X[i];
-	}
-	for(int i = 0; i < 16; ++i){
-		AS7265X_array_2[i] = Beacon_pack_IS0.Sensor_Board_AS7265X[i+16];
-	}
-	for(int i = 0; i < 4; ++i){
-		AS7265X_array_3[i] = Beacon_pack_IS0.Sensor_Board_AS7265X[i+32];
-	}
-
 	//Printing the data ussing the MSS UART which can print a maximum of 16 bytes at a time
 	//Printing the CCSDS Header
 	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)CCSDS_header_array_1, sizeof(CCSDS_header_array_1) );
@@ -240,17 +223,13 @@ void Beacon_Packet_UART_log(){
 	//Printing the Sensor_Board_VMEL6075 Data
 	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)Beacon_pack_IS0.Sensor_Board_VMEL6075, sizeof(Beacon_pack_IS0.Sensor_Board_VMEL6075) );
 
-	//Printing the Sensor_Board_AS7265X Data
-	MSS_UART_polled_tx( &g_mss_uart0, AS7265X_array_1, sizeof(AS7265X_array_1));
-
-	//Printing the Sensor_Board_AS7265X Data
-	MSS_UART_polled_tx( &g_mss_uart0, AS7265X_array_2, sizeof(AS7265X_array_2));
-
-	//Printing the Sensor_Board_AS7265X Data
-	MSS_UART_polled_tx( &g_mss_uart0, AS7265X_array_3, sizeof(AS7265X_array_3));
+	//TODO: Printing the Sensor_Board_AS7265X Data
+	//uint32_t CCSDS_header_array_4[1] = {Beacon_pack_IS0.beac_head.TS1};
+	//MSS_UART_polled_tx( &g_mss_uart0, CCSDS_header_array_4, sizeof(CCSDS_header_array_4) );
 
 	//Printing the CCSDS Fletcher Code
 	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)CCSDS_fletcher_array, sizeof(CCSDS_fletcher_array) );
+
 
 }
 

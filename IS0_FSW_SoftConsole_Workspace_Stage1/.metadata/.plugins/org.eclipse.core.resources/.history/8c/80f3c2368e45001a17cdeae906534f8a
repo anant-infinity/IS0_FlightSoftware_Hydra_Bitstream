@@ -252,6 +252,7 @@ void Beacon_Packet_UART_log(){
 	//Printing the CCSDS Fletcher Code
 	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)CCSDS_fletcher_array, sizeof(CCSDS_fletcher_array) );
 
+
 }
 
 

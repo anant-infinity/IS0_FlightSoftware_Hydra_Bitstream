@@ -267,7 +267,7 @@ uint8_t read_AS7265_reg(uint8_t virtual_reg_address){
 			Beacon_pack_IS0.Sensor_Board_AS7265X[i+12] = read_AS7265_reg(pointsAS72651[i].regAddr);
 		}
 		//Set the DEV_SEL register to sensor 1
-		//Add the write line here
+		// Add the write line here
 		for(int i = 0; i < 12; ++i){
 			Beacon_pack_IS0.Sensor_Board_AS7265X[i+24] = read_AS7265_reg(pointsAS72651[i].regAddr);
 		}
