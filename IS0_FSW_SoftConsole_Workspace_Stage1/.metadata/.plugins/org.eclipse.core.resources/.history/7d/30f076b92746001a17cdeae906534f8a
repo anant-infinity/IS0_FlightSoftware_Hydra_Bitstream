@@ -9,7 +9,7 @@
 #include "SPI_Flash/spi_flash.h"
 #include "Seq_ops/main_seq.h"
 #include "string.h"
-#include "GPIOs/gpios.h"
+#include "gpios.h"
 
 #include "../../CMSIS/mss_assert.h"
 

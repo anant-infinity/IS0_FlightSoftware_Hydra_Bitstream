@@ -1,3 +1,5 @@
+
+
 #ifndef _SD_H
 	#define _SD_H
 
@@ -7,28 +9,6 @@
 #else
 #define GLOBAL  extern
 #endif
-
-
-#define SD_CARD_SPI_BASE_CLOCK 60000000
-
-enum SD_CLOCK_SPEEDS {
-	SD_CARD_MINIMUM_SPEED=512,
-	SD_CARD_DEFAULT_SPEED=256,
-	SD_CARD_1MHZ=60,
-	SD_CARD_2MHZ=30,
-	SD_CARD_3MHZ=20,
-	SD_CARD_5MHZ=12,
-	SD_CARD_6MHZ=10,
-	SD_CARD_7POINT5MHZ=8,
-};
-
-enum SD_CMD_CODES {
-	SD_CMD0,
-	SD_CMD7,
-	SD_CMD14,
-};
-
-
 
 #define SD_CARD_SINGLE_BLOCK_SIZE 512
 #define SD_TEST_DATA_SIZE		512
@@ -62,22 +42,6 @@ enum SD_CMD_CODES {
 */
 uint8_t SD_Init(mss_spi_slave_t slave);
 
-/** SD_Simul_Init()
- * All devices on the SPI bus mss_spi1 must be on at the same time, because when
- * powered off, the device will load the bus, meaning we can't communicate
- * with the device that is turned on at the time.
- *
- * Since both SD Cards are on at the same time, we need both to be in SPI mode,
- * because SD mode spits garbage unrequested to the bus
- *
- * SD_Simul_Init() must attempt to put both SD Cards in SPI mode at the same time,
- 	 or else one SD Card will spit garbage on the bus, inhibiting comms with the
- 	 other devices on the bus (SBAND and other SD)
-
-
- */
-uint8_t SD_Simul_Init();
-
 uint16_t SD_get_status(mss_spi_slave_t slave);
 
 void SD_clear_slave_select(mss_spi_slave_t slave);
@@ -86,7 +50,6 @@ void SD_toggle_slave_select(mss_spi_slave_t slave);
 void SD_enable(mss_spi_slave_t slave);
 void SD_disable(mss_spi_slave_t slave);
 uint8_t SD_Select_Init();
-uint8_t SD_Send_Command(mss_spi_slave_t slave, uint8_t cmd_code);
 
 /*---------------------------------------------------------------------------*/
 /* The SD_Write_Sector() writes to a sector of the SD card. It first sends 
@@ -186,26 +149,6 @@ uint8_t SD_Set_Highest_Clock(mss_spi_slave_t slave);
 uint8_t SD_Select_Helper(uint8_t curr_slave);
 
 uint32_t SD_Card_Wipe(mss_spi_slave_t slave);
-
-// This function is necessary in order to update the clock divider.
-//Normally, the MSS_set_slave_select() updates the clock div before setting the pin low
-// But IS-1 got rid of that function in favor of manually controlling SS pin.
-// That means that we never set the clock div to a new value unless we manually
-// do it.
-// This implementation is a call to the normal configure_master_mode function
-// while adding in the code from set_slave_select that dealt with the clk_div.
-void Custom_SPI_configure_master_mode
-(
-    mss_spi_instance_t *    this_spi,
-    mss_spi_slave_t         slave,
-    mss_spi_protocol_mode_t protocol_mode,
-    uint32_t                clk_div,
-    uint8_t                 frame_bit_length
-);
-
-
-//new SD_Card_Init function to replace Select_Init
-void SD_Cards_Init(void);
 void SD_FDRI(void);
 
 //GLOBAL uint8_t SD_Clk_Div;

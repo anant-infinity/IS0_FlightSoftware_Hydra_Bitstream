@@ -45,30 +45,22 @@ void main_seq(){
 	//Call the Init() function to initialize all the peripherals
 	Init();
 
-	Globals.SCIC_SCID_Timer.Start = RTC_Get_Value32();
-	Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value32();
-	Globals.Sat_Curr_Mode = SC_SCID_MODE;
-	Globals.Forced_Mode_Flag = 0x00;
+	//Calling the Get Beacon Packet function to collect the data from the EPS and Sensor Boards
+	//and storing in Beacon packet structure
+	Get_Beacon_Packet();
 
-	while(1){
+	//For ground debugging log the beacon packet over UART
+	Beacon_Packet_UART_log();
 
-		//Calling the Get Beacon Packet function to collect the data from the EPS and Sensor Boards
-		//and storing in Beacon packet structure
-		Get_Beacon_Packet();
+	//Storing the beacon packet in the SD Card
+	//TODO: This function is taken as is from IS1 - need to check the working of the same
+	//Store_Beacon_Data();
 
-		//For ground debugging log the beacon packet over UART
-		Beacon_Packet_UART_log();
+	//TODO: Add code for any interaction with the PSLV UART verilog peripheral if needed.
 
-		//Storing the beacon packet in the SD Card
-		//TODO: This function is taken as is from IS1 - need to check the working of the same
-		//Store_Beacon_Data();
+	//Call the Decide mode function to Apply the forced simulated modes for IS0
+	//Decide_Mode();
 
-		//TODO: Add code for any interaction with the PSLV UART verilog peripheral if needed.
-
-		//Call the Decide mode function to Apply the forced simulated modes for IS0
-		//Decide_Mode();
-
-	}
 }
 
 void Init(){
@@ -108,11 +100,6 @@ void Get_Beacon_Packet(){
 
 	//Get triad sensor data
 	Get_AS7265x_Data();
-
-	//Making the beacon packet into CCSDS Format
-    CCSDS_Pack( BEACON_PACKET_APID, 0xC0, Globals.Beacon_Packet_Seq_Counter, (struct CCSDS_Header *)&(Beacon_pack_IS0.beac_head), sizeof(Beacon_pack_IS0));
-    CCSDS_Fletcher_16((uint8_t *)(&Beacon_pack_IS0), sizeof(Beacon_pack_IS0) - 2);
-    Globals.Beacon_Packet_Seq_Counter++;
 
     }
 
@@ -155,67 +142,14 @@ void Decide_Mode(){
 	//Sequence of Forcing the modes for IS0.
 	//The functions to switch mode are written in a way that switching from any mode to any other mode is possible
 
-	//For IS0 mode decision is on the basis of time, following is the description:
-	//1. Start in Science D
-	//2. Switch between Science D and Science C every 45 minutes
-	//3. On 5th day, force into safe mode for 5 orbits - repeat this after 10 days, i.e 5th, 15th, 25th and so on
-	//4. On 10th day, force into phoenix mode for 5 orbits - repeat this after 10 days, i.e 10th, 20th, 30th and so on
+	//Start in Science D
+	//Switch to Science C in 45 minutes and repeat
 
-	//Code to switch between Science C and Science D
-	//Psuedo-Code
+	//Every 5 days, force into safe mode for 5 orbits
 
-	//Save initial time - SCI_C and SCI_D mode switch timer
-	//If (curr_time - init_time > 45minutes)
-	//	If (Curr_mode == Science D)
-	//		switch to SCI_D
-	//		update init_time
-	//	else
-	//		switch to SCi_C
-	//		update init_time
+	//Every 10 days, force into phoenix mode for 5 orbits
 
-
-	Globals.SCIC_SCID_Timer.Time = RTC_Get_Value32();
-	if((Globals.SCIC_SCID_Timer.Time - Globals.SCIC_SCID_Timer.Start)>0x0A8C){//45 minutes in hexadecimal is 0x0A8C
-		if(Globals.Sat_Curr_Mode == SC_SCID_MODE){
-			SwitchTo_Mode_Science_C();
-			Globals.SCIC_SCID_Timer.Start = RTC_Get_Value32();
-		}
-		else{
-			SwitchTo_Mode_Science_D();
-			Globals.SCIC_SCID_Timer.Start = RTC_Get_Value32();
-		}
-	}
-
-	//Code to switch to Safe or Phoenix
-	//Psuedo-Code
-
-	//Save initial time - Pheonix and Safe mode switch timer
-	//If (curr_time - init_time > 5 days)
-	//	If (Flag == 0)
-	//		switch to Safe
-	//		update init_time
-	//		flag = 1
-	//	else
-	//		switch to SCI_C
-	//		update init_time
-	//		Flag = 0;
-
-	Globals.Safe_Pheonix_Timer.Time = RTC_Get_Value32();
-	if((Globals.Safe_Pheonix_Timer.Time - Globals.Safe_Pheonix_Timer.Start)>0x069780){//5 days in hexadecimal is 0x069780
-
-		if(Globals.Forced_Mode_Flag == 0x00){
-			SwitchTo_Mode_Safe();
-			Globals.Forced_Mode_Flag = 0x01;
-			Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value32();
-		}
-		else{
-			SwitchTo_Mode_Pheonix();
-			Globals.Forced_Mode_Flag = 0x00;
-			Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value32();
-		}
-	}
 }
-
 
 
 void SwitchTo_Mode_Science_D(){

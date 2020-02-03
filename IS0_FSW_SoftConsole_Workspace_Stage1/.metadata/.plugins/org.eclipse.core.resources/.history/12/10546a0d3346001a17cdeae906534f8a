@@ -47,8 +47,8 @@ void main_seq(){
 
 	Globals.SCIC_SCID_Timer.Start = RTC_Get_Value32();
 	Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value32();
+
 	Globals.Sat_Curr_Mode = SC_SCID_MODE;
-	Globals.Forced_Mode_Flag = 0x00;
 
 	while(1){
 
@@ -199,21 +199,21 @@ void Decide_Mode(){
 	//		switch to SCI_C
 	//		update init_time
 	//		Flag = 0;
-
+	uint8_t Safe_Pheonix_Flag = 0x00;
 	Globals.Safe_Pheonix_Timer.Time = RTC_Get_Value32();
 	if((Globals.Safe_Pheonix_Timer.Time - Globals.Safe_Pheonix_Timer.Start)>0x069780){//5 days in hexadecimal is 0x069780
 
-		if(Globals.Forced_Mode_Flag == 0x00){
+		if(Globals.Sat_Curr_Mode == SC_SCID_MODE){
 			SwitchTo_Mode_Safe();
-			Globals.Forced_Mode_Flag = 0x01;
 			Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value32();
 		}
 		else{
 			SwitchTo_Mode_Pheonix();
-			Globals.Forced_Mode_Flag = 0x00;
 			Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value32();
 		}
 	}
+
+
 }
 
 

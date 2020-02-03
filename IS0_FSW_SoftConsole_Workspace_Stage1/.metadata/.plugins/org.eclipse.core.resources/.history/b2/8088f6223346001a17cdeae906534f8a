@@ -47,8 +47,8 @@ void main_seq(){
 
 	Globals.SCIC_SCID_Timer.Start = RTC_Get_Value32();
 	Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value32();
+
 	Globals.Sat_Curr_Mode = SC_SCID_MODE;
-	Globals.Forced_Mode_Flag = 0x00;
 
 	while(1){
 
@@ -214,6 +214,8 @@ void Decide_Mode(){
 			Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value32();
 		}
 	}
+
+
 }
 
 

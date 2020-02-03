@@ -68,8 +68,7 @@
 /* Defining the modes of operation of the spacecraft */
 #define SC_PHOENIX_MODE     0x00
 #define SC_SAFE_MODE        0x01
-//Removed charging mode for IS0
-//#define SC_CHARGING_MODE    0x02
+#define SC_CHARGING_MODE    0x02
 #define SC_SCIC_MODE        0x03
 #define SC_SCID_MODE        0x04
 /*************************************************************************/
@@ -340,6 +339,19 @@ GLOBAL uint8_t Transmit_MSG[2][512];   // Two global array which act like buffer
 										// or the SBand has to be put into this buffer in appropriate manner. The function Manage_Data_Transmission() in main.c takes care of it.
 
 
+//Transmit_Buff_Manage Current_Transmit;
+//Transmit_Buff_Manage Next_Transmit;
+
+//GLOBAL Module_Sync_Small_t Transmit_Helper;
+//GLOBAL uint8_t Transmit_Completed_SBand;
+//GLOBAL uint16_t Next_Transmit_Length;
+//GLOBAL uint16_t Next_Total_Transmit_Length;
+//GLOBAL uint16_t Current_Transmit_Length;
+//GLOBAL uint16_t Total_Transmit_Length;
+//GLOBAL uint8_t Current_Transmit_Buffer_Index;
+//GLOBAL uint8_t Next_Transmit_Buffer_Index;
+//GLOBAL uint16_t Curr_Transmit_Offset;
+//GLOBAL uint16_t Next_Transmit_Offset;
 
 
 /********************************* Global Variable Ends ***********************************************/
@@ -784,9 +796,8 @@ typedef struct 	// a small struct for the managing the less complex state machin
 
 
 GLOBAL struct Global_Variables { 	// Struct containing all the global variables
-   uint8_t                     	Forced_Mode_Flag;
-   Timer32_t                   	SCIC_SCID_Timer;
-   Timer32_t					Safe_Pheonix_Timer;
+   uint8_t                     	CMD_Forced_Mode;
+   Timer32_t                   	Force_Mode_Timer;
    Timer32_t                   	Force_Mode_Update_Rate;
    Timer16_t                   	DAXSS_Sci_Packet_Timer;
    uint8_t                     	I2C_Error_Flag;

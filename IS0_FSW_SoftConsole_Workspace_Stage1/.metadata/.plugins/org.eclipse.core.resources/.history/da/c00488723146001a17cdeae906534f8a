@@ -390,6 +390,7 @@ void Get_Filled_Array(Param_Table_t * t){
 
 
 	t->Param_CMD_Forced_Mode = Globals.CMD_Forced_Mode;
+    t->Param_Force_Mode_Timer_Time = Globals.Force_Mode_Timer.Time;
     t->Param_Force_Mode_Update_Rate_Time = Globals.Force_Mode_Update_Rate.Time;
 
 

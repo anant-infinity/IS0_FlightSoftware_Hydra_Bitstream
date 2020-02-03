@@ -214,6 +214,8 @@ void Decide_Mode(){
 			Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value32();
 		}
 	}
+
+
 }
 
 

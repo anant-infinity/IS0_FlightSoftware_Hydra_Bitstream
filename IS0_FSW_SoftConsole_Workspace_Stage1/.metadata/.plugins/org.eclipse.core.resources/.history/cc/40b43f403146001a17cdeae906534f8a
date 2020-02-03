@@ -784,9 +784,8 @@ typedef struct 	// a small struct for the managing the less complex state machin
 
 
 GLOBAL struct Global_Variables { 	// Struct containing all the global variables
-   uint8_t                     	Forced_Mode_Flag;
-   Timer32_t                   	SCIC_SCID_Timer;
-   Timer32_t					Safe_Pheonix_Timer;
+   uint8_t                     	CMD_Forced_Mode;
+   Timer32_t                   	Force_Mode_Timer;
    Timer32_t                   	Force_Mode_Update_Rate;
    Timer16_t                   	DAXSS_Sci_Packet_Timer;
    uint8_t                     	I2C_Error_Flag;
