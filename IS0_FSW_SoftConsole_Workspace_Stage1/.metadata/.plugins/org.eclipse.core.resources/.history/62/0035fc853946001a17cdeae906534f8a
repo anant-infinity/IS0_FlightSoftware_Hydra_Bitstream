@@ -51,8 +51,7 @@
 #define SPI_ESCAPE_LIMIT		0xff00 		// The counter value to escape the loop in the SPI transactions
 #define CCSDS_MAX_DATA_SIZE 	243			// the maximum size of the data that can be put into one CCSDS packet with AX.25 around it. After adding the CCSDS header and the fletcher code
 											// the size of the packet becomes 256 bytes.
-#define SBAND_SYNC_WORD 				(uint16_t) 0x6948 		// The Sync word for the SBAND (it has to be updated later)
-#define SIZEOF_SYNC_WORD				sizeof(SBAND_SYNC_WORD) // The size of the SBand sync word
+
 /*************************************************************************/
 
 /* Defining the APIDs of different packet */
@@ -233,6 +232,14 @@ void SC_Restart();
 
 
 
+void Utils_SPI_Custom_Setup(mss_spi_instance_t * this_spi, uint16_t frame_count);
+uint16_t Utils_SPI_Transmit_Block(mss_spi_instance_t * this_spi, uint8_t * cmd_buffer, uint16_t cmd_byte_size);
+uint16_t Utils_SPI_Receive_Block(mss_spi_instance_t * this_spi, uint8_t * rec_buffer, uint16_t rec_byte_size);
+
+#pragma pack(1)
+
+
+
 /*---------------------------------------------------------------------------*/
 /* The Utils_SPI_Custom_Setup() sets up the SPI for the transaction of data.
  *
@@ -269,8 +276,9 @@ uint16_t Utils_SPI_Receive_Block(mss_spi_instance_t * this_spi, uint8_t * rec_bu
 
 #pragma pack(1)	// this pragma makes sure that all the structs are tightly packed
 
-// The CCSDS header structure
-struct CCSDS_Header{
+
+
+struct CCSDS_Header{	// The CCSDS header struct
         uint8_t Version_ID;
         uint8_t APID;
         uint16_t Seq_no;
@@ -279,7 +287,6 @@ struct CCSDS_Header{
         uint32_t TS1;   /* 4 byte of MSB */
 };
 
-// The Enum defined EPS data of the beacon packet
 typedef enum BeaconEpsPacketEnum {
     EPS_Bat_Volt = 0,
     EPS_Bat_Curr,
@@ -318,8 +325,6 @@ typedef enum BeaconEpsPacketEnum {
     EPS_DAXSS_Curr,
 } BeaconEpsPacket;
 
-// The Enum defined Sensor Board VMEL6075 data of the beacon packet
-
 typedef enum BeaconVMEL6075PacketEnum {
 	VMEL6075_UVA_DATA = 0,
 	VMEL6075_UVB_DATA,
@@ -328,7 +333,7 @@ typedef enum BeaconVMEL6075PacketEnum {
 
 }BeaconVMEL6075Packet;
 
-// The beacon packet structure
+
 struct Beacon_packet_IS0{
 	//To Add CCSDS Header
     struct CCSDS_Header beac_head;	// The CCSDS header
@@ -372,10 +377,24 @@ typedef struct Parameter_Table 	// The stuct definition for all the variables wh
     /* Counters */
     uint32_t Param_Boot_Up_Counter;
 
+    /* Flags */
+    uint8_t Param_UHF_Malfunction_Flags;
+    uint8_t Param_ADCS_Malfunction_Flags;
+
     /* Limits */
     uint8_t Param_Flash_SPI_Tries_Limit;
     uint16_t Param_Flash_SPI_Wait_Limit;
     uint8_t Param_Non_Response_Count_Limit;
+
+    /* Thresholds */
+    uint16_t Param_Phoe_Safe_Threshold;
+    uint16_t Param_Safe_Phoe_Threshold;
+    uint16_t Param_Safe_Char_Threshold;
+    uint16_t Param_Char_Safe_Threshold;
+    uint16_t Param_Char_SciC_Threshold;
+    uint16_t Param_SciC_Char_Threshold;
+    uint16_t Param_Char_SciD_Threshold;
+    uint16_t Param_SciD_Char_Threshold;
 
 
     /* SD card data */
@@ -397,22 +416,24 @@ typedef struct Parameter_Table 	// The stuct definition for all the variables wh
 
 } Param_Table_t;
 
-// Definition of a general packet containing the maximum data size array
-struct CCSDS_Max_Data_size_Packet
+
+struct CCSDS_Max_Data_size_Packet	// Definition of a general packet containing the maximum data size array
 {
     struct CCSDS_Header ccsds_head;	// the ccsds header 
+
     uint8_t data[CCSDS_MAX_DATA_SIZE];	// the array with maximum data size allowed
+
     uint16_t Fletcher_code;
 };
 
-// typedef the CCSDS Max size packet as the Paramter table packet1
-typedef struct CCSDS_Max_Data_size_Packet Param_table_packet1_t;
+typedef struct CCSDS_Max_Data_size_Packet Param_table_packet1_t;	// typedef the CCSDS Max size packet as the Paramter table packet1
 
-// the struct definition of the second parameter table packet
-typedef struct Parameter_Table_Packet{
+typedef struct Parameter_Table_Packet{ // the struct definition of the second parameter table packet
 
     struct CCSDS_Header param_head;	// the CCSDS header
+
     uint8_t data[sizeof(Param_Table_t)];
+
     uint16_t Fletcher_code;
 
 } Param_table_packet2_t;
@@ -445,7 +466,6 @@ typedef struct Timer8{
 	uint8_t Start;
 	uint8_t Time;
 } Timer8_t;
-
 
 typedef struct 	// a small struct for the managing the less complex state machines.
 {

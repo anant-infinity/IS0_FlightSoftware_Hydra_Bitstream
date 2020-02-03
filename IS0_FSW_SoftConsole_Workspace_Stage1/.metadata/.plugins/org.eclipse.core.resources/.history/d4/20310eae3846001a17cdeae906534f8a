@@ -51,8 +51,7 @@
 #define SPI_ESCAPE_LIMIT		0xff00 		// The counter value to escape the loop in the SPI transactions
 #define CCSDS_MAX_DATA_SIZE 	243			// the maximum size of the data that can be put into one CCSDS packet with AX.25 around it. After adding the CCSDS header and the fletcher code
 											// the size of the packet becomes 256 bytes.
-#define SBAND_SYNC_WORD 				(uint16_t) 0x6948 		// The Sync word for the SBAND (it has to be updated later)
-#define SIZEOF_SYNC_WORD				sizeof(SBAND_SYNC_WORD) // The size of the SBand sync word
+
 /*************************************************************************/
 
 /* Defining the APIDs of different packet */
@@ -139,10 +138,16 @@ void main_seq();
 */
 void Init();
 
+void Get_Beacon_Packet();
+
+void Store_Beacon_Data();
+
+
 /*---------------------------------------------------------------------------*/
-/* The Get_Beacon_Packet() function forms the beacon packet structure by collecting
- * data from the sensor board and EPS. It also forms the CCSDS version of the packet
- * by added the CCSDS Header and fletcher code
+/* The Decide_Mode() decides the mode of the spacecraft for the next cycle. This
+ * is called either at the beginning or at the end of the sequence of operation.
+ * This takes the account of the battery SOC, eclipse/sun, mode avoidance and
+ * force mode to decide the next mode of the spacecraft.
  *
  * @param
  * 	No parameter
@@ -150,13 +155,63 @@ void Init();
  * @return: void
  *
 */
-void Get_Beacon_Packet();
+void Decide_Mode();
+
+
+void SwitchTo_Mode_Science_C();
+void SwitchTo_Mode_Science_D();
+void SwitchTo_Mode_Safe();
+void SwitchTo_Mode_Pheonix();
+
+void Beacon_Packet_UART_log();
+
+void RTC_Sync_Timer_Hanlder();
+
+void Watchdog_Timer_Handler();
+
+void Watchdog_Pet(void);
+
+void Beacon_Transmit_Timer_Handler();
+
+void SC_Restart();
+
+void Handle_Power_Supply();
+
+void Manage_Data_Transmission();
+
+void Handle_Transmit();
+
+void Utils_SPI_Custom_Setup(mss_spi_instance_t * this_spi, uint16_t frame_count);
+uint16_t Utils_SPI_Transmit_Block(mss_spi_instance_t * this_spi, uint8_t * cmd_buffer, uint16_t cmd_byte_size);
+uint16_t Utils_SPI_Receive_Block(mss_spi_instance_t * this_spi, uint8_t * rec_buffer, uint16_t rec_byte_size);
+
+#pragma pack(1)
+
+
+
+
+
+
+/*------------------------Task function's definitions------------------------*/
 
 /*---------------------------------------------------------------------------*/
-/* The Store_Beacon_Data() stores the beacon packet in appropriate SD card
+/* The Last_Command_Timer_Handler() manages the timer for the last command 
+ * received. Once the timer expires it does the spacecraft restart.
+ *
+ * @param
+ * 	No parameter
+ *
+ * @return: void
+ *
+*/
+
+void Beacon_Timer_Handler();
+
+/*---------------------------------------------------------------------------*/
+/* The Store_Beacon_Data() stores the beacon packet in appropriate SD card 
  * and put the request to save the parameter table. If the write operation fails
  * it sets the Current SD card to 0xff indicating the failure of the SD card.
- *
+ * 
  * This function is under development.
  *
  * @param
@@ -167,12 +222,10 @@ void Get_Beacon_Packet();
 */
 void Store_Beacon_Data();
 
-
 /*---------------------------------------------------------------------------*/
-/* The Decide_Mode() decides the mode of the spacecraft. This
- * is called either at the beginning or at the end of the sequence of operation.
- * It decides the mode on the basis of two timer values, one for SCIC and SCID
- * and the other for Safe and Pheonix
+/* The Store_Beacon_Data() manages the Beacon transmit timer. Once this timer
+ * expires the request to transmit the beacon packet is put and the timer is 
+ * restarted.
  *
  * @param
  * 	No parameter
@@ -180,26 +233,9 @@ void Store_Beacon_Data();
  * @return: void
  *
 */
-void Decide_Mode();
+void Beacon_Transmit_Timer_Handler();
 
-void SwitchTo_Mode_Science_C();
-void SwitchTo_Mode_Science_D();
-void SwitchTo_Mode_Safe();
-void SwitchTo_Mode_Pheonix();
-
-/*---------------------------------------------------------------------------*/
-/* The Beacon_Packet_UART_log() is used for ground testing only. It uss MSS_UART_0
- * To transimit the beacon packet formed to a ground PC.
- *
- * @param
- * 	No parameter
- *
- * @return: void
- *
-*/
-void Beacon_Packet_UART_log();
-
-
+void RTC_Sync_Timer_Hanlder();
 
 /*---------------------------------------------------------------------------*/
 /* The Watchdog_Timer_Handler() manages the Watchdog timer. Once it expires then
@@ -212,9 +248,6 @@ void Beacon_Packet_UART_log();
  *
 */
 void Watchdog_Timer_Handler();
-
-void Watchdog_Pet(void);
-
 
 /*---------------------------------------------------------------------------*/
 /* The SC_Restart() does the spacecraft restart. It has to give 8 positive edges
@@ -232,6 +265,58 @@ void Watchdog_Pet(void);
 void SC_Restart();
 
 
+
+
+
+/*---------------------------------------------------------------------------*/
+/* The Handle_Power_Supply() manages the power supply to different subsystem
+ * depending on the mode of the spacecraft. This is called after the Decide_mode()
+ * function.
+ *
+ * @param
+ * 	No parameter
+ *
+ * @return: void
+ *
+*/
+void Handle_Power_Supply();
+
+/*---------------------------------------------------------------------------*/
+/* The Manage_Data_Transmission() manages the transmission of data over different
+ * band. Depending on the request the data is transmitted and the request is cleared.
+ * At present, the priority order is as follows:
+ * 1) SD card data
+ * 2) Global packet transmission
+ * 3) Parameter packet transmission
+ * 4) Subsystem response packet transmission
+ * 5) Beacon packet transmission
+ *
+ * As per above order, if there is a request for SD card data transmission (any data
+ * from sd data, science, beacon, log etc..), also there is a request for Parameter
+ * packet transmission, and also beacon packet transmission then only after completing
+ * the SD card data transmission the Parameter packet transmission occurs and only after
+ * Parameter packet transmission is over then the beacon packet transmission occurs.
+ *
+ * @param
+ * 	No parameter
+ *
+ * @return: void
+ *
+*/
+void Manage_Data_Transmission();
+
+/*---------------------------------------------------------------------------*/
+/* The Handle_Transmit() is responsible for transferring data to the 
+ * appropriate module of the flight software (UHF or SBand) and starts the module
+ * to transmit data.
+ *
+ * @param
+ * 	No parameter
+ *
+ * @return: void
+ *
+*/
+void Handle_Transmit();
 
 /*---------------------------------------------------------------------------*/
 /* The Utils_SPI_Custom_Setup() sets up the SPI for the transaction of data.
@@ -269,8 +354,9 @@ uint16_t Utils_SPI_Receive_Block(mss_spi_instance_t * this_spi, uint8_t * rec_bu
 
 #pragma pack(1)	// this pragma makes sure that all the structs are tightly packed
 
-// The CCSDS header structure
-struct CCSDS_Header{
+
+
+struct CCSDS_Header{	// The CCSDS header struct
         uint8_t Version_ID;
         uint8_t APID;
         uint16_t Seq_no;
@@ -279,7 +365,6 @@ struct CCSDS_Header{
         uint32_t TS1;   /* 4 byte of MSB */
 };
 
-// The Enum defined EPS data of the beacon packet
 typedef enum BeaconEpsPacketEnum {
     EPS_Bat_Volt = 0,
     EPS_Bat_Curr,
@@ -318,8 +403,6 @@ typedef enum BeaconEpsPacketEnum {
     EPS_DAXSS_Curr,
 } BeaconEpsPacket;
 
-// The Enum defined Sensor Board VMEL6075 data of the beacon packet
-
 typedef enum BeaconVMEL6075PacketEnum {
 	VMEL6075_UVA_DATA = 0,
 	VMEL6075_UVB_DATA,
@@ -328,7 +411,7 @@ typedef enum BeaconVMEL6075PacketEnum {
 
 }BeaconVMEL6075Packet;
 
-// The beacon packet structure
+
 struct Beacon_packet_IS0{
 	//To Add CCSDS Header
     struct CCSDS_Header beac_head;	// The CCSDS header
@@ -372,10 +455,24 @@ typedef struct Parameter_Table 	// The stuct definition for all the variables wh
     /* Counters */
     uint32_t Param_Boot_Up_Counter;
 
+    /* Flags */
+    uint8_t Param_UHF_Malfunction_Flags;
+    uint8_t Param_ADCS_Malfunction_Flags;
+
     /* Limits */
     uint8_t Param_Flash_SPI_Tries_Limit;
     uint16_t Param_Flash_SPI_Wait_Limit;
     uint8_t Param_Non_Response_Count_Limit;
+
+    /* Thresholds */
+    uint16_t Param_Phoe_Safe_Threshold;
+    uint16_t Param_Safe_Phoe_Threshold;
+    uint16_t Param_Safe_Char_Threshold;
+    uint16_t Param_Char_Safe_Threshold;
+    uint16_t Param_Char_SciC_Threshold;
+    uint16_t Param_SciC_Char_Threshold;
+    uint16_t Param_Char_SciD_Threshold;
+    uint16_t Param_SciD_Char_Threshold;
 
 
     /* SD card data */
@@ -397,22 +494,24 @@ typedef struct Parameter_Table 	// The stuct definition for all the variables wh
 
 } Param_Table_t;
 
-// Definition of a general packet containing the maximum data size array
-struct CCSDS_Max_Data_size_Packet
+
+struct CCSDS_Max_Data_size_Packet	// Definition of a general packet containing the maximum data size array
 {
     struct CCSDS_Header ccsds_head;	// the ccsds header 
+
     uint8_t data[CCSDS_MAX_DATA_SIZE];	// the array with maximum data size allowed
+
     uint16_t Fletcher_code;
 };
 
-// typedef the CCSDS Max size packet as the Paramter table packet1
-typedef struct CCSDS_Max_Data_size_Packet Param_table_packet1_t;
+typedef struct CCSDS_Max_Data_size_Packet Param_table_packet1_t;	// typedef the CCSDS Max size packet as the Paramter table packet1
 
-// the struct definition of the second parameter table packet
-typedef struct Parameter_Table_Packet{
+typedef struct Parameter_Table_Packet{ // the struct definition of the second parameter table packet
 
     struct CCSDS_Header param_head;	// the CCSDS header
+
     uint8_t data[sizeof(Param_Table_t)];
+
     uint16_t Fletcher_code;
 
 } Param_table_packet2_t;
@@ -445,7 +544,6 @@ typedef struct Timer8{
 	uint8_t Start;
 	uint8_t Time;
 } Timer8_t;
-
 
 typedef struct 	// a small struct for the managing the less complex state machines.
 {

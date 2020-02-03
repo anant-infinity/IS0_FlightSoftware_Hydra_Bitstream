@@ -27,6 +27,7 @@ int main(){
 	//	test_ISO_test_beacon_debug_UART();
 	//	test_IS0_Read_Sensor_Board_Data();
 
+
 }
 
 
@@ -35,13 +36,11 @@ void main_seq(){
 	//Call the Init() function to initialize all the peripherals and RTC
 	Init();
 
-	//Starting the two mode switching timers
+	//Initializing the Global Variables
 	Globals.SCIC_SCID_Timer.Start = RTC_Get_Value32();
 	Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value32();
-
-	//Initializing the current satellite mode to Science D
 	Globals.Sat_Curr_Mode = SC_SCID_MODE;
-
+	Globals.Forced_Mode_Flag = 0x00;
 
 	while(1){
 
@@ -66,19 +65,9 @@ void main_seq(){
 
 void Init(){
 
-	//Initializing Global Variables
-	Globals.Indication_Flags = 0;
-    Globals.Flash_SPI_Tries_Limit = 5;
-    Globals.Current_SD = MSS_SPI_SLAVE_1;
-    Globals.Non_Response_Count_Limit = 20;
-    Globals.Forced_Mode_Flag = 0x00;
-
-
 	//Initialize the RTC if required
 	int i =  RTC_Enable();
 
-	Load_Parameter_Table();
-	Globals.Indication_Flags |= SAVE_PARAMETER_MAP_FLAG;
 	//Increment the Boot Up Counter
 	Globals.Boot_Up_Counter++;
 
@@ -89,14 +78,12 @@ void Init(){
 	//Initialize Sensor Board I2C Channel
 	Initialize_Sensor_Board_I2C_Channel();
 
-	//Initialize the Flash Memory
-	Flash_Init();
 
 	//Initialize the SD Cards
 	//TODO: This fucntion is taken directly from IS1 - Test the working of this function
 	SD_Cards_Init();
 
-	//TODO: Initialize the PSLV UART IP if required
+	//Initialize the PSLV UART IP if required
 }
 
 
@@ -170,6 +157,18 @@ void Decide_Mode(){
 	//4. On 10th day, force into phoenix mode for 5 orbits - repeat this after 10 days, i.e 10th, 20th, 30th and so on
 
 	//Code to switch between Science C and Science D
+	//Psuedo-Code
+
+	//Save initial time - SCI_C and SCI_D mode switch timer
+	//If (curr_time - init_time > 45minutes)
+	//	If (Curr_mode == Science D)
+	//		switch to SCI_D
+	//		update init_time
+	//	else
+	//		switch to SCi_C
+	//		update init_time
+
+
 	Globals.SCIC_SCID_Timer.Time = RTC_Get_Value32();
 	if((Globals.SCIC_SCID_Timer.Time - Globals.SCIC_SCID_Timer.Start)>0x0A8C){//45 minutes in hexadecimal is 0x0A8C
 		if(Globals.Sat_Curr_Mode == SC_SCID_MODE){
@@ -183,6 +182,19 @@ void Decide_Mode(){
 	}
 
 	//Code to switch to Safe or Phoenix
+	//Psuedo-Code
+
+	//Save initial time - Pheonix and Safe mode switch timer
+	//If (curr_time - init_time > 5 days)
+	//	If (Flag == 0)
+	//		switch to Safe
+	//		update init_time
+	//		flag = 1
+	//	else
+	//		switch to SCI_C
+	//		update init_time
+	//		Flag = 0;
+
 	Globals.Safe_Pheonix_Timer.Time = RTC_Get_Value32();
 	if((Globals.Safe_Pheonix_Timer.Time - Globals.Safe_Pheonix_Timer.Start)>0x069780){//5 days in hexadecimal is 0x069780
 

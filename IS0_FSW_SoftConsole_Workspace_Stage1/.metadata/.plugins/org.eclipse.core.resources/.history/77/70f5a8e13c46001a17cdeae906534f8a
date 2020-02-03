@@ -259,6 +259,14 @@ void Update_Variables(Param_Table_t t){
 
 	Globals.Non_Response_Count_Limit = t.Param_Non_Response_Count_Limit;
 
+	Globals.Phoe_Safe_Threshold = t.Param_Phoe_Safe_Threshold;
+	Globals.Safe_Phoe_Threshold = t.Param_Safe_Phoe_Threshold;
+	Globals.Safe_Char_Threshold = t.Param_Safe_Char_Threshold;
+	Globals.Char_Safe_Threshold = t.Param_Char_Safe_Threshold;
+	Globals.Char_SciC_Threshold = t.Param_Char_SciC_Threshold;
+	Globals.SciC_Char_Threshold = t.Param_SciC_Char_Threshold;
+	Globals.Char_SciD_Threshold = t.Param_Char_SciD_Threshold;
+	Globals.SciD_Char_Threshold = t.Param_SciD_Char_Threshold;
 
 
 
@@ -293,11 +301,25 @@ void Load_Factory_Value(){
 
 
 
+	t.Param_UHF_Malfunction_Flags = 0;
+	t.Param_ADCS_Malfunction_Flags = 0;
+
+
 
 	t.Param_Flash_SPI_Tries_Limit = 240;
 	t.Param_Flash_SPI_Wait_Limit = 0x8000;
 
 	t.Param_Non_Response_Count_Limit = 20;
+
+	t.Param_Phoe_Safe_Threshold = 55;
+	t.Param_Safe_Phoe_Threshold = 45;
+	t.Param_Safe_Char_Threshold = 70;
+	t.Param_Char_Safe_Threshold = 75;
+	t.Param_Char_SciC_Threshold = 85;
+	t.Param_SciC_Char_Threshold = 80;
+	t.Param_Char_SciD_Threshold = 85;
+	t.Param_SciD_Char_Threshold = 80;
+
 
 
 	t.Param_Beacon_Sector_Start = 4;
@@ -344,6 +366,15 @@ void Get_Filled_Array(Param_Table_t * t){
 	t->Param_Flash_SPI_Wait_Limit = Globals.Flash_SPI_Wait_Limit;
 
 	t->Param_Non_Response_Count_Limit = Globals.Non_Response_Count_Limit;
+
+	t->Param_Phoe_Safe_Threshold = Globals.Phoe_Safe_Threshold;
+	t->Param_Safe_Phoe_Threshold = Globals.Safe_Phoe_Threshold;
+	t->Param_Safe_Char_Threshold = Globals.Safe_Char_Threshold;
+	t->Param_Char_Safe_Threshold = Globals.Char_Safe_Threshold;
+	t->Param_Char_SciC_Threshold = Globals.Char_SciC_Threshold;
+	t->Param_SciC_Char_Threshold = Globals.SciC_Char_Threshold;
+	t->Param_Char_SciD_Threshold = Globals.Char_SciD_Threshold;
+	t->Param_SciD_Char_Threshold = Globals.SciD_Char_Threshold;
 
 
 
