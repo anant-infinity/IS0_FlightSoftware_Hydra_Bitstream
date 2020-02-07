@@ -36,11 +36,15 @@ void main_seq(){
 	Init();
 
 	//Starting the two mode switching timers
-	Globals.SCIC_SCID_Timer.Start = RTC_Get_Value32();
-	Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value32();
+	Globals.SCIC_SCID_Timer.Start = RTC_Get_Value64();
+	Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value64();
+
+	//Starting the timer to get beacon data
+	Globals.Beac_Timer.Start = RTC_Get_Value64();
 
 	//Initializing the current satellite mode to Science D
 	Globals.Sat_Curr_Mode = SC_SCID_MODE;
+	SwitchTo_Mode_Science_D();
 
 
 	while(1){
@@ -50,11 +54,11 @@ void main_seq(){
 		Get_Beacon_Packet();
 
 		//For ground debugging log the beacon packet over UART - COMMENT for Flight
-		Beacon_Packet_UART_log();
+		//Beacon_Packet_UART_log();
 
 		//Storing the beacon packet in the SD Card
 		//TODO: This function is taken as is from IS1 - need to check the working of the same
-		Store_Beacon_Data();
+		//Store_Beacon_Data();
 
 		//TODO: Add code for any interaction with the PSLV UART verilog peripheral if needed.
 
@@ -72,6 +76,14 @@ void Init(){
     Globals.Current_SD = MSS_SPI_SLAVE_1;
     Globals.Non_Response_Count_Limit = 20;
     Globals.Forced_Mode_Flag = 0x00;
+
+    // 45 minutes is 0xA0EEBB00
+    // 10 seconds is 10 000 000 = 0x989680
+    //Globals.SCI_SCID_Thershold_Time = (uint64_t)0x989680;
+
+    // 5 days is 0x‭649534E000
+    // 15 seconds is 15 000 000 = 0xE4E1C0
+    //Globals.Safe_Pheonix_Threshold_Time = (uint64_t)0xE4E1C0;
 
 
 	//Initialize the RTC if required
@@ -94,36 +106,57 @@ void Init(){
 
 	//Initialize the SD Cards
 	//TODO: This fucntion is taken directly from IS1 - Test the working of this function
-	SD_Cards_Init();
+	//SD_Cards_Init();
 
 	//TODO: Initialize the PSLV UART IP if required
 }
 
 
-
+//This function collects the Beacon Data from CDH, EPS, Sensor Board every one second.
 void Get_Beacon_Packet(){
 
-	//TODO Get the important CDH Data
-	//Decide what are CDH global variables need to be kept in the beacon packet and add them
+	//Run the loop once per millisecond
+	if(Globals.Beac_Timer.Time - Globals.Beac_Timer.Start > (uint64_t)0x3E8){
+		//Collect the data every one second
+		if((Globals.Beac_Timer.Time - Globals.Beac_Timer.Start)>Globals.Beac_Thershold_Time){
 
-	//Get EPS Data
-	Get_EPS_Data();
+			//Get CDH Data
+			Get_CDH_Data();
 
-	//Get VMEL Sensor Board Data
-	Get_VEML6075_Data();
+			//Get EPS Data
+			Get_EPS_Data();
 
-	//Get triad sensor data
-	Get_AS7265x_Data();
+			//Get VMEL Sensor Board Data
+			Get_VEML6075_Data();
 
-	//Making the beacon packet into CCSDS Format
-    CCSDS_Pack( BEACON_PACKET_APID, 0xC0, Globals.Beacon_Packet_Seq_Counter, (struct CCSDS_Header *)&(Beacon_pack_IS0.beac_head), sizeof(Beacon_pack_IS0));
-    CCSDS_Fletcher_16((uint8_t *)(&Beacon_pack_IS0), sizeof(Beacon_pack_IS0) - 2);
+			//Get triad sensor data
+			Get_AS7265x_Data();
 
-    //Incrementing the Beacon Packet Sequence Counter
-    Globals.Beacon_Packet_Seq_Counter++;
+			//Making the beacon packet into CCSDS Format
+		    CCSDS_Pack( BEACON_PACKET_APID, 0xC0, Globals.Beacon_Packet_Seq_Counter, (struct CCSDS_Header *)&(Beacon_pack_IS0.beac_head), sizeof(Beacon_pack_IS0));
+		    CCSDS_Fletcher_16((uint8_t *)(&Beacon_pack_IS0), sizeof(Beacon_pack_IS0) - 2);
 
-    }
+		    //Incrementing the Beacon Packet Sequence Counter
+		    Globals.Beacon_Packet_Seq_Counter++;
+		}
+	}
+}
 
+void Get_CDH_Data(){
+
+	int index_8 = 0;
+	Beacon_pack_IS0.CDH_8[index_8++] = Globals.Sat_Curr_Mode;
+	Beacon_pack_IS0.CDH_8[index_8++] = Globals.Current_SD;
+	int index_32 = 0;
+	Globals.Time_in_msec = RTC_Get_ms();
+	Beacon_pack_IS0.CDH_32[index_32++] = Globals.Time_in_msec;
+	Beacon_pack_IS0.CDH_32[index_32++] = Globals.Beacon_Read_Start;
+	Beacon_pack_IS0.CDH_32[index_32++] = Globals.Beacon_Write_Start;
+	int index_64 = 0;
+	Beacon_pack_IS0.CDH_64[index_64++] = Globals.Safe_Pheonix_Threshold_Time;
+	Beacon_pack_IS0.CDH_64[index_64++] = Globals.SCI_SCID_Thershold_Time;
+
+}
 
 void Store_Beacon_Data(){
   if (Globals.Current_SD == 0xff) {
@@ -170,33 +203,52 @@ void Decide_Mode(){
 	//4. On 10th day, force into phoenix mode for 5 orbits - repeat this after 10 days, i.e 10th, 20th, 30th and so on
 
 	//Code to switch between Science C and Science D
-	Globals.SCIC_SCID_Timer.Time = RTC_Get_Value32();
-	if((Globals.SCIC_SCID_Timer.Time - Globals.SCIC_SCID_Timer.Start)>0x0A8C){//45 minutes in hexadecimal is 0x0A8C
-		if(Globals.Sat_Curr_Mode == SC_SCID_MODE){
-			SwitchTo_Mode_Science_C();
-			Globals.SCIC_SCID_Timer.Start = RTC_Get_Value32();
-		}
-		else{
-			SwitchTo_Mode_Science_D();
-			Globals.SCIC_SCID_Timer.Start = RTC_Get_Value32();
-		}
+	//Get the Current Time
+	Globals.SCIC_SCID_Timer.Time = RTC_Get_Value64();
+	//Make sure that the decide mode function is only run once per millisecond. 1 millisecond = 1000 microsec = 0x3E8
+	if(Globals.SCIC_SCID_Timer.Time - Globals.SCIC_SCID_Timer.Start > (uint64_t)0x3E8){
+
+		if((Globals.SCIC_SCID_Timer.Time - Globals.SCIC_SCID_Timer.Start)>Globals.SCI_SCID_Thershold_Time){//45 minutes in hexadecimal is 0x0A8C
+				if(Globals.Sat_Curr_Mode == SC_SCID_MODE || Globals.Sat_Curr_Mode == SC_SAFE_MODE || Globals.Sat_Curr_Mode == SC_PHEONIX_MODE ){
+					SwitchTo_Mode_Science_C();
+					Globals.Sat_Curr_Mode = SC_SCIC_MODE;
+					Beacon_Packet_UART_log();
+					Globals.SCIC_SCID_Timer.Start = RTC_Get_Value64();
+				}
+				else{
+					SwitchTo_Mode_Science_D();
+					Globals.Sat_Curr_Mode = SC_SCID_MODE;
+					Beacon_Packet_UART_log();
+					Globals.SCIC_SCID_Timer.Start = RTC_Get_Value64();
+				}
+			}
+
+			//Code to switch to Safe or Pheonix
+			//If there is an intersection of time between safe or pheonix mode and SCI_C or SCI_D mode
+			//Safe or Pheonix mode will dominate.
+
+			Globals.Safe_Pheonix_Timer.Time = RTC_Get_Value64();
+			if((Globals.Safe_Pheonix_Timer.Time - Globals.Safe_Pheonix_Timer.Start)>Globals.Safe_Pheonix_Threshold_Time){//5 days in hexadecimal is 0x069780
+
+				if(Globals.Forced_Mode_Flag == 0x00){
+					SwitchTo_Mode_Safe();
+					Globals.Sat_Curr_Mode = SC_SAFE_MODE;
+					Beacon_Packet_UART_log();
+					Globals.Forced_Mode_Flag = 0x01;
+					Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value64();
+				}
+				else{
+					SwitchTo_Mode_Pheonix();
+					Globals.Sat_Curr_Mode = SC_PHEONIX_MODE;
+					Beacon_Packet_UART_log();
+					Globals.Forced_Mode_Flag = 0x00;
+					Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value64();
+				}
+			}
 	}
 
-	//Code to switch to Safe or Phoenix
-	Globals.Safe_Pheonix_Timer.Time = RTC_Get_Value32();
-	if((Globals.Safe_Pheonix_Timer.Time - Globals.Safe_Pheonix_Timer.Start)>0x069780){//5 days in hexadecimal is 0x069780
 
-		if(Globals.Forced_Mode_Flag == 0x00){
-			SwitchTo_Mode_Safe();
-			Globals.Forced_Mode_Flag = 0x01;
-			Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value32();
-		}
-		else{
-			SwitchTo_Mode_Pheonix();
-			Globals.Forced_Mode_Flag = 0x00;
-			Globals.Safe_Pheonix_Timer.Start = RTC_Get_Value32();
-		}
-	}
+
 }
 
 void SwitchTo_Mode_Science_D(){
@@ -237,14 +289,11 @@ void Beacon_Packet_UART_log(){
 	uint16_t EPS_array_2[8];
 	uint16_t EPS_array_3[8];
 	uint16_t EPS_array_4[8];
+	uint16_t EPS_array_5[1];
 
 	uint8_t AS7265X_array_1[16];
 	uint8_t AS7265X_array_2[16];
 	uint8_t AS7265X_array_3[4];
-
-
-	//Updating the Beacon Packet Structure
-	Get_Beacon_Packet();
 
 	//Initializing the MSS UART for Logging
 	MSS_UART_init(&g_mss_uart0,MSS_UART_115200_BAUD,MSS_UART_DATA_8_BITS | MSS_UART_NO_PARITY | MSS_UART_ONE_STOP_BIT);
@@ -252,8 +301,11 @@ void Beacon_Packet_UART_log(){
 	//Collecting the Data in Arrays to be printed
 	uint8_t CCSDS_header_array_1[2] = {Beacon_pack_IS0.beac_head.Version_ID, Beacon_pack_IS0.beac_head.APID };
 	uint16_t CCSDS_header_array_2[2] = {Beacon_pack_IS0.beac_head.Seq_no, Beacon_pack_IS0.beac_head.PL};
+
 	uint8_t CCSDS_header_array_3[1] = {Beacon_pack_IS0.beac_head.TS2};
 	uint32_t CCSDS_header_array_4[1] = {Beacon_pack_IS0.beac_head.TS1};
+
+
 	uint16_t CCSDS_fletcher_array[] = {Beacon_pack_IS0.Fletcher_code};
 
 	for(int i = 0; i < 8; ++i){
@@ -267,6 +319,9 @@ void Beacon_Packet_UART_log(){
 	}
 	for(int i = 0; i < 8; ++i){
 		EPS_array_4[i] = Beacon_pack_IS0.EPS[i+24];
+	}
+	for(int i = 0; i < 1; ++i){
+		EPS_array_5[i] = Beacon_pack_IS0.EPS[i+32];
 	}
 
 
@@ -284,14 +339,21 @@ void Beacon_Packet_UART_log(){
 	//Printing the CCSDS Header
 	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)CCSDS_header_array_1, sizeof(CCSDS_header_array_1) );
 	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)CCSDS_header_array_2, sizeof(CCSDS_header_array_2) );
-	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)CCSDS_header_array_3, sizeof(CCSDS_header_array_2) );
+	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)CCSDS_header_array_3, sizeof(CCSDS_header_array_3) );
 	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)CCSDS_header_array_4, sizeof(CCSDS_header_array_4) );
+
+	//Printing the CDH Data
+	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)Beacon_pack_IS0.CDH_8, sizeof(Beacon_pack_IS0.CDH_8) );
+	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)Beacon_pack_IS0.CDH_32, sizeof(Beacon_pack_IS0.CDH_32) );
+	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)Beacon_pack_IS0.CDH_64, sizeof(Beacon_pack_IS0.CDH_64) );
 
 	//Printing the EPS Data
 	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)EPS_array_1, sizeof(EPS_array_1));
 	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)EPS_array_2, sizeof(EPS_array_2));
 	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)EPS_array_3, sizeof(EPS_array_3));
 	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)EPS_array_4, sizeof(EPS_array_4));
+	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)EPS_array_5, sizeof(EPS_array_5));
+
 	//Printing the Sensor_Board_VMEL6075 Data
 	MSS_UART_polled_tx( &g_mss_uart0, (uint8_t*)Beacon_pack_IS0.Sensor_Board_VMEL6075, sizeof(Beacon_pack_IS0.Sensor_Board_VMEL6075) );
 

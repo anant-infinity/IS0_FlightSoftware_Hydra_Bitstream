@@ -11,7 +11,7 @@
 * CM3 subsystem memory map
 * Master(s) for this subsystem: CM3 
 *---------------------------------------------------------------------------*/
-#define APB_RTC                         0x50000000U
+#define ADDR_APB_RTC                    0x50000000U
 #define ADCS_UART                       0x50001000U
 #define CIP_UART                        0x50002000U
 #define DAXSS_UART                      0x50003000U
@@ -23,7 +23,7 @@
 #define J_EPS_I2C_C_1                   0x50009000U
 #define K_EPS_I2C_NC                  	0x5000A000U
 #define L_SENSOR_BOARD_I2C_0            0x5000B000U
-
-
+#define Reset_Generator					0x5000C000U
+#define Sensor_Board_SPI				0x5000D000U
 
 #endif /* t1_HW_PLATFORM_H_*/

@@ -72,7 +72,7 @@
 	#define	SENSOR_AS72651_RAW_WLF_L	((uint8_t)0x13)		// 8  bit RAW Value L Register; OPs ->R
 
 	// DEVSELECT register Address
-	#define	SENSOR_AS72651_DEVSEL_ADDR	(uint8_t)0x4F)		// 8  bit Device Select Address; OPs ->R/W
+	#define	SENSOR_AS72651_DEVSEL_ADDR	((uint8_t)0x4F)		// 8  bit Device Select Address; OPs ->R/W
 
 	//Values to write to the devselect register
 	#define	SENSOR_AS72651_DEVSEL_MASTER	((uint8_t)0x00)		// 8 bit , write this to dev select register to select master
@@ -82,7 +82,7 @@
 void Initialize_Sensor_Board_I2C_Channel();
 void Get_VEML6075_Data();
 void Get_AS7265x_Data();
-uint8_t read_AS7265_reg(uint8_t);
-void write_AS7265_reg(uint8_t , uint8_t);
+uint8_t read_AS7265x_reg(uint8_t);
+void write_AS7265x_reg(uint8_t);
 
 #endif /* HEADER_C_FILES_SENSOR_BOARD_SENSOR_BOARD_H_ */

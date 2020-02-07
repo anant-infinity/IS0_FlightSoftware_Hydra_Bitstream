@@ -102,13 +102,13 @@ uint16_t SD_get_status(mss_spi_slave_t slave) {
 uint8_t SD_Simul_Init() {
 	SD_disable(SPI_SLAVE_0); //Power off both SD cards
 	SD_disable(SPI_SLAVE_1);
-	Utils_Delay16(3); //
+	Utils_Delay32(3); //
 
 	//Power on both SD cards
 	MSS_GPIO_set_output( GPIO_EN_SD0, 1);
 	MSS_GPIO_set_output( GPIO_EN_SD1, 1);
 	// delay for power-up
-	Utils_Delay16(10);
+	Utils_Delay32(10);
 
 	MSS_SPI_init( &g_mss_spi1 );
 
@@ -147,7 +147,7 @@ uint8_t SD_Simul_Init() {
 
 	//Send CMD0 to SD0
 	do{		// add counter for number of trying
-		Utils_Delay16(3); // since RTC is  1kHz, this could be  anywhere from 2-3ms...
+		Utils_Delay32(3); // since RTC is  1kHz, this could be  anywhere from 2-3ms...
 		SD_set_slave_select(SPI_SLAVE_0); //tie low
 		MSS_SPI_transfer_block(&g_mss_spi1, CMD0, 7, rx_buffer, 1);
 		SD_clear_slave_select(SPI_SLAVE_0); //tie hi
@@ -160,7 +160,7 @@ uint8_t SD_Simul_Init() {
 	i=0;
 	//Send CMD0 to SD1
 	do{		// add counter for number of trying
-		Utils_Delay16(3); // since RTC is  1kHz, this could be  anywhere from 2-3ms...
+		Utils_Delay32(3); // since RTC is  1kHz, this could be  anywhere from 2-3ms...
 		SD_set_slave_select(SPI_SLAVE_0); //tie low
 		MSS_SPI_transfer_block(&g_mss_spi1, CMD0, 7, rx_buffer, 1);
 		SD_clear_slave_select(SPI_SLAVE_0); //tie hi
@@ -177,25 +177,31 @@ uint8_t SD_Simul_Init() {
 
 void SD_Cards_Init() {
 
+    Globals.Current_SD = 0xFF;
+
 	//send CMD0 to both SD_Cards. Hope they both are working... :(((
 	uint8_t stat = SD_Simul_Init();
 	if (!stat) {
 		//this means we failed
+	    //TODO Log it
+	    return;
 	}
 
 	uint8_t status = SD_Init(0);
 	if (status) {
 		Globals.Current_SD = 0;
+		Globals.Indication_Flags |= SD_CARD0_WORKING;
 		return;
 	}
 	status = SD_Init(1);
 	if (status) {
+		Globals.Indication_Flags |= SD_CARD1_WORKING;
 		Globals.Current_SD = 1;
 		return;
 	}
 	//here, both SD Cards have failed
 	//TODO: LOG/Event message
-	SD_FDRI();
+	//SD_FDRI();
 	return;
 }
 
@@ -222,17 +228,18 @@ uint8_t SD_Init(mss_spi_slave_t slave){
 
 
 
-
-//	SD_clear_slave_select(slave); //tie hi
-//	MSS_SPI_transfer_block(&g_mss_spi1, tmp_buff, 20, rx_buffer, 0);
-//	SD_set_slave_select(slave); //tie low
-//	MSS_SPI_transfer_frame(&g_mss_spi1, 0xFF);
+//testing with Transcend
 	SD_clear_slave_select(slave); //tie hi
+	MSS_SPI_transfer_block(&g_mss_spi1, tmp_buff, 20, rx_buffer, 0);
+	SD_set_slave_select(slave); //tie low
+	MSS_SPI_transfer_block(&g_mss_spi1, tmp_buff, 20, rx_buffer, 0);
+	SD_clear_slave_select(slave); //tie hi
+// if still here. It is ESSENTIAL to transcend
 	MSS_SPI_transfer_frame(&g_mss_spi1, 0xFF);
 
 
 	do{		// add counter for number of trying
-		Utils_Delay16(3); // since RTC is  1kHz, this could be  anywhere from 2-3ms...
+		Utils_Delay32(3); // since RTC is  1kHz, this could be  anywhere from 2-3ms...
 		SD_set_slave_select(slave); //tie low
 		MSS_SPI_transfer_block(&g_mss_spi1, CMD0, 7, rx_buffer, 1);
 		SD_clear_slave_select(slave); //tie hi
@@ -247,7 +254,7 @@ uint8_t SD_Init(mss_spi_slave_t slave){
 	uint8_t rx_b[5];
 	uint8_t CMD8[] = {0xFF, 0x48, 0x00, 0x00, 0x01, 0xAA, 0x87, 0xFF};	// last 0xFF is use to give sd card buffer clock
 	do{
-		Utils_Delay16(3);
+		Utils_Delay32(3);
 		SD_set_slave_select(slave); //tie low
 		MSS_SPI_transfer_block(&g_mss_spi1, CMD8, 8, rx_b, 5);
 		//checked ,return 0X1AA
@@ -261,7 +268,7 @@ uint8_t SD_Init(mss_spi_slave_t slave){
 		}
 	}while(rx_buffer[0] && i < 200);
 
-	if (i > 0){
+	if (i >= 200){
 		return 0;
 	}
 
@@ -284,7 +291,7 @@ uint8_t SD_Init(mss_spi_slave_t slave){
 
 
 	do{
-		Utils_Delay16(3);
+		Utils_Delay32(10);
 		SD_set_slave_select(slave); //tie low
 		MSS_SPI_transfer_block(&g_mss_spi1, CMD55, 8, rx_buffer, 1);
 		MSS_SPI_transfer_frame(&g_mss_spi1, 0xFF);
@@ -505,7 +512,7 @@ uint8_t SD_Read_Sector(uint8_t * data, uint32_t addr, mss_spi_slave_t slave, uin
 	uint8_t rx_buffer;
 	uint8_t data_buffer[514];
 	uint16_t status;
-	uint16_t delay=0;
+	volatile uint16_t delay=0;
 	uint16_t i=0;
 
 	uint8_t CMD16[8]= {0xFF, 0x50, 0x00, 0x00, 0x02, 0x00, 0xFF, 0xFF};
@@ -717,32 +724,6 @@ uint32_t SD_Card_Wipe(mss_spi_slave_t slave) {
 
 }
 
-//FIXME! SD_Card FDRI
-//TODO: Finish function, decide how often to try again and using what structure
-//NOTE: on 6/18/19, this function was called (noticed only via breakpoint),
-// and the system was able to recover, and keep incrementing Beaocn_Write_Start thereafter
-//TODO: Add timer to parameter table as well as use timer for FDRI based on state
-void SD_FDRI() {
-	if (Globals.Current_SD != 0xff)
-		return;
-	//now we know we need to do something
-	if (Globals.SD_FDRI_Module_Sync.CMD_Seq_Count < Globals.Non_Response_Count_Limit) {
-		if (Globals.Indication_Flags & SD_CARD0_WORKING > 0) {
-			Globals.Current_SD = MSS_SPI_SLAVE_0;
-		}
-		else if (Globals.Indication_Flags & SD_CARD1_WORKING > 0) {
-			Globals.Current_SD = MSS_SPI_SLAVE_1;
-		}
-		else {
 
-		}
-		Globals.SD_FDRI_Module_Sync.CMD_Seq_Count++;
-		return;
-	}
-//	Globals.Current_SD = SD_Select_Init();
-	SD_Cards_Init();
-	Globals.SD_FDRI_Module_Sync.CMD_Seq_Count = 0;
-
-}
 
 #endif

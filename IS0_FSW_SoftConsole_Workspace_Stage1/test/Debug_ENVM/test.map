@@ -39,11 +39,11 @@ tmp_buff            0x200             ./Header_C_files/SD_CARD/sd.o
 g_core_i2c3         0x6c              ./Header_C_files/Test/test.o
 pointsAS72651       0xc               ./Header_C_files/SENSOR_BOARD/sensor_board.o
 g_mss_uart1         0x40              ./drivers/mss_uart/mss_uart.o
-Beacon_pack_IS0     0x79              ./Header_C_files/Utils/utils.o
+Beacon_pack_IS0     0x99              ./Header_C_files/Utils/utils.o
 statusG             0x8               ./Header_C_files/Seq_ops/main.o
 g_mss_i2c0          0x74              ./drivers/mss_i2c/mss_i2c.o
 g_mss_uart0         0x40              ./drivers/mss_uart/mss_uart.o
-Globals             0x8b              ./Header_C_files/Seq_ops/main.o
+Globals             0x85              ./Header_C_files/Seq_ops/main.o
 CMD17               0x8               ./Header_C_files/SD_CARD/sd.o
 g_mss_spi0          0x84              ./drivers_config/mss_spi/mss_spi.o
 g_mss_i2c1          0x74              ./drivers/mss_i2c/mss_i2c.o
@@ -106,6 +106,8 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 ./drivers_config/mss_spi/mss_spi.o
  .text.MSS_SPI_configure_slave_mode
                 0x0000000000000000       0xc4 ./drivers_config/mss_spi/mss_spi.o
+ .text.MSS_SPI_transfer_frame
+                0x0000000000000000       0xb4 ./drivers_config/mss_spi/mss_spi.o
  .text.MSS_SPI_set_frame_rx_handler
                 0x0000000000000000       0xe0 ./drivers_config/mss_spi/mss_spi.o
  .text.MSS_SPI_set_slave_tx_frame
@@ -635,6 +637,10 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 ./drivers/CoreI2C/core_i2c.o
  .text.I2C_channel_init
                 0x0000000000000000       0xc4 ./drivers/CoreI2C/core_i2c.o
+ .text.I2C_write
+                0x0000000000000000       0xc6 ./drivers/CoreI2C/core_i2c.o
+ .text.I2C_read
+                0x0000000000000000       0xc6 ./drivers/CoreI2C/core_i2c.o
  .text.I2C_get_status
                 0x0000000000000000       0x1c ./drivers/CoreI2C/core_i2c.o
  .text.I2C_set_slave_tx_buffer
@@ -689,12 +695,14 @@ Discarded input sections
                 0x0000000000000000       0x26 ./Header_C_files/Utils/utils.o
  .text.Utils_Buffer_to_32_ValueS_Big
                 0x0000000000000000       0x34 ./Header_C_files/Utils/utils.o
+ .text.Utils_Buffer_to_16_ValueU_Little
+                0x0000000000000000       0x28 ./Header_C_files/Utils/utils.o
  .text.Utils_Buffer_to_16_ValueS_Little
                 0x0000000000000000       0x26 ./Header_C_files/Utils/utils.o
+ .text.Utils_Buffer_to_32_ValueU_Little
+                0x0000000000000000       0x34 ./Header_C_files/Utils/utils.o
  .text.Utils_Buffer_to_32_ValueS_Little
                 0x0000000000000000       0x34 ./Header_C_files/Utils/utils.o
- .text.Utils_Buffer_to_40_ValueU_Little
-                0x0000000000000000       0x8a ./Header_C_files/Utils/utils.o
  .text.Utils_Change_Endian_To_BigF32
                 0x0000000000000000       0x60 ./Header_C_files/Utils/utils.o
  .text.Utils_Change_Endian_To_BigS16
@@ -702,7 +710,7 @@ Discarded input sections
  .text.Utils_CMD_Set_Flag
                 0x0000000000000000       0x4c ./Header_C_files/Utils/utils.o
  .text.Utils_Handle_Timer16
-                0x0000000000000000       0x5c ./Header_C_files/Utils/utils.o
+                0x0000000000000000       0x64 ./Header_C_files/Utils/utils.o
  .text.Utils_Handle_Timer16_Started
                 0x0000000000000000       0x54 ./Header_C_files/Utils/utils.o
  .text.Utils_Start_Derek_Timer16
@@ -710,15 +718,23 @@ Discarded input sections
  .text.Utils_isStarted_Derek_Timer16
                 0x0000000000000000       0x16 ./Header_C_files/Utils/utils.o
  .text.Utils_isTimeout_Derek_Timer16
-                0x0000000000000000       0x68 ./Header_C_files/Utils/utils.o
+                0x0000000000000000       0x6c ./Header_C_files/Utils/utils.o
  .text.Utils_Handle_Timer32
-                0x0000000000000000       0x58 ./Header_C_files/Utils/utils.o
+                0x0000000000000000       0x60 ./Header_C_files/Utils/utils.o
  .text.Utils_Handle_Timer32_Started
                 0x0000000000000000       0x48 ./Header_C_files/Utils/utils.o
+ .text.Utils_Manage_State_Machine
+                0x0000000000000000       0x30 ./Header_C_files/Utils/utils.o
  .text.Utils_HAL_Set_16bit
                 0x0000000000000000       0x60 ./Header_C_files/Utils/utils.o
  .text.Utils_HAL_Get_16bit
                 0x0000000000000000       0x52 ./Header_C_files/Utils/utils.o
+ .text.Utils_Reset_Module_Sync
+                0x0000000000000000       0x6c ./Header_C_files/Utils/utils.o
+ .text.Utils_Delay32
+                0x0000000000000000       0x30 ./Header_C_files/Utils/utils.o
+ .text.Utils_Delay32_us
+                0x0000000000000000       0x28 ./Header_C_files/Utils/utils.o
  .text          0x0000000000000000        0x0 ./Header_C_files/Test/test.o
  .data          0x0000000000000000        0x0 ./Header_C_files/Test/test.o
  .bss           0x0000000000000000        0x0 ./Header_C_files/Test/test.o
@@ -757,6 +773,8 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 ./Header_C_files/Seq_ops/main.o
  .text.MSS_GPIO_get_outputs
                 0x0000000000000000       0x18 ./Header_C_files/Seq_ops/main.o
+ .text.Store_Beacon_Data
+                0x0000000000000000       0xcc ./Header_C_files/Seq_ops/main.o
  .text.Watchdog_Timer_Handler
                 0x0000000000000000       0x20 ./Header_C_files/Seq_ops/main.o
  .text.Watchdog_Pet
@@ -787,7 +805,7 @@ Discarded input sections
  .text.FLASH_Verify_write_count
                 0x0000000000000000       0x4c ./Header_C_files/SPI_Flash/spi_flash.o
  .text.Get_Filled_Array
-                0x0000000000000000       0xa8 ./Header_C_files/SPI_Flash/spi_flash.o
+                0x0000000000000000       0x84 ./Header_C_files/SPI_Flash/spi_flash.o
  .text.Save_Parameter_Table
                 0x0000000000000000        0xe ./Header_C_files/SPI_Flash/spi_flash.o
  .text.Save_Parameter_Table_Arr
@@ -796,6 +814,8 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .data          0x0000000000000000        0x0 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .bss           0x0000000000000000        0x0 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .bss.status_reg_buffer
+                0x0000000000000000        0x1 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .data.write_reg_buffer
                 0x0000000000000000        0x1 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .data.read_reg_buffer
@@ -804,42 +824,87 @@ Discarded input sections
                 0x0000000000000000       0x1a ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .text.VEML6075AssignInit
                 0x0000000000000000       0x58 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .text.read_AS7265x_reg
+                0x0000000000000000       0xec ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .rodata        0x0000000000000000        0x2 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .text.write_AS7265_reg
-                0x0000000000000000       0xe0 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .text.write_AS7265x_reg
+                0x0000000000000000       0xd8 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .text.assignGetAS72651
                 0x0000000000000000       0x1a ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .text.AS72651AssignInit
                 0x0000000000000000       0xd8 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ COMMON         0x0000000000000000        0xc ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .text          0x0000000000000000        0x0 ./Header_C_files/SD_CARD/sd.o
  .data          0x0000000000000000        0x0 ./Header_C_files/SD_CARD/sd.o
  .bss           0x0000000000000000        0x0 ./Header_C_files/SD_CARD/sd.o
+ .text.SD_clear_slave_select
+                0x0000000000000000       0x2c ./Header_C_files/SD_CARD/sd.o
+ .text.SD_set_slave_select
+                0x0000000000000000       0x2c ./Header_C_files/SD_CARD/sd.o
  .text.SD_toggle_slave_select
                 0x0000000000000000       0x40 ./Header_C_files/SD_CARD/sd.o
  .text.SD_enable
                 0x0000000000000000       0x28 ./Header_C_files/SD_CARD/sd.o
+ .text.SD_disable
+                0x0000000000000000       0x28 ./Header_C_files/SD_CARD/sd.o
+ .text.Custom_SPI_configure_master_mode
+                0x0000000000000000       0x7e ./Header_C_files/SD_CARD/sd.o
+ .rodata        0x0000000000000000       0x38 ./Header_C_files/SD_CARD/sd.o
+ .text.SD_get_status
+                0x0000000000000000       0x88 ./Header_C_files/SD_CARD/sd.o
+ .text.SD_Simul_Init
+                0x0000000000000000      0x184 ./Header_C_files/SD_CARD/sd.o
+ .text.SD_Cards_Init
+                0x0000000000000000       0x80 ./Header_C_files/SD_CARD/sd.o
+ .text.SD_Init  0x0000000000000000      0x380 ./Header_C_files/SD_CARD/sd.o
+ .text.SD_Write_Sector
+                0x0000000000000000      0x200 ./Header_C_files/SD_CARD/sd.o
  .text.SD_Read_Sector
-                0x0000000000000000      0x250 ./Header_C_files/SD_CARD/sd.o
+                0x0000000000000000      0x2a8 ./Header_C_files/SD_CARD/sd.o
+ .text.SD_Write_Data
+                0x0000000000000000       0x88 ./Header_C_files/SD_CARD/sd.o
  .text.SD_Read_Data
                 0x0000000000000000       0x7e ./Header_C_files/SD_CARD/sd.o
  .text.SD_Card_Wipe
                 0x0000000000000000       0xdc ./Header_C_files/SD_CARD/sd.o
+ .debug_info    0x0000000000000000     0x1a8b ./Header_C_files/SD_CARD/sd.o
+ .debug_abbrev  0x0000000000000000      0x305 ./Header_C_files/SD_CARD/sd.o
+ .debug_aranges
+                0x0000000000000000       0x90 ./Header_C_files/SD_CARD/sd.o
+ .debug_ranges  0x0000000000000000       0x80 ./Header_C_files/SD_CARD/sd.o
+ .debug_line    0x0000000000000000      0x97c ./Header_C_files/SD_CARD/sd.o
+ .debug_str     0x0000000000000000     0x1775 ./Header_C_files/SD_CARD/sd.o
+ .comment       0x0000000000000000       0x72 ./Header_C_files/SD_CARD/sd.o
+ .debug_frame   0x0000000000000000      0x244 ./Header_C_files/SD_CARD/sd.o
+ COMMON         0x0000000000000000      0x20c ./Header_C_files/SD_CARD/sd.o
  .text          0x0000000000000000        0x0 ./Header_C_files/RTC/rtc.o
  .data          0x0000000000000000        0x0 ./Header_C_files/RTC/rtc.o
  .bss           0x0000000000000000        0x0 ./Header_C_files/RTC/rtc.o
  .text.RTC_Set_Value
-                0x0000000000000000       0x8c ./Header_C_files/RTC/rtc.o
+                0x0000000000000000       0xb0 ./Header_C_files/RTC/rtc.o
  .text.RTC_Get_Value8
-                0x0000000000000000       0x14 ./Header_C_files/RTC/rtc.o
- .text.RTC_Get_Value64
-                0x0000000000000000       0x64 ./Header_C_files/RTC/rtc.o
+                0x0000000000000000       0x12 ./Header_C_files/RTC/rtc.o
+ .text.RTC_Get_Value16
+                0x0000000000000000       0x34 ./Header_C_files/RTC/rtc.o
+ .text.RTC_Get_Value32
+                0x0000000000000000       0x50 ./Header_C_files/RTC/rtc.o
  .text.RTC_Get_Config_value
                 0x0000000000000000       0x14 ./Header_C_files/RTC/rtc.o
  .text.RTC_Set_Config_value
                 0x0000000000000000       0x28 ./Header_C_files/RTC/rtc.o
+ .text.RTC_Get_us
+                0x0000000000000000       0x18 ./Header_C_files/RTC/rtc.o
+ .text.RTC_Get_sec
+                0x0000000000000000       0x34 ./Header_C_files/RTC/rtc.o
+ .text.RTC_Get_ts_ms
+                0x0000000000000000       0x36 ./Header_C_files/RTC/rtc.o
  .text          0x0000000000000000        0x0 ./Header_C_files/I2C/i2c.o
  .data          0x0000000000000000        0x0 ./Header_C_files/I2C/i2c.o
  .bss           0x0000000000000000        0x0 ./Header_C_files/I2C/i2c.o
+ .text.do_read_transaction
+                0x0000000000000000       0x40 ./Header_C_files/I2C/i2c.o
+ .text.do_write_transaction
+                0x0000000000000000       0x40 ./Header_C_files/I2C/i2c.o
  .text          0x0000000000000000        0x0 ./Header_C_files/GPIOs/gpios.o
  .data          0x0000000000000000        0x0 ./Header_C_files/GPIOs/gpios.o
  .bss           0x0000000000000000        0x0 ./Header_C_files/GPIOs/gpios.o
@@ -901,21 +966,13 @@ Discarded input sections
  .data          0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_arm_fixunssfsi.o)
  .bss           0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_arm_fixunssfsi.o)
  .debug_frame   0x0000000000000000       0x24 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_arm_fixunssfsi.o)
- .text          0x0000000000000000       0x30 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_aeabi_uldivmod.o)
  .data          0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_aeabi_uldivmod.o)
  .bss           0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_aeabi_uldivmod.o)
- .debug_frame   0x0000000000000000       0x2c c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_aeabi_uldivmod.o)
  .text          0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_udivmoddi4.o)
  .data          0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_udivmoddi4.o)
  .bss           0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_udivmoddi4.o)
- .text.__udivmoddi4
-                0x0000000000000000      0x2d0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_udivmoddi4.o)
  .ARM.extab.text.__udivmoddi4
                 0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_udivmoddi4.o)
- .ARM.exidx.text.__udivmoddi4
-                0x0000000000000000        0x8 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_udivmoddi4.o)
- .debug_frame   0x0000000000000000       0x34 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_udivmoddi4.o)
- .text          0x0000000000000000        0x4 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_dvmd_tls.o)
  .data          0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_dvmd_tls.o)
  .bss           0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_dvmd_tls.o)
  .text          0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-errno.o)
@@ -943,6 +1000,8 @@ Discarded input sections
  .text          0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memcpy-stub.o)
  .data          0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memcpy-stub.o)
  .bss           0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memcpy-stub.o)
+ .text.memcpy   0x0000000000000000       0x16 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x0000000000000000       0x28 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memcpy-stub.o)
  .text          0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memset.o)
  .data          0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memset.o)
  .bss           0x0000000000000000        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memset.o)
@@ -1137,7 +1196,7 @@ END GROUP
                 0x0000000000000700                . = ALIGN (0x10)
  *fill*         0x00000000000006f8        0x8 
 
-.text           0x0000000000000700     0x5bf0 load address 0x0000000060000700
+.text           0x0000000000000700     0x53c0 load address 0x0000000060000700
  CREATE_OBJECT_SYMBOLS
                 0x0000000060000700                __text_load = LOADADDR (.text)
                 0x0000000000000700                __text_start = .
@@ -1187,341 +1246,291 @@ END GROUP
  .text.MSS_SPI_clear_slave_select
                 0x0000000000000cec       0x88 ./drivers_config/mss_spi/mss_spi.o
                 0x0000000000000cec                MSS_SPI_clear_slave_select
- .text.MSS_SPI_transfer_frame
-                0x0000000000000d74       0xb4 ./drivers_config/mss_spi/mss_spi.o
-                0x0000000000000d74                MSS_SPI_transfer_frame
  .text.MSS_SPI_transfer_block
-                0x0000000000000e28      0x1f4 ./drivers_config/mss_spi/mss_spi.o
-                0x0000000000000e28                MSS_SPI_transfer_block
+                0x0000000000000d74      0x1f4 ./drivers_config/mss_spi/mss_spi.o
+                0x0000000000000d74                MSS_SPI_transfer_block
  .text.fill_slave_tx_fifo
-                0x000000000000101c       0xd6 ./drivers_config/mss_spi/mss_spi.o
+                0x0000000000000f68       0xd6 ./drivers_config/mss_spi/mss_spi.o
  .text.read_slave_rx_fifo
-                0x00000000000010f2       0xa6 ./drivers_config/mss_spi/mss_spi.o
+                0x000000000000103e       0xa6 ./drivers_config/mss_spi/mss_spi.o
  .text.mss_spi_isr
-                0x0000000000001198      0x27c ./drivers_config/mss_spi/mss_spi.o
+                0x00000000000010e4      0x27c ./drivers_config/mss_spi/mss_spi.o
  .text.SPI0_IRQHandler
-                0x0000000000001414       0x24 ./drivers_config/mss_spi/mss_spi.o
-                0x0000000000001414                SPI0_IRQHandler
+                0x0000000000001360       0x24 ./drivers_config/mss_spi/mss_spi.o
+                0x0000000000001360                SPI0_IRQHandler
  .text.SPI1_IRQHandler
-                0x0000000000001438       0x24 ./drivers_config/mss_spi/mss_spi.o
-                0x0000000000001438                SPI1_IRQHandler
+                0x0000000000001384       0x24 ./drivers_config/mss_spi/mss_spi.o
+                0x0000000000001384                SPI1_IRQHandler
  .text.NVIC_ClearPendingIRQ
-                0x000000000000145c       0x34 ./drivers/mss_uart/mss_uart.o
+                0x00000000000013a8       0x34 ./drivers/mss_uart/mss_uart.o
  .text.set_bit_reg8
-                0x0000000000001490       0x3a ./drivers/mss_uart/mss_uart.o
+                0x00000000000013dc       0x3a ./drivers/mss_uart/mss_uart.o
  .text.clear_bit_reg8
-                0x00000000000014ca       0x3a ./drivers/mss_uart/mss_uart.o
+                0x0000000000001416       0x3a ./drivers/mss_uart/mss_uart.o
  .text.read_bit_reg8
-                0x0000000000001504       0x38 ./drivers/mss_uart/mss_uart.o
+                0x0000000000001450       0x38 ./drivers/mss_uart/mss_uart.o
  .text.MSS_UART_init
-                0x000000000000153c       0x70 ./drivers/mss_uart/mss_uart.o
-                0x000000000000153c                MSS_UART_init
+                0x0000000000001488       0x70 ./drivers/mss_uart/mss_uart.o
+                0x0000000000001488                MSS_UART_init
  .text.MSS_UART_polled_tx
-                0x00000000000015ac       0xc4 ./drivers/mss_uart/mss_uart.o
-                0x00000000000015ac                MSS_UART_polled_tx
+                0x00000000000014f8       0xc4 ./drivers/mss_uart/mss_uart.o
+                0x00000000000014f8                MSS_UART_polled_tx
  .text.UART0_IRQHandler
-                0x0000000000001670       0x24 ./drivers/mss_uart/mss_uart.o
-                0x0000000000001670                UART0_IRQHandler
+                0x00000000000015bc       0x24 ./drivers/mss_uart/mss_uart.o
+                0x00000000000015bc                UART0_IRQHandler
  .text.UART1_IRQHandler
-                0x0000000000001694       0x24 ./drivers/mss_uart/mss_uart.o
-                0x0000000000001694                UART1_IRQHandler
+                0x00000000000015e0       0x24 ./drivers/mss_uart/mss_uart.o
+                0x00000000000015e0                UART1_IRQHandler
  .text.config_baud_divisors
-                0x00000000000016b8      0x14c ./drivers/mss_uart/mss_uart.o
+                0x0000000000001604      0x14c ./drivers/mss_uart/mss_uart.o
  .text.global_init
-                0x0000000000001804      0x1d8 ./drivers/mss_uart/mss_uart.o
+                0x0000000000001750      0x1d8 ./drivers/mss_uart/mss_uart.o
  .text.MSS_UART_isr
-                0x00000000000019dc      0x208 ./drivers/mss_uart/mss_uart.o
+                0x0000000000001928      0x208 ./drivers/mss_uart/mss_uart.o
  .text.default_tx_handler
-                0x0000000000001be4       0xe8 ./drivers/mss_uart/mss_uart.o
+                0x0000000000001b30       0xe8 ./drivers/mss_uart/mss_uart.o
  .text.ComBlk_IRQHandler
-                0x0000000000001ccc       0x48 ./drivers/mss_sys_services/mss_comblk.o
-                0x0000000000001ccc                ComBlk_IRQHandler
+                0x0000000000001c18       0x48 ./drivers/mss_sys_services/mss_comblk.o
+                0x0000000000001c18                ComBlk_IRQHandler
  .text.handle_tx_okay_irq
-                0x0000000000001d14      0x1ac ./drivers/mss_sys_services/mss_comblk.o
+                0x0000000000001c60      0x1ac ./drivers/mss_sys_services/mss_comblk.o
  .text.handle_rx_okay_irq
-                0x0000000000001ec0      0x210 ./drivers/mss_sys_services/mss_comblk.o
+                0x0000000000001e0c      0x210 ./drivers/mss_sys_services/mss_comblk.o
  .text.complete_request
-                0x00000000000020d0       0x40 ./drivers/mss_sys_services/mss_comblk.o
+                0x000000000000201c       0x40 ./drivers/mss_sys_services/mss_comblk.o
  .text.abort_current_cmd
-                0x0000000000002110       0x4c ./drivers/mss_sys_services/mss_comblk.o
+                0x000000000000205c       0x4c ./drivers/mss_sys_services/mss_comblk.o
  .text.fill_tx_fifo
-                0x000000000000215c       0x60 ./drivers/mss_sys_services/mss_comblk.o
+                0x00000000000020a8       0x60 ./drivers/mss_sys_services/mss_comblk.o
  .text.process_sys_ctrl_command
-                0x00000000000021bc       0x28 ./drivers/mss_sys_services/mss_comblk.o
+                0x0000000000002108       0x28 ./drivers/mss_sys_services/mss_comblk.o
  .text.get_channel_id_from_status
-                0x00000000000021e4       0x9c ./drivers/mss_pdma/mss_pdma.o
+                0x0000000000002130       0x9c ./drivers/mss_pdma/mss_pdma.o
  .text.DMA_IRQHandler
-                0x0000000000002280       0x78 ./drivers/mss_pdma/mss_pdma.o
-                0x0000000000002280                DMA_IRQHandler
+                0x00000000000021cc       0x78 ./drivers/mss_pdma/mss_pdma.o
+                0x00000000000021cc                DMA_IRQHandler
  .text.NVIC_DisableIRQ
-                0x00000000000022f8       0x34 ./drivers/mss_i2c/mss_i2c.o
+                0x0000000000002244       0x34 ./drivers/mss_i2c/mss_i2c.o
  .text.enable_slave_if_required
-                0x000000000000232c       0x24 ./drivers/mss_i2c/mss_i2c.o
+                0x0000000000002278       0x24 ./drivers/mss_i2c/mss_i2c.o
  .text.mss_i2c_isr
-                0x0000000000002350      0x854 ./drivers/mss_i2c/mss_i2c.o
+                0x000000000000229c      0x854 ./drivers/mss_i2c/mss_i2c.o
  .text.I2C0_IRQHandler
-                0x0000000000002ba4       0x24 ./drivers/mss_i2c/mss_i2c.o
-                0x0000000000002ba4                I2C0_IRQHandler
+                0x0000000000002af0       0x24 ./drivers/mss_i2c/mss_i2c.o
+                0x0000000000002af0                I2C0_IRQHandler
  .text.I2C1_IRQHandler
-                0x0000000000002bc8       0x24 ./drivers/mss_i2c/mss_i2c.o
-                0x0000000000002bc8                I2C1_IRQHandler
+                0x0000000000002b14       0x24 ./drivers/mss_i2c/mss_i2c.o
+                0x0000000000002b14                I2C1_IRQHandler
  .text.start_transfer
-                0x0000000000002bec      0x154 ./drivers/mss_hpdma/mss_hpdma.o
+                0x0000000000002b38      0x154 ./drivers/mss_hpdma/mss_hpdma.o
  .text.HPDMA_Complete_IRQHandler
-                0x0000000000002d40       0xf8 ./drivers/mss_hpdma/mss_hpdma.o
-                0x0000000000002d40                HPDMA_Complete_IRQHandler
+                0x0000000000002c8c       0xf8 ./drivers/mss_hpdma/mss_hpdma.o
+                0x0000000000002c8c                HPDMA_Complete_IRQHandler
  .text.HPDMA_Error_IRQHandler
-                0x0000000000002e38      0x100 ./drivers/mss_hpdma/mss_hpdma.o
-                0x0000000000002e38                HPDMA_Error_IRQHandler
+                0x0000000000002d84      0x100 ./drivers/mss_hpdma/mss_hpdma.o
+                0x0000000000002d84                HPDMA_Error_IRQHandler
  .text.NVIC_DisableIRQ
-                0x0000000000002f38       0x34 ./drivers/mss_gpio/mss_gpio.o
+                0x0000000000002e84       0x34 ./drivers/mss_gpio/mss_gpio.o
  .text.NVIC_ClearPendingIRQ
-                0x0000000000002f6c       0x34 ./drivers/mss_gpio/mss_gpio.o
+                0x0000000000002eb8       0x34 ./drivers/mss_gpio/mss_gpio.o
  .text.MSS_GPIO_init
-                0x0000000000002fa0       0x78 ./drivers/mss_gpio/mss_gpio.o
-                0x0000000000002fa0                MSS_GPIO_init
+                0x0000000000002eec       0x78 ./drivers/mss_gpio/mss_gpio.o
+                0x0000000000002eec                MSS_GPIO_init
  .text.MSS_GPIO_config
-                0x0000000000003018       0x38 ./drivers/mss_gpio/mss_gpio.o
-                0x0000000000003018                MSS_GPIO_config
+                0x0000000000002f64       0x38 ./drivers/mss_gpio/mss_gpio.o
+                0x0000000000002f64                MSS_GPIO_config
  .text.MSS_GPIO_set_output
-                0x0000000000003050       0x64 ./drivers/mss_gpio/mss_gpio.o
-                0x0000000000003050                MSS_GPIO_set_output
+                0x0000000000002f9c       0x64 ./drivers/mss_gpio/mss_gpio.o
+                0x0000000000002f9c                MSS_GPIO_set_output
  .text.I2C_init
-                0x00000000000030b4       0xc4 ./drivers/CoreI2C/core_i2c.o
-                0x00000000000030b4                I2C_init
- .text.I2C_write
-                0x0000000000003178       0xc6 ./drivers/CoreI2C/core_i2c.o
-                0x0000000000003178                I2C_write
- .text.I2C_read
-                0x000000000000323e       0xc6 ./drivers/CoreI2C/core_i2c.o
-                0x000000000000323e                I2C_read
+                0x0000000000003000       0xc4 ./drivers/CoreI2C/core_i2c.o
+                0x0000000000003000                I2C_init
  .text.I2C_write_read
-                0x0000000000003304      0x10c ./drivers/CoreI2C/core_i2c.o
-                0x0000000000003304                I2C_write_read
+                0x00000000000030c4      0x10c ./drivers/CoreI2C/core_i2c.o
+                0x00000000000030c4                I2C_write_read
  .text.I2C_wait_complete
-                0x0000000000003410       0x34 ./drivers/CoreI2C/core_i2c.o
-                0x0000000000003410                I2C_wait_complete
+                0x00000000000031d0       0x34 ./drivers/CoreI2C/core_i2c.o
+                0x00000000000031d0                I2C_wait_complete
  .text.I2C_system_tick
-                0x0000000000003444       0x5a ./drivers/CoreI2C/core_i2c.o
-                0x0000000000003444                I2C_system_tick
+                0x0000000000003204       0x5a ./drivers/CoreI2C/core_i2c.o
+                0x0000000000003204                I2C_system_tick
  .text.enable_slave_if_required
-                0x000000000000349e       0x28 ./drivers/CoreI2C/core_i2c.o
- *fill*         0x00000000000034c6        0x2 
- .text.I2C_isr  0x00000000000034c8      0x944 ./drivers/CoreI2C/core_i2c.o
-                0x00000000000034c8                I2C_isr
+                0x000000000000325e       0x28 ./drivers/CoreI2C/core_i2c.o
+ *fill*         0x0000000000003286        0x2 
+ .text.I2C_isr  0x0000000000003288      0x944 ./drivers/CoreI2C/core_i2c.o
+                0x0000000000003288                I2C_isr
  .text.NVIC_EnableIRQ
-                0x0000000000003e0c       0x30 ./drivers/CoreI2C/i2c_interrupt.o
+                0x0000000000003bcc       0x30 ./drivers/CoreI2C/i2c_interrupt.o
  .text.NVIC_DisableIRQ
-                0x0000000000003e3c       0x34 ./drivers/CoreI2C/i2c_interrupt.o
+                0x0000000000003bfc       0x34 ./drivers/CoreI2C/i2c_interrupt.o
  .text.I2C_enable_irq
-                0x0000000000003e70       0x58 ./drivers/CoreI2C/i2c_interrupt.o
-                0x0000000000003e70                I2C_enable_irq
+                0x0000000000003c30       0x58 ./drivers/CoreI2C/i2c_interrupt.o
+                0x0000000000003c30                I2C_enable_irq
  .text.I2C_disable_irq
-                0x0000000000003ec8       0x58 ./drivers/CoreI2C/i2c_interrupt.o
-                0x0000000000003ec8                I2C_disable_irq
+                0x0000000000003c88       0x58 ./drivers/CoreI2C/i2c_interrupt.o
+                0x0000000000003c88                I2C_disable_irq
  .text.Utils_Buffer_to_16_ValueU_Big
-                0x0000000000003f20       0x28 ./Header_C_files/Utils/utils.o
-                0x0000000000003f20                Utils_Buffer_to_16_ValueU_Big
+                0x0000000000003ce0       0x28 ./Header_C_files/Utils/utils.o
+                0x0000000000003ce0                Utils_Buffer_to_16_ValueU_Big
  .text.Utils_Buffer_to_32_ValueU_Big
-                0x0000000000003f48       0x34 ./Header_C_files/Utils/utils.o
-                0x0000000000003f48                Utils_Buffer_to_32_ValueU_Big
- .text.Utils_Buffer_to_16_ValueU_Little
-                0x0000000000003f7c       0x28 ./Header_C_files/Utils/utils.o
-                0x0000000000003f7c                Utils_Buffer_to_16_ValueU_Little
- .text.Utils_Buffer_to_32_ValueU_Little
-                0x0000000000003fa4       0x34 ./Header_C_files/Utils/utils.o
-                0x0000000000003fa4                Utils_Buffer_to_32_ValueU_Little
+                0x0000000000003d08       0x34 ./Header_C_files/Utils/utils.o
+                0x0000000000003d08                Utils_Buffer_to_32_ValueU_Big
+ .text.Utils_Buffer_to_52_ValueU_Little
+                0x0000000000003d3c       0x7c ./Header_C_files/Utils/utils.o
+                0x0000000000003d3c                Utils_Buffer_to_52_ValueU_Little
  .text.Utils_Change_Endian_To_BigU16
-                0x0000000000003fd8       0x28 ./Header_C_files/Utils/utils.o
-                0x0000000000003fd8                Utils_Change_Endian_To_BigU16
+                0x0000000000003db8       0x28 ./Header_C_files/Utils/utils.o
+                0x0000000000003db8                Utils_Change_Endian_To_BigU16
  .text.Utils_HAL_Set_8bit
-                0x0000000000004000       0x36 ./Header_C_files/Utils/utils.o
-                0x0000000000004000                Utils_HAL_Set_8bit
- .text.Utils_Delay16
-                0x0000000000004036       0x30 ./Header_C_files/Utils/utils.o
-                0x0000000000004036                Utils_Delay16
- .text.main     0x0000000000004066        0xe ./Header_C_files/Seq_ops/main.o
-                0x0000000000004066                main
+                0x0000000000003de0       0x36 ./Header_C_files/Utils/utils.o
+                0x0000000000003de0                Utils_HAL_Set_8bit
+ .text.main     0x0000000000003e16        0xe ./Header_C_files/Seq_ops/main.o
+                0x0000000000003e16                main
  .text.main_seq
-                0x0000000000004074       0x3c ./Header_C_files/Seq_ops/main.o
-                0x0000000000004074                main_seq
- .text.Init     0x00000000000040b0       0x8c ./Header_C_files/Seq_ops/main.o
-                0x00000000000040b0                Init
+                0x0000000000003e24       0x54 ./Header_C_files/Seq_ops/main.o
+                0x0000000000003e24                main_seq
+ .text.Init     0x0000000000003e78       0x88 ./Header_C_files/Seq_ops/main.o
+                0x0000000000003e78                Init
  .text.Get_Beacon_Packet
-                0x000000000000413c       0x4c ./Header_C_files/Seq_ops/main.o
-                0x000000000000413c                Get_Beacon_Packet
- .text.Store_Beacon_Data
-                0x0000000000004188       0xcc ./Header_C_files/Seq_ops/main.o
-                0x0000000000004188                Store_Beacon_Data
+                0x0000000000003f00       0xb8 ./Header_C_files/Seq_ops/main.o
+                0x0000000000003f00                Get_Beacon_Packet
+ .text.Get_CDH_Data
+                0x0000000000003fb8       0xd4 ./Header_C_files/Seq_ops/main.o
+                0x0000000000003fb8                Get_CDH_Data
  .text.Decide_Mode
-                0x0000000000004254       0xb4 ./Header_C_files/Seq_ops/main.o
-                0x0000000000004254                Decide_Mode
+                0x000000000000408c      0x178 ./Header_C_files/Seq_ops/main.o
+                0x000000000000408c                Decide_Mode
  .text.SwitchTo_Mode_Science_D
-                0x0000000000004308       0x18 ./Header_C_files/Seq_ops/main.o
-                0x0000000000004308                SwitchTo_Mode_Science_D
+                0x0000000000004204       0x18 ./Header_C_files/Seq_ops/main.o
+                0x0000000000004204                SwitchTo_Mode_Science_D
  .text.SwitchTo_Mode_Science_C
-                0x0000000000004320       0x18 ./Header_C_files/Seq_ops/main.o
-                0x0000000000004320                SwitchTo_Mode_Science_C
+                0x000000000000421c       0x18 ./Header_C_files/Seq_ops/main.o
+                0x000000000000421c                SwitchTo_Mode_Science_C
  .text.SwitchTo_Mode_Safe
-                0x0000000000004338       0x18 ./Header_C_files/Seq_ops/main.o
-                0x0000000000004338                SwitchTo_Mode_Safe
+                0x0000000000004234       0x18 ./Header_C_files/Seq_ops/main.o
+                0x0000000000004234                SwitchTo_Mode_Safe
  .text.SwitchTo_Mode_Pheonix
-                0x0000000000004350       0x10 ./Header_C_files/Seq_ops/main.o
-                0x0000000000004350                SwitchTo_Mode_Pheonix
+                0x000000000000424c       0x10 ./Header_C_files/Seq_ops/main.o
+                0x000000000000424c                SwitchTo_Mode_Pheonix
  .text.Beacon_Packet_UART_log
-                0x0000000000004360      0x298 ./Header_C_files/Seq_ops/main.o
-                0x0000000000004360                Beacon_Packet_UART_log
+                0x000000000000425c      0x318 ./Header_C_files/Seq_ops/main.o
+                0x000000000000425c                Beacon_Packet_UART_log
  .text.Flash_Init
-                0x00000000000045f8       0x74 ./Header_C_files/SPI_Flash/spi_flash.o
-                0x00000000000045f8                Flash_Init
+                0x0000000000004574       0x74 ./Header_C_files/SPI_Flash/spi_flash.o
+                0x0000000000004574                Flash_Init
  .text.Flash_Wait
-                0x000000000000466c       0x48 ./Header_C_files/SPI_Flash/spi_flash.o
-                0x000000000000466c                Flash_Wait
+                0x00000000000045e8       0x48 ./Header_C_files/SPI_Flash/spi_flash.o
+                0x00000000000045e8                Flash_Wait
  .text.Flash_Write_EN_DIS
-                0x00000000000046b4       0x38 ./Header_C_files/SPI_Flash/spi_flash.o
-                0x00000000000046b4                Flash_Write_EN_DIS
+                0x0000000000004630       0x38 ./Header_C_files/SPI_Flash/spi_flash.o
+                0x0000000000004630                Flash_Write_EN_DIS
  .text.Flash_CMD
-                0x00000000000046ec       0x88 ./Header_C_files/SPI_Flash/spi_flash.o
-                0x00000000000046ec                Flash_CMD
+                0x0000000000004668       0x88 ./Header_C_files/SPI_Flash/spi_flash.o
+                0x0000000000004668                Flash_CMD
  .text.Flash_Read_Status_Register_1
-                0x0000000000004774       0x3c ./Header_C_files/SPI_Flash/spi_flash.o
-                0x0000000000004774                Flash_Read_Status_Register_1
+                0x00000000000046f0       0x3c ./Header_C_files/SPI_Flash/spi_flash.o
+                0x00000000000046f0                Flash_Read_Status_Register_1
  .text.Update_Variables
-                0x00000000000047b0       0x90 ./Header_C_files/SPI_Flash/spi_flash.o
-                0x00000000000047b0                Update_Variables
+                0x000000000000472c       0xa4 ./Header_C_files/SPI_Flash/spi_flash.o
+                0x000000000000472c                Update_Variables
  .text.Load_Factory_Value
-                0x0000000000004840      0x100 ./Header_C_files/SPI_Flash/spi_flash.o
-                0x0000000000004840                Load_Factory_Value
+                0x00000000000047d0      0x14c ./Header_C_files/SPI_Flash/spi_flash.o
+                0x00000000000047d0                Load_Factory_Value
  .text.Load_Parameter_Table
-                0x0000000000004940       0x40 ./Header_C_files/SPI_Flash/spi_flash.o
-                0x0000000000004940                Load_Parameter_Table
+                0x000000000000491c       0x46 ./Header_C_files/SPI_Flash/spi_flash.o
+                0x000000000000491c                Load_Parameter_Table
  .text.Read_Parameter_Table
-                0x0000000000004980       0x14 ./Header_C_files/SPI_Flash/spi_flash.o
-                0x0000000000004980                Read_Parameter_Table
+                0x0000000000004962       0x14 ./Header_C_files/SPI_Flash/spi_flash.o
+                0x0000000000004962                Read_Parameter_Table
+ *fill*         0x0000000000004976        0x2 
  .text.Initialize_Sensor_Board_I2C_Channel
-                0x0000000000004994       0x1c ./Header_C_files/SENSOR_BOARD/sensor_board.o
-                0x0000000000004994                Initialize_Sensor_Board_I2C_Channel
+                0x0000000000004978       0x1c ./Header_C_files/SENSOR_BOARD/sensor_board.o
+                0x0000000000004978                Initialize_Sensor_Board_I2C_Channel
  .text.Get_VEML6075_Data
-                0x00000000000049b0       0x70 ./Header_C_files/SENSOR_BOARD/sensor_board.o
-                0x00000000000049b0                Get_VEML6075_Data
- .text.read_AS7265_reg
-                0x0000000000004a20       0xec ./Header_C_files/SENSOR_BOARD/sensor_board.o
-                0x0000000000004a20                read_AS7265_reg
+                0x0000000000004994       0x70 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+                0x0000000000004994                Get_VEML6075_Data
  .text.Get_AS7265x_Data
-                0x0000000000004b0c       0xac ./Header_C_files/SENSOR_BOARD/sensor_board.o
-                0x0000000000004b0c                Get_AS7265x_Data
- .text.SD_clear_slave_select
-                0x0000000000004bb8       0x2c ./Header_C_files/SD_CARD/sd.o
-                0x0000000000004bb8                SD_clear_slave_select
- .text.SD_set_slave_select
-                0x0000000000004be4       0x2c ./Header_C_files/SD_CARD/sd.o
-                0x0000000000004be4                SD_set_slave_select
- .text.SD_disable
-                0x0000000000004c10       0x28 ./Header_C_files/SD_CARD/sd.o
-                0x0000000000004c10                SD_disable
- .text.Custom_SPI_configure_master_mode
-                0x0000000000004c38       0x7e ./Header_C_files/SD_CARD/sd.o
-                0x0000000000004c38                Custom_SPI_configure_master_mode
- *fill*         0x0000000000004cb6        0x2 
- .text.SD_get_status
-                0x0000000000004cb8       0x88 ./Header_C_files/SD_CARD/sd.o
-                0x0000000000004cb8                SD_get_status
- .text.SD_Simul_Init
-                0x0000000000004d40      0x184 ./Header_C_files/SD_CARD/sd.o
-                0x0000000000004d40                SD_Simul_Init
- .text.SD_Cards_Init
-                0x0000000000004ec4       0x54 ./Header_C_files/SD_CARD/sd.o
-                0x0000000000004ec4                SD_Cards_Init
- .text.SD_Init  0x0000000000004f18      0x344 ./Header_C_files/SD_CARD/sd.o
-                0x0000000000004f18                SD_Init
- .text.SD_Write_Sector
-                0x000000000000525c      0x200 ./Header_C_files/SD_CARD/sd.o
-                0x000000000000525c                SD_Write_Sector
- .text.SD_Write_Data
-                0x000000000000545c       0x88 ./Header_C_files/SD_CARD/sd.o
-                0x000000000000545c                SD_Write_Data
- .text.SD_FDRI  0x00000000000054e4       0x7c ./Header_C_files/SD_CARD/sd.o
-                0x00000000000054e4                SD_FDRI
- .text.RTC_Get_Value16
-                0x0000000000005560       0x34 ./Header_C_files/RTC/rtc.o
-                0x0000000000005560                RTC_Get_Value16
- .text.RTC_Get_Value32
-                0x0000000000005594       0x50 ./Header_C_files/RTC/rtc.o
-                0x0000000000005594                RTC_Get_Value32
+                0x0000000000004a04       0x74 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+                0x0000000000004a04                Get_AS7265x_Data
+ .text.RTC_Get_Value64
+                0x0000000000004a78       0x7c ./Header_C_files/RTC/rtc.o
+                0x0000000000004a78                RTC_Get_Value64
  .text.RTC_Get_Value_Pointer1
-                0x00000000000055e4       0x6c ./Header_C_files/RTC/rtc.o
-                0x00000000000055e4                RTC_Get_Value_Pointer1
- .text.do_read_transaction
-                0x0000000000005650       0x40 ./Header_C_files/I2C/i2c.o
-                0x0000000000005650                do_read_transaction
- .text.do_write_transaction
-                0x0000000000005690       0x40 ./Header_C_files/I2C/i2c.o
-                0x0000000000005690                do_write_transaction
+                0x0000000000004af4       0x6c ./Header_C_files/RTC/rtc.o
+                0x0000000000004af4                RTC_Get_Value_Pointer1
+ .text.RTC_Get_ms
+                0x0000000000004b60       0x30 ./Header_C_files/RTC/rtc.o
+                0x0000000000004b60                RTC_Get_ms
  .text.do_write_read_transaction
-                0x00000000000056d0       0x5a ./Header_C_files/I2C/i2c.o
-                0x00000000000056d0                do_write_read_transaction
- *fill*         0x000000000000572a        0x2 
+                0x0000000000004b90       0x5a ./Header_C_files/I2C/i2c.o
+                0x0000000000004b90                do_write_read_transaction
+ *fill*         0x0000000000004bea        0x2 
  .text.SysTick_Handler
-                0x000000000000572c       0x38 ./Header_C_files/I2C/i2c.o
-                0x000000000000572c                SysTick_Handler
+                0x0000000000004bec       0x38 ./Header_C_files/I2C/i2c.o
+                0x0000000000004bec                SysTick_Handler
  .text.FabricIrq0_IRQHandler
-                0x0000000000005764       0x14 ./Header_C_files/I2C/i2c.o
-                0x0000000000005764                FabricIrq0_IRQHandler
+                0x0000000000004c24       0x14 ./Header_C_files/I2C/i2c.o
+                0x0000000000004c24                FabricIrq0_IRQHandler
  .text.FabricIrq1_IRQHandler
-                0x0000000000005778       0x14 ./Header_C_files/I2C/i2c.o
-                0x0000000000005778                FabricIrq1_IRQHandler
+                0x0000000000004c38       0x14 ./Header_C_files/I2C/i2c.o
+                0x0000000000004c38                FabricIrq1_IRQHandler
  .text.FabricIrq2_IRQHandler
-                0x000000000000578c       0x14 ./Header_C_files/I2C/i2c.o
-                0x000000000000578c                FabricIrq2_IRQHandler
+                0x0000000000004c4c       0x14 ./Header_C_files/I2C/i2c.o
+                0x0000000000004c4c                FabricIrq2_IRQHandler
  .text.FabricIrq3_IRQHandler
-                0x00000000000057a0       0x14 ./Header_C_files/I2C/i2c.o
-                0x00000000000057a0                FabricIrq3_IRQHandler
+                0x0000000000004c60       0x14 ./Header_C_files/I2C/i2c.o
+                0x0000000000004c60                FabricIrq3_IRQHandler
  .text.Global_Init_GPIOs
-                0x00000000000057b4       0xf4 ./Header_C_files/GPIOs/gpios.o
-                0x00000000000057b4                Global_Init_GPIOs
+                0x0000000000004c74       0xf4 ./Header_C_files/GPIOs/gpios.o
+                0x0000000000004c74                Global_Init_GPIOs
  .text.MSS_GPIO_set_outputs
-                0x00000000000058a8       0x20 ./Header_C_files/EPS/eps.o
+                0x0000000000004d68       0x20 ./Header_C_files/EPS/eps.o
  .text.MSS_GPIO_get_outputs
-                0x00000000000058c8       0x18 ./Header_C_files/EPS/eps.o
+                0x0000000000004d88       0x18 ./Header_C_files/EPS/eps.o
  .text.Initialize_EPS_I2C_Channels
-                0x00000000000058e0       0x44 ./Header_C_files/EPS/eps.o
-                0x00000000000058e0                Initialize_EPS_I2C_Channels
+                0x0000000000004da0       0x44 ./Header_C_files/EPS/eps.o
+                0x0000000000004da0                Initialize_EPS_I2C_Channels
  .text.PWR_Switch
-                0x0000000000005924       0x3a ./Header_C_files/EPS/eps.o
-                0x0000000000005924                PWR_Switch
+                0x0000000000004de4       0x3a ./Header_C_files/EPS/eps.o
+                0x0000000000004de4                PWR_Switch
  .text.assignGetEps
-                0x000000000000595e       0x3c ./Header_C_files/EPS/eps.o
-                0x000000000000595e                assignGetEps
- *fill*         0x000000000000599a        0x2 
+                0x0000000000004e1e       0x3c ./Header_C_files/EPS/eps.o
+                0x0000000000004e1e                assignGetEps
+ *fill*         0x0000000000004e5a        0x2 
  .text.epsAssignInit
-                0x000000000000599c      0x56c ./Header_C_files/EPS/eps.o
-                0x000000000000599c                epsAssignInit
+                0x0000000000004e5c      0x5c0 ./Header_C_files/EPS/eps.o
+                0x0000000000004e5c                epsAssignInit
  .text.Get_EPS_Data
-                0x0000000000005f08       0x9c ./Header_C_files/EPS/eps.o
-                0x0000000000005f08                Get_EPS_Data
+                0x000000000000541c       0x9c ./Header_C_files/EPS/eps.o
+                0x000000000000541c                Get_EPS_Data
  .text.CCSDS_Pack
-                0x0000000000005fa4       0x84 ./Header_C_files/CCSDS/ccsds.o
-                0x0000000000005fa4                CCSDS_Pack
+                0x00000000000054b8       0x84 ./Header_C_files/CCSDS/ccsds.o
+                0x00000000000054b8                CCSDS_Pack
  .text.CCSDS_Fletcher_16
-                0x0000000000006028       0xf4 ./Header_C_files/CCSDS/ccsds.o
-                0x0000000000006028                CCSDS_Fletcher_16
+                0x000000000000553c       0xf4 ./Header_C_files/CCSDS/ccsds.o
+                0x000000000000553c                CCSDS_Fletcher_16
+ .text          0x0000000000005630       0x30 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_aeabi_uldivmod.o)
+                0x0000000000005630                __aeabi_uldivmod
+ .text.__udivmoddi4
+                0x0000000000005660      0x2d0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_udivmoddi4.o)
+                0x0000000000005660                __udivmoddi4
+ .text          0x0000000000005930        0x4 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_dvmd_tls.o)
+                0x0000000000005930                __aeabi_idiv0
+                0x0000000000005930                __aeabi_ldiv0
  .text.__libc_init_array
-                0x000000000000611c       0x48 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-init.o)
-                0x000000000000611c                __libc_init_array
- .text.memcpy   0x0000000000006164       0x16 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memcpy-stub.o)
-                0x0000000000006164                memcpy
- .text.memset   0x000000000000617a       0x10 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memset.o)
-                0x000000000000617a                memset
+                0x0000000000005934       0x48 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-init.o)
+                0x0000000000005934                __libc_init_array
+ .text.memset   0x000000000000597c       0x10 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memset.o)
+                0x000000000000597c                memset
  *(.plt)
  *(.gnu.warning)
  *(.glue_7t)
- .glue_7t       0x000000000000618a        0x0 linker stubs
+ .glue_7t       0x000000000000598c        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x000000000000618a        0x0 linker stubs
+ .glue_7        0x000000000000598c        0x0 linker stubs
  *(.vfp11_veneer)
- .vfp11_veneer  0x000000000000618a        0x0 linker stubs
-                0x000000000000618c                . = ALIGN (0x4)
- *fill*         0x000000000000618a        0x2 
+ .vfp11_veneer  0x000000000000598c        0x0 linker stubs
+                0x000000000000598c                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT_BY_NAME(.ctors.*))
@@ -1531,203 +1540,194 @@ END GROUP
  *(SORT_BY_NAME(.dtors.*))
  *crtend.o(.dtors)
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata        0x000000000000618c       0x60 ./drivers/mss_pdma/mss_pdma.o
+ .rodata        0x000000000000598c       0x60 ./drivers/mss_pdma/mss_pdma.o
  .rodata.g_config_reg_lut
-                0x00000000000061ec       0x80 ./drivers/mss_gpio/mss_gpio.o
+                0x00000000000059ec       0x80 ./drivers/mss_gpio/mss_gpio.o
  .rodata.g_gpio_irqn_lut
-                0x000000000000626c       0x20 ./drivers/mss_gpio/mss_gpio.o
- .rodata        0x000000000000628c       0x38 ./Header_C_files/SD_CARD/sd.o
- .rodata        0x00000000000062c4        0x8 ./CMSIS/system_m2sxxx.o
+                0x0000000000005a6c       0x20 ./drivers/mss_gpio/mss_gpio.o
+ .rodata        0x0000000000005a8c        0x8 ./CMSIS/system_m2sxxx.o
  *(.ARM.extab* .gnu.linkonce.armextab.*)
  *(.gcc_except_table)
  *(.eh_frame_hdr)
  *(.eh_frame)
- .eh_frame      0x00000000000062cc        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
+ .eh_frame      0x0000000000005a94        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
  *(.vector_table)
  *(.init)
- .init          0x00000000000062cc        0x4 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crti.o
-                0x00000000000062cc                _init
- .init          0x00000000000062d0        0x8 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtn.o
+ .init          0x0000000000005a94        0x4 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crti.o
+                0x0000000000005a94                _init
+ .init          0x0000000000005a98        0x8 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtn.o
  *(.fini)
- .fini          0x00000000000062d8        0x4 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crti.o
-                0x00000000000062d8                _fini
- .fini          0x00000000000062dc        0x8 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtn.o
-                0x00000000000062e4                PROVIDE (__preinit_array_start = .)
+ .fini          0x0000000000005aa0        0x4 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crti.o
+                0x0000000000005aa0                _fini
+ .fini          0x0000000000005aa4        0x8 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtn.o
+                0x0000000000005aac                PROVIDE (__preinit_array_start = .)
  *(.preinit_array)
-                0x00000000000062e4                PROVIDE (__preinit_array_end = .)
-                0x00000000000062e4                PROVIDE (__init_array_start = .)
+                0x0000000000005aac                PROVIDE (__preinit_array_end = .)
+                0x0000000000005aac                PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array)
- .init_array    0x00000000000062e4        0x4 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
-                0x00000000000062e8                PROVIDE (__init_array_end = .)
+ .init_array    0x0000000000005aac        0x4 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
+                0x0000000000005ab0                PROVIDE (__init_array_end = .)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(.fini_array)
- .fini_array    0x00000000000062e8        0x4 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
+ .fini_array    0x0000000000005ab0        0x4 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
  *(SORT_BY_NAME(.fini_array.*))
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x00000000000062f0                . = ALIGN (0x10)
- *fill*         0x00000000000062ec        0x4 
-                0x00000000000062f0                __exidx_start = .
+                0x0000000000005ac0                . = ALIGN (0x10)
+ *fill*         0x0000000000005ab4        0xc 
+                0x0000000000005ac0                __exidx_start = .
 
-.v4_bx          0x00000000000062f0        0x0 load address 0x00000000600062f0
- .v4_bx         0x00000000000062f0        0x0 linker stubs
+.v4_bx          0x0000000000005ac0        0x0 load address 0x0000000060005ac0
+ .v4_bx         0x0000000000005ac0        0x0 linker stubs
 
-.iplt           0x00000000000062f0        0x0 load address 0x00000000600062f0
- .iplt          0x00000000000062f0        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
+.iplt           0x0000000000005ac0        0x0 load address 0x0000000060005ac0
+ .iplt          0x0000000000005ac0        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
 
-.rel.dyn        0x00000000000062f0        0x0 load address 0x00000000600062f0
- .rel.iplt      0x00000000000062f0        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
-
-.ARM.exidx
+.ARM.exidx      0x0000000020000000        0x8 load address 0x0000000060005ac0
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x00000000000062f0                __exidx_end = .
-                0x00000000000062f0                _etext = .
+ .ARM.exidx.text.__udivmoddi4
+                0x0000000020000000        0x8 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_udivmoddi4.o)
+                0x0000000020000008                __exidx_end = .
+                0x0000000020000008                _etext = .
 
-.data           0x0000000020000000       0x20 load address 0x00000000600062f0
-                0x00000000600062f0                __data_load = LOADADDR (.data)
-                0x00000000600062f0                _sidata = LOADADDR (.data)
-                0x0000000020000000                __data_start = .
-                0x0000000020000000                _sdata = .
+.rel.dyn        0x0000000020000008        0x0 load address 0x0000000060005ac8
+ .rel.iplt      0x0000000020000008        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
+
+.data           0x0000000020000010       0x20 load address 0x0000000060005ad0
+                0x0000000060005ad0                __data_load = LOADADDR (.data)
+                0x0000000060005ad0                _sidata = LOADADDR (.data)
+                0x0000000020000010                __data_start = .
+                0x0000000020000010                _sdata = .
  *(.jcr)
  *(.got.plt)
  *(.got)
  *(.shdata)
  *(.data .data.* .gnu.linkonce.d.*)
  .data.SystemCoreClock
-                0x0000000020000000        0x4 ./CMSIS/system_m2sxxx.o
-                0x0000000020000000                SystemCoreClock
- .data.g_FrequencyPCLK0
-                0x0000000020000004        0x4 ./CMSIS/system_m2sxxx.o
-                0x0000000020000004                g_FrequencyPCLK0
- .data.g_FrequencyPCLK1
-                0x0000000020000008        0x4 ./CMSIS/system_m2sxxx.o
-                0x0000000020000008                g_FrequencyPCLK1
- .data.g_FrequencyPCLK2
-                0x000000002000000c        0x4 ./CMSIS/system_m2sxxx.o
-                0x000000002000000c                g_FrequencyPCLK2
- .data.g_FrequencyFIC0
                 0x0000000020000010        0x4 ./CMSIS/system_m2sxxx.o
-                0x0000000020000010                g_FrequencyFIC0
- .data.g_FrequencyFIC1
+                0x0000000020000010                SystemCoreClock
+ .data.g_FrequencyPCLK0
                 0x0000000020000014        0x4 ./CMSIS/system_m2sxxx.o
-                0x0000000020000014                g_FrequencyFIC1
- .data.g_FrequencyFIC64
+                0x0000000020000014                g_FrequencyPCLK0
+ .data.g_FrequencyPCLK1
                 0x0000000020000018        0x4 ./CMSIS/system_m2sxxx.o
-                0x0000000020000018                g_FrequencyFIC64
-                0x0000000020000020                . = ALIGN (0x10)
- *fill*         0x000000002000001c        0x4 
-                0x0000000020000020                _edata = .
+                0x0000000020000018                g_FrequencyPCLK1
+ .data.g_FrequencyPCLK2
+                0x000000002000001c        0x4 ./CMSIS/system_m2sxxx.o
+                0x000000002000001c                g_FrequencyPCLK2
+ .data.g_FrequencyFIC0
+                0x0000000020000020        0x4 ./CMSIS/system_m2sxxx.o
+                0x0000000020000020                g_FrequencyFIC0
+ .data.g_FrequencyFIC1
+                0x0000000020000024        0x4 ./CMSIS/system_m2sxxx.o
+                0x0000000020000024                g_FrequencyFIC1
+ .data.g_FrequencyFIC64
+                0x0000000020000028        0x4 ./CMSIS/system_m2sxxx.o
+                0x0000000020000028                g_FrequencyFIC64
+                0x0000000020000030                . = ALIGN (0x10)
+ *fill*         0x000000002000002c        0x4 
+                0x0000000020000030                _edata = .
 
 .tm_clone_table
-                0x0000000020000020        0x0 load address 0x0000000060006310
+                0x0000000020000030        0x0 load address 0x0000000060005af0
  .tm_clone_table
-                0x0000000020000020        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
+                0x0000000020000030        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
  .tm_clone_table
-                0x0000000020000020        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtend.o
+                0x0000000020000030        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtend.o
 
-.igot.plt       0x0000000020000020        0x0 load address 0x0000000060006310
- .igot.plt      0x0000000020000020        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
+.igot.plt       0x0000000020000030        0x0 load address 0x0000000060005af0
+ .igot.plt      0x0000000020000030        0x0 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
 
-.bss            0x0000000020000020      0x8a0 load address 0x0000000060006310
-                0x0000000020000020                __bss_start__ = .
-                0x0000000020000020                _sbss = .
+.bss            0x0000000020000030      0x6a0 load address 0x0000000060005af0
+                0x0000000020000030                __bss_start__ = .
+                0x0000000020000030                _sbss = .
  *(.shbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
  .bss.completed.6486
-                0x0000000020000020        0x1 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
- *fill*         0x0000000020000021        0x3 
+                0x0000000020000030        0x1 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
+ *fill*         0x0000000020000031        0x3 
  .bss.object.6491
-                0x0000000020000024       0x18 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
+                0x0000000020000034       0x18 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
  .bss.g_comblk_cmd_opcode
-                0x000000002000003c        0x1 ./drivers/mss_sys_services/mss_comblk.o
- *fill*         0x000000002000003d        0x3 
+                0x000000002000004c        0x1 ./drivers/mss_sys_services/mss_comblk.o
+ *fill*         0x000000002000004d        0x3 
  .bss.g_comblk_p_cmd
-                0x0000000020000040        0x4 ./drivers/mss_sys_services/mss_comblk.o
- .bss.g_comblk_cmd_size
-                0x0000000020000044        0x2 ./drivers/mss_sys_services/mss_comblk.o
- *fill*         0x0000000020000046        0x2 
- .bss.g_comblk_p_data
-                0x0000000020000048        0x4 ./drivers/mss_sys_services/mss_comblk.o
- .bss.g_comblk_data_size
-                0x000000002000004c        0x4 ./drivers/mss_sys_services/mss_comblk.o
- .bss.g_comblk_p_response
                 0x0000000020000050        0x4 ./drivers/mss_sys_services/mss_comblk.o
- .bss.g_comblk_response_size
+ .bss.g_comblk_cmd_size
                 0x0000000020000054        0x2 ./drivers/mss_sys_services/mss_comblk.o
- .bss.g_comblk_response_idx
-                0x0000000020000056        0x2 ./drivers/mss_sys_services/mss_comblk.o
- .bss.g_comblk_completion_handler
+ *fill*         0x0000000020000056        0x2 
+ .bss.g_comblk_p_data
                 0x0000000020000058        0x4 ./drivers/mss_sys_services/mss_comblk.o
- .bss.g_comblk_page_handler
+ .bss.g_comblk_data_size
                 0x000000002000005c        0x4 ./drivers/mss_sys_services/mss_comblk.o
+ .bss.g_comblk_p_response
+                0x0000000020000060        0x4 ./drivers/mss_sys_services/mss_comblk.o
+ .bss.g_comblk_response_size
+                0x0000000020000064        0x2 ./drivers/mss_sys_services/mss_comblk.o
+ .bss.g_comblk_response_idx
+                0x0000000020000066        0x2 ./drivers/mss_sys_services/mss_comblk.o
+ .bss.g_comblk_completion_handler
+                0x0000000020000068        0x4 ./drivers/mss_sys_services/mss_comblk.o
+ .bss.g_comblk_page_handler
+                0x000000002000006c        0x4 ./drivers/mss_sys_services/mss_comblk.o
  .bss.g_request_in_progress
-                0x0000000020000060        0x1 ./drivers/mss_sys_services/mss_comblk.o
+                0x0000000020000070        0x1 ./drivers/mss_sys_services/mss_comblk.o
  .bss.g_comblk_state
-                0x0000000020000061        0x1 ./drivers/mss_sys_services/mss_comblk.o
- *fill*         0x0000000020000062        0x2 
+                0x0000000020000071        0x1 ./drivers/mss_sys_services/mss_comblk.o
+ *fill*         0x0000000020000072        0x2 
  .bss.g_async_event_handler
-                0x0000000020000064        0x4 ./drivers/mss_sys_services/mss_comblk.o
+                0x0000000020000074        0x4 ./drivers/mss_sys_services/mss_comblk.o
  .bss.g_pdma_isr_table
-                0x0000000020000068       0x20 ./drivers/mss_pdma/mss_pdma.o
+                0x0000000020000078       0x20 ./drivers/mss_pdma/mss_pdma.o
  .bss.g_transfer
-                0x0000000020000088       0x18 ./drivers/mss_hpdma/mss_hpdma.o
+                0x0000000020000098       0x18 ./drivers/mss_hpdma/mss_hpdma.o
  .bss.g_hpdma_end_desc
-                0x00000000200000a0        0x4 ./drivers/mss_hpdma/mss_hpdma.o
+                0x00000000200000b0        0x4 ./drivers/mss_hpdma/mss_hpdma.o
  .bss.g_hpdma_current_desc
-                0x00000000200000a4        0x4 ./drivers/mss_hpdma/mss_hpdma.o
- .bss.status_reg_buffer
-                0x00000000200000a8        0x1 ./Header_C_files/SENSOR_BOARD/sensor_board.o
-                0x00000000200000a8                status_reg_buffer
+                0x00000000200000b4        0x4 ./drivers/mss_hpdma/mss_hpdma.o
  *(COMMON)
- *fill*         0x00000000200000a9        0x3 
- COMMON         0x00000000200000ac      0x108 ./drivers_config/mss_spi/mss_spi.o
-                0x00000000200000ac                g_mss_spi1
-                0x0000000020000130                g_mss_spi0
- COMMON         0x00000000200001b4       0x80 ./drivers/mss_uart/mss_uart.o
-                0x00000000200001b4                g_mss_uart1
-                0x00000000200001f4                g_mss_uart0
- COMMON         0x0000000020000234       0xe8 ./drivers/mss_i2c/mss_i2c.o
-                0x0000000020000234                g_mss_i2c0
-                0x00000000200002a8                g_mss_i2c1
- COMMON         0x000000002000031c       0x79 ./Header_C_files/Utils/utils.o
-                0x000000002000031c                Beacon_pack_IS0
- *fill*         0x0000000020000395        0x3 
- COMMON         0x0000000020000398      0x1b8 ./Header_C_files/Test/test.o
-                0x0000000020000398                g_core_i2c2
-                0x0000000020000404                rx_buff
-                0x0000000020000408                g_core_i2c0
-                0x0000000020000474                g_core_i2c1
-                0x00000000200004e0                instance
-                0x00000000200004e4                g_core_i2c3
- COMMON         0x0000000020000550       0x93 ./Header_C_files/Seq_ops/main.o
-                0x0000000020000550                statusG
-                0x0000000020000558                Globals
- *fill*         0x00000000200005e3        0x1 
- COMMON         0x00000000200005e4        0xc ./Header_C_files/SENSOR_BOARD/sensor_board.o
-                0x00000000200005e4                pointsAS72651
- COMMON         0x00000000200005f0      0x20c ./Header_C_files/SD_CARD/sd.o
-                0x00000000200005f0                SD_Status
-                0x00000000200005f4                tmp_buff
-                0x00000000200007f4                CMD17
- COMMON         0x00000000200007fc       0xc0 ./Header_C_files/EPS/eps.o
-                0x00000000200007fc                points
-                0x00000000200008c0                . = ALIGN (0x10)
- *fill*         0x00000000200008bc        0x4 
-                0x00000000200008c0                __bss_end__ = .
-                0x00000000200008c0                _end = .
-                0x00000000200008c0                __end = _end
-                0x00000000200008c0                _ebss = .
+ COMMON         0x00000000200000b8      0x108 ./drivers_config/mss_spi/mss_spi.o
+                0x00000000200000b8                g_mss_spi1
+                0x000000002000013c                g_mss_spi0
+ COMMON         0x00000000200001c0       0x80 ./drivers/mss_uart/mss_uart.o
+                0x00000000200001c0                g_mss_uart1
+                0x0000000020000200                g_mss_uart0
+ COMMON         0x0000000020000240       0xe8 ./drivers/mss_i2c/mss_i2c.o
+                0x0000000020000240                g_mss_i2c0
+                0x00000000200002b4                g_mss_i2c1
+ COMMON         0x0000000020000328       0x99 ./Header_C_files/Utils/utils.o
+                0x0000000020000328                Beacon_pack_IS0
+ *fill*         0x00000000200003c1        0x3 
+ COMMON         0x00000000200003c4      0x1b8 ./Header_C_files/Test/test.o
+                0x00000000200003c4                g_core_i2c2
+                0x0000000020000430                rx_buff
+                0x0000000020000434                g_core_i2c0
+                0x00000000200004a0                g_core_i2c1
+                0x000000002000050c                instance
+                0x0000000020000510                g_core_i2c3
+ *fill*         0x000000002000057c        0x4 
+ COMMON         0x0000000020000580       0x8d ./Header_C_files/Seq_ops/main.o
+                0x0000000020000580                statusG
+                0x0000000020000588                Globals
+ *fill*         0x000000002000060d        0x3 
+ COMMON         0x0000000020000610       0xc0 ./Header_C_files/EPS/eps.o
+                0x0000000020000610                points
+                0x00000000200006d0                . = ALIGN (0x10)
+                0x00000000200006d0                __bss_end__ = .
+                0x00000000200006d0                _end = .
+                0x00000000200006d0                __end = _end
+                0x00000000200006d0                _ebss = .
                 [!provide]                        PROVIDE (end = .)
 
-.heap           0x00000000200008c0     0xe740 load address 0x0000000060006310
-                0x00000000200008c0                __heap_start__ = .
-                0x00000000200018c0                . = (. + MIN_SIZE_HEAP)
- *fill*         0x00000000200008c0     0x1000 
+.heap           0x00000000200006d0     0xe930 load address 0x0000000060005af0
+                0x00000000200006d0                __heap_start__ = .
+                0x00000000200016d0                . = (. + MIN_SIZE_HEAP)
+ *fill*         0x00000000200006d0     0x1000 
                 0x000000002000f000                . = (. + (((ABSOLUTE (RAM_START_ADDRESS) + RAM_SIZE) - MAIN_STACK_SIZE) - .))
- *fill*         0x00000000200018c0     0xd740 
+ *fill*         0x00000000200016d0     0xd930 
                 0x000000002000f000                _eheap = .
 
-.stack          0x000000002000f000     0x1000 load address 0x0000000060006310
+.stack          0x000000002000f000     0x1000 load address 0x0000000060005af0
                 0x000000002000f000                __stack_start__ = .
                 0x0000000020010000                . = (. + MAIN_STACK_SIZE)
  *fill*         0x000000002000f000     0x1000 
@@ -1751,7 +1751,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000      0xca0
+.debug_aranges  0x0000000000000000      0xc48
  *(.debug_aranges)
  .debug_aranges
                 0x0000000000000000       0x20 ./hal/CortexM3/GNU/hal.o
@@ -1776,36 +1776,34 @@ END GROUP
  .debug_aranges
                 0x0000000000000718       0x38 ./drivers/CoreI2C/i2c_interrupt.o
  .debug_aranges
-                0x0000000000000750       0xd8 ./Header_C_files/Utils/utils.o
+                0x0000000000000750       0xf0 ./Header_C_files/Utils/utils.o
  .debug_aranges
-                0x0000000000000828       0x70 ./Header_C_files/Test/test.o
+                0x0000000000000840       0x70 ./Header_C_files/Test/test.o
  .debug_aranges
-                0x0000000000000898       0xa8 ./Header_C_files/Seq_ops/main.o
+                0x00000000000008b0       0xb0 ./Header_C_files/Seq_ops/main.o
  .debug_aranges
-                0x0000000000000940       0xa8 ./Header_C_files/SPI_Flash/spi_flash.o
+                0x0000000000000960       0xa8 ./Header_C_files/SPI_Flash/spi_flash.o
  .debug_aranges
-                0x00000000000009e8       0x60 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+                0x0000000000000a08       0x60 ./Header_C_files/SENSOR_BOARD/sensor_board.o
  .debug_aranges
-                0x0000000000000a48       0x98 ./Header_C_files/SD_CARD/sd.o
+                0x0000000000000a68       0x78 ./Header_C_files/RTC/rtc.o
  .debug_aranges
-                0x0000000000000ae0       0x58 ./Header_C_files/RTC/rtc.o
+                0x0000000000000ae0       0x58 ./Header_C_files/I2C/i2c.o
  .debug_aranges
-                0x0000000000000b38       0x58 ./Header_C_files/I2C/i2c.o
+                0x0000000000000b38       0x20 ./Header_C_files/GPIOs/gpios.o
  .debug_aranges
-                0x0000000000000b90       0x20 ./Header_C_files/GPIOs/gpios.o
+                0x0000000000000b58       0x50 ./Header_C_files/EPS/eps.o
  .debug_aranges
-                0x0000000000000bb0       0x50 ./Header_C_files/EPS/eps.o
+                0x0000000000000ba8       0x30 ./Header_C_files/CCSDS/ccsds.o
  .debug_aranges
-                0x0000000000000c00       0x30 ./Header_C_files/CCSDS/ccsds.o
+                0x0000000000000bd8       0x20 ./CMSIS/startup_gcc/startup_m2sxxx.o
  .debug_aranges
-                0x0000000000000c30       0x20 ./CMSIS/startup_gcc/startup_m2sxxx.o
- .debug_aranges
-                0x0000000000000c50       0x50 ./CMSIS/system_m2sxxx.o
+                0x0000000000000bf8       0x50 ./CMSIS/system_m2sxxx.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000    0x1a5f3
+.debug_info     0x0000000000000000    0x189c5
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000       0x26 ./hal/CortexM3/GNU/hal.o
  .debug_info    0x0000000000000026       0x26 ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1818,21 +1816,20 @@ END GROUP
  .debug_info    0x0000000000008795      0xffc ./drivers/mss_gpio/mss_gpio.o
  .debug_info    0x0000000000009791     0x14a4 ./drivers/CoreI2C/core_i2c.o
  .debug_info    0x000000000000ac35      0x75c ./drivers/CoreI2C/i2c_interrupt.o
- .debug_info    0x000000000000b391     0x1875 ./Header_C_files/Utils/utils.o
- .debug_info    0x000000000000cc06     0x1ec4 ./Header_C_files/Test/test.o
- .debug_info    0x000000000000eaca     0x1e4a ./Header_C_files/Seq_ops/main.o
- .debug_info    0x0000000000010914     0x1984 ./Header_C_files/SPI_Flash/spi_flash.o
- .debug_info    0x0000000000012298     0x1c1e ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_info    0x0000000000013eb6     0x1b09 ./Header_C_files/SD_CARD/sd.o
- .debug_info    0x00000000000159bf      0xbc9 ./Header_C_files/RTC/rtc.o
- .debug_info    0x0000000000016588      0xec0 ./Header_C_files/I2C/i2c.o
- .debug_info    0x0000000000017448      0x176 ./Header_C_files/GPIOs/gpios.o
- .debug_info    0x00000000000175be     0x1960 ./Header_C_files/EPS/eps.o
- .debug_info    0x0000000000018f1e      0xc01 ./Header_C_files/CCSDS/ccsds.o
- .debug_info    0x0000000000019b1f       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
- .debug_info    0x0000000000019b45      0xaae ./CMSIS/system_m2sxxx.o
+ .debug_info    0x000000000000b391     0x19ae ./Header_C_files/Utils/utils.o
+ .debug_info    0x000000000000cd3f     0x1e52 ./Header_C_files/Test/test.o
+ .debug_info    0x000000000000eb91     0x1e51 ./Header_C_files/Seq_ops/main.o
+ .debug_info    0x00000000000109e2     0x18ee ./Header_C_files/SPI_Flash/spi_flash.o
+ .debug_info    0x00000000000122d0     0x1b9f ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_info    0x0000000000013e6f      0xc21 ./Header_C_files/RTC/rtc.o
+ .debug_info    0x0000000000014a90      0xe5e ./Header_C_files/I2C/i2c.o
+ .debug_info    0x00000000000158ee      0x176 ./Header_C_files/GPIOs/gpios.o
+ .debug_info    0x0000000000015a64     0x18ee ./Header_C_files/EPS/eps.o
+ .debug_info    0x0000000000017352      0xb9f ./Header_C_files/CCSDS/ccsds.o
+ .debug_info    0x0000000000017ef1       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_info    0x0000000000017f17      0xaae ./CMSIS/system_m2sxxx.o
 
-.debug_abbrev   0x0000000000000000     0x3350
+.debug_abbrev   0x0000000000000000     0x3074
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000       0x14 ./hal/CortexM3/GNU/hal.o
  .debug_abbrev  0x0000000000000014       0x14 ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1845,21 +1842,20 @@ END GROUP
  .debug_abbrev  0x000000000000105b      0x1ba ./drivers/mss_gpio/mss_gpio.o
  .debug_abbrev  0x0000000000001215      0x2ab ./drivers/CoreI2C/core_i2c.o
  .debug_abbrev  0x00000000000014c0      0x1a7 ./drivers/CoreI2C/i2c_interrupt.o
- .debug_abbrev  0x0000000000001667      0x29f ./Header_C_files/Utils/utils.o
- .debug_abbrev  0x0000000000001906      0x307 ./Header_C_files/Test/test.o
- .debug_abbrev  0x0000000000001c0d      0x34c ./Header_C_files/Seq_ops/main.o
- .debug_abbrev  0x0000000000001f59      0x3b9 ./Header_C_files/SPI_Flash/spi_flash.o
- .debug_abbrev  0x0000000000002312      0x2e5 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_abbrev  0x00000000000025f7      0x31d ./Header_C_files/SD_CARD/sd.o
- .debug_abbrev  0x0000000000002914      0x1c2 ./Header_C_files/RTC/rtc.o
- .debug_abbrev  0x0000000000002ad6      0x1b1 ./Header_C_files/I2C/i2c.o
- .debug_abbrev  0x0000000000002c87       0x81 ./Header_C_files/GPIOs/gpios.o
- .debug_abbrev  0x0000000000002d08      0x2e5 ./Header_C_files/EPS/eps.o
- .debug_abbrev  0x0000000000002fed      0x1c2 ./Header_C_files/CCSDS/ccsds.o
- .debug_abbrev  0x00000000000031af       0x14 ./CMSIS/startup_gcc/startup_m2sxxx.o
- .debug_abbrev  0x00000000000031c3      0x18d ./CMSIS/system_m2sxxx.o
+ .debug_abbrev  0x0000000000001667      0x2b9 ./Header_C_files/Utils/utils.o
+ .debug_abbrev  0x0000000000001920      0x307 ./Header_C_files/Test/test.o
+ .debug_abbrev  0x0000000000001c27      0x34c ./Header_C_files/Seq_ops/main.o
+ .debug_abbrev  0x0000000000001f73      0x3b9 ./Header_C_files/SPI_Flash/spi_flash.o
+ .debug_abbrev  0x000000000000232c      0x2fd ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_abbrev  0x0000000000002629      0x1d1 ./Header_C_files/RTC/rtc.o
+ .debug_abbrev  0x00000000000027fa      0x1b1 ./Header_C_files/I2C/i2c.o
+ .debug_abbrev  0x00000000000029ab       0x81 ./Header_C_files/GPIOs/gpios.o
+ .debug_abbrev  0x0000000000002a2c      0x2e5 ./Header_C_files/EPS/eps.o
+ .debug_abbrev  0x0000000000002d11      0x1c2 ./Header_C_files/CCSDS/ccsds.o
+ .debug_abbrev  0x0000000000002ed3       0x14 ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_abbrev  0x0000000000002ee7      0x18d ./CMSIS/system_m2sxxx.o
 
-.debug_line     0x0000000000000000     0x7c1e
+.debug_line     0x0000000000000000     0x738d
  *(.debug_line)
  .debug_line    0x0000000000000000       0x4d ./hal/CortexM3/GNU/hal.o
  .debug_line    0x000000000000004d       0x8b ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1872,21 +1868,20 @@ END GROUP
  .debug_line    0x00000000000026c4      0x2ad ./drivers/mss_gpio/mss_gpio.o
  .debug_line    0x0000000000002971      0x668 ./drivers/CoreI2C/core_i2c.o
  .debug_line    0x0000000000002fd9      0x32d ./drivers/CoreI2C/i2c_interrupt.o
- .debug_line    0x0000000000003306      0x632 ./Header_C_files/Utils/utils.o
- .debug_line    0x0000000000003938      0xa6d ./Header_C_files/Test/test.o
- .debug_line    0x00000000000043a5      0x87b ./Header_C_files/Seq_ops/main.o
- .debug_line    0x0000000000004c20      0x613 ./Header_C_files/SPI_Flash/spi_flash.o
- .debug_line    0x0000000000005233      0x7c1 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_line    0x00000000000059f4      0x991 ./Header_C_files/SD_CARD/sd.o
- .debug_line    0x0000000000006385      0x3bf ./Header_C_files/RTC/rtc.o
- .debug_line    0x0000000000006744      0x54c ./Header_C_files/I2C/i2c.o
- .debug_line    0x0000000000006c90      0x209 ./Header_C_files/GPIOs/gpios.o
- .debug_line    0x0000000000006e99      0x6d7 ./Header_C_files/EPS/eps.o
- .debug_line    0x0000000000007570      0x320 ./Header_C_files/CCSDS/ccsds.o
- .debug_line    0x0000000000007890      0x18e ./CMSIS/startup_gcc/startup_m2sxxx.o
- .debug_line    0x0000000000007a1e      0x200 ./CMSIS/system_m2sxxx.o
+ .debug_line    0x0000000000003306      0x692 ./Header_C_files/Utils/utils.o
+ .debug_line    0x0000000000003998      0xa6d ./Header_C_files/Test/test.o
+ .debug_line    0x0000000000004405      0x8ca ./Header_C_files/Seq_ops/main.o
+ .debug_line    0x0000000000004ccf      0x60d ./Header_C_files/SPI_Flash/spi_flash.o
+ .debug_line    0x00000000000052dc      0x7c3 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_line    0x0000000000005a9f      0x410 ./Header_C_files/RTC/rtc.o
+ .debug_line    0x0000000000005eaf      0x54c ./Header_C_files/I2C/i2c.o
+ .debug_line    0x00000000000063fb      0x209 ./Header_C_files/GPIOs/gpios.o
+ .debug_line    0x0000000000006604      0x6db ./Header_C_files/EPS/eps.o
+ .debug_line    0x0000000000006cdf      0x320 ./Header_C_files/CCSDS/ccsds.o
+ .debug_line    0x0000000000006fff      0x18e ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_line    0x000000000000718d      0x200 ./CMSIS/system_m2sxxx.o
 
-.debug_frame    0x0000000000000000     0x3194
+.debug_frame    0x0000000000000000     0x30b4
  *(.debug_frame)
  .debug_frame   0x0000000000000000      0x3c0 ./drivers_config/mss_spi/mss_spi.o
  .debug_frame   0x00000000000003c0      0x820 ./drivers/mss_uart/mss_uart.o
@@ -1897,23 +1892,23 @@ END GROUP
  .debug_frame   0x0000000000001754      0x198 ./drivers/mss_gpio/mss_gpio.o
  .debug_frame   0x00000000000018ec      0x484 ./drivers/CoreI2C/core_i2c.o
  .debug_frame   0x0000000000001d70       0xa8 ./drivers/CoreI2C/i2c_interrupt.o
- .debug_frame   0x0000000000001e18      0x3a8 ./Header_C_files/Utils/utils.o
- .debug_frame   0x00000000000021c0      0x17c ./Header_C_files/Test/test.o
- .debug_frame   0x000000000000233c      0x260 ./Header_C_files/Seq_ops/main.o
- .debug_frame   0x000000000000259c      0x2c4 ./Header_C_files/SPI_Flash/spi_flash.o
- .debug_frame   0x0000000000002860      0x164 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_frame   0x00000000000029c4      0x260 ./Header_C_files/SD_CARD/sd.o
- .debug_frame   0x0000000000002c24      0x128 ./Header_C_files/RTC/rtc.o
- .debug_frame   0x0000000000002d4c      0x10c ./Header_C_files/I2C/i2c.o
- .debug_frame   0x0000000000002e58       0x2c ./Header_C_files/GPIOs/gpios.o
- .debug_frame   0x0000000000002e84      0x110 ./Header_C_files/EPS/eps.o
- .debug_frame   0x0000000000002f94       0x80 ./Header_C_files/CCSDS/ccsds.o
- .debug_frame   0x0000000000003014      0x10c ./CMSIS/system_m2sxxx.o
- .debug_frame   0x0000000000003120       0x2c c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-init.o)
- .debug_frame   0x000000000000314c       0x28 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memcpy-stub.o)
- .debug_frame   0x0000000000003174       0x20 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memset.o)
+ .debug_frame   0x0000000000001e18      0x41c ./Header_C_files/Utils/utils.o
+ .debug_frame   0x0000000000002234      0x17c ./Header_C_files/Test/test.o
+ .debug_frame   0x00000000000023b0      0x294 ./Header_C_files/Seq_ops/main.o
+ .debug_frame   0x0000000000002644      0x2c8 ./Header_C_files/SPI_Flash/spi_flash.o
+ .debug_frame   0x000000000000290c      0x164 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_frame   0x0000000000002a70      0x1c4 ./Header_C_files/RTC/rtc.o
+ .debug_frame   0x0000000000002c34      0x10c ./Header_C_files/I2C/i2c.o
+ .debug_frame   0x0000000000002d40       0x2c ./Header_C_files/GPIOs/gpios.o
+ .debug_frame   0x0000000000002d6c      0x110 ./Header_C_files/EPS/eps.o
+ .debug_frame   0x0000000000002e7c       0x80 ./Header_C_files/CCSDS/ccsds.o
+ .debug_frame   0x0000000000002efc      0x10c ./CMSIS/system_m2sxxx.o
+ .debug_frame   0x0000000000003008       0x2c c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x0000000000003034       0x34 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x0000000000003068       0x2c c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-init.o)
+ .debug_frame   0x0000000000003094       0x20 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memset.o)
 
-.debug_str      0x0000000000000000     0x5867
+.debug_str      0x0000000000000000     0x55fc
  *(.debug_str)
  .debug_str     0x0000000000000000       0xb7 ./hal/CortexM3/GNU/hal.o
  .debug_str     0x00000000000000b7       0x24 ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1936,31 +1931,29 @@ END GROUP
                                         0xe25 (size before relaxing)
  .debug_str     0x0000000000003f74       0x72 ./drivers/CoreI2C/i2c_interrupt.o
                                         0xabb (size before relaxing)
- .debug_str     0x0000000000003fe6      0x6b0 ./Header_C_files/Utils/utils.o
-                                       0x1662 (size before relaxing)
- .debug_str     0x0000000000004696      0x290 ./Header_C_files/Test/test.o
-                                       0x1c1e (size before relaxing)
- .debug_str     0x0000000000004926      0x242 ./Header_C_files/Seq_ops/main.o
-                                       0x1aca (size before relaxing)
- .debug_str     0x0000000000004b68      0x41c ./Header_C_files/SPI_Flash/spi_flash.o
-                                       0x17fc (size before relaxing)
- .debug_str     0x0000000000004f84      0x19c ./Header_C_files/SENSOR_BOARD/sensor_board.o
-                                       0x197e (size before relaxing)
- .debug_str     0x0000000000005120      0x271 ./Header_C_files/SD_CARD/sd.o
-                                       0x1863 (size before relaxing)
- .debug_str     0x0000000000005391       0xaa ./Header_C_files/RTC/rtc.o
-                                        0xf8d (size before relaxing)
- .debug_str     0x000000000000543b       0xe6 ./Header_C_files/I2C/i2c.o
-                                       0x1284 (size before relaxing)
- .debug_str     0x0000000000005521       0x32 ./Header_C_files/GPIOs/gpios.o
+ .debug_str     0x0000000000003fe6      0x686 ./Header_C_files/Utils/utils.o
+                                       0x1691 (size before relaxing)
+ .debug_str     0x000000000000466c      0x290 ./Header_C_files/Test/test.o
+                                       0x1b38 (size before relaxing)
+ .debug_str     0x00000000000048fc      0x27b ./Header_C_files/Seq_ops/main.o
+                                       0x1a17 (size before relaxing)
+ .debug_str     0x0000000000004b77      0x3c3 ./Header_C_files/SPI_Flash/spi_flash.o
+                                       0x16bd (size before relaxing)
+ .debug_str     0x0000000000004f3a      0x19e ./Header_C_files/SENSOR_BOARD/sensor_board.o
+                                       0x189a (size before relaxing)
+ .debug_str     0x00000000000050d8       0xf8 ./Header_C_files/RTC/rtc.o
+                                        0xef5 (size before relaxing)
+ .debug_str     0x00000000000051d0       0xe6 ./Header_C_files/I2C/i2c.o
+                                       0x119e (size before relaxing)
+ .debug_str     0x00000000000052b6       0x32 ./Header_C_files/GPIOs/gpios.o
                                         0x3a6 (size before relaxing)
- .debug_str     0x0000000000005553       0xad ./Header_C_files/EPS/eps.o
-                                       0x18fc (size before relaxing)
- .debug_str     0x0000000000005600       0xac ./Header_C_files/CCSDS/ccsds.o
-                                        0xf96 (size before relaxing)
- .debug_str     0x00000000000056ac       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_str     0x00000000000052e8       0xad ./Header_C_files/EPS/eps.o
+                                       0x1816 (size before relaxing)
+ .debug_str     0x0000000000005395       0xac ./Header_C_files/CCSDS/ccsds.o
+                                        0xeb0 (size before relaxing)
+ .debug_str     0x0000000000005441       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
                                          0xc3 (size before relaxing)
- .debug_str     0x00000000000056d2      0x195 ./CMSIS/system_m2sxxx.o
+ .debug_str     0x0000000000005467      0x195 ./CMSIS/system_m2sxxx.o
                                         0xb29 (size before relaxing)
 
 .debug_loc
@@ -2086,7 +2079,7 @@ END GROUP
  *(.note.GNU-stack)
 OUTPUT(test.elf elf32-littlearm)
 
-.debug_ranges   0x0000000000000000      0xb70
+.debug_ranges   0x0000000000000000      0xb28
  .debug_ranges  0x0000000000000000       0xd0 ./drivers_config/mss_spi/mss_spi.o
  .debug_ranges  0x00000000000000d0      0x1d8 ./drivers/mss_uart/mss_uart.o
  .debug_ranges  0x00000000000002a8       0xd0 ./drivers/mss_sys_services/mss_comblk.o
@@ -2096,18 +2089,17 @@ OUTPUT(test.elf elf32-littlearm)
  .debug_ranges  0x0000000000000568       0x58 ./drivers/mss_gpio/mss_gpio.o
  .debug_ranges  0x00000000000005c0      0x100 ./drivers/CoreI2C/core_i2c.o
  .debug_ranges  0x00000000000006c0       0x28 ./drivers/CoreI2C/i2c_interrupt.o
- .debug_ranges  0x00000000000006e8       0xc8 ./Header_C_files/Utils/utils.o
- .debug_ranges  0x00000000000007b0       0x60 ./Header_C_files/Test/test.o
- .debug_ranges  0x0000000000000810       0x98 ./Header_C_files/Seq_ops/main.o
- .debug_ranges  0x00000000000008a8       0x98 ./Header_C_files/SPI_Flash/spi_flash.o
- .debug_ranges  0x0000000000000940       0x50 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_ranges  0x0000000000000990       0x88 ./Header_C_files/SD_CARD/sd.o
- .debug_ranges  0x0000000000000a18       0x48 ./Header_C_files/RTC/rtc.o
- .debug_ranges  0x0000000000000a60       0x48 ./Header_C_files/I2C/i2c.o
- .debug_ranges  0x0000000000000aa8       0x10 ./Header_C_files/GPIOs/gpios.o
- .debug_ranges  0x0000000000000ab8       0x40 ./Header_C_files/EPS/eps.o
- .debug_ranges  0x0000000000000af8       0x20 ./Header_C_files/CCSDS/ccsds.o
- .debug_ranges  0x0000000000000b18       0x58 ./CMSIS/system_m2sxxx.o
+ .debug_ranges  0x00000000000006e8       0xe0 ./Header_C_files/Utils/utils.o
+ .debug_ranges  0x00000000000007c8       0x60 ./Header_C_files/Test/test.o
+ .debug_ranges  0x0000000000000828       0xa0 ./Header_C_files/Seq_ops/main.o
+ .debug_ranges  0x00000000000008c8       0x98 ./Header_C_files/SPI_Flash/spi_flash.o
+ .debug_ranges  0x0000000000000960       0x50 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_ranges  0x00000000000009b0       0x68 ./Header_C_files/RTC/rtc.o
+ .debug_ranges  0x0000000000000a18       0x48 ./Header_C_files/I2C/i2c.o
+ .debug_ranges  0x0000000000000a60       0x10 ./Header_C_files/GPIOs/gpios.o
+ .debug_ranges  0x0000000000000a70       0x40 ./Header_C_files/EPS/eps.o
+ .debug_ranges  0x0000000000000ab0       0x20 ./Header_C_files/CCSDS/ccsds.o
+ .debug_ranges  0x0000000000000ad0       0x58 ./CMSIS/system_m2sxxx.o
 
 .comment        0x0000000000000000       0x71
  .comment       0x0000000000000000       0x71 ./drivers_config/mss_spi/mss_spi.o
@@ -2125,7 +2117,6 @@ OUTPUT(test.elf elf32-littlearm)
  .comment       0x0000000000000071       0x72 ./Header_C_files/Seq_ops/main.o
  .comment       0x0000000000000071       0x72 ./Header_C_files/SPI_Flash/spi_flash.o
  .comment       0x0000000000000071       0x72 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .comment       0x0000000000000071       0x72 ./Header_C_files/SD_CARD/sd.o
  .comment       0x0000000000000071       0x72 ./Header_C_files/RTC/rtc.o
  .comment       0x0000000000000071       0x72 ./Header_C_files/I2C/i2c.o
  .comment       0x0000000000000071       0x72 ./Header_C_files/GPIOs/gpios.o

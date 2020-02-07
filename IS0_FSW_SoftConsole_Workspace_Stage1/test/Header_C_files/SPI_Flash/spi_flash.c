@@ -241,38 +241,25 @@ void Update_Variables(Param_Table_t t){
 
 	Globals.Current_SD = t.Param_Current_SD;
 
-
-	Globals.Beac_Timer.Time = t.Param_Beac_Timer_Time;
-	Globals.Beac_Trans_Timer.Time = t.Param_Beac_Trans_Timer_Time;
-
 	Globals.Watchdog_Signal_Timer.Time = t.Param_Watchdog_Signal_Timer_Time;
 
-    Globals.RTC_Sync_Timer.Time = t.Param_RTC_Sync_Timer_Time;
+	Globals.Beac_Thershold_Time = t.Param_Beac_Timer_Threshold_Time;
+
+    Globals.SCI_SCID_Thershold_Time = t.Param_SCI_SCID_Thershold_Time;
+    Globals.Safe_Pheonix_Threshold_Time = t.Param_Safe_Pheonix_Threshold_Time;
+
 
 	Globals.Boot_Up_Counter = t.Param_Boot_Up_Counter;
 
-
-
-
 	Globals.Flash_SPI_Tries_Limit = t.Param_Flash_SPI_Tries_Limit;
 	Globals.Flash_SPI_Wait_Limit = t.Param_Flash_SPI_Wait_Limit;
-
 	Globals.Non_Response_Count_Limit = t.Param_Non_Response_Count_Limit;
-
-
-
 
 	Globals.Beacon_Sector_Start = t.Param_Beacon_Sector_Start;
 	Globals.Beacon_Sector_End = t.Param_Beacon_Sector_End;
 
-
-
 	Globals.Beacon_Write_Start = t.Param_Beacon_Write_Start;
 	Globals.Beacon_Read_Start = t.Param_Beacon_Read_Start;
-
-
-	Globals.Force_Mode_Update_Rate.Time = t.Param_Force_Mode_Update_Rate_Time;
-
 
 }
 
@@ -282,17 +269,22 @@ void Load_Factory_Value(){
 
 	t.Param_Current_SD = 0;
 
-	t.Param_Beac_Timer_Time = 1000;
-	t.Param_Beac_Trans_Timer_Time = 10000;
+	//This corrensponds to 200 microseconds, which is 0.2 milliseconds
 	t.Param_Watchdog_Signal_Timer_Time = 200;
 
-    t.Param_RTC_Sync_Timer_Time = 60000;
-    t.Param_EPS_CMD_Timer_Time = 400;
+	t.Param_Beac_Timer_Threshold_Time = (uint64_t)1000000;
+
+	//45 minutes = 2700 seconds = 2700 000 000 micro seconds = 0xA0EEBB00
+	//5 seconds = 5000 000 microseconds = 0x4C4B40
+	// 10 seconds is 10 000 000 = 0x989680
+	t.Param_SCI_SCID_Thershold_Time = (uint64_t)0x989680;
+
+	//5 days = 7200 minutes = 432000 seconds = 432000 000 000 micro seconds = 0x649534E000
+	//12 seconds = 12 000 000 microseconds = 0xB71B00
+	// 15 seconds is 15 000 000 = 0xE4E1C0
+	t.Param_Safe_Pheonix_Threshold_Time = (uint64_t)0xE4E1C0;
 
 	t.Param_Boot_Up_Counter = 0;
-
-
-
 
 	t.Param_Flash_SPI_Tries_Limit = 240;
 	t.Param_Flash_SPI_Wait_Limit = 0x8000;
@@ -304,16 +296,9 @@ void Load_Factory_Value(){
 	t.Param_Beacon_Sector_End = 31536004;
 
 
-
 	t.Param_Beacon_Write_Start = t.Param_Beacon_Sector_Start;
+
 	t.Param_Beacon_Read_Start = t.Param_Beacon_Sector_Start;
-
-
-
-	t.Param_CMD_Forced_Mode = 0;
-    t.Param_Force_Mode_Timer_Time = 0;
-    t.Param_Force_Mode_Update_Rate_Time = 0;
-
 
 
 	t.Param_Fletcher_code = 0;
@@ -326,25 +311,14 @@ void Get_Filled_Array(Param_Table_t * t){
 
 	t->Param_Current_SD = Globals.Current_SD;
 
-
-	t->Param_Beac_Timer_Time = Globals.Beac_Timer.Time;
-	t->Param_Beac_Trans_Timer_Time = Globals.Beac_Trans_Timer.Time;
-
 	t->Param_Watchdog_Signal_Timer_Time = Globals.Watchdog_Signal_Timer.Time;
 
-
-    t->Param_RTC_Sync_Timer_Time = Globals.RTC_Sync_Timer.Time;
-
-
 	t->Param_Boot_Up_Counter = Globals.Boot_Up_Counter;
-
-
 
 	t->Param_Flash_SPI_Tries_Limit = Globals.Flash_SPI_Tries_Limit;
 	t->Param_Flash_SPI_Wait_Limit = Globals.Flash_SPI_Wait_Limit;
 
 	t->Param_Non_Response_Count_Limit = Globals.Non_Response_Count_Limit;
-
 
 
 	t->Param_Beacon_Sector_Start = Globals.Beacon_Sector_Start;
@@ -354,9 +328,6 @@ void Get_Filled_Array(Param_Table_t * t){
 
 	t->Param_Beacon_Write_Start = Globals.Beacon_Write_Start;
 	t->Param_Beacon_Read_Start = Globals.Beacon_Read_Start;
-
-
-    t->Param_Force_Mode_Update_Rate_Time = Globals.Force_Mode_Update_Rate.Time;
 
 
 

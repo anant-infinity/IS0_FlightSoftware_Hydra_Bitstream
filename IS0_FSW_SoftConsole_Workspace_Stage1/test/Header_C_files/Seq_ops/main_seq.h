@@ -61,7 +61,7 @@
 /*************************************************************************/
 
 /* Defining the modes of operation of the spacecraft */
-#define SC_PHOENIX_MODE     0x00
+#define SC_PHEONIX_MODE     0x00
 #define SC_SAFE_MODE        0x01
 //Removed charging mode for IS0
 //#define SC_CHARGING_MODE    0x02
@@ -84,7 +84,6 @@
 #define SD_CARD0_WORKING            	0x0002
 #define SD_CARD1_WORKING            	0x0004
 #define SC_REBOOT                   	0x0020
-#define IS_ECLIPSE                  	0x0040
 #define REQ_BEACON_TRANSMIT         	0x1000
 #define REQ_SD_DATA_TRANSMIT        	0x4000
 
@@ -165,6 +164,22 @@ void Get_Beacon_Packet();
  * @return: void
  *
 */
+
+void Get_CDH_Data();
+
+/*---------------------------------------------------------------------------*/
+/* This function is used to collect the important global variables from the CDH.
+ * It then adds them to the beacon packet.
+ *
+ *
+ *
+ * @param
+ * 	No parameter
+ *
+ * @return: void
+ *
+*/
+
 void Store_Beacon_Data();
 
 
@@ -212,6 +227,18 @@ void Beacon_Packet_UART_log();
  *
 */
 void Watchdog_Timer_Handler();
+
+
+/*---------------------------------------------------------------------------*/
+/* The Watchdog_Pet() toggles a GPIO to send the "PET" signal to the watchdog,
+ * whenever it is called by the Watchdog_Timer_Handler
+ *
+ * @param
+ * 	No parameter
+ *
+ * @return: void
+ *
+*/
 
 void Watchdog_Pet(void);
 
@@ -333,14 +360,12 @@ struct Beacon_packet_IS0{
 	//To Add CCSDS Header
     struct CCSDS_Header beac_head;	// The CCSDS header
 
-    //To Add CDH HK Data
-    //uint8_t CDH_Subsystem_ON_Stat;
-    //uint16_t CDH_Temp;
-    //uint8_t CDH_Primary_Info;
-    //uint8_t CDH_Sub_System_Data_Valid_Flags;
+    uint8_t CDH_8[2];
+    uint32_t CDH_32[3];
+    uint64_t CDH_64[2];
 
     //EPS HK Data
-    uint16_t EPS[32];
+    uint16_t EPS[33];
 
     //Sensor Board VMEL Data
     uint16_t Sensor_Board_VMEL6075[4];
@@ -358,16 +383,20 @@ struct Beacon_packet_IS0{
 
 
 
-typedef struct Parameter_Table 	// The stuct definition for all the variables which are in the parameter table.
+
+typedef struct Parameter_Table 	// The struct definition for all the variables which are in the parameter table.
 {
 	//Simply modified the IS1 Parameter table - Removed all the variables that seemed to be useless for IS0
 	//Currently these parameters are not used in IS0, need to
     uint8_t Param_Current_SD;
     /* Timer data */
-    uint32_t Param_Beac_Timer_Time;
-    uint32_t Param_Beac_Trans_Timer_Time;
+
     uint16_t Param_Watchdog_Signal_Timer_Time;
-    uint32_t Param_RTC_Sync_Timer_Time;
+
+    uint64_t Param_Beac_Timer_Threshold_Time;
+
+    uint64_t Param_SCI_SCID_Thershold_Time;
+    uint64_t Param_Safe_Pheonix_Threshold_Time;
 
     /* Counters */
     uint32_t Param_Boot_Up_Counter;
@@ -377,22 +406,14 @@ typedef struct Parameter_Table 	// The stuct definition for all the variables wh
     uint16_t Param_Flash_SPI_Wait_Limit;
     uint8_t Param_Non_Response_Count_Limit;
 
-
     /* SD card data */
     uint32_t Param_Beacon_Sector_Start;
     uint32_t Param_Beacon_Sector_End;
-
 
     /* Write and transmit data indicators */
     uint32_t Param_Beacon_Write_Start;
     uint32_t Param_Beacon_Read_Start;
 
-    /* Persistent commands data*/
-    uint8_t Param_CMD_Forced_Mode;
-    uint32_t Param_Force_Mode_Timer_Time;
-    uint32_t Param_Force_Mode_Update_Rate_Time;
-
-    uint16_t Param_EPS_CMD_Timer_Time;
     uint16_t Param_Fletcher_code;
 
 } Param_Table_t;
@@ -446,6 +467,19 @@ typedef struct Timer8{
 	uint8_t Time;
 } Timer8_t;
 
+typedef struct 	// a struct for managing the state machine of different subsystems and modules
+{
+    uint16_t CMD_Seq_Count;
+    uint16_t Prev_CMD_Seq_Count;
+    uint16_t Response_Length;
+    uint16_t Response_Read;
+    Timer16_t CMD_Period_Timer;
+    Timer16_t Response_Limit_Timer;
+    uint8_t Non_response_count;
+    uint8_t GS_CMD_Length;
+    uint8_t GS_CMD_Response_Length;
+} Module_Sync_t;
+
 
 typedef struct 	// a small struct for the managing the less complex state machines.
 {
@@ -457,48 +491,56 @@ typedef struct 	// a small struct for the managing the less complex state machin
 
 
 GLOBAL struct Global_Variables { 	// Struct containing all the global variables
+
+   uint32_t						Time_in_msec;
+
    uint8_t                     	Forced_Mode_Flag;
-   Timer32_t                   	SCIC_SCID_Timer;
-   Timer32_t					Safe_Pheonix_Timer;
-   Timer32_t                   	Force_Mode_Update_Rate;
-   Timer16_t                   	DAXSS_Sci_Packet_Timer;
+
+   Timer64_t                   	Beac_Timer;
+
+   Timer64_t                   	SCIC_SCID_Timer;
+
+   Timer64_t					Safe_Pheonix_Timer;
+
+   uint64_t 					Beac_Thershold_Time;
+   uint64_t 					SCI_SCID_Thershold_Time;
+   uint64_t						Safe_Pheonix_Threshold_Time;
+
    uint8_t                     	I2C_Error_Flag;
    uint8_t                     	Sat_Curr_Mode;
-   uint8_t                     	Sat_Avoid_Mode;
+
    uint32_t                    	Timers_Started_Flag;
+
    uint32_t                    	Indication_Flags;
+
    uint16_t                    	Beacon_Packet_Seq_Counter;
-   uint16_t                    	Science_Packet_Seq_Counter;
-   Timer32_t                   	Beac_Timer;
-   Timer32_t                   	Beac_Trans_Timer;
+
    Timer16_t                   	Watchdog_Signal_Timer;
-   Timer32_t                   	RTC_Sync_Timer;
+
    uint8_t                     	Non_Response_Count_Limit;
    uint8_t                     	Subsystem_Restart_Limit;
-   uint16_t                    	Phoe_Safe_Threshold;
-   uint16_t                    	Safe_Phoe_Threshold;
-   uint16_t                    	Safe_Char_Threshold;
-   uint16_t                    	Char_Safe_Threshold;
-   uint16_t                   	Char_SciD_Threshold;
-   uint16_t                    	SciD_Char_Threshold;
-   uint16_t                    	Char_SciC_Threshold;
-   uint16_t                    	SciC_Char_Threshold;
+
    uint8_t                     	Flash_SPI_Tries_Limit;
-   uint8_t                     	CMD_Persistant_Flags;
+
    uint32_t                    	Boot_Up_Counter;
+
    uint32_t                    	Beacon_Sector_Start;
    uint32_t                    	Beacon_Sector_End;
    uint32_t                    	Beacon_Write_Start;
    uint32_t                    	Beacon_Read_Start;
-   uint32_t                    	HK_Read_Start;
+
    uint8_t                     	PWR_I2C_Error_Count[3];
-   uint16_t                    	PWR_Fuel_Guage_Data[3];
+
    uint16_t                    	Flash_SPI_Wait_Limit;
    uint8_t                     	SD_Clk_Div;
    uint8_t                     	Current_SD;
    uint16_t 					Globals_Table_Packet_Seq_Counter;
+
    Module_Sync_Small_t			SD_FDRI_Module_Sync;
+
 } Globals;
+
+
 
 
 typedef struct CCSDS_Max_Data_size_Packet Global_packet_Full_t;	// Tyepdef of the CCSDS Max size packet as global packet 1

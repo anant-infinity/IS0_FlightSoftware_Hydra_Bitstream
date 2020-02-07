@@ -2,26 +2,6 @@
 <!-- Commands Not Used for IS0 -->
 <menu name="Commands">
         <cmd name = "Sorry, No Commands for IS0"/>
-<!--         <cmd name = "Change_Threshold"/>
-       	<cmd name = "Power_Cycle_Spacecraft"/>
-		<cmd name = "Command_Subsystem"/>
-		<cmd name = "Force_Mode"/>
-		<cmd name = "Set_Flag"/>
-		<cmd name = "Restart_Reset_Counter"/>
-		<cmd name = "Change_Timer_Rate"/>
-		<cmd name = "Set_Packet_Read_Offset"/>
-		<cmd name = "Comms_Priority_Transmit_Data"/>
-		<cmd name = "Set_Packet_Write_Offset"/>
-		<cmd name = "Power_Cycle_Subsystem"/>
-		<cmd name = "Transmit_Table"/>
-		<cmd name = "Transmit_ADCS_IMG"/>
-		<cmd name = "Write_Param"/>
-		<cmd name = "Write_SRAM_Param"/>
-		<cmd name = "Sync_CDH_RTC"/>
-		<cmd name = "Tmp_Change_Beacon_Rate"/>
-		<cmd name = "Goto_Custom_Mode"/>
-		<cmd name = "Define_Custom_Mode"/>
-		<cmd name = "Load_Factory_Parameters"/>
-		<cmd name = "Reset_Flash_Parameters"/> -->
+
     </menu>
 </hydraMenu>

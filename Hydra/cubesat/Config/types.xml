@@ -229,41 +229,9 @@
     <typeFloat name="float32l" endian="LITTLE"/>
     <typeDouble name="double64l" endian="LITTLE"/>
 
-
-    <typeEU name="adcs_tracker_temp" size="8" eu="adcs_star_tracker_temp_EU"/>
-    <typeEU name="adcs_wheel_temp" size="16" eu="adcs_wheel_temp_EU"/>
-    <typeEU name="adcs_digi_bus_volt" size="16" eu="adcs_digi_bus_EU"/>
-    <typeEU name="adcs_sun_vector" size="16" eu="adcs_sun_vector_EU"/>
-    <typeEU name="adcs_wheel_drag" size="16" eu="adcs_wheel_drag_EU"/>
-    <typeEU name="adcs_wheel_speed" size="16" eu="adcs_wheel_speed_EU"/>
-    <typeEU name="adcs_body_rate" size="32" eu="adcs_body_rate_EU"/>
-    <typeEU name="adcs_mag_vector" size="16" eu="adcs_mag_segment"/>
-    <typeEU name="adcs_body_quat" size="32" eu="adcs_body_quat_EU"/>
-    <typeEU name="sband_board_tmp" size="16" eu="sband_board_tmp_EU" />
-
-    <!-- IS1 types -->
-    <typeState name="ON_OFF_t" size="1" dict="ON_OFF_dict" endian = "LITTLE"/>
-    <typeState name="Enable_Diable_t" size="1" dict="ENABLE_DISABLE_dict" endian = "LITTLE"/>
-    <typeState name="TRUE_FALSE_t" size="1" dict="TRUE_FALSE_dict" endian = "LITTLE"/>
-    <typeState name="YES_NO_t" size="1" dict="Yes_No_dict" endian = "LITTLE"/>
-    <typeState name="Good_Bad_t" size="1" dict="Good_Bad_dict" endian = "LITTLE"/>
-    <typeState name="Spacecraft_Mode_t" size="3" dict="Spacecraft_Mode_dict" endian = "LITTLE"/>
-
-    <!-- DAXSS types -->
-    <typeState name="CDHState" size="4" dict="CDHState"/>
-    <typeState name="ModeStatus" size="3" dict="ModeStatus"/>
-    <typeState name="CmdStatus" size="16" endian="LITTLE" dict="CmdStatus"/>
-    <typeState name="ParamTableStatus" size="8" dict="ParamTableStatus"/>
-    <typeState name="ParamTableValue" size="8" dict="ParamTableValue"/>
-    <typeSN name="CDH_Temp" size="16" endian="LITTLE" eu="CDH_Temp"/>
-    <typeSN name="X123_High_V" size="16" endian="LITTLE" eu="X123_High_V"/>
-    <typeEU name="X123_Det_Temp" size="16" endian="LITTLE" eu="X123_Det_Temp"/>
-    <typeEU name="CDH_Batt_V1" size="16" endian="LITTLE" eu="CDH_Batt_V1"/>
-    <typeEU name="CDH_Batt_V2" size="16" endian="LITTLE" eu="CDH_Batt_V2"/>
-    <typeEU name="CDH_V" size="16" endian="LITTLE" eu="CDH_V"/>
-    <typeEU name="EPS_SA_I5" size="16" endian="LITTLE" eu="EPS_SA_I5"/>
-    <typeEU name="EPS_SA_V" size="16" endian="BIG" eu="EPS_SA_V"/>
-    <typeEU name="EPS_SA_I" size="16" endian="BIG" eu="EPS_SA_I"/>
-    <typeSN name="SPS_Pos" size="16" endian="LITTLE"/>
     
+    <typeEU name="EPS_SA_V" size="16" endian="LITTLE" eu="EPS_SA_V"/>
+    <typeEU name="EPS_SA_I" size="16" endian="LITTLE" eu="EPS_SA_I"/>
+    <typeEU name="EPS_SoC" size="16" endian="LITTLE" eu="EPS_SoC"/>
+ 
 </hydraDef>

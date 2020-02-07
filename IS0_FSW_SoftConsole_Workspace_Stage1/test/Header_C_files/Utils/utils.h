@@ -22,7 +22,7 @@ uint16_t Utils_Buffer_to_16_ValueU_Little(uint8_t * buffer);
 int16_t Utils_Buffer_to_16_ValueS_Little(uint8_t * buffer);
 uint32_t Utils_Buffer_to_32_ValueU_Little(uint8_t * buffer);
 int32_t Utils_Buffer_to_32_ValueS_Little(uint8_t * buffer);
-uint64_t Utils_Buffer_to_40_ValueU_Little(uint8_t * buffer);
+uint64_t Utils_Buffer_to_52_ValueU_Little(uint8_t * buffer);
 
 /*---------------------------------------------------------------------------*/
 /* The Change_Endian_To_BigF32() is a utility function which converts the given
@@ -77,7 +77,7 @@ uint8_t Utils_Handle_Timer32(Timer32_t *  timer, uint32_t mask);
 
 uint8_t Utils_Handle_Timer32_Started(Timer32_t *  timer);
 
-
+void Utils_Manage_State_Machine(Module_Sync_t * module, uint16_t prev_state, uint16_t response_length);
 
 uint8_t Utils_HAL_Set_8bit(addr_t base_addr, uint8_t reg_addr, uint8_t val);
 
@@ -85,7 +85,8 @@ uint16_t Utils_HAL_Set_16bit(addr_t base_addr, uint8_t reg_addr_U, uint8_t reg_a
 
 uint16_t Utils_HAL_Get_16bit(addr_t base_addr, uint8_t reg_addr_U, uint8_t reg_addr_L);
 
-void Utils_Delay16(uint16_t delay);
-
+void Utils_Delay32(uint32_t delay);
+void Utils_Delay32_us(uint32_t delay_us);
+void Utils_Reset_Module_Sync(Module_Sync_t * mod,  uint8_t init_state, uint16_t cmd_time, uint16_t response_limit_time);
 
 #endif /* HEADER_C_FILES_UTILS_UTILS_H_ */

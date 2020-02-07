@@ -46,8 +46,12 @@ int32_t Utils_Buffer_to_32_ValueS_Little(uint8_t * buffer){
 	return buffer[3] << 24 | buffer[2] << 16 | buffer[1] << 8 | buffer[0];
 }
 
-uint64_t Utils_Buffer_to_40_ValueU_Little(uint8_t * buffer){
-	uint64_t k = ((uint64_t)buffer[4] << 32) | (buffer[3] << 24) | (buffer[2] << 16) | (buffer[1] << 8) | (buffer[0]);
+uint64_t Utils_Buffer_to_52_ValueU_Little(uint8_t * buffer){
+	uint64_t k = (uint64_t) buffer[6];
+	for (uint8_t i = 1; i < 7; i++){
+		k <<= 8;
+		k |= buffer[6-i];
+	}
 	return k;
 }
 
@@ -84,18 +88,18 @@ uint8_t Utils_CMD_Set_Flag(uint8_t * var, uint8_t mask, uint8_t flag){
 uint8_t Utils_Handle_Timer16(Timer16_t *  timer, uint32_t mask){
 	if((Globals.Timers_Started_Flag & mask) > 0){
 		if(Utils_Handle_Timer16_Started(timer)){
-			timer->Start = RTC_Get_Value16();
+			timer->Start = (uint16_t) RTC_Get_ms();
 			return 1;
 		}
 		return 0;
    	}else{
-		timer->Start = RTC_Get_Value16();
+		timer->Start = (uint16_t) RTC_Get_ms();
        	Globals.Timers_Started_Flag |= mask;
    	}
    	return 0;
 }
 uint8_t Utils_Handle_Timer16_Started(Timer16_t *  timer){
-	uint16_t Curr = RTC_Get_Value16();
+	uint16_t Curr = (uint16_t) RTC_Get_ms();
    	/* Taking care of timer overflow */
    	if (Curr < timer->Start){
        	Curr += (0xffff - timer->Start);
@@ -115,7 +119,7 @@ void Utils_Start_Derek_Timer16(Derek_Timer16_t * timer, uint16_t duration) {
 	if (Utils_isStarted_Derek_Timer16(timer)) return;
 	timer->isStarted = 1;
 	timer->time = duration;
-	timer->start = RTC_Get_Value16();
+	timer->start = (uint16_t) RTC_Get_ms();
 
 
 }
@@ -131,7 +135,7 @@ uint8_t Utils_isTimeout_Derek_Timer16(Derek_Timer16_t * timer) {
 		return 1;
 	}
 
-	if ((uint16_t)((RTC_Get_Value16() - timer->start) % 0xFFFF) > timer->time) {
+	if ((uint16_t)(((uint16_t) RTC_Get_ms() - timer->start) % 0xFFFF) > timer->time) {
 		timer->isStarted = 0;
 		return 1;
 	}
@@ -141,18 +145,18 @@ uint8_t Utils_isTimeout_Derek_Timer16(Derek_Timer16_t * timer) {
 uint8_t Utils_Handle_Timer32(Timer32_t *  timer, uint32_t mask){
 	if((Globals.Timers_Started_Flag & mask) > 0){
 		if(Utils_Handle_Timer32_Started(timer)){
-			timer->Start = RTC_Get_Value32();
+			timer->Start = RTC_Get_ms();
 			return 1;
 		}
 		return 0;
    	}else{
-		timer->Start = RTC_Get_Value32();
+		timer->Start = RTC_Get_ms();
        	Globals.Timers_Started_Flag |= mask;
    	}
    	return 0;
 }
 uint8_t Utils_Handle_Timer32_Started(Timer32_t *  timer){
-	uint32_t Curr = RTC_Get_Value32();
+	uint32_t Curr = RTC_Get_ms();
    	/* Taking care of timer overflow */
    	if (Curr < timer->Start){
        	Curr += (0xffffffff - timer->Start);
@@ -166,7 +170,11 @@ uint8_t Utils_Handle_Timer32_Started(Timer32_t *  timer){
    	return 0;
 }
 
-
+void Utils_Manage_State_Machine(Module_Sync_t * module, uint16_t prev_state, uint16_t response_length){
+    module->Response_Length = response_length;
+	module->Response_Read = 0;
+    module->Prev_CMD_Seq_Count = prev_state;
+}
 
 
 uint8_t Utils_HAL_Set_8bit(addr_t base_addr, uint8_t reg_addr, uint8_t val){
@@ -194,12 +202,27 @@ uint16_t Utils_HAL_Get_16bit(addr_t base_addr, uint8_t reg_addr_U, uint8_t reg_a
     return start_p;
 }
 
+void Utils_Reset_Module_Sync(Module_Sync_t * mod,  uint8_t init_state, uint16_t cmd_time, uint16_t response_limit_time){
+    mod->CMD_Seq_Count = init_state;
+    mod->Response_Length = 0;
+    mod->Prev_CMD_Seq_Count = 0;
+    mod->CMD_Period_Timer.Time = cmd_time;
+    mod->Response_Limit_Timer.Time = response_limit_time;
+    mod->Response_Read = 0;
+    mod->CMD_Period_Timer.Start = 0;
+    mod->GS_CMD_Length = 0;
+    mod->GS_CMD_Response_Length = 0;
+}
 
-
-void Utils_Delay16(uint16_t delay) {
-	uint16_t start = RTC_Get_Value16();
-	while ((uint16_t)(RTC_Get_Value16() - start) < delay);
+void Utils_Delay32(uint32_t delay) {
+	uint32_t start = RTC_Get_us();
+	while ((uint32_t)(RTC_Get_us() - start) < (delay*1000));
 	return;
 }
 
+void Utils_Delay32_us(uint32_t delay_us) {
+	uint32_t start = RTC_Get_us();
+	while((uint32_t)(RTC_Get_us() - start) < (delay_us));
+	return;
+}
 #endif /* HEADER_C_FILES_UTILS_UTILS_H_ */
