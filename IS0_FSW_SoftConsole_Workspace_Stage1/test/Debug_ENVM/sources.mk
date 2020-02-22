@@ -23,6 +23,7 @@ Header_C_files/CCSDS \
 Header_C_files/EPS \
 Header_C_files/GPIOs \
 Header_C_files/I2C \
+Header_C_files/PSLV_UART \
 Header_C_files/RTC \
 Header_C_files/SD_CARD \
 Header_C_files/SENSOR_BOARD \

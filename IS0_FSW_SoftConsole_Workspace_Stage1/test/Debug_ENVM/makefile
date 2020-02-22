@@ -29,6 +29,7 @@ RM := rm -rf
 -include Header_C_files/SENSOR_BOARD/subdir.mk
 -include Header_C_files/SD_CARD/subdir.mk
 -include Header_C_files/RTC/subdir.mk
+-include Header_C_files/PSLV_UART/subdir.mk
 -include Header_C_files/I2C/subdir.mk
 -include Header_C_files/GPIOs/subdir.mk
 -include Header_C_files/EPS/subdir.mk

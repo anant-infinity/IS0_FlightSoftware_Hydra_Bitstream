@@ -11,6 +11,7 @@
 #include "core_i2c.h"
 #include "hal.h"
 #include "hal_assert.h"
+#include "Seq_ops/main_seq.h"
 
 #include <string.h>
 
@@ -456,8 +457,16 @@ i2c_status_t I2C_wait_complete
     HAL_restore_interrupts( saved_psr );
 
     /* Run the loop until state returns I2C_FAILED  or I2C_SUCESS*/
+    // NOTE: Modifying this code to run only finite times
+    uint16_t i2c_count = 0;
     do {
         i2c_status = this_i2c->master_status;
+        i2c_count++;
+        if(i2c_count>1000){
+        	Globals.I2C_Error_Flag = 1;
+        	i2c_count = 0;
+        	break;
+        }
     } while(I2C_IN_PROGRESS == i2c_status);
     return i2c_status;
 }

@@ -13,6 +13,7 @@
 
 #define SAVE_N_REBOOT	Globals.Indication_Flags |= (SAVE_PARAMETER_MAP_FLAG | SC_REBOOT)
 
+
 uint16_t Utils_Buffer_to_16_ValueU_Big(uint8_t * buffer);
 int16_t Utils_Buffer_to_16_ValueS_Big(uint8_t * buffer);
 uint32_t Utils_Buffer_to_32_ValueU_Big(uint8_t * buffer);

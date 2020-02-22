@@ -369,6 +369,73 @@ void test_SD_Write_Packets() {
 	}
 }
 
+//pass in what slot the SD CUT (SD Card Under Test) is in (0 or 1), and its size (16 or 128).
+int test_SD_All_Sectors(mss_spi_slave_t slot, uint16_t sd_size) {
+	Global_Init_GPIOs();
+	MSS_UART_init(&g_mss_uart0,MSS_UART_115200_BAUD,MSS_UART_DATA_8_BITS | MSS_UART_NO_PARITY | MSS_UART_ONE_STOP_BIT);
+
+//	SD_enable(slot);
+	SD_Cards_Init();
+
+	// not sure if this really does anything when running in an automated way,
+	// but it does work to randomize the test data in a lab bench setting.
+	srand(RTC_Get_Value32());
+	int rand_seed = rand();
+
+
+	uint32_t sector,i;
+	uint8_t data[SD_TEST_DATA_SIZE];
+	uint8_t rx_data[SD_TEST_DATA_SIZE+2];
+	int write_errs=0,read_errs=0,ver_errs=0;
+
+	// init data buffers
+	for (i = 0; i < SD_TEST_DATA_SIZE; i++,rand_seed++) {
+		data[i] = rand_seed % 128;
+		rx_data[i] = 0;
+	}
+
+	if(!SD_Init(slot)) {
+		MSS_UART_polled_tx(&g_mss_uart0, "Unable to init card", sizeof("Unable to init card"));
+	}
+	uint32_t max_size = sd_size == 16 ? SD_MAX_SECTOR_VALUE_16 : SD_MAX_SECTOR_VALUE_128;
+	for (sector = 4; sector < max_size; sector++) {
+		i = SD_Write_Data(data, SD_TEST_DATA_SIZE, sector, slot);
+		if (i != sector+1)
+			write_errs++;
+		i = SD_Read_Data(rx_data, 512, sector, slot);
+		if (i != sector + 1)
+			read_errs++;
+		i = FLASH_Verify_write(data, rx_data, SD_TEST_DATA_SIZE);
+		if (i != SD_TEST_DATA_SIZE)
+			ver_errs++;
+
+		int total_errs = write_errs + read_errs + ver_errs;
+
+		if(sector%16 == 0){
+			if (!total_errs) {
+				MSS_UART_polled_tx(&g_mss_uart0, ".", 1);
+			}
+			else {
+				MSS_UART_polled_tx(&g_mss_uart0, (uint8_t *)&sector, sizeof(sector));
+				MSS_UART_polled_tx(&g_mss_uart0, (uint8_t *)&write_errs, sizeof(write_errs));
+				MSS_UART_polled_tx(&g_mss_uart0, (uint8_t *)&total_errs, sizeof(total_errs));
+			}
+		}
+
+		//change data buffers for accuracy of test
+		for (i = 0; i < SD_TEST_DATA_SIZE; i++) {
+				data[i] = i % 128 + sector;
+				rx_data[i] = 0;
+			}
+	}
+
+	SD_Card_Wipe(slot);
+	MSS_UART_polled_tx(&g_mss_uart0, (uint8_t *)write_errs, sizeof(write_errs));
+
+	return write_errs;
+
+}
+
 void test_save_parameter_character(){
 	Global_Init_GPIOs();
 	Flash_Init();
@@ -570,49 +637,7 @@ void spi_flash_test2(){
 
 
 
-int test_SD_All_Sectors(mss_spi_slave_t slot, uint16_t sd_size) {
-	Global_Init_GPIOs();
-	SD_enable(slot);
-	uint32_t sector,i;
-	uint8_t data[SD_TEST_DATA_SIZE];
-	uint8_t rx_data[SD_TEST_DATA_SIZE+2];
-	int errs=0;
 
-	// init data buffers
-	for (i = 0; i < SD_TEST_DATA_SIZE; i++) {
-		data[i] = i % 128;
-		//data[i] = 0;
-		rx_data[i] = 0;
-	}
-
-	SD_Init(slot);
-	uint32_t max_size = sd_size == 16 ? SD_MAX_SECTOR_VALUE_16 : SD_MAX_SECTOR_VALUE_128;
-	for (sector = 4; sector < max_size; sector++) {
-		i = SD_Write_Data(data, SD_TEST_DATA_SIZE, sector, 0);
-		if (i != sector+1)
-			errs++;
-		i = SD_Read_Data(rx_data, 512, sector, 0);
-		if (i != sector + 1)
-			errs++;
-		i = FLASH_Verify_write(data, rx_data, SD_TEST_DATA_SIZE);
-		if (i != SD_TEST_DATA_SIZE)
-			errs++;
-
-		if(sector%256 == 0){
-			i=0;  //dummy command so that I can add a breakpoint
-		}
-
-		//change data buffers for accuracy of test
-		for (i = 0; i < SD_TEST_DATA_SIZE; i++) {
-				data[i] = i % 128 + sector;
-				rx_data[i] = 0;
-			}
-	}
-
-	SD_Card_Wipe(slot);
-	return errs;
-
-}
 
 
 #endif

@@ -197,7 +197,7 @@
                                 								
                                 <option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.verbose.590180168" name="Verbose (-v)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.verbose" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                                 								
-                                <option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.otheroptimizations.1465769023" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.otheroptimizations" useByScannerDiscovery="true" value="-O0" valueType="string"/>
+                                <option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.otheroptimizations.1465769023" name="Other optimization flags" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.otheroptimizations" useByScannerDiscovery="true" value="-O0" valueType="string"/>
                                 								
                                 <inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.137312486" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input"/>
                                 							
@@ -351,7 +351,7 @@
                     					
                     <sourceEntries>
                         						
-                        <entry excluding="Header_C_files/CMSIS|Header_C_files/Libero|Header_C_files/hal|Header_C_files/drivers_config|Header_C_files/drivers|Header_C_files/SD_CARD/sd4.c|Header_C_files/SD_CARD/sd1.c|Header_C_files/is1-fs|Header_C_files/Programming_File|Header_C_files/HDL|Header_C_files/MPPT|Header_C_files/Hydra|Header_C_files/Seq_ops/main_seq.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        <entry excluding="Header_C_files/MPPT|Header_C_files/CMSIS|Header_C_files/drivers|Header_C_files/is1-fs|Header_C_files/SD_CARD/sd4.c|Header_C_files/hal|Header_C_files/drivers_config|Header_C_files/Programming_File|Header_C_files/Seq_ops/main_seq.c|Header_C_files/Libero|Header_C_files/SD_CARD/sd1.c|Header_C_files/HDL|Header_C_files/Hydra" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                         					
                     </sourceEntries>
                     				
@@ -623,7 +623,7 @@
                     					
                     <sourceEntries>
                         						
-                        <entry excluding="Header_C_files/CMSIS|Header_C_files/Libero|Header_C_files/hal|Header_C_files/drivers_config|Header_C_files/drivers|Header_C_files/SD_CARD/sd4.c|Header_C_files/SD_CARD/sd1.c|Header_C_files/is1-fs|Header_C_files/Programming_File|Header_C_files/HDL|Header_C_files/MPPT|Header_C_files/Hydra|Header_C_files/Seq_ops/main_seq.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        <entry excluding="Header_C_files/MPPT|Header_C_files/CMSIS|Header_C_files/drivers|Header_C_files/is1-fs|Header_C_files/SD_CARD/sd4.c|Header_C_files/hal|Header_C_files/drivers_config|Header_C_files/Programming_File|Header_C_files/Seq_ops/main_seq.c|Header_C_files/Libero|Header_C_files/SD_CARD/sd1.c|Header_C_files/HDL|Header_C_files/Hydra" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                         					
                     </sourceEntries>
                     				
@@ -979,7 +979,7 @@
                     					
                     <sourceEntries>
                         						
-                        <entry excluding="Header_C_files/CMSIS|Header_C_files/Libero|Header_C_files/hal|Header_C_files/drivers_config|Header_C_files/drivers|Header_C_files/SD_CARD/sd4.c|Header_C_files/SD_CARD/sd1.c|Header_C_files/is1-fs|Header_C_files/Programming_File|Header_C_files/HDL|Header_C_files/Test|Header_C_files/MPPT|Header_C_files/Hydra|Header_C_files/Seq_ops/main_seq.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        <entry excluding="Header_C_files/MPPT|Header_C_files/CMSIS|Header_C_files/drivers|Header_C_files/is1-fs|Header_C_files/Test|Header_C_files/SD_CARD/sd4.c|Header_C_files/hal|Header_C_files/drivers_config|Header_C_files/Programming_File|Header_C_files/Seq_ops/main_seq.c|Header_C_files/Libero|Header_C_files/SD_CARD/sd1.c|Header_C_files/HDL|Header_C_files/Hydra" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                         					
                     </sourceEntries>
                     				
@@ -1335,7 +1335,7 @@
                     					
                     <sourceEntries>
                         						
-                        <entry excluding="Header_C_files/CMSIS|Header_C_files/Libero|Header_C_files/hal|Header_C_files/drivers_config|Header_C_files/drivers|Header_C_files/SD_CARD/sd4.c|Header_C_files/SD_CARD/sd1.c|Header_C_files/is1-fs|Header_C_files/Programming_File|Header_C_files/HDL|Header_C_files/MPPT|Header_C_files/Hydra|Header_C_files/Seq_ops/main_seq.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        <entry excluding="Header_C_files/MPPT|Header_C_files/CMSIS|Header_C_files/drivers|Header_C_files/is1-fs|Header_C_files/SD_CARD/sd4.c|Header_C_files/hal|Header_C_files/drivers_config|Header_C_files/Programming_File|Header_C_files/Seq_ops/main_seq.c|Header_C_files/Libero|Header_C_files/SD_CARD/sd1.c|Header_C_files/HDL|Header_C_files/Hydra" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                         					
                     </sourceEntries>
                     				

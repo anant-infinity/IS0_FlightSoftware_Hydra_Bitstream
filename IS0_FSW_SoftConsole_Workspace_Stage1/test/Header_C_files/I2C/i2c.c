@@ -42,6 +42,9 @@ i2c_instance_t g_core_i2c3; 			// Core I2C for SENSOR_0;
 	    I2C_read(this_core_i2c, serial_addr, rx_buffer, read_length, I2C_RELEASE_BUS);
 
 	    status = I2C_wait_complete(this_core_i2c, DEMO_I2C_TIMEOUT);
+	    if(status == I2C_FAILED){
+	    	Globals.I2C_Error_Flag = 1;
+	    }
 
 	    return status;
 	}
@@ -65,6 +68,9 @@ i2c_instance_t g_core_i2c3; 			// Core I2C for SENSOR_0;
 
 	    status = I2C_wait_complete(this_core_i2c, DEMO_I2C_TIMEOUT);
 
+	    if(status == I2C_FAILED){
+	    	Globals.I2C_Error_Flag = 1;
+	    }
 	    return status;
 	}
 
@@ -72,6 +78,11 @@ i2c_instance_t g_core_i2c3; 			// Core I2C for SENSOR_0;
 	 * Perform write-read transaction with parameters gathered from the command
 	 * line interface. This function is called as a result of the user's input in
 	 * the command line interface.
+	 *
+	 * NOTE: The definition of this function is slightly modified as compared to the do_write funcion
+	 * for ease of use. The modification is that the function takes as an input
+	 * the register address (of type uint8_t) instead of an tx_buffer array.
+	 *
 	 */
 	i2c_status_t do_write_read_transaction
 	(
@@ -96,6 +107,9 @@ i2c_instance_t g_core_i2c3; 			// Core I2C for SENSOR_0;
 	                       I2C_RELEASE_BUS);
 
 	    status = I2C_wait_complete(this_core_i2c, DEMO_I2C_TIMEOUT);
+	    if(status == I2C_FAILED){
+	    	Globals.I2C_Error_Flag = 1;
+	    }
 
 	    return status;
 	}

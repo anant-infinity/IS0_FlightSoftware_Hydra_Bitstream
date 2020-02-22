@@ -5,8 +5,8 @@
  *      Author: Anant
  */
 
-#ifndef _PWR_C
-	#define _PWR_C
+#ifndef _EPS_C
+	#define _EPS_C
 
 #include <EPS/eps.h>
 #include "math.h"
@@ -21,9 +21,9 @@
 /*------------------------------------------------------------------------------
  * Instance data for our CoreI2C devices
  */
-i2c_instance_t g_core_i2c0;				// Core I2C for EPS_C0;
-i2c_instance_t g_core_i2c1; 			// Core I2C for EPS_C1;
-i2c_instance_t g_core_i2c2; 			// Core I2C for EPS_NC;
+i2c_instance_t g_core_i2c0;				// Core I2C 0 for EPS_C0;
+i2c_instance_t g_core_i2c1; 			// Core I2C 1 for EPS_C1;
+i2c_instance_t g_core_i2c2; 			// Core I2C 2 for EPS_NC;
 
 
 void Initialize_EPS_I2C_Channels(){
@@ -31,12 +31,16 @@ void Initialize_EPS_I2C_Channels(){
     /*-------------------------------------------------------------------------
      * Initialize the Core I2C Drivers
     */
-    I2C_init(&g_core_i2c0, COREI2C_0, MASTER_SER_ADDR, I2C_PCLK_DIV_960);
-    I2C_init(&g_core_i2c1, COREI2C_1, MASTER_SER_ADDR, I2C_PCLK_DIV_960);
-    I2C_init(&g_core_i2c2, COREI2C_2, MASTER_SER_ADDR, I2C_PCLK_DIV_960);
+    I2C_init(&g_core_i2c0, COREI2C_0, MASTER_SER_ADDR, I2C_PCLK_DIV_960);		// Core I2C 0 for EPS_C0;
+    I2C_init(&g_core_i2c1, COREI2C_1, MASTER_SER_ADDR, I2C_PCLK_DIV_960);		// Core I2C 1 for EPS_C1;
+    I2C_init(&g_core_i2c2, COREI2C_2, MASTER_SER_ADDR, I2C_PCLK_DIV_960);		// Core I2C 1 for EPS_C1;
+
+
+
 
 }
 
+//Function to control the various GPIOs for IS0
 void PWR_Switch(uint32_t config, uint8_t on_off){
 	//Gets the Current state of all the GPIOs and stores it in GPIO pattern
 	uint32_t gpio_pattern = MSS_GPIO_get_outputs();
@@ -54,14 +58,14 @@ void PWR_Switch(uint32_t config, uint8_t on_off){
 }
 
 
-
+//Structure written for ease of data collection from the I2C slaves.
 struct GetEpsSeqPoint {
 	i2c_instance_t* i2c;
 	uint8_t slaveAddr;
 	uint8_t regAddr;
 };
 
-struct GetEpsSeqPoint points[32];
+struct GetEpsSeqPoint points[34];
 
 struct GetEpsSeqPoint assignGetEps(i2c_instance_t* i2c, uint8_t slaveAddr, uint8_t regAddr){
 	struct GetEpsSeqPoint result;
@@ -71,6 +75,7 @@ struct GetEpsSeqPoint assignGetEps(i2c_instance_t* i2c, uint8_t slaveAddr, uint8
 	return result;
 }
 
+//Assigning the
 void epsAssignInit(){
 	int index = 0;
 
@@ -78,6 +83,7 @@ void epsAssignInit(){
 	//Fuel Gauge 1
 	points[index++] = assignGetEps(&g_core_i2c0, EPS_FG1_SLAVE_C0, EPS_FG_SOC);
 
+	//See EPS.h to see what voltage and current each of the channels contain.
 	//VC Sensor 1
 	points[index++] = assignGetEps(&g_core_i2c0, EPS_VC1_SLAVE_C0, EPS_VC_CH2_SHUNT_VOLTAGE);
 	points[index++] = assignGetEps(&g_core_i2c0, EPS_VC1_SLAVE_C0, EPS_VC_CH2_BUS_VOLTAGE);
@@ -103,6 +109,8 @@ void epsAssignInit(){
 	points[index++] = assignGetEps(&g_core_i2c0, EPS_VC3_SLAVE_C0, EPS_VC_CH3_BUS_VOLTAGE);
 
 	//VC Sensor 4
+	//NOTE: This sensor is not present in the v4 Version of the EPS Board
+	//It is only present in the flight board.
 	points[index++] = assignGetEps(&g_core_i2c0, EPS_VC4_SLAVE_C0, EPS_VC_CH1_SHUNT_VOLTAGE);
 	points[index++] = assignGetEps(&g_core_i2c0, EPS_VC4_SLAVE_C0, EPS_VC_CH1_BUS_VOLTAGE);
 
@@ -142,13 +150,15 @@ void epsAssignInit(){
 }
 
 void Get_EPS_Data(){
-	epsAssignInit();
 
+		//Initialize the different Data Structures
+		epsAssignInit();
 		uint8_t write_length = TX_LENGTH;
 		uint8_t rx_buffer[RX_LENGTH_2];
 		uint8_t read_length = RX_LENGTH_2;
 		i2c_status_t instance;
-		for(int i = 0; i < 33; ++i){
+		for(int i = 0; i < 34; ++i){
+
 			instance = do_write_read_transaction(points[i].i2c, points[i].slaveAddr, points[i].regAddr, write_length, rx_buffer, read_length);
 			Beacon_pack_IS0.EPS[i] = Utils_Buffer_to_16_ValueU_Big(rx_buffer);
 		}

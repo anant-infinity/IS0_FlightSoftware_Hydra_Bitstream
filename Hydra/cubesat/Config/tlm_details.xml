@@ -46,6 +46,7 @@
             <itemDef name="EPS_VC3_CH3_Curr"                 type="EPS_SA_I"     displayName="Panel1_Curr" />
             <itemDef name="EPS_VC3_CH3_Volt"                 type="EPS_SA_V"     displayName="Panel1_Volt" />
 
+            <!-- Uncomment this for flight IS0 -->
             <itemDef name="EPS_VC4_CH1_Curr"                 type="EPS_SA_I"     displayName="Panel0_Curr" />
             <itemDef name="EPS_VC4_CH1_Volt"                 type="EPS_SA_V"     displayName="Panel0_Volt" />
 
@@ -93,22 +94,22 @@
             <itemDef name = "Sensor_Board_AS7265x_DataByte_9"  type="dn8l" displayName = "DataByte 9"/>
             <itemDef name = "Sensor_Board_AS7265x_DataByte_10" type="dn8l" displayName = "DataByte 10"/>
             <itemDef name = "Sensor_Board_AS7265x_DataByte_11" type="dn8l" displayName = "DataByte 11"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_12" type="dn8l" displayName = "DataByte 11"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_13" type="dn8l" displayName = "DataByte 12"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_14" type="dn8l" displayName = "DataByte 13"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_15" type="dn8l" displayName = "DataByte 14"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_16" type="dn8l" displayName = "DataByte 15"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_17" type="dn8l" displayName = "DataByte 16"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_18" type="dn8l" displayName = "DataByte 17"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_19" type="dn8l" displayName = "DataByte 18"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_20" type="dn8l" displayName = "DataByte 19"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_21" type="dn8l" displayName = "DataByte 20"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_22" type="dn8l" displayName = "DataByte 21"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_23" type="dn8l" displayName = "DataByte 22"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_24" type="dn8l" displayName = "DataByte 23"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_25" type="dn8l" displayName = "DataByte 24"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_26" type="dn8l" displayName = "DataByte 25"/>
-            <itemDef name = "Sensor_Board_AS7265x_DataByte_27" type="dn8l" displayName = "DataByte 26"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_12" type="dn8l" displayName = "DataByte 12"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_13" type="dn8l" displayName = "DataByte 13"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_14" type="dn8l" displayName = "DataByte 14"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_15" type="dn8l" displayName = "DataByte 15"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_16" type="dn8l" displayName = "DataByte 16"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_17" type="dn8l" displayName = "DataByte 17"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_18" type="dn8l" displayName = "DataByte 18"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_19" type="dn8l" displayName = "DataByte 19"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_20" type="dn8l" displayName = "DataByte 20"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_21" type="dn8l" displayName = "DataByte 21"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_22" type="dn8l" displayName = "DataByte 22"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_23" type="dn8l" displayName = "DataByte 23"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_24" type="dn8l" displayName = "DataByte 24"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_25" type="dn8l" displayName = "DataByte 25"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_26" type="dn8l" displayName = "DataByte 26"/>
+            <itemDef name = "Sensor_Board_AS7265x_DataByte_27" type="dn8l" displayName = "DataByte 27"/>
             <itemDef name = "Sensor_Board_AS7265x_DataByte_28" type="dn8l" displayName = "DataByte 28"/>
             <itemDef name = "Sensor_Board_AS7265x_DataByte_29" type="dn8l" displayName = "DataByte 29"/>
             <itemDef name = "Sensor_Board_AS7265x_DataByte_30" type="dn8l" displayName = "DataByte 30"/>

@@ -5,14 +5,14 @@
  *      Author: Anant
  */
 
-#ifndef _PWR_H
-	#define _PWR_H
+#ifndef _EPS_H
+	#define _EPS_H
 
 
 #include "Seq_ops/main_seq.h"
 
 #undef  GLOBAL
-#ifdef _PWR_C
+#ifdef _EPS_C
 #define GLOBAL
 #else
 #define GLOBAL  extern
@@ -108,5 +108,6 @@
 void Initialize_EPS_I2C_Channels();
 void Get_EPS_Data();
 void PWR_Switch(uint32_t, uint8_t);
+void epsAssignInit();
 
 #endif

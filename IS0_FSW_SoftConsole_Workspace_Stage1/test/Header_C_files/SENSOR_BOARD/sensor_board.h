@@ -56,6 +56,7 @@
 	#define	SENSOR_AS72651_HWVERSION_L	((uint8_t)0x01)		// 8  bit Hardware Version L Register; OPs ->R
 	#define	SENSOR_AS72651_SWVERSION_H	((uint8_t)0x02)		// 8  bit Software Version H Register; OPs ->R
 	#define	SENSOR_AS72651_SWVERSION_L	((uint8_t)0x03)		// 8  bit Software Version L Register; OPs ->R
+	#define	SENSOR_CONFIG_REGISTER		((uint8_t)0x04)		// 8  bit Configuration register; OPs ->R
 
 	//Raw Data registers
 	#define	SENSOR_AS72651_RAW_RGA_H	((uint8_t)0x08)		// 8  bit RAW Value H Register; OPs ->R
@@ -84,5 +85,7 @@ void Get_VEML6075_Data();
 void Get_AS7265x_Data();
 uint8_t read_AS7265x_reg(uint8_t);
 void write_AS7265x_reg(uint8_t);
+void AS7265xAssignInit();
+void VEML6075AssignInit();
 
 #endif /* HEADER_C_FILES_SENSOR_BOARD_SENSOR_BOARD_H_ */

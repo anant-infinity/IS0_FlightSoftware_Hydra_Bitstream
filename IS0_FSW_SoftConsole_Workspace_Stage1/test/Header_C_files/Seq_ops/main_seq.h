@@ -1,19 +1,3 @@
-/*
- * main_sch.h
- *
- *  Created on: Jul 9, 2018
- *      Author: Ankit
- */
-/*
- * // Default Flags order:
- * 1st bit - UHF
- * 2th bit - ADCS
- * 3th bit - SBAND
- * 4th bit - CIP
- * 5th bit - EPS
- * 6th bit - CDH
- * 7th bit - DAXSS
- */
 #ifndef _MAIN_SEQ_H
 #define _MAIN_SEQ_H
 
@@ -63,8 +47,6 @@
 /* Defining the modes of operation of the spacecraft */
 #define SC_PHEONIX_MODE     0x00
 #define SC_SAFE_MODE        0x01
-//Removed charging mode for IS0
-//#define SC_CHARGING_MODE    0x02
 #define SC_SCIC_MODE        0x03
 #define SC_SCID_MODE        0x04
 /*************************************************************************/
@@ -103,6 +85,29 @@
 #define BEACON_PACKET_SIZE				254
 #define PARAMETER_TABLE1_PACKET_SIZE 	256
 #define PARAMETER_TABLE2_PACKET_SIZE	94
+
+/*************************************************************************/
+
+//Space between sectors
+#define SD_SECTOR_BUFFER      10
+
+//Start of all sectors
+#define SD_SECTOR_START       4
+
+//Size of each sector, in bytes
+#define SD_SECTOR_SIZE_BEACON 31536000
+#define SD_SECTOR_SIZE_SCID   10512000
+#define SD_SECTOR_SIZE_SCIC   157680000
+#define SD_SECTOR_SIZE_ADCS   3153600
+#define SD_SECTOR_SIZE_IMG    75600
+#define SD_SECTOR_SIZE_LOG    546000
+#define SD_SECTOR_SIZE_HK     0
+
+#define SD_FAIL_THRESHOLD 5
+#define SD_RESTART_LIMIT  20
+
+#define SD_CARD_WRITE_NUM_TRIES 4
+/*************************************************************************/
 
 
 
@@ -164,6 +169,8 @@ void Get_Beacon_Packet();
  * @return: void
  *
 */
+
+void Make_Beacon_Packet_Array();
 
 void Get_CDH_Data();
 
@@ -293,6 +300,10 @@ uint16_t Utils_SPI_Transmit_Block(mss_spi_instance_t * this_spi, uint8_t * cmd_b
 */
 uint16_t Utils_SPI_Receive_Block(mss_spi_instance_t * this_spi, uint8_t * rec_buffer, uint16_t rec_byte_size);
 
+void SD_FDRI();
+void SD_FDRI_Init();
+
+
 
 #pragma pack(1)	// this pragma makes sure that all the structs are tightly packed
 
@@ -360,12 +371,12 @@ struct Beacon_packet_IS0{
 	//To Add CCSDS Header
     struct CCSDS_Header beac_head;	// The CCSDS header
 
-    uint8_t CDH_8[2];
+    uint8_t CDH_8[3];
     uint32_t CDH_32[3];
     uint64_t CDH_64[2];
 
     //EPS HK Data
-    uint16_t EPS[33];
+    uint16_t EPS[34];
 
     //Sensor Board VMEL Data
     uint16_t Sensor_Board_VMEL6075[4];
@@ -380,8 +391,17 @@ struct Beacon_packet_IS0{
 
 } Beacon_pack_IS0;
 
+uint8_t Beacon_Pack_Array[sizeof(Beacon_pack_IS0)];
+
+typedef struct
+{
+    uint32_t start;
+    uint32_t end;
+    uint32_t write;
+    uint32_t read;
 
 
+} SD_Sector_t;
 
 
 typedef struct Parameter_Table 	// The struct definition for all the variables which are in the parameter table.
@@ -489,6 +509,15 @@ typedef struct 	// a small struct for the managing the less complex state machin
     uint16_t Response_Read;
 } Module_Sync_Small_t;
 
+typedef struct
+{
+    uint16_t failCount;
+    uint16_t restartCount;
+    uint16_t failThreshold;
+    uint16_t restartLimit;
+
+} SD_FDRI_t;
+
 
 GLOBAL struct Global_Variables { 	// Struct containing all the global variables
 
@@ -536,7 +565,7 @@ GLOBAL struct Global_Variables { 	// Struct containing all the global variables
    uint8_t                     	Current_SD;
    uint16_t 					Globals_Table_Packet_Seq_Counter;
 
-   Module_Sync_Small_t			SD_FDRI_Module_Sync;
+   SD_FDRI_t					SD_FDRI_Module_Sync;
 
 } Globals;
 
@@ -553,6 +582,9 @@ typedef struct Global_Table_Packet{	// Struct definition of last global packet
     uint16_t Fletcher_code;
 
 } Global_packet_Last_t;
+
+
+
 
 
 #endif /* MAIN_SCH_H_ */

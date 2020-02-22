@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;test/Header_C_files/PSLV_UART.c&apos; to &apos;PSLV_UART&apos;" description="Rename resource &apos;PSLV_UART.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Header_C_files/PSLV_UART.c" name="PSLV_UART" stamp="1581589180263" updateReferences="true"/>
+</session>

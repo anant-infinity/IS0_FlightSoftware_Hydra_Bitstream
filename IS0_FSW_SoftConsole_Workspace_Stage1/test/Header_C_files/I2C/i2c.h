@@ -20,14 +20,14 @@
 #include "../../t1_hw_platform.h"
 
 	/*------------------------------------------------------------------------------
-	 * Register based address info for three EPS CoreI2C peripherals
+	 * Register base address info for three EPS CoreI2C peripherals
 	 */
 	#define COREI2C_0                     I_EPS_I2C_C_0			//I2C Critical Channel 0
 	#define COREI2C_1                     J_EPS_I2C_C_1			//I2C Critical Channel 1
 	#define COREI2C_2					  K_EPS_I2C_NC			//I2C Non-Critical Channel
 
 	/*------------------------------------------------------------------------------
-	 * Register based address info for Sensor Board CoreI2C peripheral
+	 * Register base address info for Sensor Board CoreI2C peripheral
 	 */
 	#define COREI2C_3					  L_SENSOR_BOARD_I2C_0	//I2C for Sensor Board
 

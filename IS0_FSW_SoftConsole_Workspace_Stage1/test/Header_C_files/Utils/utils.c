@@ -14,6 +14,7 @@
 #include "string.h"
 #include "../../CMSIS/mss_assert.h"
 
+
 uint16_t Utils_Buffer_to_16_ValueU_Big(uint8_t * buffer){
 	return buffer[0] << 8 | buffer[1];
 }

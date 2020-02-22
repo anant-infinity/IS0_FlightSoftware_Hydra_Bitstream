@@ -19,10 +19,13 @@
 #define UART_0                          0x50005000U
 #define UHF_DATA_RXTX_0_DATA_RX_SLAVE   0x50006000U
 #define UHF_DATA_RXTX_0_DATA_TX_SLAVE   0x50007000U
+
 #define I_EPS_I2C_C_0                   0x50008000U
 #define J_EPS_I2C_C_1                   0x50009000U
 #define K_EPS_I2C_NC                  	0x5000A000U
 #define L_SENSOR_BOARD_I2C_0            0x5000B000U
+
+
 #define Reset_Generator					0x5000C000U
 #define Sensor_Board_SPI				0x5000D000U
 

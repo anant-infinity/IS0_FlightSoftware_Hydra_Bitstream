@@ -272,7 +272,7 @@ void Load_Factory_Value(){
 	//This corrensponds to 200 microseconds, which is 0.2 milliseconds
 	t.Param_Watchdog_Signal_Timer_Time = 200;
 
-	t.Param_Beac_Timer_Threshold_Time = (uint64_t)1000000;
+	t.Param_Beac_Timer_Threshold_Time = 1000000;
 
 	//45 minutes = 2700 seconds = 2700 000 000 micro seconds = 0xA0EEBB00
 	//5 seconds = 5000 000 microseconds = 0x4C4B40

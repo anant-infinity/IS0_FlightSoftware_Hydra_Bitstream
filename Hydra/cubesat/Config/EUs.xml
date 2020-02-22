@@ -8,7 +8,7 @@
 
     <euPoly name="EPS_SA_I">
         <coeff index="0" value="0"/>
-        <coeff index="1" value="0.4998779"/><!--40*0.001*163.8/32760-->
+        <coeff index="1" value="0.005"/><!--40*0.001*163.8/32760-->
     </euPoly>
 
     <euPoly name="EPS_SoC">
