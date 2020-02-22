@@ -9,6 +9,7 @@
             <frameCopy name="ccsdsTlmSecHeader" prefix="beacon_"/>
 
             <itemDef name="CDH_Curr_Mode"                type="dn8l"    displayName="CDH_Curr_Mode" />
+            <itemDef name="CDH_I2C_Error_Flag"                type="dn8l"    displayName="CDH_I2C_Error_Flag" />
             <itemDef name="CDH_Curr_SD"                  type="dn8l"    displayName="CDH_Curr_SD" />
             
             <itemDef name="CDH_Time_Msec"                type="dn32l"   displayName="CDH_Time_Msec" />
@@ -48,7 +49,7 @@
 
             <!-- Uncomment this for flight IS0 -->
             <itemDef name="EPS_VC4_CH1_Curr"                 type="EPS_SA_I"     displayName="Panel0_Curr" />
-            <itemDef name="EPS_VC4_CH1_Volt"                 type="EPS_SA_V"     displayName="Panel0_Volt" />
+            <itemDef name="EPS_VC4_CH1_Volt"                 type="EPS_SA_V"     displayName="Panel0_Volt" /> -->
 
             <itemDef name="EPS_FG2_SoC"                 type="EPS_SoC"       displayName="EPS_FG1_SoC" /> 
 

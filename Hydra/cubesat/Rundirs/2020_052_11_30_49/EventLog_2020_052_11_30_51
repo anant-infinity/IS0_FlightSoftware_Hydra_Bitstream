@@ -1,0 +1,16 @@
+2020/052-11:30:51: Configuring for Serial
+2020/052-11:30:51: <CFG> HW beaconTlmOut need to have prefix to use maxSize
+2020/052-11:30:51: <CFG> HW logTlmOut need to have prefix to use maxSize
+2020/052-11:30:51: <CFG> HW subsystemResponseTlmOut need to have prefix to use maxSize
+2020/052-11:30:51: <CFG> HW parametertableTlmOut need to have prefix to use maxSize
+2020/052-11:30:51: <CFG> Frame beacon_tlm_pkt Item Fletcher_code not defined
+2020/052-11:30:51: <INT> Run Directory: C:\Users\Anant\Desktop\Hydra_IS0\cubesat\Rundirs\2020_052_11_30_49\
+2020/052-11:30:51: <INT> Writing note to file
+2020/052-11:30:51: <RDR> Auto-starting reader serialReader
+2020/052-11:30:51: <HW> COM6 is opened
+2020/052-11:30:51: <RDR> Starting reader serialReader
+2020/052-11:30:51: <SCR> Starting script in engine 0
+2020/052-11:30:51: <SCR> Starting script init.prc
+2020/052-11:30:51: <INT> Running startup script
+2020/052-11:30:51: <HW> Starting new file: EventLog_2020_052_11_30_51
+2020/052-11:30:51: <SCR> Done with script init.prc

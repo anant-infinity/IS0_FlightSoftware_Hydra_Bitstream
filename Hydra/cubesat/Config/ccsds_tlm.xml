@@ -23,10 +23,10 @@
     </frameDef>
 
     <!-- File to hold CCSDS telemetry packets -->
-     <hwOutFile name="beaconTlmOut" suffix="_ccsds" maxSize="#MAX_OUTPUT_FILE_SIZE" filename="beacon_out"/>
-     <hwOutFile name="logTlmOut" suffix="_ccsds" maxSize="#MAX_OUTPUT_FILE_SIZE" filename="log_out"/>
-     <hwOutFile name="subsystemResponseTlmOut" suffix="_ccsds" maxSize="#MAX_OUTPUT_FILE_SIZE" filename="subsystemResponse_out"/>
-     <hwOutFile name="parametertableTlmOut" suffix="_ccsds" maxSize="#MAX_OUTPUT_FILE_SIZE" filename="parameter_table_out"/>
+     <hwOutFile name="beaconTlmOut" prefix="IS0Data" maxSize="#MAX_OUTPUT_FILE_SIZE" />
+
+     
+     
      <!-- Alias to hide details for rolling over file -->
      <alias name="ccsds_file_rollover" command="cmd_hw">
          <description text="Rollover CCSDS output file"/>
@@ -39,10 +39,6 @@
      <decoderDef name="ccsdsDecoder" updateDB="enabled">
           <frameID name="ccsdsTlmHeader.ccsds_TlmApID"/>
           <outputDevice name="beaconTlmOut" frameID="#BEACON_TLM_PKT_APID"/>
-          <outputDevice name="logTlmOut" frameID="#LOG_TLM_PKT_APID"/>
-         <outputDevice name="subsystemResponseTlmOut" frameID="#SUBSYSTEM_RESPONSE_TLM_PKT_APID"/>
-         <outputDevice name="parametertableTlmOut" frameID="#PARAMETER_TABLE_TLM_PKT_APID1"/>
-         <outputDevice name="parametertableTlmOut" frameID="#PARAMETER_TABLE_TLM_PKT_APID2"/>
           <!-- <outputDevice name="CCSDS_TLM_Server"/> -->
       </decoderDef>
       

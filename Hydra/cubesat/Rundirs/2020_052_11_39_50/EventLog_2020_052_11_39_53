@@ -1,0 +1,12 @@
+2020/052-11:39:53: Configuring for Serial
+2020/052-11:39:53: <CFG> HW beaconTlmOut need to have prefix to use maxSize
+2020/052-11:39:53: <INT> Run Directory: C:\Users\Anant\Desktop\Hydra_IS0\cubesat\Rundirs\2020_052_11_39_50\
+2020/052-11:39:53: <INT> Writing note to file
+2020/052-11:39:53: <RDR> Auto-starting reader serialReader
+2020/052-11:39:53: <HW> COM6 is opened
+2020/052-11:39:53: <RDR> Starting reader serialReader
+2020/052-11:39:53: <SCR> Starting script in engine 0
+2020/052-11:39:53: <SCR> Starting script init.prc
+2020/052-11:39:53: <INT> Running startup script
+2020/052-11:39:53: <HW> Starting new file: EventLog_2020_052_11_39_53
+2020/052-11:39:53: <SCR> Done with script init.prc

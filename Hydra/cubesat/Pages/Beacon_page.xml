@@ -10,6 +10,7 @@
         <column>
         	<section name="CDH">
         		<row item = "CDH_Curr_Mode" label = "Sat_Curr_Mode"/>
+        		<row item = "CDH_I2C_Error_Flag" label = "CDH_I2C_Error_Flag"/>
 				<row item = "CDH_Curr_SD" label = "CDH_Curr_SD"/>
 				<row item = "CDH_Time_Msec" label = "CDH_Time_Msec"/>
 				<row item = "Beacon_Read_Start" format="HEX" label = "Beacon_Read_Start"/>
@@ -49,7 +50,7 @@
 
             <!-- Uncomment this for IS0 Flight Payload -->
             <row item="EPS_VC4_CH1_Curr"                       label="Panel0_Curr" />
-            <row item="EPS_VC4_CH1_Volt"                       label="Panel0_Volt" />
+            <row item="EPS_VC4_CH1_Volt"                       label="Panel0_Volt" /> 
 
         </section>
 		</column>
@@ -87,8 +88,8 @@
 
         <column>
         	<section name="Sensor Board VMEL6075 DATA">
-        		<row item = "Sensor_Board_VMEL6075_UVA_DATA" 	    label = "Sensor_Board_VMEL6075_UVA_DATA"/>
-				<row item = "Sensor_Board_VMEL6075_UVB_DATA" 	    label = "Sensor_Board_VMEL6075_UVB_DATA"/>
+        		<row item = "Sensor_Board_VMEL6075_UVA_DATA" 	    label = "UV Sensor A"/>
+				<row item = "Sensor_Board_VMEL6075_UVB_DATA" 	    label = "UV Sensor B"/>
 				<row item = "Sensor_Board_VMEL6075_UVCOMP1_DATA"    label = "Sensor_Board_VMEL6075_UVCOMP1_DATA"/>
 				<row item = "Sensor_Board_VMEL6075_UVCOMP2_DATA"    label = "Sensor_Board_VMEL6075_UVCOMP2_DATA"/>
 	    	</section>

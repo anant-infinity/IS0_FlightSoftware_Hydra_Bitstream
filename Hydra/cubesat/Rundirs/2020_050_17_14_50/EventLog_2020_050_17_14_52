@@ -1,0 +1,55 @@
+2020/050-17:14:52: Configuring for Serial
+2020/050-17:14:52: <CFG> HW beaconTlmOut need to have prefix to use maxSize
+2020/050-17:14:52: <CFG> HW logTlmOut need to have prefix to use maxSize
+2020/050-17:14:52: <CFG> HW subsystemResponseTlmOut need to have prefix to use maxSize
+2020/050-17:14:52: <CFG> HW parametertableTlmOut need to have prefix to use maxSize
+2020/050-17:14:52: <CFG> Item RTC_updated type YES_NO_t is not defined
+2020/050-17:14:52: <CFG> Item Bus_Transceiver_stat type Enable_Diable_t is not defined
+2020/050-17:14:52: <CFG> Item Eclispe_stat type YES_NO_t is not defined
+2020/050-17:14:52: <CFG> Item SC_Mode type Spacecraft_Mode_t is not defined
+2020/050-17:14:52: <CFG> Item DAXSS type TRUE_FALSE_t is not defined
+2020/050-17:14:52: <CFG> Item EPS type TRUE_FALSE_t is not defined
+2020/050-17:14:52: <CFG> Item CIP type TRUE_FALSE_t is not defined
+2020/050-17:14:52: <CFG> Item SBAND type TRUE_FALSE_t is not defined
+2020/050-17:14:52: <CFG> Item ADCS type TRUE_FALSE_t is not defined
+2020/050-17:14:52: <CFG> Item UHF type TRUE_FALSE_t is not defined
+2020/050-17:14:52: <CFG> Item Cmd_reject_stat_not_exec type YES_NO_t is not defined
+2020/050-17:14:52: <CFG> Item Cmd_reject_stat_bad_crc type YES_NO_t is not defined
+2020/050-17:14:52: <CFG> Item Cmd_reject_stat_bad_fcs type YES_NO_t is not defined
+2020/050-17:14:52: <CFG> Item Cmd_reject_stat_bad_data type YES_NO_t is not defined
+2020/050-17:14:52: <CFG> Item Cmd_reject_stat_bad_op2 type YES_NO_t is not defined
+2020/050-17:14:52: <CFG> Item Cmd_reject_stat_bad_op1 type YES_NO_t is not defined
+2020/050-17:14:52: <CFG> Item Cmd_reject_stat_bad_apid type YES_NO_t is not defined
+2020/050-17:14:52: <INT> Run Directory: C:\Users\Anant\Desktop\Hydra_IS0\cubesat\Rundirs\2020_050_17_14_50\
+2020/050-17:14:52: <INT> Writing note to file
+2020/050-17:14:52: <RDR> Auto-starting reader serialReader
+2020/050-17:14:52: <HW> COM6 is opened
+2020/050-17:14:52: <RDR> Starting reader serialReader
+2020/050-17:14:52: <SCR> Starting script in engine 0
+2020/050-17:14:52: <SCR> Starting script init.prc
+2020/050-17:14:52: <INT> Running startup script
+2020/050-17:14:52: <HW> Starting new file: EventLog_2020_050_17_14_52
+2020/050-17:14:52: <SCR> Done with script init.prc
+2020/050-17:15:41: serialReader length field in header too large: 16449
+2020/050-17:15:41: serialReader length field in header too large: 16449
+2020/050-17:15:41: serialReader length field in header too large: 16449
+2020/050-17:15:41: serialReader length field in header too large: 16449
+2020/050-17:15:41: serialReader length field in header too large: 16449
+2020/050-17:15:41: serialReader length field in header too large: 16449
+2020/050-17:15:48: serialReader length field in header too large: 2064
+2020/050-17:16:02: serialReader length field in header too large: 2052
+2020/050-17:16:02: serialReader length field in header too large: 14601
+2020/050-17:16:02: serialReader length field in header too large: 10240
+2020/050-17:16:02: serialReader length field in header too large: 24607
+2020/050-17:16:02: serialReader length field in header too large: 2048
+2020/050-17:16:02: serialReader length field in header too large: 26671
+2020/050-17:16:02: serialReader length field in header too large: 31348
+2020/050-17:16:02: serialReader length field in header too large: 16704
+2020/050-17:16:02: serialReader length field in header too large: 16704
+2020/050-17:16:02: serialReader length field in header too large: 16704
+2020/050-17:16:02: serialReader length field in header too large: 16704
+2020/050-17:16:02: serialReader length field in header too large: 16704
+2020/050-17:16:02: serialReader length field in header too large: 16704
+2020/050-17:16:05: serialReader length field in header too large: 4288
+2020/050-17:16:05: serialReader length field in header too large: 8855
+2020/050-17:16:12: serialReader length field in header too large: 15026

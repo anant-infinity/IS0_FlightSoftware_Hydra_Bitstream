@@ -1,0 +1,33 @@
+2020/051-12:45:47: Configuring for Serial
+2020/051-12:45:47: <CFG> HW beaconTlmOut need to have prefix to use maxSize
+2020/051-12:45:47: <CFG> HW logTlmOut need to have prefix to use maxSize
+2020/051-12:45:47: <CFG> HW subsystemResponseTlmOut need to have prefix to use maxSize
+2020/051-12:45:47: <CFG> HW parametertableTlmOut need to have prefix to use maxSize
+2020/051-12:45:47: <CFG> Item RTC_updated type YES_NO_t is not defined
+2020/051-12:45:47: <CFG> Item Bus_Transceiver_stat type Enable_Diable_t is not defined
+2020/051-12:45:47: <CFG> Item Eclispe_stat type YES_NO_t is not defined
+2020/051-12:45:47: <CFG> Item SC_Mode type Spacecraft_Mode_t is not defined
+2020/051-12:45:47: <CFG> Item DAXSS type TRUE_FALSE_t is not defined
+2020/051-12:45:47: <CFG> Item EPS type TRUE_FALSE_t is not defined
+2020/051-12:45:47: <CFG> Item CIP type TRUE_FALSE_t is not defined
+2020/051-12:45:47: <CFG> Item SBAND type TRUE_FALSE_t is not defined
+2020/051-12:45:47: <CFG> Item ADCS type TRUE_FALSE_t is not defined
+2020/051-12:45:47: <CFG> Item UHF type TRUE_FALSE_t is not defined
+2020/051-12:45:47: <CFG> Item Cmd_reject_stat_not_exec type YES_NO_t is not defined
+2020/051-12:45:47: <CFG> Item Cmd_reject_stat_bad_crc type YES_NO_t is not defined
+2020/051-12:45:47: <CFG> Item Cmd_reject_stat_bad_fcs type YES_NO_t is not defined
+2020/051-12:45:47: <CFG> Item Cmd_reject_stat_bad_data type YES_NO_t is not defined
+2020/051-12:45:47: <CFG> Item Cmd_reject_stat_bad_op2 type YES_NO_t is not defined
+2020/051-12:45:47: <CFG> Item Cmd_reject_stat_bad_op1 type YES_NO_t is not defined
+2020/051-12:45:47: <CFG> Item Cmd_reject_stat_bad_apid type YES_NO_t is not defined
+2020/051-12:45:47: <INT> Run Directory: C:\Users\Anant\Desktop\Hydra_IS0\cubesat\Rundirs\2020_051_12_45_45\
+2020/051-12:45:47: <INT> Writing note to file
+2020/051-12:45:47: <RDR> Auto-starting reader serialReader
+2020/051-12:45:47: <HW> COM6 is opened
+2020/051-12:45:47: <RDR> Starting reader serialReader
+2020/051-12:45:47: <SCR> Starting script in engine 0
+2020/051-12:45:47: <SCR> Starting script init.prc
+2020/051-12:45:47: <INT> Running startup script
+2020/051-12:45:47: <HW> Starting new file: EventLog_2020_051_12_45_47
+2020/051-12:45:47: <SCR> Done with script init.prc
+2020/051-12:48:36: serialReader length field in header too large: 30743

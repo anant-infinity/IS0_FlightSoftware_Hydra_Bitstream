@@ -1,7 +1,10 @@
 <hydraDef>
 
+
+	<hwServer name="SDR_Radio_TLM" mode="read" port="#SDR_RADIO_TLM_PORT" addr="localhost"/>
+
     <!-- Client connections to radio for commands and telemetry -->
-    <hwClient name="SDR_Radio_TLM" mode="read" port="#SDR_RADIO_TLM_PORT" addr="SDR_RADIO_IP_ADDR"/>
+    <!-- <hwClient name="SDR_Radio_TLM" mode="read" port="#SDR_RADIO_TLM_PORT" addr="SDR_RADIO_IP_ADDR"/> -->
     <hwClient name="SDR_Radio_CMD" mode="write" port="#SDR_RADIO_CMD_PORT" addr="SDR_RADIO_IP_ADDR"/>
 
     <!-- <hwServer name="SDR_Radio_TLM" mode="read" port="#SDR_RADIO_TLM_PORT"/> -->
@@ -63,7 +66,10 @@
     <!-- <decoderDef name="radioRaw">
         <outputDevice name="radioRawFile"/>
     </decoderDef> -->
-    <readerTCP name="SDR_TLM_Reader" maxSize="272" hw="SDR_Radio_TLM" decoder="ax25Decoder"
+
+    <!-- removed this :  decoder="ax25Decoder" -->
+
+    <readerTCP name="SDR_TLM_Reader" maxSize="272" hw="SDR_Radio_TLM" decoder="ccsdsDecoder"
 	    autoStart="true">
       <sync size="2" pattern="0x48 0x69"/>
     </readerTCP>

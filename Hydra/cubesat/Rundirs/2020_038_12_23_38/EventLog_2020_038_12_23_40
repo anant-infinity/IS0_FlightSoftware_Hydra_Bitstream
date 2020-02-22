@@ -1,0 +1,40 @@
+2020/038-12:23:40: Configuring for Serial
+2020/038-12:23:40: <CFG> HW beaconTlmOut need to have prefix to use maxSize
+2020/038-12:23:40: <CFG> HW logTlmOut need to have prefix to use maxSize
+2020/038-12:23:40: <CFG> HW subsystemResponseTlmOut need to have prefix to use maxSize
+2020/038-12:23:40: <CFG> HW parametertableTlmOut need to have prefix to use maxSize
+2020/038-12:23:40: <CFG> Item RTC_updated type YES_NO_t is not defined
+2020/038-12:23:40: <CFG> Item Bus_Transceiver_stat type Enable_Diable_t is not defined
+2020/038-12:23:40: <CFG> Item Eclispe_stat type YES_NO_t is not defined
+2020/038-12:23:40: <CFG> Item SC_Mode type Spacecraft_Mode_t is not defined
+2020/038-12:23:40: <CFG> Item DAXSS type TRUE_FALSE_t is not defined
+2020/038-12:23:40: <CFG> Item EPS type TRUE_FALSE_t is not defined
+2020/038-12:23:40: <CFG> Item CIP type TRUE_FALSE_t is not defined
+2020/038-12:23:40: <CFG> Item SBAND type TRUE_FALSE_t is not defined
+2020/038-12:23:40: <CFG> Item ADCS type TRUE_FALSE_t is not defined
+2020/038-12:23:40: <CFG> Item UHF type TRUE_FALSE_t is not defined
+2020/038-12:23:40: <CFG> Item Cmd_reject_stat_not_exec type YES_NO_t is not defined
+2020/038-12:23:40: <CFG> Item Cmd_reject_stat_bad_crc type YES_NO_t is not defined
+2020/038-12:23:40: <CFG> Item Cmd_reject_stat_bad_fcs type YES_NO_t is not defined
+2020/038-12:23:40: <CFG> Item Cmd_reject_stat_bad_data type YES_NO_t is not defined
+2020/038-12:23:40: <CFG> Item Cmd_reject_stat_bad_op2 type YES_NO_t is not defined
+2020/038-12:23:40: <CFG> Item Cmd_reject_stat_bad_op1 type YES_NO_t is not defined
+2020/038-12:23:40: <CFG> Item Cmd_reject_stat_bad_apid type YES_NO_t is not defined
+2020/038-12:23:40: <INT> Run Directory: C:\Users\Anant\Desktop\Hydra_IS0\cubesat\Rundirs\2020_038_12_23_38\
+2020/038-12:23:40: <INT> Writing note to file
+2020/038-12:23:40: <RDR> Auto-starting reader serialReader
+2020/038-12:23:40: <HW> Create file failed for COM6, error number 5
+2020/038-12:23:40: <RDR> Starting reader serialReader
+2020/038-12:23:40: <SCR> Starting script in engine 0
+2020/038-12:23:40: <SCR> Starting script init.prc
+2020/038-12:23:40: <INT> Running startup script
+2020/038-12:23:40: <HW> Starting new file: EventLog_2020_038_12_23_40
+2020/038-12:23:40: <SCR> Done with script init.prc
+2020/038-12:23:42: <PAG> Item Sensor_Board_VMEL6075_UVA_DATA_L not found
+2020/038-12:23:42: <PAG> Item Sensor_Board_VMEL6075_UVA_DATA_H not found
+2020/038-12:23:42: <PAG> Item Sensor_Board_VMEL6075_UVB_DATA_L not found
+2020/038-12:23:42: <PAG> Item Sensor_Board_VMEL6075_UVB_DATA_H not found
+2020/038-12:23:42: <PAG> Item Sensor_Board_VMEL6075_UVCOMP1_DATA_L not found
+2020/038-12:23:42: <PAG> Item Sensor_Board_VMEL6075_UVCOMP1_DATA_H not found
+2020/038-12:23:42: <PAG> Item Sensor_Board_VMEL6075_UVCOMP2_DATA_L not found
+2020/038-12:23:42: <PAG> Item Sensor_Board_VMEL6075_UVCOMP2_DATA_H not found

@@ -1,0 +1,26 @@
+2020/052-18:24:38: Configuring for Radio
+2020/052-18:24:38: <HW> Waiting for connections at 0.0.0.0:17100
+2020/052-18:24:38: <CFG> HW radioRawFile need to have prefix to use maxSize
+2020/052-18:24:38: <CFG> Reader SDR_TLM_Reader sync pattern is missing length
+2020/052-18:24:38: <INT> Run Directory: C:\Users\Anant\Desktop\Hydra_IS0\cubesat\Rundirs\2020_052_18_24_34\
+2020/052-18:24:38: <INT> Writing note to file
+2020/052-18:24:38: <RDR> Auto-starting reader SDR_TLM_Reader
+2020/052-18:24:38: <RDR> Starting reader SDR_TLM_Reader
+2020/052-18:24:38: <SCR> Starting script in engine 0
+2020/052-18:24:38: <SCR> Starting script init.prc
+2020/052-18:24:38: <INT> Running startup script
+2020/052-18:24:38: <HW> Starting new file: EventLog_2020_052_18_24_38
+2020/052-18:24:38: <SCR> Done with script init.prc
+2020/052-18:25:08: <HW> New connection from 127.0.0.1 on port 17100
+2020/052-18:26:24: <HW> SDR_Radio_TLM Read socket error 2
+2020/052-18:26:24: <HW> Got socket close event: 127.0.0.1:50345
+2020/052-18:26:24: <HW> Got socket close event: 127.0.0.1:50345
+2020/052-18:35:24: <HW> New connection from 127.0.0.1 on port 17100
+2020/052-18:38:14: <HW> SDR_Radio_TLM Read socket error 2
+2020/052-18:38:14: <HW> Got socket close event: 127.0.0.1:50620
+2020/052-18:39:53: <HW> New connection from 127.0.0.1 on port 17100
+2020/052-18:40:35: <HW> SDR_Radio_TLM Read socket error 2
+2020/052-18:40:35: <HW> Got socket close event: 127.0.0.1:50731
+2020/052-18:40:35: <HW> Got socket close event: 127.0.0.1:50731
+2020/052-18:42:07: <HW> New connection from 127.0.0.1 on port 17100
+2020/052-18:42:38: <HW> Starting new file: IS0Data_2020_052_18_42_38

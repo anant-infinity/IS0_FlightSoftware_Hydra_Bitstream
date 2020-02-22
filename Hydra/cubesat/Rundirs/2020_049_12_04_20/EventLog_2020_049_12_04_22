@@ -1,0 +1,32 @@
+2020/049-12:04:22: Configuring for Serial
+2020/049-12:04:22: <CFG> HW beaconTlmOut need to have prefix to use maxSize
+2020/049-12:04:22: <CFG> HW logTlmOut need to have prefix to use maxSize
+2020/049-12:04:22: <CFG> HW subsystemResponseTlmOut need to have prefix to use maxSize
+2020/049-12:04:22: <CFG> HW parametertableTlmOut need to have prefix to use maxSize
+2020/049-12:04:22: <CFG> Item RTC_updated type YES_NO_t is not defined
+2020/049-12:04:22: <CFG> Item Bus_Transceiver_stat type Enable_Diable_t is not defined
+2020/049-12:04:22: <CFG> Item Eclispe_stat type YES_NO_t is not defined
+2020/049-12:04:22: <CFG> Item SC_Mode type Spacecraft_Mode_t is not defined
+2020/049-12:04:22: <CFG> Item DAXSS type TRUE_FALSE_t is not defined
+2020/049-12:04:22: <CFG> Item EPS type TRUE_FALSE_t is not defined
+2020/049-12:04:22: <CFG> Item CIP type TRUE_FALSE_t is not defined
+2020/049-12:04:22: <CFG> Item SBAND type TRUE_FALSE_t is not defined
+2020/049-12:04:22: <CFG> Item ADCS type TRUE_FALSE_t is not defined
+2020/049-12:04:22: <CFG> Item UHF type TRUE_FALSE_t is not defined
+2020/049-12:04:22: <CFG> Item Cmd_reject_stat_not_exec type YES_NO_t is not defined
+2020/049-12:04:22: <CFG> Item Cmd_reject_stat_bad_crc type YES_NO_t is not defined
+2020/049-12:04:22: <CFG> Item Cmd_reject_stat_bad_fcs type YES_NO_t is not defined
+2020/049-12:04:22: <CFG> Item Cmd_reject_stat_bad_data type YES_NO_t is not defined
+2020/049-12:04:22: <CFG> Item Cmd_reject_stat_bad_op2 type YES_NO_t is not defined
+2020/049-12:04:22: <CFG> Item Cmd_reject_stat_bad_op1 type YES_NO_t is not defined
+2020/049-12:04:22: <CFG> Item Cmd_reject_stat_bad_apid type YES_NO_t is not defined
+2020/049-12:04:22: <INT> Run Directory: C:\Users\Anant\Desktop\Hydra_IS0\cubesat\Rundirs\2020_049_12_04_20\
+2020/049-12:04:22: <INT> Writing note to file
+2020/049-12:04:22: <RDR> Auto-starting reader serialReader
+2020/049-12:04:22: <HW> COM6 is opened
+2020/049-12:04:22: <RDR> Starting reader serialReader
+2020/049-12:04:22: <SCR> Starting script in engine 0
+2020/049-12:04:22: <SCR> Starting script init.prc
+2020/049-12:04:22: <INT> Running startup script
+2020/049-12:04:22: <HW> Starting new file: EventLog_2020_049_12_04_22
+2020/049-12:04:22: <SCR> Done with script init.prc
