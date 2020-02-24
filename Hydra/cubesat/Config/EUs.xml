@@ -1,19 +1,54 @@
 ﻿<hydraDef>
 
-    <!--IS0 TYPES-->
+    <!--IS0-EPS Telemetry EUs-->
     <euPoly name="EPS_SA_V">
         <coeff index="0" value="0"/>
-        <coeff index="1" value="0.001"/><!--32.76/32760-->
+        <!-- Refer INA3221 Datasheet Page 27, BUS-Voltage Register 
+        => Full Scale Value is 0x7FF8 (32760) which corresponds to 32.76V
+        => Register is 16 bit, out of which the first three bits are 0 by default. 
+        => Thus value should be shifted by 3 bits, hence devided by 8. 
+        => LSB Corresponds to 8 mV, hence value should be multiplied by 0.008
+        => Thus Conversion factor is 0.008/8 = 0.001 V
+        => Value shown on beacon page is in Volts-->
+
+        <coeff index="1" value="0.001"/>
     </euPoly>
 
     <euPoly name="EPS_SA_I">
         <coeff index="0" value="0"/>
-        <coeff index="1" value="0.005"/><!--40*0.001*163.8/32760-->
+        <!-- Refer INA3221 Datasheet Page 27, SHUNT-Voltage Register 
+        => Shunt Voltage register contains the current value
+        => Full Scale Value is 0x7FF8 (32760) which corresponds to 163.8 mA
+        => Register is 16 bit, out of which the first three bits are 0 by default. 
+        => Thus value should be shifted by 3 bits, hence devided by 8. 
+        => LSB Corresponds to 40 uV (or micro-Ampere), hence value should be multiplied by 40*10^6
+        => Thus Conversion factor is (40*10^6)/8 = 0.005 mA
+        => Value shown on beacon page is in Milli Amperes -->
+        <coeff index="1" value="0.005"/>
     </euPoly>
 
     <euPoly name="EPS_SoC">
         <coeff index="0" value="0"/>
-        <coeff index="1" value="0.00390625"/><!--40*0.001*163.8/32760-->
+        <!-- Refer MAX17049 Datasheet Page 10, Register Summary Table 
+        => SoC is stored as a 16 bit number 
+        => Conversion factor is (1/256) = 0.00390625 %
+        => Value shown on beacon page is in percentage -->
+        <coeff index="1" value="0.00390625"/>
     </euPoly>
+
+    <euPoly name="EPS_ADC">
+        <coeff index="0" value="0"/>
+        <!-- Refer AD7998 Datasheet Page 20, Conversion Result Register 
+        => ADC value is stored as a 16 bit number 
+        => First four bits contain alert flag and chanel identifier, these are removed in the FSW
+        => The remaining 12 bits are converted to Voltage by the conversion factor 
+        => The conversion factor is (3.3V/2^12) = 0.0008056640625
+        => Value shown on beacon page is in Volts
+        => In order to convert this voltage into temperature the curve provided by Vishay 
+        => Should be used.  -->
+        <coeff index="1" value="0.0008056"/>
+    </euPoly>
+
+
     
 </hydraDef>

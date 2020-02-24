@@ -230,9 +230,9 @@
     <typeDouble name="double64l" endian="LITTLE"/>
 
     
-    <typeEU name="EPS_SA_V" size="16" endian="LITTLE" eu="EPS_SA_V"/>
-    <typeEU name="EPS_SA_I" size="16" endian="LITTLE" eu="EPS_SA_I"/>
-    <typeEU name="EPS_SoC" size="16" endian="LITTLE" eu="EPS_SoC"/>
-    <typeEU name="EPS_ADC" size="16" endian="LITTLE" eu="EPS_ADC"/>
+    <typeEU name="EPS_SA_V" size="16" endian="BIG" eu="EPS_SA_V"/>
+    <typeEU name="EPS_SA_I" size="16" endian="BIG" eu="EPS_SA_I"/>
+    <typeEU name="EPS_SoC" size="16" endian="BIG" eu="EPS_SoC"/>
+    <typeEU name="EPS_ADC" size="16" endian="BIG" eu="EPS_ADC"/>
  
 </hydraDef>

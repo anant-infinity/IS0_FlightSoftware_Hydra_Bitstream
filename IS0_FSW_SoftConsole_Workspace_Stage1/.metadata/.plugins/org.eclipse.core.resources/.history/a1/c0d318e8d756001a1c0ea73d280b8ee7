@@ -139,7 +139,7 @@ uint8_t read_AS7265x_reg(uint8_t virtual_reg_address){
 
 	 uint8_t count = 0;
 
-	 while(count<10){
+	 while(count<100){
 		 count++;
 		 Utils_Delay32(1);
 		 // Read slave I²C status to see if the read buffer is ready.
@@ -156,8 +156,9 @@ uint8_t read_AS7265x_reg(uint8_t virtual_reg_address){
 	 uint8_t virtual_reg_buffer[TX_LENGTH_2] = {SENSOR_AS72651_WRITE_REG, virtual_reg_address};
 	 instance = do_write_transaction(&g_core_i2c3, SENSOR_MASTER, virtual_reg_buffer, write_length_2);
 	 count = 0;
-	 while(count<10){
+	 while(count<100){
 		 count++;
+		 Utils_Delay32(1);
 		 // Read the slave I²C status to see if our read data is available.
 		 instance = do_write_read_transaction(&g_core_i2c3, SENSOR_MASTER, SENSOR_AS72651_STATUS_REG, write_length, rx_buffer, read_length);
 		 Utils_Delay32(1);

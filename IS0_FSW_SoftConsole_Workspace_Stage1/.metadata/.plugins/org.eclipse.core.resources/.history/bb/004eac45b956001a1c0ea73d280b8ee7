@@ -158,12 +158,9 @@ void Get_EPS_Data(){
 		uint8_t read_length = RX_LENGTH_2;
 		i2c_status_t instance;
 		for(int i = 0; i < 34; ++i){
+
 			instance = do_write_read_transaction(points[i].i2c, points[i].slaveAddr, points[i].regAddr, write_length, rx_buffer, read_length);
 			Beacon_pack_IS0.EPS[i] = Utils_Buffer_to_16_ValueU_Big(rx_buffer);
-			//Doing Data Processing on the EPS ADC Data , to remove the 4 MSBs Refer AD7998 Datasheet Page 20
-			if(i==30 || i==31 || i==32 ){
-				Beacon_pack_IS0.EPS[i] = Beacon_pack_IS0.EPS[i]&0x0FFF;
-			}
 		}
 
 }
