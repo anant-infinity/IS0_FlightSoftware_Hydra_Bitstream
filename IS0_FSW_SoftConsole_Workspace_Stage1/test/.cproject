@@ -577,6 +577,10 @@
                                 								
                                 <option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.usenewlibnano.1001467443" name="Use newlib-nano (--specs=nano.specs)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.usenewlibnano" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                                 								
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.flags.386310253" name="Linker flags (-Xlinker [option])" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.flags" useByScannerDiscovery="false" valueType="stringList"/>
+                                								
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.otherobjs.513595387" name="Other objects" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.otherobjs" useByScannerDiscovery="false" valueType="userObjs"/>
+                                								
                                 <inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input.1309144500" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input">
                                     									
                                     <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -848,6 +852,18 @@
                                 <option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.usenewlibnano.1940685257" name="Use newlib-nano (--specs=nano.specs)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.usenewlibnano" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                                 								
                                 <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.paths.614126459" name="Library search path (-L)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.paths" useByScannerDiscovery="false" valueType="libPaths"/>
+                                								
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.otherobjs.1930151207" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.otherobjs" useByScannerDiscovery="false" valueType="userObjs">
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;D:\Final_Year_Project_Work\IS-0-P4\is-0-fpga-design\is-0-fpga-design-v1\firmware\CMSIS\startup_gcc\production-smartfusion2-execute-in-place.ld&quot;"/>
+                                    								
+                                </option>
+                                								
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.flags.580189462" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.flags" useByScannerDiscovery="false" valueType="stringList">
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;D:\Final_Year_Project_Work\IS-0-P4\is-0-fpga-design\is-0-fpga-design-v1\firmware\CMSIS\startup_gcc\production-smartfusion2-execute-in-place.ld&quot;"/>
+                                    								
+                                </option>
                                 								
                                 <inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input.460742393" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input">
                                     									

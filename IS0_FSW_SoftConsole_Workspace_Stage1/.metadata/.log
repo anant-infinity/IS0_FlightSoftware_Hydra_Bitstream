@@ -2534,3 +2534,1640 @@ java.nio.file.AccessDeniedException: C:\Users\InspireSat4
 
 !ENTRY ilg.gnumcueclipse.managedbuild.cross.riscv 4 1 2020-02-24 15:42:07.259
 !MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.data 4 1 2020-02-24 16:42:54.864
+!MESSAGE File .repos.xml does not exist, using defaults.
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 16:49:02.968
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 16:49:03.846
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 16:52:13.447
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 16:52:14.316
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:12:01.915
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 25 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:12:01.916
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:12:01.926
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 27 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:12:01.926
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:12:11.837
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:12:12.653
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.debug.gdbjtag.openocd 4 5012 2020-02-24 17:12:15.291
+!MESSAGE Error in final launch sequence
+!STACK 1
+org.eclipse.core.runtime.CoreException: Failed to execute MI command:
+load C:\\Users\\Anant\\Documents\\IS0_FSW_Hydra_Bitstream_Files\\IS0_FlightSoftware_Hydra_Bitstream\\IS0_FSW_SoftConsole_Workspace_Stage1\\test\\Debug_ENVM\\test.elf
+Error message from debugger back end:
+Error finishing flash operation
+	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:111)
+	at ilg.gnumcueclipse.debug.gdbjtag.openocd.dsf.LaunchConfigurationDelegate.launchDebugSession(LaunchConfigurationDelegate.java:448)
+	at ilg.gnumcueclipse.debug.gdbjtag.openocd.dsf.LaunchConfigurationDelegate.launchDebugger(LaunchConfigurationDelegate.java:174)
+	at ilg.gnumcueclipse.debug.gdbjtag.openocd.dsf.LaunchConfigurationDelegate.launch(LaunchConfigurationDelegate.java:150)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:859)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:717)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Contains: Failed to execute MI command:
+load C:\\Users\\Anant\\Documents\\IS0_FSW_Hydra_Bitstream_Files\\IS0_FlightSoftware_Hydra_Bitstream\\IS0_FSW_SoftConsole_Workspace_Stage1\\test\\Debug_ENVM\\test.elf
+Error message from debugger back end:
+Error finishing flash operation
+java.lang.Exception: Error finishing flash operation
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:943)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:772)
+!SUBENTRY 1 org.eclipse.cdt.dsf 4 10004 2020-02-24 17:12:15.292
+!MESSAGE Failed to execute MI command:
+load C:\\Users\\Anant\\Documents\\IS0_FSW_Hydra_Bitstream_Files\\IS0_FlightSoftware_Hydra_Bitstream\\IS0_FSW_SoftConsole_Workspace_Stage1\\test\\Debug_ENVM\\test.elf
+Error message from debugger back end:
+Error finishing flash operation
+!SUBENTRY 2 org.eclipse.cdt.dsf.gdb 4 10004 2020-02-24 17:12:15.292
+!MESSAGE Failed to execute MI command:
+load C:\\Users\\Anant\\Documents\\IS0_FSW_Hydra_Bitstream_Files\\IS0_FlightSoftware_Hydra_Bitstream\\IS0_FSW_SoftConsole_Workspace_Stage1\\test\\Debug_ENVM\\test.elf
+Error message from debugger back end:
+Error finishing flash operation
+!STACK 0
+java.lang.Exception: Error finishing flash operation
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:943)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:772)
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:12:46.129
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:12:47.044
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:16:10.487
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 25 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:16:10.487
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:16:10.495
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 27 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:16:10.495
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:16:50.233
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:16:51.180
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:25:24.756
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 25 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:25:24.757
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:25:24.766
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 27 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:25:24.766
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:25:38.246
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:25:38.678
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:31:16.298
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 25 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:31:16.299
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:31:16.307
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 27 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:31:16.307
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:31:42.718
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 25 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:31:42.718
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:31:42.726
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 27 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:31:42.726
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:32:21.358
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:32:21.846
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:33:45.773
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 25 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:33:45.773
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:33:45.781
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 27 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:33:45.781
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:33:59.715
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:34:00.154
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:37:07.834
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 25 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:37:07.834
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 17:37:07.843
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 27 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 17:37:07.843
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:37:27.616
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:37:28.151
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:47:35.726
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:47:36.241
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:53:52.057
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:53:52.599
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:55:57.621
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:55:58.095
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:57:56.506
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 17:57:56.973
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:03:33.875
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:03:34.340
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:04:41.644
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:04:42.128
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 18:05:07.127
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 25 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 18:05:07.127
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 18:05:07.135
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 27 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 18:05:07.135
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:05:15.306
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:05:15.751
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:12:52.178
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:12:53.077
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:14:57.638
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:14:58.079
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:15:45.914
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:15:46.392
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:16:26.846
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:16:27.330
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:17:08.904
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:17:09.379
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 18:19:00.351
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 25 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 18:19:00.352
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getOutputStream(BuildConsolePartitioner.java:499)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getOutputStream(MultiBuildConsoleAdapter.java:99)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getOutputStream(CBuildConsole.java:64)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.prepareStreams(BuildRunnerHelper.java:142)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:121)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2020-02-24 18:19:00.360
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:45)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:318)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	... 27 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 280 2020-02-24 18:19:00.361
+!MESSAGE Cannot create file, access denied: C:\Users\InspireSat4\Documents\IS1\IS1_hw_redesign\is1_hw_redesign_firmware_orig_v1\IS1_FSW_wksps\.metadata\.plugins\org.eclipse.cdt.ui.
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Users\InspireSat4
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createAndCheckIsDirectory(Unknown Source)
+	at java.base/java.nio.file.Files.createDirectories(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:307)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.logOpen(BuildConsolePartitioner.java:194)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.setStreamOpened(BuildConsolePartitioner.java:140)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildOutputStream.<init>(BuildOutputStream.java:40)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner.getInfoStream(BuildConsolePartitioner.java:505)
+	at org.eclipse.cdt.internal.ui.buildconsole.MultiBuildConsoleAdapter.getInfoStream(MultiBuildConsoleAdapter.java:104)
+	at org.eclipse.cdt.internal.ui.buildconsole.CBuildConsole.getInfoStream(CBuildConsole.java:70)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:440)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:420)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.greeting(BuildRunnerHelper.java:402)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:125)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:70)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:753)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:795)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:216)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:259)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:312)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:315)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:367)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:388)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:501)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:401)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:19:13.148
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:19:13.631
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:21:00.417
+!MESSAGE C:\Microsemi\SoftConsole_v6.0\openocd\bin/openocd.exe -c gdb_port 3333 -c telnet_port 4444 -c tcl_port 6666 --command set DEVICE M2S060 --file board/microsemi-cortex-m3.cfg -c echo "Started by GNU MCU Eclipse"
+
+!ENTRY ilg.gnumcueclipse.packs.core 4 1 2020-02-24 18:21:00.911
+!MESSAGE arm-none-eabi-gdb --interpreter=mi2 --nx

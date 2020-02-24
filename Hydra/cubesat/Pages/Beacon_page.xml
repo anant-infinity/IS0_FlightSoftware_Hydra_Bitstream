@@ -96,8 +96,8 @@
 	     </column>
 
 
-	     <column>
-        	<section name="Sensor Board AS7265x DATA">
+		<column>
+        	<section name="Sensor Board AS72651 DATA">
         		<row item = "Sensor_Board_AS7265x_DataByte_1" label = "DataByte 1"/>
 				<row item = "Sensor_Board_AS7265x_DataByte_2" label = "DataByte 2"/>
 				<row item = "Sensor_Board_AS7265x_DataByte_3" label = "DataByte 3"/>
@@ -110,6 +110,12 @@
 				<row item = "Sensor_Board_AS7265x_DataByte_10" label = "DataByte 10"/>
 				<row item = "Sensor_Board_AS7265x_DataByte_11" label = "DataByte 11"/>
 				<row item = "Sensor_Board_AS7265x_DataByte_12" label = "DataByte 12"/>
+			</section>
+	    </column>
+	    
+	    <column>
+        	<section name="Sensor Board AS72652 DATA">	
+
 				<row item = "Sensor_Board_AS7265x_DataByte_13" label = "DataByte 13"/>
 				<row item = "Sensor_Board_AS7265x_DataByte_14" label = "DataByte 14"/>
 				<row item = "Sensor_Board_AS7265x_DataByte_15" label = "DataByte 15"/>
@@ -122,6 +128,11 @@
 				<row item = "Sensor_Board_AS7265x_DataByte_22" label = "DataByte 22"/>
 				<row item = "Sensor_Board_AS7265x_DataByte_23" label = "DataByte 23"/>
 				<row item = "Sensor_Board_AS7265x_DataByte_24" label = "DataByte 24"/>
+			</section>
+	    </column>
+
+	    <column>
+        	<section name="Sensor Board AS72653 DATA">	    				
 				<row item = "Sensor_Board_AS7265x_DataByte_25" label = "DataByte 25"/>
 				<row item = "Sensor_Board_AS7265x_DataByte_26" label = "DataByte 26"/>
 				<row item = "Sensor_Board_AS7265x_DataByte_27" label = "DataByte 27"/>

@@ -79,23 +79,23 @@ void VEML6075AssignInit(){
 void AS7265xAssignInit(){
 
 	int k = 0;
-	Read_Array_AS7265x[k++] = SENSOR_AS72651_RAW_RGA_H ;
-	Read_Array_AS7265x[k++] = SENSOR_AS72651_RAW_RGA_L ;
+	Read_Array_AS7265x[k++] = SENSOR_AS72651_HWVERSION_H ;
+	Read_Array_AS7265x[k++] = SENSOR_AS72651_HWVERSION_L ;
 
-	Read_Array_AS7265x[k++] = SENSOR_AS72651_RAW_SHB_H ;
-	Read_Array_AS7265x[k++] = SENSOR_AS72651_RAW_SHB_L ;
+	Read_Array_AS7265x[k++] = SENSOR_AS72651_HWVERSION_H ;
+	Read_Array_AS7265x[k++] = SENSOR_AS72651_HWVERSION_L ;
 
-	Read_Array_AS7265x[k++] = SENSOR_AS72651_RAW_TIC_H ;
-	Read_Array_AS7265x[k++] = SENSOR_AS72651_RAW_TIC_L ;
+	Read_Array_AS7265x[k++] = SENSOR_AS72651_HWVERSION_H ;
+	Read_Array_AS7265x[k++] = SENSOR_AS72651_HWVERSION_L ;
 
-	Read_Array_AS7265x[k++] = SENSOR_AS72651_RAW_UJD_H ;
-	Read_Array_AS7265x[k++] = SENSOR_AS72651_RAW_UJD_L ;
+	Read_Array_AS7265x[k++] = SENSOR_AS72651_HWVERSION_H ;
+	Read_Array_AS7265x[k++] = SENSOR_AS72651_HWVERSION_L ;
 
-	Read_Array_AS7265x[k++] = SENSOR_AS72651_RAW_VKE_H ;
-	Read_Array_AS7265x[k++] = SENSOR_AS72651_RAW_VKE_L ;
+	Read_Array_AS7265x[k++] = SENSOR_AS72651_HWVERSION_H ;
+	Read_Array_AS7265x[k++] = SENSOR_AS72651_HWVERSION_L ;
 
-	Read_Array_AS7265x[k++] = SENSOR_AS72651_RAW_WLF_H ;
-	Read_Array_AS7265x[k++] = SENSOR_AS72651_RAW_WLF_L ;
+	Read_Array_AS7265x[k++] = SENSOR_AS72651_HWVERSION_H ;
+	Read_Array_AS7265x[k++] = SENSOR_AS72651_HWVERSION_L ;
 }
 
 
@@ -250,14 +250,13 @@ uint8_t read_AS7265x_reg(uint8_t virtual_reg_address){
 		Utils_Delay32(1);
 		// Initialize the data structures
 		 AS7265xAssignInit();
-
-		uint8_t Dev_Sel_reg = 0x00;
-
+		// Utils_Delay32(1000);
 		//Set the DEV_SEL register to sensor 1
-		write_AS7265x_reg(SENSOR_AS72651_DEVSEL_MASTER);
-		Utils_Delay32(10);
+		//write_AS7265x_reg(SENSOR_AS72651_DEVSEL_MASTER);
+
+		Utils_Delay32(1);
 		//read the DEV_SEL register to see if slave data is ready
-		Dev_Sel_reg = read_AS7265x_reg(SENSOR_AS72651_DEVSEL_ADDR);
+		//uint8_t Dev_Sel_reg = read_AS7265x_reg(SENSOR_AS72651_DEVSEL_ADDR);
 
 		//Read all the data from sensor 1
 		for(int i = 0; i < 12; ++i){
@@ -268,10 +267,10 @@ uint8_t read_AS7265x_reg(uint8_t virtual_reg_address){
 
 		//Utils_Delay32(1);
 		//Set the DEV_SEL register to sensor 2
-		write_AS7265x_reg(SENSOR_AS72651_DEVSEL_FIRSTSLAVE);
-		Utils_Delay32(10);
+		//write_AS7265x_reg(SENSOR_AS72651_DEVSEL_FIRSTSLAVE);
+		Utils_Delay32(1);
 		//read the DEV_SEL register to see if slave data is ready
-		Dev_Sel_reg = read_AS7265x_reg(SENSOR_AS72651_DEVSEL_ADDR);
+		//Dev_Sel_reg = read_AS7265x_reg(SENSOR_AS72651_DEVSEL_ADDR);
 
 		//Read all the data from sensor 2
 		for(int i = 0; i < 12; ++i){
@@ -279,12 +278,12 @@ uint8_t read_AS7265x_reg(uint8_t virtual_reg_address){
 			Beacon_pack_IS0.Sensor_Board_AS7265X[i+12] = read_AS7265x_reg(Read_Array_AS7265x[i]);
 
 		}
-
+		//Utils_Delay32(1000);
 		//Set the DEV_SEL register to sensor 3
-		write_AS7265x_reg(SENSOR_AS72651_DEVSEL_SECONDSLAVE);
-		Utils_Delay32(10);
+		//write_AS7265x_reg(SENSOR_AS72651_DEVSEL_SECONDSLAVE);
+		Utils_Delay32(1);
 		//read the DEV_SEL register to see if slave data is ready
-		Dev_Sel_reg = read_AS7265x_reg(SENSOR_AS72651_DEVSEL_ADDR);
+		//Dev_Sel_reg = read_AS7265x_reg(SENSOR_AS72651_DEVSEL_ADDR);
 
 		//Read all the data from sensor 3
 		for(int i = 0; i < 12; ++i){

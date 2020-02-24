@@ -143,13 +143,13 @@ void Get_Beacon_Packet(){
 			//Get VMEL Sensor Board Data
 			Get_VEML6075_Data();
 
-			//MSS_GPIO_set_output( GPIO_EN_BUS_TRAN, 1);
+			MSS_GPIO_set_output( GPIO_EN_BUS_TRAN, 1);
 
 			//Get triad sensor data
 
 			Get_AS7265x_Data();
 
-			//MSS_GPIO_set_output( GPIO_EN_BUS_TRAN, 0);
+			MSS_GPIO_set_output( GPIO_EN_BUS_TRAN, 0);
 
 
 			//Making the beacon packet into CCSDS Format
