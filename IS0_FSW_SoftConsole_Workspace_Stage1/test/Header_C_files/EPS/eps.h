@@ -105,7 +105,7 @@
 	#define EPS_ADC_MASK_MODE2_SEQCH	((uint8_t)0x70)	// Sequence of channels selected in configuration register
 	/***************************************************************************/
 
-void Initialize_EPS_I2C_Channels();
+void Initialize_EPS();
 void Get_EPS_Data();
 void PWR_Switch(uint32_t, uint8_t);
 void epsAssignInit();

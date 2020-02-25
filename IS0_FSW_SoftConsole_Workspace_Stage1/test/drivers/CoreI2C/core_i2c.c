@@ -12,7 +12,6 @@
 #include "hal.h"
 #include "hal_assert.h"
 #include "Seq_ops/main_seq.h"
-
 #include <string.h>
 
 #ifdef __cplusplus
@@ -463,7 +462,20 @@ i2c_status_t I2C_wait_complete
         i2c_status = this_i2c->master_status;
         i2c_count++;
         if(i2c_count>1000){
-        	Globals.I2C_Error_Flag = 1;
+
+	    	if (this_i2c->base_address ==  0x50008000){
+	    		Globals.I2C_Error_Flag = 0x05;
+	    	}
+	    	else if(this_i2c->base_address == 0x50009000U){
+	    		Globals.I2C_Error_Flag = 0x06;
+	    	}
+	    	else if(this_i2c->base_address == 0x5000A000U){
+	    		Globals.I2C_Error_Flag = 0x07;
+	    	}
+	    	else if(this_i2c->base_address == 0x5000B000U){
+	    		Globals.I2C_Error_Flag = 0x08;
+	    	}
+
         	i2c_count = 0;
         	break;
         }

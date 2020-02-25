@@ -25,20 +25,8 @@ i2c_instance_t g_core_i2c0;				// Core I2C 0 for EPS_C0;
 i2c_instance_t g_core_i2c1; 			// Core I2C 1 for EPS_C1;
 i2c_instance_t g_core_i2c2; 			// Core I2C 2 for EPS_NC;
 
-
-void Initialize_EPS_I2C_Channels(){
-
-    /*-------------------------------------------------------------------------
-     * Initialize the Core I2C Drivers
-    */
-    I2C_init(&g_core_i2c0, COREI2C_0, MASTER_SER_ADDR, I2C_PCLK_DIV_960);		// Core I2C 0 for EPS_C0;
-    I2C_init(&g_core_i2c1, COREI2C_1, MASTER_SER_ADDR, I2C_PCLK_DIV_960);		// Core I2C 1 for EPS_C1;
-    I2C_init(&g_core_i2c2, COREI2C_2, MASTER_SER_ADDR, I2C_PCLK_DIV_960);		// Core I2C 1 for EPS_C1;
-
-
-
-
-}
+uint8_t rx_buffer_EPS[RX_LENGTH_2];
+i2c_status_t instance;
 
 //Function to control the various GPIOs for IS0
 void PWR_Switch(uint32_t config, uint8_t on_off){
@@ -149,17 +137,26 @@ void epsAssignInit(){
 
 }
 
+void Initialize_EPS(){
+
+    /*-------------------------------------------------------------------------
+     * Initialize the Core I2C Drivers
+    */
+    I2C_init(&g_core_i2c0, COREI2C_0, MASTER_SER_ADDR, I2C_PCLK_DIV_960);		// Core I2C 0 for EPS_C0;
+    I2C_init(&g_core_i2c1, COREI2C_1, MASTER_SER_ADDR, I2C_PCLK_DIV_960);		// Core I2C 1 for EPS_C1;
+    I2C_init(&g_core_i2c2, COREI2C_2, MASTER_SER_ADDR, I2C_PCLK_DIV_960);		// Core I2C 1 for EPS_C1;
+
+    //Initialize the Data Structures
+    epsAssignInit();
+
+}
+
 void Get_EPS_Data(){
 
-		//Initialize the different Data Structures
-		epsAssignInit();
-		uint8_t write_length = TX_LENGTH;
-		uint8_t rx_buffer[RX_LENGTH_2];
-		uint8_t read_length = RX_LENGTH_2;
-		i2c_status_t instance;
+
 		for(int i = 0; i < 34; ++i){
-			instance = do_write_read_transaction(points[i].i2c, points[i].slaveAddr, points[i].regAddr, write_length, rx_buffer, read_length);
-			Beacon_pack_IS0.EPS[i] = Utils_Buffer_to_16_ValueU_Big(rx_buffer);
+			instance = do_write_read_transaction(points[i].i2c, points[i].slaveAddr, points[i].regAddr, TX_LENGTH, rx_buffer_EPS, RX_LENGTH_2);
+			Beacon_pack_IS0.EPS[i] = Utils_Buffer_to_16_ValueU_Big(rx_buffer_EPS);
 			//Doing Data Processing on the EPS ADC Data , to remove the 4 MSBs Refer AD7998 Datasheet Page 20
 			if(i==30 || i==31 || i==32 ){
 				Beacon_pack_IS0.EPS[i] = Beacon_pack_IS0.EPS[i]&0x0FFF;

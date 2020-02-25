@@ -20,11 +20,8 @@
 
 int main(){
 
-	//	Running the Sequence of Operations
+	//Running the Sequence of Operations
 	main_seq();
-
-	//test funtion for testing the SD card
-	//test_SD_All_Sectors(0, 128);
 
 }
 
@@ -105,10 +102,10 @@ void Init(){
 
 	//Initialize all the GPIOs
 	Global_Init_GPIOs();
-	//Initialize EPS I2C Channels
-	Initialize_EPS_I2C_Channels();
-	//Initialize Sensor Board I2C Channel
-	Initialize_Sensor_Board_I2C_Channel();
+	//Initialize EPS
+	Initialize_EPS();
+	//Initialize Sensor Board
+	Initialize_Sensor_Board();
 
 	//Initialize the Flash Memory
 	Flash_Init();
@@ -143,14 +140,8 @@ void Get_Beacon_Packet(){
 			//Get VMEL Sensor Board Data
 			Get_VEML6075_Data();
 
-			//MSS_GPIO_set_output( GPIO_EN_BUS_TRAN, 1);
-
 			//Get triad sensor data
-
 			Get_AS7265x_Data();
-
-			//MSS_GPIO_set_output( GPIO_EN_BUS_TRAN, 0);
-
 
 			//Making the beacon packet into CCSDS Format
 		    CCSDS_Pack( BEACON_PACKET_APID, 0xC0, Globals.Beacon_Packet_Seq_Counter, (struct CCSDS_Header *)&(Beacon_pack_IS0.beac_head), sizeof(Beacon_pack_IS0));
@@ -159,9 +150,12 @@ void Get_Beacon_Packet(){
 		    //Incrementing the Beacon Packet Sequence Counter
 		    Globals.Beacon_Packet_Seq_Counter++;
 
-		    //for ground testing
+		    //TODO: For ground testing only
+		    //Comment for Flight
 		    Beacon_Packet_UART_log();
+
 		    //Make the beacon Packet Array
+		    //This array is used to write the data byte-by-byte into the PSLV FIFO
 		    Make_Beacon_Packet_Array();
 		    Globals.Beac_Timer.Start = RTC_Get_Value64();
 		}
@@ -253,6 +247,8 @@ void Make_Beacon_Packet_Array(){
 
 void Get_CDH_Data(){
 
+	//This function is used to collect the important telemtry for the CDH board
+	//This mainly includes global variables, timers, flags etc.
 	int index_8 = 0;
 	Beacon_pack_IS0.CDH_8[index_8++] = Globals.Sat_Curr_Mode;
 	Beacon_pack_IS0.CDH_8[index_8++] = Globals.I2C_Error_Flag;
@@ -389,6 +385,8 @@ void SwitchTo_Mode_Pheonix(){
 }
 
 
+//This function is only for ground testing, to log the packet over the debug UART
+//Not required for flight
 void Beacon_Packet_UART_log(){
 
 	uint16_t EPS_array_1[8];

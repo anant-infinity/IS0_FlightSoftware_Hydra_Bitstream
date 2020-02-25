@@ -108,7 +108,18 @@ i2c_instance_t g_core_i2c3; 			// Core I2C for SENSOR_0;
 
 	    status = I2C_wait_complete(this_core_i2c, DEMO_I2C_TIMEOUT);
 	    if(status == I2C_FAILED){
-	    	Globals.I2C_Error_Flag = 1;
+	    	if (this_core_i2c == &g_core_i2c0){
+	    		Globals.I2C_Error_Flag = 0x01;
+	    	}
+	    	else if(this_core_i2c == &g_core_i2c1){
+	    		Globals.I2C_Error_Flag = 0x02;
+	    	}
+	    	else if(this_core_i2c == &g_core_i2c2){
+	    		Globals.I2C_Error_Flag = 0x03;
+	    	}
+	    	else if(this_core_i2c == &g_core_i2c3){
+	    		Globals.I2C_Error_Flag = 0x04;
+	    	}
 	    }
 
 	    return status;

@@ -80,7 +80,7 @@
 	#define	SENSOR_AS72651_DEVSEL_FIRSTSLAVE	((uint8_t)0x01)		// 8 bit , write this to dev select register to select first sensor slave
 	#define	SENSOR_AS72651_DEVSEL_SECONDSLAVE	((uint8_t)0x02)		// 8 bit , write this to dev select register to select second sensor slave
 
-void Initialize_Sensor_Board_I2C_Channel();
+void Initialize_Sensor_Board();
 void Get_VEML6075_Data();
 void Get_AS7265x_Data();
 uint8_t read_AS7265x_reg(uint8_t);

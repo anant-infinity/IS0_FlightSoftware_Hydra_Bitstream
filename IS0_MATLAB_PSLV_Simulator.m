@@ -37,7 +37,7 @@ packet_size = 156;
 % Collecting a beacon packet every 10 seconds 
 % Collecting the packet two bytes at a time by sending the PSLV Command 
 i=0;
-while(i<10)
+while(i<100)
     packet_array=zeros(1,156);
     for command_number=1: (packet_size/2)
         %Putting a delay of 0.01 seconds between consecutive packets 
