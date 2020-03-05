@@ -1,0 +1,10 @@
+2020/059-18:52:00: Configuring for Radio
+2020/059-18:52:00: <CFG> Could not load file Config\radio.xml
+2020/059-18:52:00: <CFG> Could not load file Config\radio.xml
+2020/059-18:52:00: <INT> Run Directory: C:\Users\Anant\Desktop\Hydra_IS0\cubesat\Rundirs\2020_059_18_51_56\
+2020/059-18:52:00: <INT> Writing note to file
+2020/059-18:52:00: <SCR> Starting script in engine 0
+2020/059-18:52:00: <SCR> Starting script init.prc
+2020/059-18:52:00: <INT> Running startup script
+2020/059-18:52:00: <HW> Starting new file: EventLog_2020_059_18_52_00
+2020/059-18:52:00: <SCR> Done with script init.prc

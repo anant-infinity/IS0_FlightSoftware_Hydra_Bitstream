@@ -1,0 +1,79 @@
+<pageDef>
+
+	<size width="1300" height="850"/>
+	<background color="Page_Background"/>
+	<text color="BLACK"/>
+	<font name="Arial" size="12"/>
+
+    <page title="IS0 CDH-EPS Page">
+
+
+        <column>
+        	<section name="Sensor Board VMEL6075 DATA">
+        		<row item = "Sensor_Board_VMEL6075_UVA_DATA" 	    label = "UV Sensor A"/>
+				<row item = "Sensor_Board_VMEL6075_UVB_DATA" 	    label = "UV Sensor B"/>
+				<row item = "Sensor_Board_VMEL6075_UVCOMP1_DATA"    label = "Sensor_Board_VMEL6075_UVCOMP1_DATA"/>
+				<row item = "Sensor_Board_VMEL6075_UVCOMP2_DATA"    label = "Sensor_Board_VMEL6075_UVCOMP2_DATA"/>
+	    	</section>
+	     </column>
+
+	     <column>
+        	<section name="Sensor Board AS72653 DATA">	    				
+				<row item = "Sensor_Board_AS7265x_DataByte_25" label = "Channel_A_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_26" label = "Channel_A_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_27" label = "Channel_B_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_28" label = "Channel_B_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_29" label = "Channel_C_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_30" label = "Channel_C_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_31" label = "Channel_D_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_32" label = "Channel_D_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_33" label = "Channel_E_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_34" label = "Channel_E_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_35" label = "Channel_F_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_36" label = "Channel_F_Data_L"/>
+        	</section>
+        </column> 
+
+        <column>
+        	<section name="Sensor Board AS72652 DATA">	
+
+				<row item = "Sensor_Board_AS7265x_DataByte_13" label = "Channel_G_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_14" label = "Channel_G_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_15" label = "Channel_H_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_16" label = "Channel_H_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_17" label = "Channel_I_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_18" label = "Channel_I_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_19" label = "Channel_J_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_20" label = "Channel_J_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_21" label = "Channel_K_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_22" label = "Channel_K_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_23" label = "Channel_L_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_24" label = "Channel_L_Data_L"/>
+			</section>
+	    </column>
+
+	     <column>
+        	<section name="Sensor Board AS72651 DATA">
+        		<row item = "Sensor_Board_AS7265x_DataByte_1" label = "Channel_R_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_2" label = "Channel_R_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_3" label = "Channel_S_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_4" label = "Channel_S_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_5" label = "Channel_T_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_6" label = "Channel_T_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_7" label = "Channel_U_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_8" label = "Channel_U_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_9" label = "Channel_V_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_10" label = "Channel_V_Data_L"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_11" label = "Channel_W_Data_H"/>
+				<row item = "Sensor_Board_AS7265x_DataByte_12" label = "Channel_W_Data_L"/>
+			</section>
+	    </column>
+	    
+	    
+
+
+
+    </page>
+</pageDef>
+
+

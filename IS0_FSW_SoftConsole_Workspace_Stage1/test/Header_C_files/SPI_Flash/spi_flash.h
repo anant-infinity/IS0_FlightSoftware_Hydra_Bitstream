@@ -1,8 +1,8 @@
 /*
  * spi_flash.h
  *
- *  Created on: Sep 4, 2018
- *      Author: Ankit
+ *  Created on: March 5, 2020
+ *      Author: Anant
  */
 
 #ifndef _SPI_FLASH_H
@@ -10,6 +10,7 @@
 
 #include "../mss_spi/mss_spi.h"
 #include "../Seq_ops/main_seq.h"
+
 
 #undef  GLOBAL
 #ifdef _SPI_FLASH_C
@@ -274,113 +275,16 @@ void Update_Variables(Param_Table_t t);
 */
 void Load_Factory_Value();
 
-/*---------------------------------------------------------------------------*/
-/* The Get_Filled_Array() copy the global variables value to the corresponding
- * field of the Paramter_Table_T struct which is passed as the parameter to the
- * function.
- *
- * @param
- *	Param_Table_t * t: The pointer to the parameter struct to which all the 
- *						global variables' value will be copied.
- *
- * @return: void
- *	
-*/
-void Get_Filled_Array(Param_Table_t * t);
-
-/*---------------------------------------------------------------------------*/
-/* The Save_Parameter_Table() is responsible for handling the state machine
- * of the function Save_Parameter_Table_Arr(), Param_Module_sync, and 
- * retuning appropriate values. When the Param_Module_sync is in IDLE state
- * then this function returns FLASH_WRITE_IDLE value. Otherwise it will 
- * fill the parameter table with the current values of the global variables
- * and pass it to the Save_Parameter_Table_Arr() function. If the value 
- * returned by the Save_Parameter_Table_Arr() function is FLASH_WRITE_TMP_FAIL then
- * this function it sets the state machine to FLASH_STATE_ERASE_CMD and checks 
- * the Param_Module_sync.Response_Read value if it is less than 
- * Globals.Flash_SPI_Tries_Limit then it sends the clear status register  
- * command and returns FLASH_WRITE_TMP_FAIL, else it sets the state machine to 
- * the IDLE state and returns FLASH_WRITE_FAIL. If the value returned by the 
- * Save_Parameter_Table_Arr is FLASH_STATE_PROGRAM then this function resets the
- * Globals.Param_Module_sync.Response_Read to 0 and returns FLASH_WRITE_SUCCESS.
- * If the function Save_Parameter_Table_Arr() returns any other value then this 
- * function returns the value FLASH_WRITE_BUSY.
- *
- * @param
- *	no parameters
- *
- * @return: uint8_t
- *	It returns one of the following follows:
- *		FLASH_WRITE_FAIL
- *		FLASH_WRITE_SUCCESS
- *		FLASH_WRITE_BUSY
- *		FLASH_WRITE_IDLE
- *		FLASH_WRITE_TMP_FAIL
-*/
-uint8_t Save_Parameter_Table();
-
-/*---------------------------------------------------------------------------*/
-/* The Save_Parameter_Table_Arr() is responsible for executing the state machine
- * on the basis of the Param_Module_sync's state. All the states returns the value
- * equal to their state number if the state was executed successfully else they 
- * return the value 0xFF (FLASH_WRITE_TMP_FAIL). In the FLASH_STATE_ERASE_CMD 
- * it sends the erase command of the sector of which the address is passed and 
- * then change the state machine to the FLASH_STATE_WAIT. In FLASH_STATE_WAIT 
- * state, it checks for the status register and wait for the ready bit to become
- * 0. If it is zero then it changes the state to the FLASH_STATE_ERASE_VERIFY else
- * it doesn't change its state and increases the Param_Module_sync.Response_Length 
- * and if the value of Param_Module_sync.Response_Length exceeds 
- * Globals.Flash_SPI_Wait_Limit then it returns 0xFF. The FLASH_STATE_ERASE_VERIFY
- * state read back the value from the sector and verify if it has been erased or not.
- * This state returns either its state value or 0xFF depending on the verification.
- * It then changes the state to the FLASH_STATE_PROGRAM. The FLASH_STATE_PROGRAM 
- * state programs the sector, read back the data and verify its integrity. If any 
- * the data verification fails then it return 0xFF else it returns the value equal 
- * to its state machine.
- *
- * @param
- *	uint8_t * FLASH_Parmaeter_Arr: The array to be saved in the parameter table
- *	uint16_t FLASH_Parameter_Arr_size: The size of the array to be saved.
- *	uint32_t address: The sector address where the data is to be stored.
- *
- * @return: uint8_t
- *	It either returns the value equal to the state which was executed or 0xFF
-*/
-uint8_t Save_Parameter_Table_Arr(uint8_t * FLASH_Parameter_Arr, uint16_t FLASH_Parameter_Arr_Size, uint32_t address);
-
-/*---------------------------------------------------------------------------*/
-/* The Load_Parameter_Table() uses Read_Parameter_Table to read the parameter
- * table from the flash memory and load it to the relevant global variables.
- * If the Read_Parameter_Table() returns 0, which denote the failure to read 
- * the parameter table, then it loads the factory values to the parameter table.
- *
- * @param
- *	no parameter
- *
- * @return: uint8_t
- *	It returns 1 if the parameter has been successfully loaded from the flash
- *	memory else it returns 0.
-*/
-uint8_t Load_Parameter_Table();
-
-/*---------------------------------------------------------------------------*/
-/* The Read_Parameter_Table() reads data from the passed addresses[7] and verifies
- * its checksum along with Param_PSLV_Wait_Timer_Time to not to be 0xFFFFFFFF.
- * If both the conditions meet then it returns 1 else it returns 0.
- *
- * @param
- *	Param_Table_t * FLASH_Parameter: The pointer to the struct where the read 
- *									data is stored.
- *
- * @return: uint8_t
- *	It returns 1 if the parameter has been successfully loaded from the flash
- *	memory else it returns 0.
-*/
-uint8_t Read_Parameter_Table(Param_Table_t * FLASH_Parameter);
 
 GLOBAL mss_spi_instance_t * FLASH_SPI;	// The instance of spi for flash memory
-//GLOBAL uint16_t Flash_SPI_Wait_Limit;	// The no. of times FS will wait for an operation
 
+//GLOBAL uint16_t Flash_SPI_Wait_Limit;	// The no. of times FS will wait for an operation
 //GLOBAL Module_Sync_Small_t Param_Module_sync;	// Variable for handling the flash write operation
+
+void Update_Parameter_Table_IS0();
+
+void Store_Data_Packet_Flash();
+
+void Read_Parameter_Table_IS0();
 #endif /* SPI_FLASH_H_ */	
 

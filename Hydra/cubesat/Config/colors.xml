@@ -1,7 +1,16 @@
 <hydraDef>
 
     <color name = "Page_Background" code = "rgb(230, 230, 250)"/>
+
     <color name = "GOOD_VAL" code = "rgb(182, 215, 168)"/>
+
     <color name = "BAD_VAL" code = "rgb(224, 102, 102)"/>
+
+    <color name = "red" code = "rgb(230, 0, 0)"/>
+
+    <color name = "green" code = "rgb(0, 230, 0)"/>
+
+    <color name = "blue" code = "rgb(0, 0, 230)"/>
+
     
 </hydraDef>

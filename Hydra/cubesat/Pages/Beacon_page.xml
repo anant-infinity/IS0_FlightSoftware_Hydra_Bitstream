@@ -5,7 +5,7 @@
 	<text color="BLACK"/>
 	<font name="Arial" size="12"/>
 
-    <page title="IS0 Telemetry Page">
+    <page title="IS0 CDH-EPS Page">
 
         <column>
         	<section name="CDH">
@@ -13,8 +13,8 @@
         		<row item = "CDH_I2C_Error_Flag" label = "CDH_I2C_Error_Flag"/>
 				<row item = "CDH_Curr_SD" label = "CDH_Curr_SD"/>
 				<row item = "CDH_Time_Msec" label = "CDH_Time_Msec"/>
-				<row item = "Beacon_Read_Start" format="HEX" label = "Beacon_Read_Start"/>
-				<row item = "Beacon_Write_Start" format="HEX" label = "Beacon_Write_Start"/>
+				<row item = "Boot_Up_Counter" label = "Boot_Up_Counter"/>
+				<row item = "SD_Write_Read_Verify_Count" label = "SD_Write_Read_Verify_Count"/>
 				<row item = "Safe_Pheonix_Threshold_Time"		label="Safe_Pheonix_Threshold_Time"/>
 				<row item = "SCI_SCID_Thershold_Time"			label="Safe_Pheonix_Threshold_Time"/>
 			</section>
@@ -96,7 +96,7 @@
 	     </column>
 
 
-		<column>
+	     <column>
         	<section name="Sensor Board AS72651 DATA">
         		<row item = "Sensor_Board_AS7265x_DataByte_1" label = "DataByte 1"/>
 				<row item = "Sensor_Board_AS7265x_DataByte_2" label = "DataByte 2"/>
@@ -147,6 +147,13 @@
 				<row item = "Sensor_Board_AS7265x_DataByte_36" label = "DataByte 36"/>
         	</section>
         </column> 
+
+        <column>
+  			<row  label = "State_Pheonix" monitor = "State_Pheonix"/>
+  			<row  label = "State_Safe" monitor = "State_Safe"/>
+  			<row  label = "State_SciC" monitor = "State_SciC"/>
+  			<row  label = "State_SciD" monitor = "State_SciD"/>
+  		</column>  
 
     </page>
 </pageDef>

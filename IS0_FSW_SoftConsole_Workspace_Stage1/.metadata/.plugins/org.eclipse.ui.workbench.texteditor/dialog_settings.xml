@@ -2,12 +2,15 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="STO" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="STO"/>
+			<item value="STA"/>
+			<item value="STA_FIELD"/>
 			<item value="PWR"/>
 			<item value="do_write_transaction"/>
 			<item value="Beacon_pack"/>
@@ -20,9 +23,6 @@
 			<item value="I2C_write"/>
 			<item value="I2C_Write"/>
 			<item value="RESET_ALL_BIT_FLAG"/>
-			<item value="UHF_TX_Resets"/>
-			<item value="test_UHF_Data"/>
-			<item value="Globals"/>
 		</list>
 		<list key="replacehistory">
 			<item value="Beacon_pack_IS0"/>

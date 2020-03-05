@@ -86,19 +86,7 @@ uint8_t Utils_CMD_Set_Flag(uint8_t * var, uint8_t mask, uint8_t flag){
 	return *var;
 }
 
-uint8_t Utils_Handle_Timer16(Timer16_t *  timer, uint32_t mask){
-	if((Globals.Timers_Started_Flag & mask) > 0){
-		if(Utils_Handle_Timer16_Started(timer)){
-			timer->Start = (uint16_t) RTC_Get_ms();
-			return 1;
-		}
-		return 0;
-   	}else{
-		timer->Start = (uint16_t) RTC_Get_ms();
-       	Globals.Timers_Started_Flag |= mask;
-   	}
-   	return 0;
-}
+
 uint8_t Utils_Handle_Timer16_Started(Timer16_t *  timer){
 	uint16_t Curr = (uint16_t) RTC_Get_ms();
    	/* Taking care of timer overflow */
@@ -143,19 +131,6 @@ uint8_t Utils_isTimeout_Derek_Timer16(Derek_Timer16_t * timer) {
 	return 0;
 }
 
-uint8_t Utils_Handle_Timer32(Timer32_t *  timer, uint32_t mask){
-	if((Globals.Timers_Started_Flag & mask) > 0){
-		if(Utils_Handle_Timer32_Started(timer)){
-			timer->Start = RTC_Get_ms();
-			return 1;
-		}
-		return 0;
-   	}else{
-		timer->Start = RTC_Get_ms();
-       	Globals.Timers_Started_Flag |= mask;
-   	}
-   	return 0;
-}
 uint8_t Utils_Handle_Timer32_Started(Timer32_t *  timer){
 	uint32_t Curr = RTC_Get_ms();
    	/* Taking care of timer overflow */

@@ -1,4 +1,9 @@
-
+/*
+ * gpios.c
+ *
+ *  Created on: Jan 27, 2020
+ *      Author: Anant
+ */
 
 #ifndef _GPIOS_C
 	#define _GPIOS_C
@@ -27,7 +32,7 @@ void Global_Init_GPIOs(){
 	MSS_GPIO_config( GPIO_EN_SD1,MSS_GPIO_OUTPUT_MODE); /* configuring for giving EN switch of sd card1 - default 0 */
 
 	MSS_GPIO_config( GPIO_CTRL_MOSI_SD,MSS_GPIO_OUTPUT_MODE ); /*configuring for FPGA reset pin of SBand - default 0 */
-    MSS_GPIO_set_output( GPIO_CTRL_MOSI_SD, 0);
+
 
 
     MSS_GPIO_config( GPIO_EN_SENSOR_BOARD,MSS_GPIO_OUTPUT_MODE); /* configuring for deployment Antenna - default 1 */
@@ -50,16 +55,13 @@ void Global_Init_GPIOs(){
 	MSS_GPIO_set_output( GPIO_SENSER_BOARD_CHIP_SELECT, 1);
 
 	MSS_GPIO_set_output( GPIO_PWR_CYCLE_SC, 1); /* Make sure that the spacecraft power cycle signal is tie high by default*/
-	MSS_GPIO_set_output( GPIO_RESET_IC, 1); /* Pulling the input of the external Watchdog timer high*/
+	MSS_GPIO_set_output( GPIO_RESET_IC, 0); /* Pulling the input of the external Watchdog timer high*/
 	MSS_GPIO_set_output( GPIO_EN_BUS_TRAN, 0); /* Enable the bus transceivers - By default high, pulling it low now to enable the bus transceiver*/
 
-	MSS_GPIO_set_output( GPIO_EN_SD0, 1);	/* Turn ON the sd card 0*/
 
-	// TODO: Turn this back on once we have one that isn't blown!
-//	MSS_GPIO_set_output( GPIO_EN_SD1, 1);	/* Turn ON the sd card 1*/
-
-
-
+	MSS_GPIO_set_output( GPIO_CTRL_MOSI_SD, 0);
+	MSS_GPIO_set_output( GPIO_EN_SD0, 0);	/* Turn OFF the sd card 0*/
+	MSS_GPIO_set_output( GPIO_EN_SD1, 0);	/* Turn OFF the sd card 1*/
 
 
 }

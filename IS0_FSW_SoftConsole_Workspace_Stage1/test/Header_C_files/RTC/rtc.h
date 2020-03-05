@@ -1,8 +1,8 @@
 /*
- * rtc.h
+ * rtc.c
  *
- *  Created on: Jun 13, 2018
- *      Author: Ankit
+ *  Created on: 8 Nov 2019
+ *      Author: mayuresh.sarpotdar
  */
 
 #ifndef _RTC_H

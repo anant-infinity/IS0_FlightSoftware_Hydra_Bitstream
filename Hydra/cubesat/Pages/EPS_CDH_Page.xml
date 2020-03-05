@@ -1,0 +1,112 @@
+<pageDef>
+
+	<size width="1300" height="850"/>
+	<background color="Page_Background"/>
+	<text color="BLACK"/>
+	<font name="Arial" size="12"/>
+
+    <page title="IS0 CDH-EPS Page">
+
+        <column>
+        	<section name="CDH">
+        		<row item = "CDH_Curr_Mode" label = "Sat_Curr_Mode"/>
+        		<row item = "CDH_I2C_Error_Flag" label = "CDH_I2C_Error_Flag"/>
+				<row item = "CDH_Curr_SD" label = "CDH_Curr_SD"/>
+				<row item = "CDH_Time_Msec" label = "CDH_Time_Msec"/>
+				<row item = "Boot_Up_Counter" label = "Boot_Up_Counter"/>
+				<row item = "SD_Write_Read_Verify_Count" label = "SD_Write_Read_Verify_Count"/>
+				<row item = "Safe_Pheonix_Threshold_Time"		label="Safe_Pheonix_Threshold_Time"/>
+				<row item = "SCI_SCID_Thershold_Time"			label="Safe_Pheonix_Threshold_Time"/>
+			</section>
+		</column> 
+		
+
+		<column>
+        	<section name="Battery, CDH and Comms">
+        	
+            	<row item="EPS_VC5_CH3_Volt"                         label="Battery_Volt" />
+            	<row item="EPS_VC5_CH3_Curr"                         label="Battery_Curr" />
+
+
+            	<row item="EPS_VC1_CH3_Volt"                        label="CDH_Volt" />
+            	<row item="EPS_VC1_CH3_Curr"                        label="CDH_Curr" />
+
+
+            	<row item="EPS_VC2_CH2_Volt"                        label="UHF_Volt" />
+            	<row item="EPS_VC2_CH2_Curr"                        label="UHF_Curr" />
+
+
+            	<row item="EPS_VC2_CH1_Volt"                        label="SBAND_Volt" />
+            	<row item="EPS_VC2_CH1_Curr"                        label="SBAND_Curr" />
+        	</section>
+
+        	<section name="ADCS and GPS">
+
+
+            	<row item="EPS_VC6_CH1_Volt"                         label="ADCS_Volt" />
+            	<row item="EPS_VC6_CH1_Curr"                         label="ADCS_Curr" />
+            
+            	<row item="EPS_VC6_CH2_Volt"                         label="GPS3V3_Volt" />
+            	<row item="EPS_VC6_CH2_Curr"                         label="GPS3V3_Curr" />
+            
+            	<row item="EPS_VC5_CH1_Volt"                       label="GPS12_2_Volt" />
+            	<row item="EPS_VC5_CH1_Curr"                       label="GPS12_2_Curr" />
+            
+            	<row item="EPS_VC5_CH2_Volt"                         label="GPS12_1_Volt" />
+            	<row item="EPS_VC5_CH2_Curr"                       label="GPS12_1_Curr" />
+           
+            </section>
+        </column>          
+            
+        <column>
+        	<section name="Science Payloads">            
+
+            	<row item="EPS_VC1_CH2_Curr"                        label="DAXSS_Curr" />
+            	<row item="EPS_VC1_CH2_Volt"                        label="DAXSS_Volt" />
+
+            	<row item="EPS_VC6_CH3_Curr"                         label="CIP_Curr" />
+            	<row item="EPS_VC6_CH3_Volt"                         label="CIP_Volt" />
+            </section>
+
+            <section name="Solar Panels and Battery Heater"> 
+            	<row item="EPS_VC4_CH1_Curr"                       label="Panel0_Curr" />
+            	<row item="EPS_VC4_CH1_Volt"                       label="Panel0_Volt" /> 
+
+            	<row item="EPS_VC3_CH3_Curr"                       label="Panel1_Curr" />
+            	<row item="EPS_VC3_CH3_Volt"                       label="Panel1_Volt" />
+
+            	<row item="EPS_VC3_CH1_Curr"                        label="Panel2_Curr" />
+            	<row item="EPS_VC3_CH1_Volt"                        label="Panel2_Volt" />
+
+            	<row item="EPS_VC2_CH3_Curr"                        label="BatteryHeater_Curr" />
+            	<row item="EPS_VC2_CH3_Volt"                        label="BatteryHeater_Volt" />
+
+            </section>	
+        </column>    	
+            
+		
+		<column>
+			<section name="State of Charge">
+				
+				<row item="EPS_FG1_SoC"                            label="EPS_FG1_SoC" /> 
+            	<row item="EPS_FG2_SoC"                           label="EPS_FG1_SoC" /> 
+            	<row item="EPS_FG3_SoC"                           	label="EPS_FG3_SoC" />
+
+            
+        	</section>
+
+        	<section name="Thermistor ADC Voltage">
+            	
+            	<row item="EPS_ADC_CH6"                      		label="ADC_CH6_OBC" /> 
+            	<row item="EPS_ADC_CH7"                        		label="ADC_CH7_EPS" />
+            	<row item="EPS_ADC_CH8"                        		label="ADC_CH8_Adapter" /> 
+
+            </section>
+            	
+        </column>
+ 
+
+    </page>
+</pageDef>
+
+

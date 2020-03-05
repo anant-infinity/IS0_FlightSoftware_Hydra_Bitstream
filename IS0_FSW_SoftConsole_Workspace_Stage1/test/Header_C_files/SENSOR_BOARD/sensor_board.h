@@ -10,10 +10,7 @@
 
 #include "CortexM3/GNU/cpu_types.h"
 #include "../mss_spi/mss_spi.h"
-
-//Added for Testing EPS I2C
 #include "drivers/corei2c/core_i2c.h"
-//#include "drivers/mss_uart/mss_uart.h"
 #include "drivers_config/sys_config/sys_config.h"
 #include "t1_hw_platform.h"
 

@@ -1,0 +1,29 @@
+<pageDef>
+
+	<size width="1300" height="850"/>
+	<background color="Page_Background"/>
+	<text color="BLACK"/>
+	<font name="Arial" size="12"/>
+
+    <page title="IS0 Telemetry Plots 2">
+
+
+		<column> 
+
+			<chart title="Battery State of Charge" update="1000" interval="10800000">
+			<line item="EPS_FG1_SoC" color="red"/>
+			<line item="EPS_FG2_SoC" color="green"/>
+			<line item="EPS_FG3_SoC" color="blue"/>
+			</chart>
+
+
+		</column> 
+
+
+
+		
+
+    </page>
+</pageDef>
+
+

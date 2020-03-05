@@ -1,5 +1,5 @@
 /*
- * eps.c
+ * sd.c
  *
  *  Created on: Jan 25, 2020
  *      Author: Anant
@@ -28,23 +28,6 @@ i2c_instance_t g_core_i2c2; 			// Core I2C 2 for EPS_NC;
 uint8_t rx_buffer_EPS[RX_LENGTH_2];
 i2c_status_t instance;
 
-//Function to control the various GPIOs for IS0
-void PWR_Switch(uint32_t config, uint8_t on_off){
-	//Gets the Current state of all the GPIOs and stores it in GPIO pattern
-	uint32_t gpio_pattern = MSS_GPIO_get_outputs();
-
-	if(on_off){
-		//IF on_off bit is set to 1, then turns ON the GPIOs passed in config,
-		//while keeping the OLD GPIOs in the same state
-		gpio_pattern |= config;
-	}else{
-		//IF on_off bit is set to 0, then turns OFF the GPIOs passed in config,
-		//while keeping the old GPIOs same state
-		gpio_pattern &= (~config);
-	}
-	MSS_GPIO_set_outputs(gpio_pattern);
-}
-
 
 //Structure written for ease of data collection from the I2C slaves.
 struct GetEpsSeqPoint {
@@ -61,6 +44,24 @@ struct GetEpsSeqPoint assignGetEps(i2c_instance_t* i2c, uint8_t slaveAddr, uint8
 	result.slaveAddr = slaveAddr;
 	result.regAddr = regAddr;
 	return result;
+}
+
+
+//Function to control the various GPIOs for IS0
+void PWR_Switch(uint32_t config, uint8_t on_off){
+	//Gets the Current state of all the GPIOs and stores it in GPIO pattern
+	uint32_t gpio_pattern = MSS_GPIO_get_outputs();
+
+	if(on_off){
+		//IF on_off bit is set to 1, then turns ON the GPIOs passed in config,
+		//while keeping the OLD GPIOs in the same state
+		gpio_pattern |= config;
+	}else{
+		//IF on_off bit is set to 0, then turns OFF the GPIOs passed in config,
+		//while keeping the old GPIOs same state
+		gpio_pattern &= (~config);
+	}
+	MSS_GPIO_set_outputs(gpio_pattern);
 }
 
 //Assigning the

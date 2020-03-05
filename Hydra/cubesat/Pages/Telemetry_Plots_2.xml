@@ -1,0 +1,49 @@
+<pageDef>
+
+	<size width="1300" height="850"/>
+	<background color="Page_Background"/>
+	<text color="BLACK"/>
+	<font name="Arial" size="12"/>
+
+    <page title="IS0 Telemetry Plots 2">
+		
+		<column>
+			
+			<chart title="DAxSS Voltage" update="1000" interval="10800000">
+			<line item="EPS_VC1_CH2_Volt" color="red"/>
+			</chart>
+
+			<chart title="CIP Voltage" update="1000" interval="10800000">
+			<line item="EPS_VC6_CH3_Volt" color="red"/>
+			</chart>
+
+			<chart title="Battery Heater Voltage" update="1000" interval="10800000">
+			<line item="EPS_VC2_CH3_Volt" color="red"/>
+			</chart>
+
+		</column>
+
+        <column>
+
+			<chart title="SBand Voltage" update="1000" interval="10800000">
+			<line item="EPS_VC2_CH1_Volt" color="red"/>
+			</chart>
+
+			<chart title="ADCS Voltage" update="1000" interval="10800000">
+			<line item="EPS_VC6_CH1_Volt" color="red"/>
+			</chart>
+
+			<chart title="GPS 12 and 3.3 Voltage" update="1000" interval="10800000">
+			<line item="EPS_VC5_CH1_Volt" color="red"/>
+			<line item="EPS_VC5_CH2_Volt" color="blue"/>
+			<line item="EPS_VC6_CH2_Volt" color="green"/>
+			</chart>
+
+
+		</column>
+		
+
+    </page>
+</pageDef>
+
+

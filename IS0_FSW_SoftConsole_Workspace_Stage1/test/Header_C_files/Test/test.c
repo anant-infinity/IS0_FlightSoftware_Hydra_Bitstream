@@ -28,8 +28,6 @@
 #define FLASH_MANUFACTURER_ID   (uint8_t)0x01
 #define FLASH_DEVICE_ID         (uint8_t)0x17
 
-static uint8_t g_flash_wr_buf[BUFFER_A_SIZE];
-static uint8_t g_flash_rd_buf[BUFFER_A_SIZE];
 
 
 //********************************** Added for EPS Testing  ********************************************\\
@@ -356,7 +354,7 @@ void test_SD_Write_Packets() {
 				j = 0;
 			}
 			beac_write_addr = Globals.Beacon_Write_Start;
-			for (i=0,err=0; i<BEACON_PACKET_SIZE; i++) {
+			for (i=0,err=0; i<sizeof(Beacon_pack_IS0); i++) {
 				if (read_data[i+2] != ((uint8_t *)&Beacon_pack_IS0)[i]){
 					err++;
 				}
@@ -379,8 +377,8 @@ int test_SD_All_Sectors(mss_spi_slave_t slot, uint16_t sd_size) {
 
 	// not sure if this really does anything when running in an automated way,
 	// but it does work to randomize the test data in a lab bench setting.
-	srand(RTC_Get_Value32());
-	int rand_seed = rand();
+	//srand(RTC_Get_Value32());
+	int rand_seed =1;
 
 
 	uint32_t sector,i;
@@ -434,26 +432,6 @@ int test_SD_All_Sectors(mss_spi_slave_t slot, uint16_t sd_size) {
 
 	return write_errs;
 
-}
-
-void test_save_parameter_character(){
-	Global_Init_GPIOs();
-	Flash_Init();
-	while(1){
-		Load_Factory_Value();
-//		if(Globals.Param_Module_sync.CMD_Seq_Count == FLASH_STATE_IDLE){
-//			Globals.Param_Module_sync.CMD_Seq_Count = FLASH_STATE_ERASE_CMD;
-//		}
-		statusG = Save_Parameter_Table();
-//		statusG = Load_Parameter_Table();
-
-		if(statusG == 0){
-			continue;
-		}
-		if(Globals.Subsystem_Restart_Limit != 0x03){
-			continue;
-		}
-	}
 }
 
 
@@ -521,114 +499,87 @@ void test_RTC(){
 }
 
 
-
+uint8_t test_flash_rd_buf[2] = {0x00, 0x00};
 
 void spi_flash_test2(){
     volatile uint32_t errors = 0;
     uint32_t address = 0;
-    uint16_t loop_count;
-
-    for(loop_count = 0; loop_count < (BUFFER_A_SIZE/2); loop_count++)
-    {
-        g_flash_wr_buf[loop_count] = 0+loop_count;
-        g_flash_rd_buf[loop_count] = 0x00;
-    }
-    for(loop_count = (BUFFER_A_SIZE/2); loop_count < BUFFER_A_SIZE; loop_count++)
-    {
-        g_flash_wr_buf[loop_count] = 0x33;
-        g_flash_rd_buf[loop_count] = 0x00;
-    }
     Flash_Init();
 
+    Flash_Read_Data(0x00030000, test_flash_rd_buf, sizeof(test_flash_rd_buf));
+
     while(1){
+
+    	//Responce Array
         uint8_t res[10];
+
+        //Command Array
         uint8_t cmd[10];
 
+
+
+
+        //Sending the Command for Write Enable
         MSS_SPI_set_slave_select( &g_mss_spi0, MSS_SPI_SLAVE_0 );
         Flash_Write_EN_DIS(FLASH_WREN);
         MSS_SPI_clear_slave_select( &g_mss_spi0, MSS_SPI_SLAVE_0 );
 
-        cmd[0] = FLASH_RDSR1;
-        Flash_CMD(cmd, 1, res, 1);
-
-        uint8_t res2 = Flash_Read_Status_Register_1();
-        res2 = Flash_Read_Status_Register_1();
-
-        MSS_SPI_set_slave_select( &g_mss_spi0, MSS_SPI_SLAVE_0 );
-        Flash_Write_EN_DIS(FLASH_WRDI);
-        MSS_SPI_clear_slave_select( &g_mss_spi0, MSS_SPI_SLAVE_0 );
-
-        res2 = Flash_Read_Status_Register_1();
-        res2 = Flash_Read_Status_Register_1();
-
-
-
-//      cmd[0] = FLASH_WRR;cmd[1] = 0;
-//      Flash_CMD(cmd, 2, 0,0,0);
-
-        Flash_CMD(cmd, 1, res, 1);
-        cmd[0] = FLASH_RDSR2;
-        Flash_CMD(cmd, 1, res, 1);
-        cmd[0] = FLASH_RDCR1;
-        Flash_CMD(cmd, 1, res, 1);
-
-        cmd[0] = FLASH_READ_ID; cmd[1] = 0; cmd[2] = 0; cmd[3] = 0; cmd[4] = 0;
-        Flash_CMD(cmd, 5, res, 2);
-
-
+        //Erasing the three sectors
         address = 0x00020000;
         uint32_t stat = Flash_Erase(FLASH_SE, address);
-        uint8_t p;
-        cmd[0] = FLASH_RDSR1;
-//      while(1){
-            MSS_GPIO_set_output(MSS_GPIO_1, 1);
-
-            Flash_CMD(cmd, 1, res, 1);
-//          p = Flash_CMD_Read();
-//          MSS_SPI_set_slave_select( &g_mss_spi0, MSS_SPI_SLAVE_0 );
-//          p=FLASH_get_status();
-//          MSS_SPI_clear_slave_select( &g_mss_spi0, MSS_SPI_SLAVE_0 );
-//          Flash_Read_Data(0x00020000, g_flash_rd_buf, sizeof(g_flash_wr_buf));
-            MSS_GPIO_set_output(MSS_GPIO_1, 0);
-//      }
 
         address = 0x00030000;
         stat = Flash_Erase(FLASH_SE, address);
-        Flash_Read_Data(0x00030000, g_flash_rd_buf, sizeof(g_flash_wr_buf));
+
         address = 0x00040000;
         stat = Flash_Erase(FLASH_SE, address);
-        Flash_Read_Data(0x00040000, g_flash_rd_buf, sizeof(g_flash_wr_buf));
 
+
+        //Writing two bytes
         address = 0x00020000;
-        Flash_Program(address, g_flash_wr_buf, sizeof(g_flash_wr_buf));
-        Flash_Read_Data(address, g_flash_rd_buf, sizeof(g_flash_wr_buf));
-        errors = FLASH_Verify_write(g_flash_rd_buf, g_flash_wr_buf, sizeof(g_flash_wr_buf));
 
+        //Call this read function first During Initialization
+        //Flash_Read_Data(address, test_flash_rd_buf, sizeof(test_flash_rd_buf));
+
+        //Flash_Program(address, test_flash_wr_buf, sizeof(test_flash_wr_buf));
+        //Flash_Read_Data(address, test_flash_rd_buf, sizeof(test_flash_rd_buf));
+
+
+        //Need to Erase before updating
+        stat = Flash_Erase(FLASH_SE, address);
+
+        //Updating the Flash parameters
+
+        //Flash_Program(address, test_flash_wr_buf, sizeof(test_flash_wr_buf));
+        //Flash_Read_Data(address, test_flash_rd_buf, sizeof(test_flash_rd_buf));
+
+        //errors = FLASH_Verify_write(test_flash_rd_buf, test_flash_wr_buf, sizeof(test_flash_wr_buf));
+
+        //Writing two bytes
         address = 0x00030000;
-        Flash_Program(address, g_flash_wr_buf, sizeof(g_flash_wr_buf));
-        Flash_Read_Data(address, g_flash_rd_buf, sizeof(g_flash_wr_buf));
-        errors = FLASH_Verify_write(g_flash_rd_buf, g_flash_wr_buf, sizeof(g_flash_wr_buf));
+        uint8_t test_flash_wr_buf_2[2] = {0x03, 0x04};
+        Flash_Program(0x00030000, test_flash_wr_buf_2, sizeof(test_flash_wr_buf_2));
+        Flash_Read_Data(0x00030000, test_flash_rd_buf, sizeof(test_flash_rd_buf));
+        errors = FLASH_Verify_write(test_flash_rd_buf, test_flash_wr_buf_2, sizeof(test_flash_wr_buf_2));
 
+        //Writing two bytes
         address = 0x00040000;
-        Flash_Program(address, g_flash_wr_buf, sizeof(g_flash_wr_buf));
-        Flash_Read_Data(address, g_flash_rd_buf, sizeof(g_flash_wr_buf));
-        errors = FLASH_Verify_write(g_flash_rd_buf, g_flash_wr_buf, sizeof(g_flash_wr_buf));
+        uint8_t test_flash_wr_buf_3[2] = {0x05, 0x06};
+        Flash_Program(address, test_flash_wr_buf_3, sizeof(test_flash_wr_buf_3));
+        Flash_Read_Data(address, test_flash_rd_buf, sizeof(test_flash_rd_buf));
+        errors = FLASH_Verify_write(test_flash_rd_buf, test_flash_wr_buf_3, sizeof(test_flash_wr_buf_3));
 
-        address= 0x00030000;
-        Flash_Erase(FLASH_SE, address);
-        Flash_Read_Data(address, g_flash_rd_buf, sizeof(g_flash_wr_buf));
+        //Erasing the Sector
+        //address= 0x00020000;
+        //Flash_Erase(FLASH_SE, address);
+        //Flash_Read_Data(address, g_flash_rd_buf, sizeof(g_flash_wr_buf));
 
-        address= 0x00020000;
-        Flash_Read_Data(address, g_flash_rd_buf, sizeof(g_flash_wr_buf));
-        errors = FLASH_Verify_write(g_flash_rd_buf, g_flash_wr_buf, sizeof(g_flash_wr_buf));
+        //address= 0x00030000;
+        //Flash_Read_Data(address, g_flash_rd_buf, sizeof(g_flash_wr_buf));
 
-        address= 0x00030000;
-        Flash_Read_Data(address, g_flash_rd_buf, sizeof(g_flash_wr_buf));
-        errors = FLASH_Verify_write(g_flash_rd_buf, g_flash_wr_buf, sizeof(g_flash_wr_buf));
+        //address= 0x00040000;
+        //Flash_Read_Data(address, g_flash_rd_buf, sizeof(g_flash_wr_buf));
 
-        address= 0x00040000;
-        Flash_Read_Data(address, g_flash_rd_buf, sizeof(g_flash_wr_buf));
-        errors = FLASH_Verify_write(g_flash_rd_buf, g_flash_wr_buf, sizeof(g_flash_wr_buf));
 
 
     }

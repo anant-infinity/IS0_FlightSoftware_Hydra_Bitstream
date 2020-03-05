@@ -10,6 +10,7 @@
 
 
 uint8_t status;
+uint8_t fifo_packet_wr_buf[156];
 
 void Check_and_Fill_FIFO(){
 
@@ -23,6 +24,16 @@ void Check_and_Fill_FIFO(){
 
 		// Reset FIFO and state machine
 		Reset_FIFO_SM();
+
+		if(Globals.Flash_Packet_Read_Counter> (uint32_t)53746){
+			Globals.Flash_Packet_Read_Counter = 0;
+		}
+
+		if(Globals.Flash_Packet_Read_Counter>Globals.Flash_Packet_Write_Counter){
+			return;
+		}
+		Flash_Read_Data( 0x00001000 + 156*Globals.Flash_Packet_Read_Counter, (uint8_t*)fifo_packet_wr_buf, sizeof(fifo_packet_wr_buf));
+		Globals.Flash_Packet_Read_Counter++;
 
 		// Write the beacon packet array to the FIFO byte by byte
 		for (int i=0; i<sizeof(Beacon_Pack_Array); i++)
@@ -39,9 +50,6 @@ void Check_and_Fill_FIFO(){
 		HAL_set_8bit_reg(PSLV_UART, CONFIG, 0);
 
 	}
-
-	//After filling the FIFO the SD card read pointer should also be increased
-
 
 }
 

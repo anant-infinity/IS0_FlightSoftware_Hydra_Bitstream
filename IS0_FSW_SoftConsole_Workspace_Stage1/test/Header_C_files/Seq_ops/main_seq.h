@@ -1,9 +1,15 @@
+/*
+ * main_seq.h
+ *
+ *  Created on: Jan 25, 2020
+ *      Author: Anant
+ */
 #ifndef _MAIN_SEQ_H
 #define _MAIN_SEQ_H
 
 /***  defines for code state    **********/
 #define ENABLE_UART0_COMMAND
-#define TEST_STATE // TODO: remove before flight
+
 /***************************/
 
 /***
@@ -47,27 +53,16 @@
 /* Defining the modes of operation of the spacecraft */
 #define SC_PHEONIX_MODE     0x00
 #define SC_SAFE_MODE        0x01
-#define SC_SCIC_MODE        0x03
-#define SC_SCID_MODE        0x04
+#define SC_SCIC_MODE        0x02
+#define SC_SCID_MODE        0x03
 /*************************************************************************/
 
-
-
-/* Globals.Timers_Started_Flag */
-
-#define BEAC_TIMER_STARTED_FLAG					0x010
-#define BEAC_TRANS_TIMER_STARTED_FLAG			0x020
-#define WATCHDOG_SIGNAL_TIMER_FLAG               0x100
-
-/*************************************************************************/
 
 /* Indication Flags: Indication_Flags */
 #define SAVE_PARAMETER_MAP_FLAG     	0x0001
 #define SD_CARD0_WORKING            	0x0002
 #define SD_CARD1_WORKING            	0x0004
 #define SC_REBOOT                   	0x0020
-#define REQ_BEACON_TRANSMIT         	0x1000
-#define REQ_SD_DATA_TRANSMIT        	0x4000
 
 /*************************************************************************/
 
@@ -82,9 +77,6 @@
 
 /* Packet Sizes (including CCSDS Headers) */
 #define CCSDS_TLM_WRAPPER_SIZE			13
-#define BEACON_PACKET_SIZE				254
-#define PARAMETER_TABLE1_PACKET_SIZE 	256
-#define PARAMETER_TABLE2_PACKET_SIZE	94
 
 /*************************************************************************/
 
@@ -233,12 +225,11 @@ void Beacon_Packet_UART_log();
  * @return: void
  *
 */
-void Watchdog_Timer_Handler();
 
 
 /*---------------------------------------------------------------------------*/
-/* The Watchdog_Pet() toggles a GPIO to send the "PET" signal to the watchdog,
- * whenever it is called by the Watchdog_Timer_Handler
+/* The Watchdog_Pet() toggles a GPIO to send the "PET" signal to the watchdog
+ * timer handler verilog peripheral
  *
  * @param
  * 	No parameter
@@ -299,9 +290,6 @@ uint16_t Utils_SPI_Transmit_Block(mss_spi_instance_t * this_spi, uint8_t * cmd_b
  *
 */
 uint16_t Utils_SPI_Receive_Block(mss_spi_instance_t * this_spi, uint8_t * rec_buffer, uint16_t rec_byte_size);
-
-void SD_FDRI();
-void SD_FDRI_Init();
 
 
 
@@ -380,7 +368,6 @@ struct Beacon_packet_IS0{
 
     //Sensor Board VMEL Data
     uint16_t Sensor_Board_VMEL6075[4];
-    //TODO: Update the hydra code to combine DATA_L and DATA_H
 
     //Sensor Board AS7265X Data
     uint8_t Sensor_Board_AS7265X[36];
@@ -391,7 +378,8 @@ struct Beacon_packet_IS0{
 
 } Beacon_pack_IS0;
 
-uint8_t Beacon_Pack_Array[sizeof(Beacon_pack_IS0)];
+GLOBAL uint8_t Beacon_Pack_Array[sizeof(Beacon_pack_IS0)];
+
 
 typedef struct
 {
@@ -406,15 +394,11 @@ typedef struct
 
 typedef struct Parameter_Table 	// The struct definition for all the variables which are in the parameter table.
 {
-	//Simply modified the IS1 Parameter table - Removed all the variables that seemed to be useless for IS0
-	//Currently these parameters are not used in IS0, need to
     uint8_t Param_Current_SD;
+
     /* Timer data */
-
-    uint16_t Param_Watchdog_Signal_Timer_Time;
-
+    uint64_t Param_Watchdog_Signal_Threshold_Time;
     uint64_t Param_Beac_Timer_Threshold_Time;
-
     uint64_t Param_SCI_SCID_Thershold_Time;
     uint64_t Param_Safe_Pheonix_Threshold_Time;
 
@@ -424,7 +408,6 @@ typedef struct Parameter_Table 	// The struct definition for all the variables w
     /* Limits */
     uint8_t Param_Flash_SPI_Tries_Limit;
     uint16_t Param_Flash_SPI_Wait_Limit;
-    uint8_t Param_Non_Response_Count_Limit;
 
     /* SD card data */
     uint32_t Param_Beacon_Sector_Start;
@@ -434,9 +417,13 @@ typedef struct Parameter_Table 	// The struct definition for all the variables w
     uint32_t Param_Beacon_Write_Start;
     uint32_t Param_Beacon_Read_Start;
 
+    uint32_t Param_Write_Read_Verify_Count;
+
     uint16_t Param_Fletcher_code;
 
 } Param_Table_t;
+
+
 
 // Definition of a general packet containing the maximum data size array
 struct CCSDS_Max_Data_size_Packet
@@ -448,16 +435,6 @@ struct CCSDS_Max_Data_size_Packet
 
 // typedef the CCSDS Max size packet as the Paramter table packet1
 typedef struct CCSDS_Max_Data_size_Packet Param_table_packet1_t;
-
-// the struct definition of the second parameter table packet
-typedef struct Parameter_Table_Packet{
-
-    struct CCSDS_Header param_head;	// the CCSDS header
-    uint8_t data[sizeof(Param_Table_t)];
-    uint16_t Fletcher_code;
-
-} Param_table_packet2_t;
-
 
 
 /* Structs for Timers */
@@ -523,49 +500,45 @@ GLOBAL struct Global_Variables { 	// Struct containing all the global variables
 
    uint32_t						Time_in_msec;
 
-   uint8_t                     	Forced_Mode_Flag;
-
+   //Timers
+   Timer64_t                   	Watchdog_Signal_Timer;
    Timer64_t                   	Beac_Timer;
-
    Timer64_t                   	SCIC_SCID_Timer;
-
    Timer64_t					Safe_Pheonix_Timer;
 
+   //Timer Thresholds
    uint64_t 					Beac_Thershold_Time;
    uint64_t 					SCI_SCID_Thershold_Time;
    uint64_t						Safe_Pheonix_Threshold_Time;
+   uint64_t						Watchdog_Signal_Threshold_Time;
 
+   //Flags
    uint8_t                     	I2C_Error_Flag;
+
+   //Variables
    uint8_t                     	Sat_Curr_Mode;
-
-   uint32_t                    	Timers_Started_Flag;
-
-   uint32_t                    	Indication_Flags;
-
-   uint16_t                    	Beacon_Packet_Seq_Counter;
-
-   Timer16_t                   	Watchdog_Signal_Timer;
-
-   uint8_t                     	Non_Response_Count_Limit;
-   uint8_t                     	Subsystem_Restart_Limit;
-
+   uint8_t 						Forced_Mode_Flag;
+   uint32_t                    	Beacon_Packet_Seq_Counter;
    uint8_t                     	Flash_SPI_Tries_Limit;
-
+   uint16_t                    	Flash_SPI_Wait_Limit;
    uint32_t                    	Boot_Up_Counter;
 
+   //Flash Packet Write Counter
+   uint32_t                    	Flash_Packet_Write_Counter;
+   uint32_t                    	Flash_Packet_Read_Counter;
+
+   //SD Card Sector Addresses
    uint32_t                    	Beacon_Sector_Start;
    uint32_t                    	Beacon_Sector_End;
    uint32_t                    	Beacon_Write_Start;
    uint32_t                    	Beacon_Read_Start;
-
-   uint8_t                     	PWR_I2C_Error_Count[3];
-
-   uint16_t                    	Flash_SPI_Wait_Limit;
    uint8_t                     	SD_Clk_Div;
    uint8_t                     	Current_SD;
-   uint16_t 					Globals_Table_Packet_Seq_Counter;
+   uint32_t						SD_Write_Read_Verify_Count;
 
    SD_FDRI_t					SD_FDRI_Module_Sync;
+
+   Module_Sync_Small_t         	Param_Module_sync;
 
 } Globals;
 
@@ -582,9 +555,6 @@ typedef struct Global_Table_Packet{	// Struct definition of last global packet
     uint16_t Fletcher_code;
 
 } Global_packet_Last_t;
-
-
-
 
 
 #endif /* MAIN_SCH_H_ */

@@ -10,13 +10,12 @@
 #include "../CCSDS/ccsds.h"
 #include "GPIOs/gpios.h"
 #include "string.h"
+#include "Utils/utils.h"
 
-//Module_Sync_Small_t Globals.Param_Module_sync;
-//
-//uint16_t Globals.Flash_SPI_Wait_Limit = 0x8000;
-uint32_t const addresses[8] = {0x00001000, 0x00002000, 0x00003000, 0x00004000,
-                            0x00005000, 0x00006000, 0x00007000, 0x0000F000};
-
+uint32_t flash_rd_buf[7];
+uint32_t flash_wr_buf[7];
+uint8_t flash_packet_rd_buf[156];
+uint32_t stat;
 
 void Flash_Init(){
 
@@ -30,7 +29,10 @@ void Flash_Init(){
             2,
             MSS_SPI_BLOCK_TRANSFER_FRAME_SIZE
         );
-	uint8_t res = Flash_Read_Status_Register_1();
+    uint8_t res = 0xFF;
+
+	res = Flash_Read_Status_Register_1();
+
 	if((res & 0x60) != 0){
     	uint8_t cmd = FLASH_CLSR;
 		MSS_SPI_set_slave_select( &g_mss_spi0, MSS_SPI_SLAVE_0 );
@@ -39,6 +41,10 @@ void Flash_Init(){
 	}
 	Globals.Flash_SPI_Wait_Limit = 0x8000;
 
+	Utils_Delay32(100);
+
+	//Only For Erasing Everything on First Boot
+	//stat = Flash_Erase(FLASH_BE, 0x0FFFFFFF);
 
 }
 
@@ -82,7 +88,7 @@ uint32_t Flash_CMD(uint8_t * cmd, uint8_t cmd_size, uint8_t * rx, uint16_t rx_si
 
 uint8_t Flash_Read_Status_Register_1(){
 	MSS_SPI_set_slave_select( &g_mss_spi0, MSS_SPI_SLAVE_0 );
-	uint8_t ready_bit;
+	uint8_t ready_bit = 0xFF ;
 	uint8_t command = FLASH_RDSR1;
 	MSS_SPI_transfer_block( &g_mss_spi0, &command, sizeof(command), &ready_bit, sizeof(ready_bit) );
 	MSS_SPI_clear_slave_select( &g_mss_spi0, MSS_SPI_SLAVE_0 );
@@ -241,65 +247,43 @@ void Update_Variables(Param_Table_t t){
 
 	Globals.Current_SD = t.Param_Current_SD;
 
-	Globals.Watchdog_Signal_Timer.Time = t.Param_Watchdog_Signal_Timer_Time;
-
+    Globals.Watchdog_Signal_Threshold_Time = t.Param_Watchdog_Signal_Threshold_Time;
 	Globals.Beac_Thershold_Time = t.Param_Beac_Timer_Threshold_Time;
-
     Globals.SCI_SCID_Thershold_Time = t.Param_SCI_SCID_Thershold_Time;
     Globals.Safe_Pheonix_Threshold_Time = t.Param_Safe_Pheonix_Threshold_Time;
 
-
-	Globals.Boot_Up_Counter = t.Param_Boot_Up_Counter;
-
 	Globals.Flash_SPI_Tries_Limit = t.Param_Flash_SPI_Tries_Limit;
 	Globals.Flash_SPI_Wait_Limit = t.Param_Flash_SPI_Wait_Limit;
-	Globals.Non_Response_Count_Limit = t.Param_Non_Response_Count_Limit;
-
-	Globals.Beacon_Sector_Start = t.Param_Beacon_Sector_Start;
-	Globals.Beacon_Sector_End = t.Param_Beacon_Sector_End;
-
-	Globals.Beacon_Write_Start = t.Param_Beacon_Write_Start;
-	Globals.Beacon_Read_Start = t.Param_Beacon_Read_Start;
 
 }
 
-//  /* Require Update */
+
 void Load_Factory_Value(){
 	Param_Table_t t;
 
 	t.Param_Current_SD = 0;
 
-	//This corrensponds to 200 microseconds, which is 0.2 milliseconds
-	t.Param_Watchdog_Signal_Timer_Time = 200;
+	//This corresponds to 1000000 (hex 0x0F4240) microseconds, which is 1 second
+	t.Param_Watchdog_Signal_Threshold_Time = (uint64_t)0x0F4240;
 
-	t.Param_Beac_Timer_Threshold_Time = 1000000;
+	//This corresponds to 1000000 (hex 0x0F4240) microseconds, which is 1 second
+	t.Param_Beac_Timer_Threshold_Time = (uint64_t)0x0F4240;
 
 	//45 minutes = 2700 seconds = 2700 000 000 micro seconds = 0xA0EEBB00
 	//5 seconds = 5000 000 microseconds = 0x4C4B40
 	// 10 seconds is 10 000 000 = 0x989680
-	t.Param_SCI_SCID_Thershold_Time = (uint64_t)0x989680;
+	// 10 minutes is 10*60*1000000 = 600000000
+	t.Param_SCI_SCID_Thershold_Time = (uint64_t)600000000;
 
 	//5 days = 7200 minutes = 432000 seconds = 432000 000 000 micro seconds = 0x649534E000
 	//12 seconds = 12 000 000 microseconds = 0xB71B00
 	// 15 seconds is 15 000 000 = 0xE4E1C0
-	t.Param_Safe_Pheonix_Threshold_Time = (uint64_t)0xE4E1C0;
+	//15 minutes is 15*60*1000000 = 600000000
+	t.Param_Safe_Pheonix_Threshold_Time = (uint64_t)900000000;
 
-	t.Param_Boot_Up_Counter = 0;
 
 	t.Param_Flash_SPI_Tries_Limit = 240;
 	t.Param_Flash_SPI_Wait_Limit = 0x8000;
-
-	t.Param_Non_Response_Count_Limit = 20;
-
-
-	t.Param_Beacon_Sector_Start = 4;
-	t.Param_Beacon_Sector_End = 31536004;
-
-
-	t.Param_Beacon_Write_Start = t.Param_Beacon_Sector_Start;
-
-	t.Param_Beacon_Read_Start = t.Param_Beacon_Sector_Start;
-
 
 	t.Param_Fletcher_code = 0;
 
@@ -307,164 +291,105 @@ void Load_Factory_Value(){
 	Update_Variables(t);
 }
 
-void Get_Filled_Array(Param_Table_t * t){
+void Update_Parameter_Table_IS0(){
+    //Need to Erase before updating
+    stat = Flash_Erase(FLASH_P4E, 0x00000000);
+    //Add a delay here
+    Utils_Delay32(100);
+    //Updating the Flash parameters
+    int j = 0;
+    flash_wr_buf[j++] = Globals.Boot_Up_Counter;
+    flash_wr_buf[j++] = Globals.Beacon_Packet_Seq_Counter;
 
-	t->Param_Current_SD = Globals.Current_SD;
+    flash_wr_buf[j++] = Globals.Flash_Packet_Write_Counter;
+    flash_wr_buf[j++] = Globals.Flash_Packet_Read_Counter;
 
-	t->Param_Watchdog_Signal_Timer_Time = Globals.Watchdog_Signal_Timer.Time;
+    flash_wr_buf[j++] = Globals.Beacon_Read_Start;
+    flash_wr_buf[j++] = Globals.Beacon_Write_Start;
+    flash_wr_buf[j++] = Globals.SD_Write_Read_Verify_Count;
 
-	t->Param_Boot_Up_Counter = Globals.Boot_Up_Counter;
+    //Writing the Variables to the Flash Memory
+    Flash_Program(0x00000000, (uint8_t*)flash_wr_buf, sizeof(flash_wr_buf));
+    //Add a delay here
+    Utils_Delay32(100);
 
-	t->Param_Flash_SPI_Tries_Limit = Globals.Flash_SPI_Tries_Limit;
-	t->Param_Flash_SPI_Wait_Limit = Globals.Flash_SPI_Wait_Limit;
-
-	t->Param_Non_Response_Count_Limit = Globals.Non_Response_Count_Limit;
-
-
-	t->Param_Beacon_Sector_Start = Globals.Beacon_Sector_Start;
-	t->Param_Beacon_Sector_End = Globals.Beacon_Sector_End;
-
-
-
-	t->Param_Beacon_Write_Start = Globals.Beacon_Write_Start;
-	t->Param_Beacon_Read_Start = Globals.Beacon_Read_Start;
-
-
-
+    //Just Reading to Check
+    Flash_Read_Data(0x00000000, (uint8_t*)flash_rd_buf, sizeof(flash_rd_buf));
 }
 
-// TODO: add handle for triple parameter table implementation
-uint8_t Save_Parameter_Table(){
-/*	if(Globals.Param_Module_sync.CMD_Seq_Count == FLASH_STATE_IDLE){
-		return FLASH_STATE_IDLE;
-	}
-    Param_Table_t FLASH_Parameter_Arr;
-	Get_Filled_Array(&FLASH_Parameter_Arr);
-    CCSDS_Fletcher_16((uint8_t *)&FLASH_Parameter_Arr, sizeof(FLASH_Parameter_Arr)-2);
+void Store_Data_Packet_Flash(){
 
-    uint8_t res = Save_Parameter_Table_Arr((uint8_t *)&FLASH_Parameter_Arr, sizeof(FLASH_Parameter_Arr), addresses[7]);
-    if(res == 0xff){
-    	if(Globals.Param_Module_sync.Response_Read  < Globals.Flash_SPI_Tries_Limit){
-    		Globals.Param_Module_sync.Response_Read++;
-    		 Send the clear status command
-    		uint8_t cmd[] = {FLASH_CLSR};
-    		MSS_SPI_transfer_block(&g_mss_spi0, cmd, sizeof(cmd), 0, 0);	 Check it once
-    		Globals.Param_Module_sync.CMD_Seq_Count = FLASH_STATE_ERASE_CMD;
-    		return 0xff;
-    	}
-    	else{
-    		Globals.Param_Module_sync.CMD_Seq_Count = FLASH_STATE_IDLE;
-    		return 0x00;
-    	}
-    }else if(res == FLASH_STATE_PROGRAM){
-    	Globals.Param_Module_sync.Response_Read = 0;
-    	return 0x01;
-    }else{
-    	return 0x02;
-    }*/
-	return 0;
-}
+	//Writing the Data Packet to the Flash Memory
+	//Total number of Packets that the Flash memory can store is
+	//(8192-4)*1024/156 = 53746 packets
 
-uint8_t Save_Parameter_Table_Arr(uint8_t * FLASH_Parameter_Arr, uint16_t FLASH_Parameter_Arr_Size, uint32_t address){
-/*    uint8_t rx_buff[FLASH_Parameter_Arr_Size];
-    uint32_t status=0;
-    uint8_t ready_bit = 0xff; uint8_t cmd[4];
-	switch(Globals.Param_Module_sync.CMD_Seq_Count){
-		case FLASH_STATE_ERASE_CMD:	 Sector erase command
-			Globals.Param_Module_sync.Response_Length = 0;
-			cmd[0] = FLASH_P4E;
-			cmd[1] = (address >> 16) & 0xFF;
-			cmd[2] = (address >> 8 ) & 0xFF;
-			cmd[3] = address;
-			Flash_Write_EN_DIS(FLASH_WREN);
-			MSS_SPI_set_slave_select( &g_mss_spi0, MSS_SPI_SLAVE_0 );
-			MSS_SPI_transfer_block( &g_mss_spi0, cmd, sizeof(cmd), 0, 0);
-			MSS_SPI_clear_slave_select( &g_mss_spi0, MSS_SPI_SLAVE_0 );
+	if(Globals.Flash_Packet_Write_Counter> (uint32_t)53746){
+		if(Globals.Flash_Packet_Read_Counter<(uint32_t)53746){
+			return;
+		}
+		Globals.Flash_Packet_Write_Counter = 0;
 
-    		Globals.Param_Module_sync.CMD_Seq_Count = FLASH_STATE_WAIT;
-    		Globals.Param_Module_sync.Prev_CMD_Seq_Count = FLASH_STATE_ERASE_CMD;
-    		return FLASH_STATE_ERASE_CMD;
-
-    	case FLASH_STATE_WAIT:	 Wait state for erase (only)
-    		ready_bit =  Flash_Read_Status_Register_1();
-			ready_bit = ready_bit & FLASH_STATUS1_WIP;
-			Globals.Param_Module_sync.Prev_CMD_Seq_Count = FLASH_STATE_WAIT;
-			if(ready_bit == 0){
-				Globals.Param_Module_sync.CMD_Seq_Count = FLASH_STATE_ERASE_VERIFY;
-    			Flash_Write_EN_DIS(FLASH_WRDI);
-    			return FLASH_STATE_WAIT;
-			}else{
-				Globals.Param_Module_sync.CMD_Seq_Count = FLASH_STATE_WAIT;
-				Globals.Param_Module_sync.Response_Length++;
-				if(Globals.Param_Module_sync.Response_Length >= Globals.Flash_SPI_Wait_Limit){
-					Flash_Write_EN_DIS(FLASH_WRDI);
-					return 0xff;
-				}else{
-					return FLASH_STATE_WAIT;
-				}
-			}
-    		break;
-
-    	case FLASH_STATE_ERASE_VERIFY:	 Cross check the erase
-    		status = Flash_Read_Data(address, rx_buff, FLASH_Parameter_Arr_Size);
-	        status = FLASH_Verify_write_count(rx_buff, 0xff, FLASH_Parameter_Arr_Size);
-	        Globals.Param_Module_sync.CMD_Seq_Count = FLASH_STATE_PROGRAM;
-    		Globals.Param_Module_sync.Prev_CMD_Seq_Count = FLASH_STATE_ERASE_VERIFY;
-	        if(status != FLASH_Parameter_Arr_Size){
-	        	return 0xff;
-	        }else{
-	        	return FLASH_STATE_ERASE_VERIFY;
-	        }
-
-	    case FLASH_STATE_PROGRAM:	 Program the sector and cross check
-	    	status = Flash_Program(address, FLASH_Parameter_Arr, FLASH_Parameter_Arr_Size);
-	        status = Flash_Read_Data(address, rx_buff, FLASH_Parameter_Arr_Size);
-	        status = FLASH_Verify_write(rx_buff, FLASH_Parameter_Arr, FLASH_Parameter_Arr_Size);
-
-			Globals.Param_Module_sync.CMD_Seq_Count = FLASH_STATE_IDLE;
-			Globals.Param_Module_sync.Prev_CMD_Seq_Count = FLASH_STATE_PROGRAM;
-	        if(status != FLASH_Parameter_Arr_Size){
-				return 0xff;
-	        }else{
-	            return FLASH_STATE_PROGRAM;
-	        }
-
-	    default:	 IDLE state
-	    	return FLASH_STATE_IDLE;
-	}*/
-	return 0;
-}
-
-uint8_t Load_Parameter_Table(){
-	Param_Table_t FLASH_Parameter;
-	if(Read_Parameter_Table(&FLASH_Parameter)){
-		Update_Variables(FLASH_Parameter);
-		return 1;
 	}
 
+	Flash_Program(0x00001000 + 156*Globals.Flash_Packet_Write_Counter , Beacon_Pack_Array, sizeof(Beacon_Pack_Array));
+
+
+	//Added Here for Testing
+	Flash_Read_Data(0x00001000 + 156*Globals.Flash_Packet_Write_Counter, (uint8_t*)flash_packet_rd_buf, sizeof(flash_packet_rd_buf));
+	Globals.Flash_Packet_Write_Counter++ ;
+
+}
+
+
+
+void Read_Parameter_Table_IS0(){
+
+	//Load the factory value for all the variables not stored in the Flash
 	Load_Factory_Value();
-	return 0;
+
+	//Call this read function first During Initialization
+    Flash_Read_Data(0x00000000, (uint8_t*)flash_rd_buf, sizeof(flash_rd_buf));
+
+
+    if (flash_rd_buf[0]==(uint32_t)0x00 || flash_rd_buf[0]==0xFFFFFFFF ){
+
+    	//Need to Erase The entire Flash on the First Boot
+    	stat = Flash_Erase(FLASH_BE, 0x0FFFFFFF);
+
+    	//Load the Factory Value if first boot
+    	Globals.Boot_Up_Counter = 0;
+    	Globals.Beacon_Packet_Seq_Counter = 0;
+
+    	Globals.Flash_Packet_Write_Counter = 0;
+    	Globals.Flash_Packet_Read_Counter = 0;
+
+    	Globals.Beacon_Read_Start = 4;
+    	Globals.Beacon_Write_Start = 4;
+    	Globals.SD_Write_Read_Verify_Count = 0;
+
+    }
+    else{
+
+    	//Update the Variables with the value in the Flash Memory, if not first boot
+    	int j = 0;
+    	Globals.Boot_Up_Counter = flash_rd_buf[j++];
+    	Globals.Beacon_Packet_Seq_Counter = flash_rd_buf[j++];
+
+    	Globals.Flash_Packet_Write_Counter = flash_rd_buf[j++];
+    	Globals.Flash_Packet_Read_Counter = flash_rd_buf[j++];
+
+    	Globals.Beacon_Read_Start = flash_rd_buf[j++];
+    	Globals.Beacon_Write_Start = flash_rd_buf[j++];
+    	Globals.SD_Write_Read_Verify_Count = flash_rd_buf[j++];
+
+
+
+    }
 }
 
 
-// TODO: add handle for triple parameter table implementation
-uint8_t Read_Parameter_Table(Param_Table_t * FLASH_Parameter){
 
-/*	int8_t i=7; uint32_t status; uint8_t reading_errors = 0;
-	uint16_t FLASH_Parameter_Arr_Size = sizeof(Param_Table_t);
-	while(i > 6){
-		status = Flash_Read_Data(addresses[i], (uint8_t *)FLASH_Parameter, FLASH_Parameter_Arr_Size);
-		if(status < Globals.Flash_SPI_Wait_Limit){
-        	status = CCSDS_Fletcher_16_Checkbytes((uint8_t *)FLASH_Parameter, FLASH_Parameter_Arr_Size, 0);
-			if(status == 0 && (FLASH_Parameter->Param_PSLV_Wait_Timer_Time) != 0xffffffff){
-				// Update_Variables(FLASH_Parameter);
-				return 1; 	 The "break" means we won't be correcting the corrupted sectors.
-			}
-        }
-		i--;
-	}
-	return 0;*/
-	return 0;
-}
+
+
 
 #endif

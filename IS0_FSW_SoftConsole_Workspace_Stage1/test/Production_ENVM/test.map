@@ -1,0 +1,86 @@
+Archive member included to satisfy reference by file (symbol)
+
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-exit.o)
+                              c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/crt0.o (exit)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-impure.o)
+                              c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-exit.o) (_global_impure_ptr)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-init.o)
+                              c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/crt0.o (__libc_init_array)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-memset.o)
+                              c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/crt0.o (memset)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-__call_atexit.o)
+                              c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-exit.o) (__call_exitprocs)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-atexit.o)
+                              c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-__call_atexit.o) (atexit)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-fini.o)
+                              c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-__call_atexit.o) (__libc_fini_array)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)
+                              c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-__call_atexit.o) (__retarget_lock_acquire_recursive)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-__atexit.o)
+                              c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-atexit.o) (__register_exitproc)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-errno.o)
+                              ./CMSIS/startup_gcc/newlib_stubs.o (__errno)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-memcpy.o)
+                              ./drivers/mss_sys_services/mss_sys_services.o (memcpy)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_arm_addsubsf3.o)
+                              ./Header_C_files/Utils/utils.o (__aeabi_i2f)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_arm_fixunssfsi.o)
+                              ./Header_C_files/Utils/utils.o (__aeabi_f2uiz)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_aeabi_uldivmod.o)
+                              ./Header_C_files/RTC/rtc.o (__aeabi_uldivmod)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_udivmoddi4.o)
+                              c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_aeabi_uldivmod.o) (__udivmoddi4)
+c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_dvmd_tls.o)
+                              c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_aeabi_uldivmod.o) (__aeabi_ldiv0)
+
+Allocating common symbols
+Common symbol       size              file
+
+__lock___atexit_recursive_mutex
+                    0x1               c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)
+points              0xcc              ./Header_C_files/EPS/eps.o
+flash_wr_buf        0x14              ./Header_C_files/SPI_Flash/spi_flash.o
+__lock___arc4random_mutex
+                    0x1               c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)
+FLASH_SPI           0x4               ./Header_C_files/SPI_Flash/spi_flash.o
+g_core_i2c2         0x5c              ./Header_C_files/I2C/i2c.o
+g_core_i2c0         0x5c              ./Header_C_files/I2C/i2c.o
+SD_Status           0x1               ./Header_C_files/SD_CARD/sd.o
+g_core_i2c1         0x5c              ./Header_C_files/I2C/i2c.o
+g_mss_spi1          0x84              ./drivers_config/mss_spi/mss_spi.o
+instance            0x1               ./Header_C_files/SENSOR_BOARD/sensor_board.o
+tmp_buff            0x200             ./Header_C_files/SD_CARD/sd.o
+__lock___env_recursive_mutex
+                    0x1               c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)
+__lock___sinit_recursive_mutex
+                    0x1               c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)
+rx_buffer_AS7265x_2
+                    0x1               ./Header_C_files/SENSOR_BOARD/sensor_board.o
+__lock___malloc_recursive_mutex
+                    0x1               c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)
+g_core_i2c3         0x6c              ./Header_C_files/SENSOR_BOARD/sensor_board.o
+rx_buffer_EPS       0x2               ./Header_C_files/EPS/eps.o
+g_mss_uart1         0x40              ./drivers/mss_uart/mss_uart.o
+flash_rd_buf        0x14              ./Header_C_files/SPI_Flash/spi_flash.o
+Beacon_pack_IS0     0x9c              ./drivers/CoreI2C/core_i2c.o
+statusG             0x8               ./Header_C_files/Seq_ops/main.o
+g_mss_i2c0          0x74              ./drivers/mss_i2c/mss_i2c.o
+g_mss_uart0         0x40              ./drivers/mss_uart/mss_uart.o
+rx_buffer_VMEL      0x2               ./Header_C_files/SENSOR_BOARD/sensor_board.o
+Read_Array_VMEL6075
+                    0x8               ./Header_C_files/SENSOR_BOARD/sensor_board.o
+Globals             0x92              ./Header_C_files/Seq_ops/main.o
+stat                0x4               ./Header_C_files/SPI_Flash/spi_flash.o
+__lock___at_quick_exit_mutex
+                    0x1               c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)
+CMD17               0x8               ./Header_C_files/SD_CARD/sd.o
+Read_Array_AS7265x  0xc               ./Header_C_files/SENSOR_BOARD/sensor_board.o
+g_mss_spi0          0x84              ./drivers_config/mss_spi/mss_spi.o
+__lock___dd_hash_mutex
+                    0x1               c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)
+__lock___tz_mutex   0x1               c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)
+g_mss_i2c1          0x74              ./drivers/mss_i2c/mss_i2c.o
+status              0x1               ./Header_C_files/PSLV_UART/pslv_uart.o
+Beacon_Pack_Array   0x9c              ./drivers/CoreI2C/core_i2c.o
+__lock___sfp_recursive_mutex
+                    0x1               c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc.a(lib_a-lock.o)

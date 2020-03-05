@@ -1,3 +1,10 @@
+/*
+ * eps.c
+ *
+ *  Created on: Jan 25, 2020
+ *      Author: Anant
+ */
+
 #ifndef _SD_C
 	#define _SD_C
 
@@ -19,6 +26,9 @@ uint8_t SD_Status;
 
 uint8_t CMD17[8];
 uint8_t tmp_buff[SD_CARD_SINGLE_BLOCK_SIZE];
+
+uint8_t SD_Beacon_Pack_Write_Array[512];
+uint8_t SD_Beacon_Pack_Read_Array[512+2];
 
 void SD_clear_slave_select(mss_spi_slave_t slave) {
 	if (!slave) {
@@ -182,26 +192,23 @@ void SD_Cards_Init() {
 	//send CMD0 to both SD_Cards. Hope they both are working... :(((
 	uint8_t stat = SD_Simul_Init();
 	if (!stat) {
-		//this means we failed
-	    //TODO Log it
+		Globals.Current_SD = 0xE1;
 	    return;
 	}
 
-	uint8_t status = SD_Init(0);
+	// TODO: Turn this back on once we have one that isn't blown!
+	//uint8_t status = SD_Init(0);
+	//if (status) {
+	//	Globals.Current_SD = 0;
+	//	return;
+	//}
+	uint8_t status = SD_Init(1);
 	if (status) {
-		Globals.Current_SD = 0;
-		Globals.Indication_Flags |= SD_CARD0_WORKING;
-		return;
-	}
-	status = SD_Init(1);
-	if (status) {
-		Globals.Indication_Flags |= SD_CARD1_WORKING;
 		Globals.Current_SD = 1;
 		return;
 	}
 	//here, both SD Cards have failed
-	//TODO: LOG/Event message
-	//SD_FDRI();
+	Globals.Current_SD = 0xE2;
 	return;
 }
 
@@ -333,97 +340,6 @@ uint8_t SD_Init(mss_spi_slave_t slave){
 
 	return 1;
 }	// SD card is initialized now
-//
-//uint8_t SD_Select_Init(){
-//	/* curr_slave to be updated */
-//	uint8_t curr_slave = MSS_SPI_SLAVE_1;
-//	SD_disable(curr_slave); //Power off the selected SD card
-//	SD_enable(curr_slave); //Power on the selected SD card
-//
-//	//Power on both SD cards
-//	MSS_GPIO_set_output( GPIO_EN_SD0, 1);
-//	MSS_GPIO_set_output( GPIO_EN_SD1, 1);
-//
-//
-//	uint8_t data[SD_TEST_DATA_SIZE];
-//	uint8_t rx_data[SD_TEST_DATA_SIZE];
-//	uint16_t i;
-//	for (i = 0; i < SD_TEST_DATA_SIZE; i++){
-//		data[i]=i%128 +0 ;
-//		rx_data[i] = 0;
-//	}
-//	i=0;
-//	SD_Init(curr_slave);
-//	i = SD_Write_Data(data, SD_TEST_DATA_SIZE, 0x201, curr_slave);
-//	i = SD_Read_Data(rx_data, 512, 0x201, curr_slave);
-//
-//	uint8_t tries = 20;
-//    i = 0;
-//    do
-//    {
-//    	i++;
-//    	if(SD_Select_Helper(curr_slave)){
-//			Globals.Indication_Flags |= SD_CARD0_WORKING;
-//			Globals.Indication_Flags &= ~SD_CARD1_WORKING;
-//    		return curr_slave;
-//    	}
-//    	SD_Set_Highest_Clock(curr_slave);
-//
-//    }while( i < tries);
-//    /* At this point the sd0 is not working set the indication flag to 0*/
-//    // TODO: uncomment after sdcard2 is ok again.
-//	curr_slave = MSS_SPI_SLAVE_1;
-//	SD_Init(curr_slave);
-//	i = 0;
-//    do
-//    {
-//    	i++;
-//    	if(SD_Select_Helper(curr_slave)){
-//    		Globals.Indication_Flags |= SD_CARD1_WORKING;
-//			Globals.Indication_Flags &= ~SD_CARD0_WORKING;
-//    		return curr_slave;
-//    	}
-//    }while( i < tries);
-//	/* None of the sd card is working */
-//	Globals.Indication_Flags &= ~SD_CARD0_WORKING;
-//	Globals.Indication_Flags &= ~SD_CARD1_WORKING;
-//	// Don't want these actually due to power-up time considerations
-////	MSS_GPIO_set_output( GPIO_EN_SD0, 0);	/* Turn OFF the sd card 0*/
-////	MSS_GPIO_set_output( GPIO_EN_SD1, 0);	/* Turn OFF the sd card 1*/
-//
-//	//reset clock speeds to much higher.
-//	MSS_SPI_configure_master_mode
-//	(
-//		&g_mss_spi1,
-//		MSS_SPI_SLAVE_0,
-//		MSS_SPI_MODE0,
-//		SD_CARD_3MHZ, // preliminary and under test TODO: Finalize and define
-//		8);
-//
-//	MSS_SPI_configure_master_mode
-//	(
-//		&g_mss_spi1,
-//		MSS_SPI_SLAVE_1,
-//		MSS_SPI_MODE0,
-//		SD_CARD_3MHZ,
-//		8);
-//	return 0xff;
-//}
-//
-//uint8_t SD_Select_Helper(uint8_t curr_slave){
-//	SD_Status = SD_Set_Highest_Clock(curr_slave);
-//	if(SD_Status == 0){
-//		MSS_GPIO_set_output( GPIO_EN_SD0, 0);
-//		MSS_GPIO_set_output( GPIO_EN_SD1, 0);
-//		MSS_GPIO_set_output( GPIO_EN_SD0, 1);
-//		//TODO: reset after this works!
-//		MSS_GPIO_set_output( GPIO_EN_SD1, 1);
-//
-//		SD_Status = SD_Init(curr_slave);
-//		return 0;
-//	}
-//	return 1;
-//}
 
 uint8_t SD_Write_Sector(uint8_t * data, uint32_t addr, mss_spi_slave_t slave, uint16_t write_limit){
 	uint16_t status;
@@ -494,12 +410,6 @@ uint8_t SD_Write_Sector(uint8_t * data, uint32_t addr, mss_spi_slave_t slave, ui
 			return 0;
 		}
 
-//
-////		Utils_SPI_Transmit_Block(&g_mss_spi1, tmp_buff, 192);
-//		MSS_SPI_transfer_block(&g_mss_spi1, tmp_buff, 512, 0, 0);
-
-//		uint8_t ACMD13[] = {0x4D, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff};
-//		MSS_SPI_transfer_block(&g_mss_spi1, ACMD13, 7, rx_buffer, 2);	// rx_buffer should be 0x00 0x00
 	}
 	SD_clear_slave_select(slave); //tie high
 
@@ -534,11 +444,6 @@ uint8_t SD_Read_Sector(uint8_t * data, uint32_t addr, mss_spi_slave_t slave, uin
 
 	SD_clear_slave_select(slave); //tie high
 	for(delay=0; delay < 100; delay++);
-
-	//status = SD_get_status(slave);
-
-
-	//SD_toggle_slave_select(slave);
 
 
 	MSS_SPI_transfer_block(&g_mss_spi1, tmp_buff, 64, &rx_buffer, 0);
@@ -580,18 +485,7 @@ uint8_t SD_Read_Sector(uint8_t * data, uint32_t addr, mss_spi_slave_t slave, uin
 		return 0;
 	}
 
-	//MSS_GPIO_set_output( GPIO_CTRL_MOSI_SD, 1);
-//	for (i=0; i<512; i++) {
-//		MSS_SPI_transfer_block(&g_mss_spi1, tmp_buff, 0, &data[i], 1);
-//	}
-    //MSS_SPI_transfer_block(&g_mss_spi1, tmp_buff, 0, &data_buffer, 514);
     MSS_SPI_transfer_block(&g_mss_spi1, tmp_buff, 0, data, 514);
-    //Utils_SPI_Receive_Block(&g_mss_spi1, data, read_limit);
-
-//	MSS_GPIO_set_output( GPIO_CTRL_MOSI_SD, 1);
-
-	//Utils_SPI_Transmit_Block(&g_mss_spi1, tmp_buff, SD_CARD_SINGLE_BLOCK_SIZE - read_limit + 2);
-//	MSS_SPI_transfer_block(&g_mss_spi1, tmp_buff, SD_CARD_SINGLE_BLOCK_SIZE - read_limit + 2, 0, 0);
 
 	status = SD_get_status(slave);
 	SD_clear_slave_select(slave); //tie high
@@ -601,23 +495,12 @@ uint8_t SD_Read_Sector(uint8_t * data, uint32_t addr, mss_spi_slave_t slave, uin
 
 uint32_t SD_Write_Data(uint8_t * data, uint16_t dataLength, uint32_t addr, mss_spi_slave_t slave){
 	uint16_t j = 0;uint32_t addr_tmp = addr;
-//    uint8_t data_tmp[515];
-//
-//    data_tmp[0] = 0xfe;
-//
-//    data_tmp[513]=0xFF;
-//    data_tmp[514]=0xFF;
+
     uint16_t sent_bytes = 0, rem_bytes  = dataLength, bytes_to_send = 0;
     uint16_t i;
     while(sent_bytes < dataLength){
         bytes_to_send = rem_bytes < SD_CARD_SINGLE_BLOCK_SIZE ? rem_bytes : SD_CARD_SINGLE_BLOCK_SIZE;
 
-
-//        memcpy(&data_tmp[1], &data[sent_bytes], bytes_to_send);
-//
-//        if(bytes_to_send + 1 < 513){
-//        	memset(&data_tmp[bytes_to_send + 1], 0, SD_CARD_SINGLE_BLOCK_SIZE - bytes_to_send);
-//        }
 		SD_Status = SD_Write_Sector(&data[sent_bytes], addr, slave, bytes_to_send);
         if(SD_Status == 0)
         	return addr_tmp;
@@ -627,7 +510,7 @@ uint32_t SD_Write_Data(uint8_t * data, uint16_t dataLength, uint32_t addr, mss_s
         addr += 1;
 
     }
-    //  10 bytes of 0xff
+
 
     return addr;    /* Returns from which address the next data to be written */
 
@@ -650,58 +533,7 @@ uint32_t SD_Read_Data(uint8_t * data, uint16_t dataLength, uint32_t addr, mss_sp
     return addr;    /* Returns from which address the next read operation can be done */
 }
 
-//uint8_t SD_Set_Highest_Clock(mss_spi_slave_t slave){
-//	Globals.SD_Clk_Div = 5;
-//	uint16_t i;	/* The initial clock divider value to be chosen on the basis of the base clock*/
-//	uint8_t data[SD_TEST_DATA_SIZE];
-//	uint8_t rx_data[SD_TEST_DATA_SIZE];
-//	data[0]=0xFE;
-//	for (i =0; i<SD_TEST_DATA_SIZE; i++){
-//		data[i]=i % 10;
-//		rx_data[i] = 0;
-//	}
-//
-//	do{
-//		Custom_SPI_configure_master_mode
-//		(
-//			&g_mss_spi1,
-//			slave,
-//			MSS_SPI_MODE0,
-//			SD_CARD_MINIMUM_SPEED,//Globals.SD_Clk_Div,
-//			8);
-//
-//		i = SD_Write_Data(data, SD_TEST_DATA_SIZE, 0x00000001, slave);	/* 0x00000200 and 0x00000400 are dummy addresses to be used for this purpose and not for data storage*/
-//		if(i == 0x00000001)
-//			break;
-//		i = SD_Read_Data(rx_data, SD_TEST_DATA_SIZE, 0x00000001, slave);
-//		if(i == 0x00000001)
-//			break;
-//		i = FLASH_Verify_write(data, rx_data, SD_TEST_DATA_SIZE);
-//		if(i != SD_TEST_DATA_SIZE)
-//			break;
-//
-//		memset(rx_data, 0, SD_TEST_DATA_SIZE);
-//
-////		Globals.SD_Clk_Div -= 2;
-//	}while(i == SD_TEST_DATA_SIZE && Globals.SD_Clk_Div >= 10);
-//
-////	Globals.SD_Clk_Div += 2;
-//	MSS_SPI_configure_master_mode
-//	(
-//		&g_mss_spi1,
-//		slave,
-//		MSS_SPI_MODE0,
-//		SD_CARD_MINIMUM_SPEED,//Globals.SD_Clk_Div,
-//		8);
-//	i = SD_Write_Data(data, SD_TEST_DATA_SIZE, 0x00000001, slave);
-//
-//	i = SD_Read_Data(rx_data, SD_TEST_DATA_SIZE, 0x00000001, slave);
-//	i = FLASH_Verify_write(data, rx_data, SD_TEST_DATA_SIZE);
-//	if(i == SD_TEST_DATA_SIZE)
-//		return Globals.SD_Clk_Div;
-//	else
-//		return 0;
-//}
+
 
 uint32_t SD_Card_Wipe(mss_spi_slave_t slave) {
 	uint32_t max_size = slave ? SD_MAX_SECTOR_VALUE_16: SD_MAX_SECTOR_VALUE_128;
@@ -723,6 +555,33 @@ uint32_t SD_Card_Wipe(mss_spi_slave_t slave) {
 	return errs;
 
 }
+
+void SD_Write_Read_Verify(){
+
+	for (uint16_t k = 0; k < 512; k++) {
+		if(k<156){
+			SD_Beacon_Pack_Write_Array[k] = Beacon_Pack_Array[k];
+		}
+		else{
+			SD_Beacon_Pack_Write_Array[k] = 0;
+		}
+		SD_Beacon_Pack_Read_Array[k]=0;
+	}
+
+	Globals.Beacon_Write_Start = SD_Write_Data((uint8_t*)SD_Beacon_Pack_Write_Array, 512, Globals.Beacon_Write_Start, Globals.Current_SD);
+	Globals.Beacon_Read_Start = SD_Read_Data((uint8_t*)SD_Beacon_Pack_Read_Array, 512, Globals.Beacon_Read_Start, Globals.Current_SD);
+
+	uint16_t counts = 0;
+	for (uint16_t m = 0; m < 156; m++) {
+		if(SD_Beacon_Pack_Write_Array[m] == SD_Beacon_Pack_Write_Array[m]){
+			counts++;
+		}
+	}
+	if (counts == 156){
+		Globals.SD_Write_Read_Verify_Count++;
+	}
+}
+
 
 
 

@@ -9,14 +9,16 @@
             <frameCopy name="ccsdsTlmSecHeader" prefix="beacon_"/>
 
             <itemDef name="CDH_Curr_Mode"                type="dn8l"    displayName="CDH_Curr_Mode" />
-            <itemDef name="CDH_I2C_Error_Flag"                type="dn8l"    displayName="CDH_I2C_Error_Flag" />
+
+            <itemDef name="CDH_I2C_Error_Flag"           type="dn8l"    displayName="CDH_I2C_Error_Flag" />
+            
             <itemDef name="CDH_Curr_SD"                  type="dn8l"    displayName="CDH_Curr_SD" />
             
             <itemDef name="CDH_Time_Msec"                type="dn32l"   displayName="CDH_Time_Msec" />
             
-            <itemDef name="Beacon_Read_Start"            type="dn32l"   displayName="Beacon_Read_Start" />
+            <itemDef name="Boot_Up_Counter"            type="dn32l"   displayName="Boot_Up_Counter" />
             
-            <itemDef name="Beacon_Write_Start"           type="dn32l"   displayName="Beacon_Write_Start" />
+            <itemDef name="SD_Write_Read_Verify_Count"           type="dn32l"   displayName="SD_Write_Read_Verify_Count" />
             
             <itemDef name="Safe_Pheonix_Threshold_Time"      type="dn64l"     displayName="Safe_Pheonix_Threshold_Time" />
             

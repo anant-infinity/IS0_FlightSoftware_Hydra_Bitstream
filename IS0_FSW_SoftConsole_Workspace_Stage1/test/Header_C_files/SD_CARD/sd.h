@@ -1,3 +1,10 @@
+/*
+ * sd.h
+ *
+ *  Created on: Jan 25, 2020
+ *      Author: Anant
+ */
+
 #ifndef _SD_H
 	#define _SD_H
 
@@ -207,6 +214,8 @@ void Custom_SPI_configure_master_mode
 //new SD_Card_Init function to replace Select_Init
 void SD_Cards_Init(void);
 void SD_FDRI(void);
+
+void SD_Write_Read_Verify();
 
 //GLOBAL uint8_t SD_Clk_Div;
 #endif

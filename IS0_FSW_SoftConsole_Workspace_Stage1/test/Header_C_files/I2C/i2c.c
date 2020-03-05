@@ -14,8 +14,6 @@
 #include "CortexM3/GNU/cpu_types.h"
 
 
-
-
 i2c_instance_t g_core_i2c0;				// Core I2C for EPS_C0;
 i2c_instance_t g_core_i2c1; 			// Core I2C for EPS_C1;
 i2c_instance_t g_core_i2c2; 			// Core I2C for EPS_NC;
