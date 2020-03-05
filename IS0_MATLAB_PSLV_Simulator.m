@@ -43,7 +43,7 @@ plot_array_ = zeros(1,num_of_packets);
 while(i<num_of_packets)
     packet_array=zeros(1,156);
     for command_number=1: (packet_size/2)
-        %Putting a delay of 0.01 seconds bet    ween consecutive packets 
+        %Putting a delay of 0.01 seconds between consecutive packets 
         pause(0.01);
         fwrite(serial_port,PSLV_Command );
         resp = fread(serial_port, 2); 

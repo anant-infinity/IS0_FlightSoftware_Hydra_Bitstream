@@ -14,9 +14,9 @@
             
             <itemDef name="CDH_Time_Msec"                type="dn32b"   displayName="CDH_Time_Msec" />
             
-            <itemDef name="Beacon_Read_Start"            type="dn32b"   displayName="Beacon_Read_Start" />
+            <itemDef name="Boot_Up_Counter"            type="dn32b"   displayName="Boot_Up_Counter" />
             
-            <itemDef name="Beacon_Write_Start"           type="dn32b"   displayName="Beacon_Write_Start" />
+            <itemDef name="SD_Write_Read_Verify_Count"           type="dn32b"   displayName="SD_Write_Read_Verify_Count" />
             
             <itemDef name="Safe_Pheonix_Threshold_Time"      type="dn64b"     displayName="Safe_Pheonix_Threshold_Time" />
             
