@@ -1,0 +1,11 @@
+2020/066-15:34:34: Configuring for Serial
+2020/066-15:34:34: <INT> Run Directory: C:\Users\Anant\Desktop\Hydra_IS0\cubesat\Rundirs\2020_066_15_34_32\
+2020/066-15:34:34: <INT> Writing note to file
+2020/066-15:34:34: <RDR> Auto-starting reader serialReader
+2020/066-15:34:34: <HW> Create file failed for COM6, error number 5
+2020/066-15:34:34: <RDR> Starting reader serialReader
+2020/066-15:34:34: <SCR> Starting script in engine 0
+2020/066-15:34:34: <SCR> Starting script init.prc
+2020/066-15:34:34: <INT> Running startup script
+2020/066-15:34:34: <HW> Starting new file: EventLog_2020_066_15_34_34
+2020/066-15:34:34: <SCR> Done with script init.prc

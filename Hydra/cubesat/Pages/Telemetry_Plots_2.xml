@@ -9,15 +9,15 @@
 		
 		<column>
 			
-			<chart title="DAxSS Voltage" update="1000" interval="10800000">
+			<chart title="DAxSS Voltage" update="1000" interval="43200000">
 			<line item="EPS_VC1_CH2_Volt" color="red"/>
 			</chart>
 
-			<chart title="CIP Voltage" update="1000" interval="10800000">
+			<chart title="CIP Voltage" update="1000" interval="43200000">
 			<line item="EPS_VC6_CH3_Volt" color="red"/>
 			</chart>
 
-			<chart title="Battery Heater Voltage" update="1000" interval="10800000">
+			<chart title="Battery Heater Voltage" update="1000" interval="43200000">
 			<line item="EPS_VC2_CH3_Volt" color="red"/>
 			</chart>
 
@@ -25,15 +25,15 @@
 
         <column>
 
-			<chart title="SBand Voltage" update="1000" interval="10800000">
+			<chart title="SBand Voltage" update="1000" interval="43200000">
 			<line item="EPS_VC2_CH1_Volt" color="red"/>
 			</chart>
 
-			<chart title="ADCS Voltage" update="1000" interval="10800000">
+			<chart title="ADCS Voltage" update="1000" interval="43200000">
 			<line item="EPS_VC6_CH1_Volt" color="red"/>
 			</chart>
 
-			<chart title="GPS 12 and 3.3 Voltage" update="1000" interval="10800000">
+			<chart title="GPS 12 and 3.3 Voltage" update="1000" interval="43200000">
 			<line item="EPS_VC5_CH1_Volt" color="red"/>
 			<line item="EPS_VC5_CH2_Volt" color="blue"/>
 			<line item="EPS_VC6_CH2_Volt" color="green"/>

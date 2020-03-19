@@ -9,15 +9,15 @@
 
         <column>
 
-        	<chart title="Battery Voltage" update="1000" interval="10800000">
+        	<chart title="Battery Voltage" update="1000" interval="43200000">
 			<line item="EPS_VC5_CH3_Volt" color="red"/>
 			</chart>
 
-			<chart title="CDH Voltage" update="1000" interval="10800000">
+			<chart title="CDH Voltage" update="1000" interval="43200000">
 			<line item="EPS_VC1_CH3_Volt" color="red"/>
 			</chart>
 
-			<chart title="UHF Voltage" update="1000" interval="10800000">
+			<chart title="UHF Voltage" update="1000" interval="43200000">
 			<line item="EPS_VC2_CH2_Volt" color="red"/>
 			</chart>
 			
@@ -25,15 +25,15 @@
 
 		<column>
 
-        	<chart title="Battery Current" update="1000" interval="10800000">
+        	<chart title="Battery Current" update="1000" interval="43200000">
 			<line item="EPS_VC5_CH3_Curr" color="red"/>
 			</chart>
 
-			<chart title="CDH Current" update="1000" interval="10800000">
+			<chart title="CDH Current" update="1000" interval="43200000">
 			<line item="EPS_VC1_CH3_Curr" color="red"/>
 			</chart>
 
-			<chart title="UHF Current" update="1000" interval="10800000">
+			<chart title="UHF Current" update="1000" interval="43200000">
 			<line item="EPS_VC2_CH2_Curr" color="red"/>
 			</chart>
 			

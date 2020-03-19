@@ -394,7 +394,6 @@ typedef struct
 
 typedef struct Parameter_Table 	// The struct definition for all the variables which are in the parameter table.
 {
-    uint8_t Param_Current_SD;
 
     /* Timer data */
     uint64_t Param_Watchdog_Signal_Threshold_Time;
@@ -402,22 +401,9 @@ typedef struct Parameter_Table 	// The struct definition for all the variables w
     uint64_t Param_SCI_SCID_Thershold_Time;
     uint64_t Param_Safe_Pheonix_Threshold_Time;
 
-    /* Counters */
-    uint32_t Param_Boot_Up_Counter;
-
     /* Limits */
     uint8_t Param_Flash_SPI_Tries_Limit;
     uint16_t Param_Flash_SPI_Wait_Limit;
-
-    /* SD card data */
-    uint32_t Param_Beacon_Sector_Start;
-    uint32_t Param_Beacon_Sector_End;
-
-    /* Write and transmit data indicators */
-    uint32_t Param_Beacon_Write_Start;
-    uint32_t Param_Beacon_Read_Start;
-
-    uint32_t Param_Write_Read_Verify_Count;
 
     uint16_t Param_Fletcher_code;
 

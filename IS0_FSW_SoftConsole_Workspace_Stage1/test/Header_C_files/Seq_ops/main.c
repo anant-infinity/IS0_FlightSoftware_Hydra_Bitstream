@@ -40,7 +40,8 @@ void main_seq(){
 	Init();
 
 	//Setting reset generator for 20 second timeout after which a hardware reset will be generated
-	HAL_set_8bit_reg(Reset_Generator, CONTROL, 0);
+	//TODO Change to 1 for FLIGHT/TVAC
+	HAL_set_8bit_reg(Reset_Generator, CONTROL, 1);
 	//Starting the timer to pet the watchdog
 	Globals.Watchdog_Signal_Timer.Start = RTC_Get_Value64();
 
@@ -52,7 +53,7 @@ void main_seq(){
 	Globals.Beac_Timer.Start = RTC_Get_Value64();
 
 	//Initializing the current satellite mode to Science D
-	Globals.Sat_Curr_Mode = SC_SCID_MODE;
+	//Globals.Sat_Curr_Mode = SC_SCID_MODE;
 	SwitchTo_Mode_Science_D();
 
 
@@ -80,7 +81,6 @@ void Init(){
 	//Initializing Global Variables
 
     Globals.Flash_SPI_Tries_Limit = 5;
-    Globals.Current_SD = MSS_SPI_SLAVE_1;
 
 	//Initialize the RTC if required
 	int i =  RTC_Enable();
@@ -90,6 +90,7 @@ void Init(){
 
 	//Read the Flash Memory to get the Parameters, also update other parameters
 	Read_Parameter_Table_IS0();
+
     Load_Factory_Value();
 
 	//Increment the Boot Up Counter

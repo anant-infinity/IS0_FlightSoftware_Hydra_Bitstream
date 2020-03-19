@@ -1,0 +1,18 @@
+2020/066-17:48:47: Configuring for Serial
+2020/066-17:48:47: <INT> Run Directory: C:\Users\Anant\Desktop\Hydra_IS0\cubesat\Rundirs\2020_066_17_48_45\
+2020/066-17:48:47: <INT> Writing note to file
+2020/066-17:48:47: <RDR> Auto-starting reader serialReader
+2020/066-17:48:47: <HW> COM6 is opened
+2020/066-17:48:47: <RDR> Starting reader serialReader
+2020/066-17:48:47: <SCR> Starting script in engine 0
+2020/066-17:48:47: <SCR> Starting script init.prc
+2020/066-17:48:47: <INT> Running startup script
+2020/066-17:48:47: <HW> Starting new file: EventLog_2020_066_17_48_47
+2020/066-17:48:47: <SCR> Done with script init.prc
+2020/066-17:48:47: <HW> Starting new file: IS0Data_2020_066_17_48_47
+2020/066-17:49:36: serialReader length field in header too large: 6405
+2020/066-17:49:36: serialReader length field in header too large: 8064
+2020/066-17:49:38: serialReader length field in header too large: 6144
+2020/066-17:49:38: serialReader length field in header too large: 4096
+2020/066-17:49:39: serialReader length field in header too large: 30743
+2020/066-17:49:39: serialReader length field in header too large: 6192

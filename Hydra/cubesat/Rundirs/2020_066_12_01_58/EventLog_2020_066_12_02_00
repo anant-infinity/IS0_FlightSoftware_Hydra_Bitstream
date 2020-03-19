@@ -1,0 +1,12 @@
+2020/066-12:02:00: Configuring for Serial
+2020/066-12:02:00: <INT> Run Directory: C:\Users\Anant\Desktop\Hydra_IS0\cubesat\Rundirs\2020_066_12_01_58\
+2020/066-12:02:00: <INT> Writing note to file
+2020/066-12:02:00: <RDR> Auto-starting reader serialReader
+2020/066-12:02:00: <HW> COM6 is opened
+2020/066-12:02:00: <RDR> Starting reader serialReader
+2020/066-12:02:00: <SCR> Starting script in engine 0
+2020/066-12:02:00: <SCR> Starting script init.prc
+2020/066-12:02:00: <INT> Running startup script
+2020/066-12:02:00: <HW> Starting new file: EventLog_2020_066_12_02_00
+2020/066-12:02:00: <SCR> Done with script init.prc
+2020/066-12:02:01: <HW> Starting new file: IS0Data_2020_066_12_02_01

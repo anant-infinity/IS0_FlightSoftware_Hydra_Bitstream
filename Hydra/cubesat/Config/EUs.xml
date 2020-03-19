@@ -10,7 +10,6 @@
         => LSB Corresponds to 8 mV, hence value should be multiplied by 0.008
         => Thus Conversion factor is 0.008/8 = 0.001 V
         => Value shown on beacon page is in Volts-->
-
         <coeff index="1" value="0.001"/>
     </euPoly>
 
@@ -21,10 +20,10 @@
         => Full Scale Value is 0x7FF8 (32760) which corresponds to 163.8 mA
         => Register is 16 bit, out of which the first three bits are 0 by default. 
         => Thus value should be shifted by 3 bits, hence devided by 8. 
-        => LSB Corresponds to 40 uV (or micro-Ampere), hence value should be multiplied by 40*10^6
-        => Thus Conversion factor is (40*10^6)/8 = 0.005 mA
+        => LSB Corresponds to 40 uV (or micro-Ampere), hence value should be multiplied by 40*10^(-6)
+        => Thus Conversion factor is (40*10^(-6))/8 = 0.005 mA
         => Value shown on beacon page is in Milli Amperes -->
-        <coeff index="1" value="0.005"/>
+        <coeff index="1" value="0.5"/>
     </euPoly>
 
     <euPoly name="EPS_SoC">
@@ -37,16 +36,24 @@
     </euPoly>
 
     <euPoly name="EPS_ADC">
-        <coeff index="0" value="0"/>
+        <coeff index="0" value="91.394"/>
+        <coeff index="1" value="-0.089486048"/>
+        <coeff index="2" value="0.0000355199"/>
+        <coeff index="3" value="-0.00000000626243"/>
+        <coeff index="4" value="0.000000000000189072"/>
         <!-- Refer AD7998 Datasheet Page 20, Conversion Result Register 
         => ADC value is stored as a 16 bit number 
-        => First four bits contain alert flag and chanel identifier, these are removed in the FSW
-        => The remaining 12 bits are converted to Voltage by the conversion factor 
-        => The conversion factor is (3.3V/2^12) = 0.0008056640625
-        => Value shown on beacon page is in Volts
-        => In order to convert this voltage into temperature the curve provided by Vishay 
-        => Should be used.  -->
-        <coeff index="1" value="0.0008056"/>
+        => First four bits contain alert flag including the chanel identifier, these ARE REMOVED IN THE FSW
+        => The remaining 12 bits are converted to Voltage by the conversion factor from the data sheet
+        => The conversion factor is (3.3V/2^12) = 0.0008056640625 to convert to voltage
+        => In order to convert this voltage into temperature the look up table provided by Vishay is used
+        => Look Up table provided by Vishay includes relationship between Resistance and Temperature. 
+        => This is used to create a look up table between Voltage and Temperature, using the formula 
+        =>  R (in kOhms) = (23.2 * V)/(3.3-V) 
+        => Once the Look up table is obtained in excel, a polynomial fit is done to it in excel and following
+        => Polynomial Coefficients are obtained:
+        => C0 = 102.58, C1 = -0.14098, C2 = 0.0001032285657216, C4 = -0.000000039437396597674496, 
+        => C5 = 0.000000000005593400349509746688 -->
     </euPoly>
 
 

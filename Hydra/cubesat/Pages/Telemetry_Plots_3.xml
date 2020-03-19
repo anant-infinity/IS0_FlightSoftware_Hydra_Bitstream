@@ -10,7 +10,7 @@
 
 		<column> 
 
-			<chart title="Battery State of Charge" update="1000" interval="10800000">
+			<chart title="Battery State of Charge" update="1000" interval="43200000">
 			<line item="EPS_FG1_SoC" color="red"/>
 			<line item="EPS_FG2_SoC" color="green"/>
 			<line item="EPS_FG3_SoC" color="blue"/>
@@ -19,6 +19,16 @@
 
 		</column> 
 
+		<column> 
+
+			<chart title="Temperature" update="1000" interval="43200000">
+			<line item="EPS_ADC_CH6" color="red"/>
+			<line item="EPS_ADC_CH7" color="green"/>
+			<line item="EPS_ADC_CH8" color="blue"/>
+			</chart>
+
+
+		</column> 
 
 
 		

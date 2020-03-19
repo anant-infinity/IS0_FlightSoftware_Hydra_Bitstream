@@ -1,0 +1,17 @@
+2020/066-11:51:55: Configuring for Serial
+2020/066-11:51:55: <CFG> EU EPS_ADC missing coeff value
+2020/066-11:51:55: <CFG> EU EPS_ADC_therm missing coeff value
+2020/066-11:51:55: <CFG> EU EPS_ADC_therm missing coeff value
+2020/066-11:51:55: <CFG> EU EPS_ADC_therm missing coeff value
+2020/066-11:51:55: <CFG> EU EPS_ADC_therm missing coeff value
+2020/066-11:51:55: <INT> Run Directory: C:\Users\Anant\Desktop\Hydra_IS0\cubesat\Rundirs\2020_066_11_51_53\
+2020/066-11:51:55: <INT> Writing note to file
+2020/066-11:51:55: <RDR> Auto-starting reader serialReader
+2020/066-11:51:55: <HW> COM6 is opened
+2020/066-11:51:55: <RDR> Starting reader serialReader
+2020/066-11:51:55: <SCR> Starting script in engine 0
+2020/066-11:51:55: <SCR> Starting script init.prc
+2020/066-11:51:55: <INT> Running startup script
+2020/066-11:51:55: <HW> Starting new file: EventLog_2020_066_11_51_55
+2020/066-11:51:55: <SCR> Done with script init.prc
+2020/066-11:51:56: <HW> Starting new file: IS0Data_2020_066_11_51_56
