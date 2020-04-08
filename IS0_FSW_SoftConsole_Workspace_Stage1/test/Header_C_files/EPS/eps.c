@@ -1,5 +1,5 @@
 /*
- * sd.c
+ * eps.c
  *
  *  Created on: Jan 25, 2020
  *      Author: Anant
@@ -64,7 +64,8 @@ void PWR_Switch(uint32_t config, uint8_t on_off){
 	MSS_GPIO_set_outputs(gpio_pattern);
 }
 
-//Assigning the
+//Assigning the points array each element of which contains a GetEpsSeqPoint structure 
+//This array is then used to collect telemetry from the different I2C slaves of the EPS
 void epsAssignInit(){
 	int index = 0;
 

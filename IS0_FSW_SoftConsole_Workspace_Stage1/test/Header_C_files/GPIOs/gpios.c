@@ -17,7 +17,7 @@ void Global_Init_GPIOs(){
 
     MSS_GPIO_init();
 
-    MSS_GPIO_config( GPIO_DSW0_DAXSS, MSS_GPIO_OUTPUT_MODE); /* configuring GPIO_1 for DSW_0 BCR Enable - default 0 */
+    MSS_GPIO_config( GPIO_DSW0_DAXSS, MSS_GPIO_OUTPUT_MODE); /* configuring GPIO_1 for DSW_0 DAXSS - default 0 */
     MSS_GPIO_config( GPIO_DSW1_CIP, MSS_GPIO_OUTPUT_MODE); /* configuring GPIO_2 for DSW_1 CIP - default 0 */
     MSS_GPIO_config( GPIO_DSW2_ADCS, MSS_GPIO_OUTPUT_MODE); /* configuring GPIO_3 for DSW_2 ADCS & GPS - default 0 */
     MSS_GPIO_config( GPIO_DSW3_Sband, MSS_GPIO_OUTPUT_MODE); /* configuring GPIO_4 for DSW_3 SBand - default 0 */
@@ -35,10 +35,10 @@ void Global_Init_GPIOs(){
 
 
 
-    MSS_GPIO_config( GPIO_EN_SENSOR_BOARD,MSS_GPIO_OUTPUT_MODE); /* configuring for deployment Antenna - default 1 */
-    MSS_GPIO_config( GPIO_RESET_SENSER_BOARD,MSS_GPIO_OUTPUT_MODE); /*configuring for EN pin of SBand - default 1 */
-    MSS_GPIO_config( GPIO_SENSER_BOARD_WRITE_PROTECT,MSS_GPIO_OUTPUT_MODE ); /*configuring for FPGA reset pin of SBand - default 1 */
-    MSS_GPIO_config( GPIO_SENSER_BOARD_CHIP_SELECT,MSS_GPIO_OUTPUT_MODE );
+    MSS_GPIO_config( GPIO_EN_SENSOR_BOARD,MSS_GPIO_OUTPUT_MODE); /* configuring for enabling PicoSIM Sensor - default 1 */
+    MSS_GPIO_config( GPIO_RESET_SENSER_BOARD,MSS_GPIO_OUTPUT_MODE); /*configuring for reset pin of PicoSIM Sensor - default 1 */
+    MSS_GPIO_config( GPIO_SENSER_BOARD_WRITE_PROTECT,MSS_GPIO_OUTPUT_MODE ); /*configuring for write protect pin of PicoSIM Sensor - default 1 */
+    MSS_GPIO_config( GPIO_SENSER_BOARD_CHIP_SELECT,MSS_GPIO_OUTPUT_MODE ); /*configuring for chip select of PicoSIM Sensor - default 1 */
 
 
     //Setting the GPIO default outputs
@@ -55,7 +55,7 @@ void Global_Init_GPIOs(){
 	MSS_GPIO_set_output( GPIO_SENSER_BOARD_CHIP_SELECT, 1);
 
 	MSS_GPIO_set_output( GPIO_PWR_CYCLE_SC, 1); /* Make sure that the spacecraft power cycle signal is tie high by default*/
-	MSS_GPIO_set_output( GPIO_RESET_IC, 0); /* Pulling the input of the external Watchdog timer high*/
+	MSS_GPIO_set_output( GPIO_RESET_IC, 0); /* Pulling the input of the external Watchdog timer low*/
 	MSS_GPIO_set_output( GPIO_EN_BUS_TRAN, 0); /* Enable the bus transceivers - By default high, pulling it low now to enable the bus transceiver*/
 
 

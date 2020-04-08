@@ -18,7 +18,7 @@
 #define GLOBAL  extern
 #endif
 
-#define MASTER_SER_ADDR     			((uint8_t)0x21)	// Address of Master, need to change later on basis of constrains(if present)
+#define MASTER_SER_ADDR     			((uint8_t)0x21)	// not used 
 
 /*-----------------------------------------------------------------------------
 	 * All Slave Addresses of the I2C Critical Channel 0 EPS Slaves

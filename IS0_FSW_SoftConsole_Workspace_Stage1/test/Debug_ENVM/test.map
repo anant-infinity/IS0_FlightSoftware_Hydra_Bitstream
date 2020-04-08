@@ -839,8 +839,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./Header_C_files/CCSDS/ccsds.o
  .data          0x0000000000000000        0x0 ./Header_C_files/CCSDS/ccsds.o
  .bss           0x0000000000000000        0x0 ./Header_C_files/CCSDS/ccsds.o
- .text.CCSDS_Fletcher_16_Checkbytes
-                0x0000000000000000       0xc0 ./Header_C_files/CCSDS/ccsds.o
  .text          0x0000000000000000        0x0 ./CMSIS/startup_gcc/newlib_stubs.o
  .data          0x0000000000000000        0x0 ./CMSIS/startup_gcc/newlib_stubs.o
  .bss           0x0000000000000000        0x0 ./CMSIS/startup_gcc/newlib_stubs.o
@@ -1829,7 +1827,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000      0xcd8
+.debug_aranges  0x0000000000000000      0xcd0
  *(.debug_aranges)
  .debug_aranges
                 0x0000000000000000       0x20 ./hal/CortexM3/GNU/hal.o
@@ -1876,16 +1874,16 @@ END GROUP
  .debug_aranges
                 0x0000000000000be8       0x50 ./Header_C_files/EPS/eps.o
  .debug_aranges
-                0x0000000000000c38       0x30 ./Header_C_files/CCSDS/ccsds.o
+                0x0000000000000c38       0x28 ./Header_C_files/CCSDS/ccsds.o
  .debug_aranges
-                0x0000000000000c68       0x20 ./CMSIS/startup_gcc/startup_m2sxxx.o
+                0x0000000000000c60       0x20 ./CMSIS/startup_gcc/startup_m2sxxx.o
  .debug_aranges
-                0x0000000000000c88       0x50 ./CMSIS/system_m2sxxx.o
+                0x0000000000000c80       0x50 ./CMSIS/system_m2sxxx.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000    0x1bffb
+.debug_info     0x0000000000000000    0x1bf6e
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000       0x26 ./hal/CortexM3/GNU/hal.o
  .debug_info    0x0000000000000026       0x26 ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1901,19 +1899,19 @@ END GROUP
  .debug_info    0x000000000000bd17     0x198b ./Header_C_files/Utils/utils.o
  .debug_info    0x000000000000d6a2     0x1e93 ./Header_C_files/Test/test.o
  .debug_info    0x000000000000f535     0x1cf7 ./Header_C_files/Seq_ops/main.o
- .debug_info    0x000000000001122c     0x18d3 ./Header_C_files/SPI_Flash/spi_flash.o
- .debug_info    0x0000000000012aff     0x1ab9 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_info    0x00000000000145b8     0x1b2c ./Header_C_files/SD_CARD/sd.o
- .debug_info    0x00000000000160e4      0xc46 ./Header_C_files/RTC/rtc.o
- .debug_info    0x0000000000016d2a     0x1363 ./Header_C_files/PSLV_UART/pslv_uart.o
- .debug_info    0x000000000001808d      0xe73 ./Header_C_files/I2C/i2c.o
- .debug_info    0x0000000000018f00      0x176 ./Header_C_files/GPIOs/gpios.o
- .debug_info    0x0000000000019076     0x18fd ./Header_C_files/EPS/eps.o
- .debug_info    0x000000000001a973      0xbb4 ./Header_C_files/CCSDS/ccsds.o
- .debug_info    0x000000000001b527       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
- .debug_info    0x000000000001b54d      0xaae ./CMSIS/system_m2sxxx.o
+ .debug_info    0x000000000001122c     0x18d5 ./Header_C_files/SPI_Flash/spi_flash.o
+ .debug_info    0x0000000000012b01     0x1ab9 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_info    0x00000000000145ba     0x1b2c ./Header_C_files/SD_CARD/sd.o
+ .debug_info    0x00000000000160e6      0xc46 ./Header_C_files/RTC/rtc.o
+ .debug_info    0x0000000000016d2c     0x1363 ./Header_C_files/PSLV_UART/pslv_uart.o
+ .debug_info    0x000000000001808f      0xe73 ./Header_C_files/I2C/i2c.o
+ .debug_info    0x0000000000018f02      0x176 ./Header_C_files/GPIOs/gpios.o
+ .debug_info    0x0000000000019078     0x18fd ./Header_C_files/EPS/eps.o
+ .debug_info    0x000000000001a975      0xb25 ./Header_C_files/CCSDS/ccsds.o
+ .debug_info    0x000000000001b49a       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_info    0x000000000001b4c0      0xaae ./CMSIS/system_m2sxxx.o
 
-.debug_abbrev   0x0000000000000000     0x35d5
+.debug_abbrev   0x0000000000000000     0x35bb
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000       0x14 ./hal/CortexM3/GNU/hal.o
  .debug_abbrev  0x0000000000000014       0x14 ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1929,19 +1927,19 @@ END GROUP
  .debug_abbrev  0x00000000000016a5      0x2b9 ./Header_C_files/Utils/utils.o
  .debug_abbrev  0x000000000000195e      0x2fa ./Header_C_files/Test/test.o
  .debug_abbrev  0x0000000000001c58      0x34c ./Header_C_files/Seq_ops/main.o
- .debug_abbrev  0x0000000000001fa4      0x349 ./Header_C_files/SPI_Flash/spi_flash.o
- .debug_abbrev  0x00000000000022ed      0x2e8 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_abbrev  0x00000000000025d5      0x331 ./Header_C_files/SD_CARD/sd.o
- .debug_abbrev  0x0000000000002906      0x1d1 ./Header_C_files/RTC/rtc.o
- .debug_abbrev  0x0000000000002ad7      0x284 ./Header_C_files/PSLV_UART/pslv_uart.o
- .debug_abbrev  0x0000000000002d5b      0x1b1 ./Header_C_files/I2C/i2c.o
- .debug_abbrev  0x0000000000002f0c       0x81 ./Header_C_files/GPIOs/gpios.o
- .debug_abbrev  0x0000000000002f8d      0x2e5 ./Header_C_files/EPS/eps.o
- .debug_abbrev  0x0000000000003272      0x1c2 ./Header_C_files/CCSDS/ccsds.o
- .debug_abbrev  0x0000000000003434       0x14 ./CMSIS/startup_gcc/startup_m2sxxx.o
- .debug_abbrev  0x0000000000003448      0x18d ./CMSIS/system_m2sxxx.o
+ .debug_abbrev  0x0000000000001fa4      0x358 ./Header_C_files/SPI_Flash/spi_flash.o
+ .debug_abbrev  0x00000000000022fc      0x2e8 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_abbrev  0x00000000000025e4      0x331 ./Header_C_files/SD_CARD/sd.o
+ .debug_abbrev  0x0000000000002915      0x1d1 ./Header_C_files/RTC/rtc.o
+ .debug_abbrev  0x0000000000002ae6      0x284 ./Header_C_files/PSLV_UART/pslv_uart.o
+ .debug_abbrev  0x0000000000002d6a      0x1b1 ./Header_C_files/I2C/i2c.o
+ .debug_abbrev  0x0000000000002f1b       0x81 ./Header_C_files/GPIOs/gpios.o
+ .debug_abbrev  0x0000000000002f9c      0x2e5 ./Header_C_files/EPS/eps.o
+ .debug_abbrev  0x0000000000003281      0x199 ./Header_C_files/CCSDS/ccsds.o
+ .debug_abbrev  0x000000000000341a       0x14 ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_abbrev  0x000000000000342e      0x18d ./CMSIS/system_m2sxxx.o
 
-.debug_line     0x0000000000000000     0x83ec
+.debug_line     0x0000000000000000     0x83be
  *(.debug_line)
  .debug_line    0x0000000000000000       0x4d ./hal/CortexM3/GNU/hal.o
  .debug_line    0x000000000000004d       0x8b ./hal/CortexM3/GNU/hw_reg_access.o
@@ -1957,19 +1955,19 @@ END GROUP
  .debug_line    0x0000000000003531      0x660 ./Header_C_files/Utils/utils.o
  .debug_line    0x0000000000003b91      0x98b ./Header_C_files/Test/test.o
  .debug_line    0x000000000000451c      0x986 ./Header_C_files/Seq_ops/main.o
- .debug_line    0x0000000000004ea2      0x60c ./Header_C_files/SPI_Flash/spi_flash.o
- .debug_line    0x00000000000054ae      0x7a6 ./Header_C_files/SENSOR_BOARD/sensor_board.o
- .debug_line    0x0000000000005c54      0x9ad ./Header_C_files/SD_CARD/sd.o
- .debug_line    0x0000000000006601      0x411 ./Header_C_files/RTC/rtc.o
- .debug_line    0x0000000000006a12      0x4e6 ./Header_C_files/PSLV_UART/pslv_uart.o
- .debug_line    0x0000000000006ef8      0x559 ./Header_C_files/I2C/i2c.o
- .debug_line    0x0000000000007451      0x20c ./Header_C_files/GPIOs/gpios.o
- .debug_line    0x000000000000765d      0x6e1 ./Header_C_files/EPS/eps.o
- .debug_line    0x0000000000007d3e      0x320 ./Header_C_files/CCSDS/ccsds.o
- .debug_line    0x000000000000805e      0x18e ./CMSIS/startup_gcc/startup_m2sxxx.o
- .debug_line    0x00000000000081ec      0x200 ./CMSIS/system_m2sxxx.o
+ .debug_line    0x0000000000004ea2      0x60d ./Header_C_files/SPI_Flash/spi_flash.o
+ .debug_line    0x00000000000054af      0x7a6 ./Header_C_files/SENSOR_BOARD/sensor_board.o
+ .debug_line    0x0000000000005c55      0x9ad ./Header_C_files/SD_CARD/sd.o
+ .debug_line    0x0000000000006602      0x411 ./Header_C_files/RTC/rtc.o
+ .debug_line    0x0000000000006a13      0x4e7 ./Header_C_files/PSLV_UART/pslv_uart.o
+ .debug_line    0x0000000000006efa      0x559 ./Header_C_files/I2C/i2c.o
+ .debug_line    0x0000000000007453      0x20c ./Header_C_files/GPIOs/gpios.o
+ .debug_line    0x000000000000765f      0x6e1 ./Header_C_files/EPS/eps.o
+ .debug_line    0x0000000000007d40      0x2f0 ./Header_C_files/CCSDS/ccsds.o
+ .debug_line    0x0000000000008030      0x18e ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_line    0x00000000000081be      0x200 ./CMSIS/system_m2sxxx.o
 
-.debug_frame    0x0000000000000000     0x32a4
+.debug_frame    0x0000000000000000     0x3280
  *(.debug_frame)
  .debug_frame   0x0000000000000000      0x3c0 ./drivers_config/mss_spi/mss_spi.o
  .debug_frame   0x00000000000003c0      0x820 ./drivers/mss_uart/mss_uart.o
@@ -1991,15 +1989,15 @@ END GROUP
  .debug_frame   0x0000000000002dfc      0x10c ./Header_C_files/I2C/i2c.o
  .debug_frame   0x0000000000002f08       0x2c ./Header_C_files/GPIOs/gpios.o
  .debug_frame   0x0000000000002f34      0x110 ./Header_C_files/EPS/eps.o
- .debug_frame   0x0000000000003044       0x80 ./Header_C_files/CCSDS/ccsds.o
- .debug_frame   0x00000000000030c4      0x10c ./CMSIS/system_m2sxxx.o
- .debug_frame   0x00000000000031d0       0x2c c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_aeabi_uldivmod.o)
- .debug_frame   0x00000000000031fc       0x34 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_udivmoddi4.o)
- .debug_frame   0x0000000000003230       0x2c c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-init.o)
- .debug_frame   0x000000000000325c       0x28 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memcpy-stub.o)
- .debug_frame   0x0000000000003284       0x20 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memset.o)
+ .debug_frame   0x0000000000003044       0x5c ./Header_C_files/CCSDS/ccsds.o
+ .debug_frame   0x00000000000030a0      0x10c ./CMSIS/system_m2sxxx.o
+ .debug_frame   0x00000000000031ac       0x2c c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x00000000000031d8       0x34 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m\libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x000000000000320c       0x2c c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-init.o)
+ .debug_frame   0x0000000000003238       0x28 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x0000000000003260       0x20 c:/microsemi/softconsole_v6.0/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libg_nano.a(lib_a-memset.o)
 
-.debug_str      0x0000000000000000     0x592d
+.debug_str      0x0000000000000000     0x5900
  *(.debug_str)
  .debug_str     0x0000000000000000       0xb7 ./hal/CortexM3/GNU/hal.o
  .debug_str     0x00000000000000b7       0x24 ./hal/CortexM3/GNU/hw_reg_access.o
@@ -2044,11 +2042,11 @@ END GROUP
                                         0x3a6 (size before relaxing)
  .debug_str     0x00000000000055f4       0xd2 ./Header_C_files/EPS/eps.o
                                        0x1826 (size before relaxing)
- .debug_str     0x00000000000056c6       0xac ./Header_C_files/CCSDS/ccsds.o
-                                        0xee2 (size before relaxing)
- .debug_str     0x0000000000005772       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
+ .debug_str     0x00000000000056c6       0x7f ./Header_C_files/CCSDS/ccsds.o
+                                        0xeae (size before relaxing)
+ .debug_str     0x0000000000005745       0x26 ./CMSIS/startup_gcc/startup_m2sxxx.o
                                          0xc3 (size before relaxing)
- .debug_str     0x0000000000005798      0x195 ./CMSIS/system_m2sxxx.o
+ .debug_str     0x000000000000576b      0x195 ./CMSIS/system_m2sxxx.o
                                         0xb29 (size before relaxing)
 
 .debug_loc
@@ -2176,7 +2174,7 @@ END GROUP
  *(.note.GNU-stack)
 OUTPUT(test.elf elf32-littlearm)
 
-.debug_ranges   0x0000000000000000      0xb98
+.debug_ranges   0x0000000000000000      0xb90
  .debug_ranges  0x0000000000000000       0xd0 ./drivers_config/mss_spi/mss_spi.o
  .debug_ranges  0x00000000000000d0      0x1d8 ./drivers/mss_uart/mss_uart.o
  .debug_ranges  0x00000000000002a8       0xd0 ./drivers/mss_sys_services/mss_comblk.o
@@ -2197,8 +2195,8 @@ OUTPUT(test.elf elf32-littlearm)
  .debug_ranges  0x0000000000000a88       0x48 ./Header_C_files/I2C/i2c.o
  .debug_ranges  0x0000000000000ad0       0x10 ./Header_C_files/GPIOs/gpios.o
  .debug_ranges  0x0000000000000ae0       0x40 ./Header_C_files/EPS/eps.o
- .debug_ranges  0x0000000000000b20       0x20 ./Header_C_files/CCSDS/ccsds.o
- .debug_ranges  0x0000000000000b40       0x58 ./CMSIS/system_m2sxxx.o
+ .debug_ranges  0x0000000000000b20       0x18 ./Header_C_files/CCSDS/ccsds.o
+ .debug_ranges  0x0000000000000b38       0x58 ./CMSIS/system_m2sxxx.o
 
 .comment        0x0000000000000000       0x71
  .comment       0x0000000000000000       0x71 ./drivers_config/mss_spi/mss_spi.o

@@ -21,11 +21,9 @@ i2c_instance_t g_core_i2c3; 			// Core I2C for SENSOR_0;
 
 
 
-// ******************************** I2C Driver Functions ***************************************************************
+// ******************************** I2C Driver Functions *****************************
 /*------------------------------------------------------------------------------
-	 * Perform read transaction with parameters gathered from the command line
-	 * interface. This function is called as a result of the user's input in the
-	 * command line interface.
+	 * Perform read transaction with parameters passed as input. 
 	 */
 	i2c_status_t do_read_transaction
 	(
@@ -48,9 +46,7 @@ i2c_instance_t g_core_i2c3; 			// Core I2C for SENSOR_0;
 	}
 
 	/*------------------------------------------------------------------------------
-	 * Perform write transaction with parameters gathered from the command line
-	 * interface. This function is called as a result of the user's input in the
-	 * command line interface.
+	 * Perform write transaction with parameters passed as input.
 	 */
 	i2c_status_t do_write_transaction
 	(
@@ -73,14 +69,7 @@ i2c_instance_t g_core_i2c3; 			// Core I2C for SENSOR_0;
 	}
 
 	/*------------------------------------------------------------------------------
-	 * Perform write-read transaction with parameters gathered from the command
-	 * line interface. This function is called as a result of the user's input in
-	 * the command line interface.
-	 *
-	 * NOTE: The definition of this function is slightly modified as compared to the do_write funcion
-	 * for ease of use. The modification is that the function takes as an input
-	 * the register address (of type uint8_t) instead of an tx_buffer array.
-	 *
+	 * Perform write-read transaction with parameters passed as input
 	 */
 	i2c_status_t do_write_read_transaction
 	(

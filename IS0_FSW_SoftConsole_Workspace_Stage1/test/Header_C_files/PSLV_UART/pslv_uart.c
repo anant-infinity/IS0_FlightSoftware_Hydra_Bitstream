@@ -12,12 +12,20 @@
 uint8_t status;
 uint8_t fifo_packet_wr_buf[156];
 
+//This file contains the C functions that are used to interface  
+//with the PSLV Interface Protocol IP developed in verilog.  
+//The verilog IP needs as input a packet array and stores it in its FIFO. 
+//It then handles sending the packet to the PSLV two bytes at a time. 
+//This is done whenever it recieves commands from the PSLV. 
+//Further the the IP contains a status reg , which is set to 0x01 if the
+//FIFO of the IP is empty and needs new packet from the C Code. 
+
 void Check_and_Fill_FIFO(){
 
 
-	//check if the STATUS register is 0x01
-	//if yes then the FIFO is empty and the current Beacon_Packet_Array
-	//Can be loaded onto the FIFO
+	// Checking if the STATUS register is 0x01
+	// If yes then the FIFO is Empty 
+	// Then current Beacon_Packet_Array can be loaded onto the FIFO
 
 
 	if(Get_Status_Reg() == 0x01 ){

@@ -1,6 +1,9 @@
-
-//ccsds.h
-
+/*
+ * ccsds.h
+ *
+ *  Created on: Jan 25, 2020
+ *      Author: Anant
+ */
 #ifndef _CCSDS_H
 	#define _CCSDS_H
 
@@ -70,28 +73,6 @@ void CCSDS_Pack( uint8_t APP_ID, uint8_t grouping_flag, uint16_t sequence_count,
  *	It doesn't return any value.
 */
 void CCSDS_Fletcher_16(uint8_t* msg, uint32_t len);
-
-/*---------------------------------------------------------------------------*/
-/* The CCSDS_Fletcher_16_Checkbytes() function which is used to check the
- * Fletcher code of the received packet whose pointer is passed in the argument.
- * The function has the argument "op" which is to be set to 1 when the command
- * accepted was sent by Hydra. This is done because of the way Hydra implements
- * fletcher code. The "op" may be zero when the packet is from
- * DAXSS, it is not clear at the moment.
- * @param
- * uint8_t * msg: This is the pointer to the received CCSDS packet.
- * The typecast would be required to pass the data
- * uint32_t len: This is the length of the data "msg" passed, this should
- * include the length of primary header, secondary header and the data(data
- * includes the fletcher code).
- * uint8_t op: This field should be set to 1 if they data received is from Hydra
- * else it should be 0.
- *
- * @return: uint16_t
- *	It returns 0 if the code is correct else it returns 1.
-*/
-uint16_t CCSDS_Fletcher_16_Checkbytes(uint8_t* msg, uint16_t len, uint8_t op);
-
 
 #endif
 
