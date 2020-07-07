@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;test/Header_C_files/EPS/pwr.h&apos; to &apos;eps.h&apos;" description="Rename resource &apos;pwr.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Header_C_files/EPS/pwr.h" name="eps.h" stamp="1571175118390" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;test/Header_C_files/EPS/pwr.c&apos; to &apos;eps.c&apos;" description="Rename resource &apos;pwr.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Header_C_files/EPS/pwr.c" name="eps.c" stamp="1571175125799" updateReferences="true"/>
-</session>

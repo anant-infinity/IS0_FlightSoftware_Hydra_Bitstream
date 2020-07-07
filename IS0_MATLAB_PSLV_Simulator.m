@@ -23,7 +23,7 @@ if ~isempty(instrfind)
 end
 
 %Open the serial connection at the corrent COMM port 
-serial_port = serial('COM20', 'BaudRate', 2000000, 'Timeout', 10);
+serial_port = serial('COM5', 'BaudRate', 2000000, 'Timeout', 10);
 fopen(serial_port);
 
 % Configuration and the TCP connection 
@@ -42,7 +42,7 @@ fopen(tcp_port);
 % Collecting a beacon packet every 10 seconds 
 % Collecting the packet two bytes at a time by sending the PSLV Command 
 i=0;
-num_of_packets = 8640;
+num_of_packets = 100;
 plot_array = zeros(1,num_of_packets);
 
 while(i<num_of_packets)
@@ -69,7 +69,7 @@ end
 % Collecting a beacon packet every 10 seconds 
 % Collecting the packet two bytes at a time by sending the PSLV Command 
 i=0;
-num_of_packets = 8600;
+num_of_packets = 100;
 
 store_array = zeros(num_of_packets,packet_size);
 
@@ -90,10 +90,10 @@ while(i<num_of_packets)
     store_array(i+1,:) = packet_array;
     i=i+1;
     %Putting a delay of 0.01 seconds between consecutive packets 
-    pause(5);
+    pause(2);
 end
 %Storing the Data in the Excel Sheet 
-filename = 'IS0_Data_Log_TVAC_12Hr.xlsx';
+filename = 'IS0_Sun_Spectrum_Test_2.xlsx';
 writematrix(store_array,filename,'Sheet',1)
 
 %%

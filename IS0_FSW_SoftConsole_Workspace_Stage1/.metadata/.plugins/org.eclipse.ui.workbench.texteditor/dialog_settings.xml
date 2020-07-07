@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="STO" key="selection"/>
+		<item value="Flash_SPI_Tries_Limit" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Flash_SPI_Tries_Limit"/>
 			<item value="STO"/>
 			<item value="STA"/>
 			<item value="STA_FIELD"/>
@@ -22,7 +23,6 @@
 			<item value="do"/>
 			<item value="I2C_write"/>
 			<item value="I2C_Write"/>
-			<item value="RESET_ALL_BIT_FLAG"/>
 		</list>
 		<list key="replacehistory">
 			<item value="Beacon_pack_IS0"/>

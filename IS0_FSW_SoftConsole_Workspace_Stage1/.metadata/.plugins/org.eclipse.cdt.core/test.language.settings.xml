@@ -15,18 +15,6 @@
                         					
                     </entry>
                     					
-                    <entry kind="includePath" name="/test/Header_C_files">
-                        						
-                        <flag value="BUILTIN|READONLY|VALUE_WORKSPACE_PATH|RESOLVED"/>
-                        					
-                    </entry>
-                    					
-                    <entry kind="includePath" name="/test/CMSIS">
-                        						
-                        <flag value="BUILTIN|READONLY|VALUE_WORKSPACE_PATH|RESOLVED"/>
-                        					
-                    </entry>
-                    					
                     <entry kind="includePath" name="/test/CMSIS/startup_gcc">
                         						
                         <flag value="BUILTIN|READONLY|VALUE_WORKSPACE_PATH|RESOLVED"/>
@@ -5466,18 +5454,6 @@
                 <language id="org.eclipse.cdt.core.gcc">
                     					
                     <entry kind="includePath" name="/test">
-                        						
-                        <flag value="BUILTIN|READONLY|VALUE_WORKSPACE_PATH|RESOLVED"/>
-                        					
-                    </entry>
-                    					
-                    <entry kind="includePath" name="/test/Header_C_files">
-                        						
-                        <flag value="BUILTIN|READONLY|VALUE_WORKSPACE_PATH|RESOLVED"/>
-                        					
-                    </entry>
-                    					
-                    <entry kind="includePath" name="/test/CMSIS">
                         						
                         <flag value="BUILTIN|READONLY|VALUE_WORKSPACE_PATH|RESOLVED"/>
                         					
@@ -10927,18 +10903,6 @@
                         					
                     </entry>
                     					
-                    <entry kind="includePath" name="/test/Header_C_files">
-                        						
-                        <flag value="BUILTIN|READONLY|VALUE_WORKSPACE_PATH|RESOLVED"/>
-                        					
-                    </entry>
-                    					
-                    <entry kind="includePath" name="/test/CMSIS">
-                        						
-                        <flag value="BUILTIN|READONLY|VALUE_WORKSPACE_PATH|RESOLVED"/>
-                        					
-                    </entry>
-                    					
                     <entry kind="includePath" name="/test/CMSIS/startup_gcc">
                         						
                         <flag value="BUILTIN|READONLY|VALUE_WORKSPACE_PATH|RESOLVED"/>
@@ -16378,18 +16342,6 @@
                 <language id="org.eclipse.cdt.core.gcc">
                     					
                     <entry kind="includePath" name="/test">
-                        						
-                        <flag value="BUILTIN|READONLY|VALUE_WORKSPACE_PATH|RESOLVED"/>
-                        					
-                    </entry>
-                    					
-                    <entry kind="includePath" name="/test/Header_C_files">
-                        						
-                        <flag value="BUILTIN|READONLY|VALUE_WORKSPACE_PATH|RESOLVED"/>
-                        					
-                    </entry>
-                    					
-                    <entry kind="includePath" name="/test/CMSIS">
                         						
                         <flag value="BUILTIN|READONLY|VALUE_WORKSPACE_PATH|RESOLVED"/>
                         					
