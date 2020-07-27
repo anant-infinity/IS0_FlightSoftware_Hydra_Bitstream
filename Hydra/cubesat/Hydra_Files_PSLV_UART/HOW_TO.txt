@@ -1,0 +1,3 @@
+These two files are seperate for Serial Hydra and PSLV RS485 Hydra. 
+In order to use the PSLV RS485 Hydra, these files need to be replaced in the 
+config folder

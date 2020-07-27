@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Delete 9 resources" deleteContents="false" description="Delete 9 resources" element1="/fpga-cortex-m1-blinky" element2="/m1fpga-cortex-m1-blinky" element3="/miv-rv32im-interrupt-blinky" element4="/miv-rv32im-systick-blinky" element5="/miv-rv32imaf-mandelbrot-uart" element6="/miv-rv32imaf-raytracer-uart-cpp" element7="/pse-blinky" element8="/smartfusion-cortex-m3-blinky" element9="/smartfusion2-cortex-m3-blinky" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="9" stamp="1564599005022"/>
-</session>
